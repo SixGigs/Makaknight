@@ -8,12 +8,17 @@ import "CoreLibs/timer"
 import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk"
 
+-- Scripts
+import "scripts/GameScene"
+
+GameScene()
+
 -- PlayDate Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Main Game Loop
 function pd.update()
-    gfx.sprite.update()
-    pd.timer.updateTimers()
+	gfx.sprite.update()
+	pd.timer.updateTimers()
 end

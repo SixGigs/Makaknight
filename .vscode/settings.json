@@ -5,6 +5,11 @@
         "class",
         "AnimatedSprite",
         "json",
-        "printTable"
+        "printTable",
+        "GameScene"
+    ],
+    "Lua.diagnostics.disable": [
+        "param-type-mismatch",
+        "duplicate-set-field"
     ]
 }
