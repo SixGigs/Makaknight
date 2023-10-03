@@ -6,7 +6,8 @@
         "AnimatedSprite",
         "json",
         "printTable",
-        "GameScene"
+        "GameScene",
+        "Player"
     ],
     "Lua.diagnostics.disable": [
         "param-type-mismatch",
