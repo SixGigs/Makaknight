@@ -15,6 +15,10 @@ class("GameScene").extends()
 
 function GameScene:init()
 	self:goToLevel("Level_0")
+
+	self.spawnX = 12 * 16
+	self.spawnY = 4 * 16
+	self.player = Player(self.spawnX, self.spawnY)
 end
 
 function GameScene:goToLevel(level_name)

@@ -10,7 +10,7 @@ function Player:init(x, y)
 	Player.super.init(self, playerImageTable)
 
 	self:addState("idle", 4, 4)
-	self:addState("run", 1, 4, {tickStep = 3})
+	self:addState("run", 1, 4, {tickStep = 4})
 	self:addState("jump", 5, 5)
 	self:playAnimation()
 
@@ -101,7 +101,7 @@ end
 
 -- Physics Helper Functions
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + self.applyGravity
+	self.yVelocity = self.yVelocity + self.gravity
 	if self.touchingGround then
 		self.yVelocity = 0
 	end
