@@ -68,3 +68,15 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 end
+
+
+-- Input Helper Functions
+function Player:handleGroundInput()
+	if pd.buttonIsPressed(pd.kButtonLeft) then
+		self:changeToRunState("left")
+	elseif pd.buttonIsPressed(pd.kButtonRight) then
+		self:changeToRunState("right")
+	else
+		self:changeToIdleState()
+	end
+end
