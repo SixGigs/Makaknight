@@ -55,3 +55,16 @@ function Player:handleState()
 		
 	end
 end
+
+
+function Player:handleMovementAndCollisions()
+	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
+
+	self.touchingGround = false
+	for i = 1, length do
+		local collision = collisions[i]
+		if collision.normal.y == -1 then
+			self.touchingGround = true
+		end
+	end
+end
