@@ -97,3 +97,12 @@ function Player:changeToRunState(direction)
 	end
 	self:changeState("run")
 end
+
+
+-- Physics Helper Functions
+function Player:applyGravity()
+	self.yVelocity = self.yVelocity + self.applyGravity
+	if self.touchingGround then
+		self.yVelocity = 0
+	end
+end
