@@ -2,11 +2,13 @@ local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 
 TAGS = {
-	Player = 1
+	Player = 1,
+	Hazard = 2
 }
 
 Z_INDEXES = {
-	Player = 100
+	Player = 100,
+	Hazard = 20
 }
 
 ldtk.load("levels/world.ldtk", false)
