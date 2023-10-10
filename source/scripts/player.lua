@@ -50,15 +50,25 @@ function Player:init(x, y, gameManager)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	self.dead = false
 end
 
 
-function Player:collisionResponse()
+function Player:collisionResponse(other)
+	local tag = other:getTag()
+	if tag == TAGS.Hazard then
+		return gfx.sprite.kCollisionTypeOverlap
+	end
+
 	return gfx.sprite.kCollisionTypeSlide
 end
 
 
 function Player:update()
+	if self.dead then
+		return
+	end
+
 	self:updateAnimation()
 	self:handleState()
 	self:handleMovementAndCollisions()
@@ -94,19 +104,30 @@ function Player:handleMovementAndCollisions()
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	local died = false
 
 	for i = 1, length do
 		local collision = collisions[i]
-		if collision.normal.y == -1 then
-			self.touchingGround = true
-			self.dashAvailable = true
-			self.doubleJumpAvailable = true
-		elseif collision.normal.y == 1 then
-			self.touchingCeiling = true
-		end
+		local collisionType = collision.type
+		local collisionObject = collision.other
+		local collisionTag = collisionObject:getTag()
 
-		if collision.normal.x ~= 0 then
-			self.touchingWall = true
+		if collisionType == gfx.sprite.kCollisionTypeSlide then
+			if collision.normal.y == -1 then
+				self.touchingGround = true
+				self.dashAvailable = true
+				self.doubleJumpAvailable = true
+			elseif collision.normal.y == 1 then
+				self.touchingCeiling = true
+			end
+
+			if collision.normal.x ~= 0 then
+				self.touchingWall = true
+			end
+		end
+		
+		if collisionTag == TAGS.Hazard then
+			died = true
 		end
 	end
 
@@ -125,7 +146,25 @@ function Player:handleMovementAndCollisions()
 	elseif self.y > 240 then
 		self.gameManager:enterRoom("south")
 	end
+
+	if died then
+		self:die()
+	end
 end
+
+
+function Player:die()
+	self.xVelocity = 0
+	self.yVelocity = 0
+	self.dead = true
+	self:setCollisionsEnabled(false)
+	pd.timer.performAfterDelay(200, function()
+		self:setCollisionsEnabled(true)
+		self.dead = false
+		self.gameManager:resetPlayer()
+	end)
+end
+
 
 
 -- Input Helper Functions
