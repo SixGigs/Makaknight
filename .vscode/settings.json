@@ -8,7 +8,8 @@
         "printTable",
         "GameScene",
         "Player",
-        "Spike"
+        "Spike",
+        "Spikeball"
     ],
     "Lua.diagnostics.disable": [
         "param-type-mismatch",
