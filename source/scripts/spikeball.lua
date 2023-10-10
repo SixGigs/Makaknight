@@ -1,5 +1,5 @@
 local gfx <const> = playdate.graphics
-local spikeballImage <const> gfx.image.new("image/spikeball")
+local spikeballImage <const> = gfx.image.new("images/spikeball")
 
 class('Spikeball').extends(gfx.sprite)
 
