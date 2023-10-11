@@ -9,7 +9,8 @@
         "GameScene",
         "Player",
         "Spike",
-        "Spikeball"
+        "Spikeball",
+        "Ability"
     ],
     "Lua.diagnostics.disable": [
         "param-type-mismatch",
