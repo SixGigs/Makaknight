@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.3.4",
 	"appBuildId": 470178,
-	"nextUid": 73,
+	"nextUid": 76,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1731,6 +1731,75 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "Ability",
+			"uid": 73,
+			"tags": [],
+			"exportToToc": false,
+			"doc": null,
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#00ABFF",
+			"renderMode": "Ellipse",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "ability",
+					"doc": null,
+					"__type": "LocalEnum.Ability",
+					"uid": 75,
+					"type": "F_Enum(74)",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1755,7 +1824,13 @@
 				"averageColors": "f33200000000000000000000000000000000000000000000f666f555f666f877f776f877f655f655f444f444f544f544f555f332f555f888f8770000f655f655f444f444f544f544f666f555f666f555f7760000f655f655f665f665f4440000f333f333f776f776f8770000f655f655f665f665f4440000f333f333f776f77600000000000000000000000000000000"
 			}
 		}
-	], "enums": [{ "identifier": "TileEnum", "uid": 2, "values": [{ "id": "Solid", "tileRect": null, "tileId": -1, "color": 12470831, "__tileSrcRect": null }], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
+	], "enums": [
+		{ "identifier": "TileEnum", "uid": 2, "values": [{ "id": "Solid", "tileRect": null, "tileId": -1, "color": 12470831, "__tileSrcRect": null }], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "Ability", "uid": 74, "values": [
+			{ "id": "Dash", "tileRect": null, "tileId": -1, "color": 12470831, "__tileSrcRect": null },
+			{ "id": "DoubleJump", "tileRect": null, "tileId": -1, "color": 14120515, "__tileSrcRect": null }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
@@ -1801,7 +1876,46 @@
 					"seed": 4929172,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Ability",
+							"__grid": [18,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#00ABFF",
+							"__worldX": 288,
+							"__worldY": 112,
+							"iid": "44a14bb0-6280-11ee-9cf0-cfb2c020640e",
+							"width": 16,
+							"height": 16,
+							"defUid": 73,
+							"px": [288,112],
+							"fieldInstances": [{ "__identifier": "ability", "__type": "LocalEnum.Ability", "__value": "Dash", "__tile": null, "defUid": 75, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["Dash"]
+							}] }]
+						},
+						{
+							"__identifier": "Ability",
+							"__grid": [20,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#00ABFF",
+							"__worldX": 320,
+							"__worldY": 112,
+							"iid": "47094b00-6280-11ee-9cf0-d54899d8b763",
+							"width": 16,
+							"height": 16,
+							"defUid": 73,
+							"px": [320,112],
+							"fieldInstances": [{ "__identifier": "ability", "__type": "LocalEnum.Ability", "__value": "DoubleJump", "__tile": null, "defUid": 75, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["DoubleJump"]
+							}] }]
+						}
+					]
 				},
 				{
 					"__identifier": "Walls",
