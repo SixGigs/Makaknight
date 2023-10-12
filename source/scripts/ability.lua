@@ -4,6 +4,9 @@ class('Ability').extends(gfx.sprite)
 
 function Ability:init(x, y, entity)
     self.fields = entity.fields
+    if self.fields.pickedUp then
+        return
+    end
 
     self.abilityName = self.fields.ability
     local abilityImage = gfx.image.new("images/"..self.abilityName)
@@ -25,5 +28,6 @@ function Ability:pickUp(player)
         player.dashAbility = true
     end
 
+    self.fields.pickedUp = true
     self:remove()
 end
