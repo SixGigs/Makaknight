@@ -1,22 +1,32 @@
+-- Create the script constants
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 
+
+-- Create an array of tags (used to identify the collision objects)
 TAGS = {
 	Player = 1,
 	Hazard = 2,
 	Pickup = 3
 }
 
+-- Create an array of Z indexes for the objects (how far in the foreground they are)
 Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
 	Pickup = 50
 }
 
+
+-- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
 
+-- Create the game scene class
 class("GameScene").extends()
 
+
+--- The initialising method of the game scene class,
+--- It loads the level, and spawns the player
 function GameScene:init()
 	self:goToLevel("Level_0")
 
@@ -26,11 +36,14 @@ function GameScene:init()
 end
 
 
+--- The reset player method moves the player back to the most recent spawn X & Y coordinates
 function GameScene:resetPlayer()
 	self.player:moveTo(self.spawnX, self.spawnY)
 end
 
 
+--- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
+--- @param direction string Contains in text form, the direction from the current level to load the next level piece
 function GameScene:enterRoom(direction)
 	local level = ldtk.get_neighbours(self.levelName, direction)[1]
 	self:goToLevel(level)
@@ -53,6 +66,8 @@ function GameScene:enterRoom(direction)
 end
 
 
+--- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
+--- @param level_name string Contains the name of the level to load as a scring
 function GameScene:goToLevel(level_name)
 	gfx.sprite.removeAll()
 
