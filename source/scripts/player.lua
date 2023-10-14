@@ -1,9 +1,15 @@
+-- Constants used for the script
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
+-- Create the player class
 class('Player').extends(AnimatedSprite)
 
 
+--- The player is initialised with this method
+--- @param x           integer The X coordinate to spawn the player
+--- @param y           integer The Y coordinate to spawn the player
+--- @param gameManager table   The game manager is passed in to manage player on object interactions
 function Player:init(x, y, gameManager)
 	--Game Manager
 	self.gameManager = gameManager
@@ -12,6 +18,7 @@ function Player:init(x, y, gameManager)
 	local playerImageTable = gfx.imagetable.new("images/player-table-32-32")
 	Player.super.init(self, playerImageTable)
 
+	-- States
 	self:addState("idle", 4, 4)
 	self:addState("run", 1, 4, {tickStep = 4})
 	self:addState("jump", 5, 5)
@@ -58,6 +65,9 @@ function Player:init(x, y, gameManager)
 end
 
 
+--- This function is used to handle the collisions the player has with the world
+--- @param  other   table   This variable contains what the player has collided with
+--- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag = other:getTag()
 	if tag == TAGS.Hazard or tag == TAGS.Pickup then
@@ -68,6 +78,7 @@ function Player:collisionResponse(other)
 end
 
 
+--- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	if self.dead then
 		return
@@ -80,6 +91,7 @@ function Player:update()
 end
 
 
+--- The jump buffer helps jumping appear more natural in the game
 function Player:updateJumpBuffer()
 	self.jumpBuffer = self.jumpBuffer - 1
 	if self.jumpBuffer <= 0 then
@@ -92,11 +104,13 @@ function Player:updateJumpBuffer()
 end
 
 
+--- A function to detect whether the player has jumped based on jump buffer
 function Player:playerJumped()
 	return self.jumpBuffer > 0
 end
 
 
+--- The state handler changes the functions running on the player based on state
 function Player:handleState()
 	if self.currentState == "idle" then
 		self:applyGravity()
@@ -108,6 +122,7 @@ function Player:handleState()
 		if self.touchingGround then
 			self:changeToIdleState()
 		end
+
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
@@ -120,6 +135,7 @@ function Player:handleState()
 end
 
 
+--- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
 	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
 
@@ -177,6 +193,7 @@ function Player:handleMovementAndCollisions()
 end
 
 
+--- This function handles when the player dies, what to do and when to respawn
 function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
@@ -190,8 +207,9 @@ function Player:die()
 end
 
 
+-- Input Helper Functions ------------------------------------------------------------------------------------------
 
--- Input Helper Functions
+--- Handle input while the player is on the ground. Like going left, right, dashing, and jumping
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
@@ -207,6 +225,7 @@ function Player:handleGroundInput()
 end
 
 
+--- Hendle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
 		self.doubleJumpAvailable = false
@@ -221,13 +240,17 @@ function Player:handleAirInput()
 end
 
 
--- State Transitions
+-- State Transitions -----------------------------------------------------------------------------------------------
+
+--- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
 	self.xVelocity = 0
+
 	self:changeState("idle")
 end
 
-
+--- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
+--- @param direction string Contains the direction the player is moving in as a string
 function Player:changeToRunState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.maxSpeed
@@ -236,22 +259,27 @@ function Player:changeToRunState(direction)
 		self.xVelocity = self.maxSpeed
 		self.globalFlip = 0
 	end
+
 	self:changeState("run")
 end
 
 
+--- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
 	self.yVelocity = self.jumpVelocity
 	self.jumpBuffer = 0
+
 	self:changeState("jump")
 end
 
 
+--- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("jump")
 end
 
 
+--- Makes the player dash in the direction they are facing
 function Player:changeToDashState()
 	self.dashAvailable = false
 	self.yVelocity = 0
@@ -270,7 +298,10 @@ function Player:changeToDashState()
 end
 
 
--- Physics Helper Functions
+-- Physics Helper Functions ----------------------------------------------------------------------------------------
+
+--- Applies gravity to the player, used if the player is not touching a surface
+--- Resets Y velocity when colliding with a cieling or the ground
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + self.gravity
 	if self.touchingGround or self.touchingCeiling then
@@ -278,6 +309,9 @@ function Player:applyGravity()
 	end
 end
 
+
+--- Applys air drag to the player if they're not holding the direction they are moving in while airborn
+--- @param amount integer The amount to decrease movement by while in the air if recieving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
 		self.xVelocity = self.xVelocity - amount
