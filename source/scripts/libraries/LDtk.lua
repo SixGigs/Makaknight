@@ -663,7 +663,7 @@ function _.convert_relative_folder( filepath )
 		end
 	end
 
-	print(absolute_path)
+	-- print(absolute_path)
 	return absolute_path
 end
 
