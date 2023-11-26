@@ -1,2 +1,7 @@
 name=makaknight
+author=SixGigs
+description=Shape the land as you see fit.
 bundleID=com.six.makaknight
+version=0.1.0
+buildNumber=1
+imagePath=launcher
