@@ -1,6 +1,10 @@
 -- Create the script constants
+local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
+
+-- Load data for the player and location
+local gameData = playdate.datastore.read()
 
 
 -- Create an array of tags (used to identify the collision objects)
@@ -28,11 +32,24 @@ class("GameScene").extends()
 --- The initialising method of the game scene class,
 --- It loads the level, and spawns the player
 function GameScene:init()
-	self:goToLevel("Level_0")
+	print("Game opened")
 
-	self.spawnX = 2 * 16
-	self.spawnY = 9 * 16
+	if gameData then
+		self:goToLevel(gameData.currentLevel)
+		self.spawnX = gameData.spawnX
+		self.spawnY = gameData.spawnY
+	else
+		self:goToLevel("Level_0")
+		self.spawnX = 2 * 16
+		self.spawnY = 9 * 16
+	end
+
 	self.player = Player(self.spawnX, self.spawnY, self)
+
+	if gameData then
+		self.player.doubleJumpAbility = gameData.doubleJump
+		self.player.dashAbility = gameData.dash
+	end
 end
 
 
@@ -63,6 +80,16 @@ function GameScene:enterRoom(direction)
 	self.player:moveTo(spawnX, spawnY)
 	self.spawnX = spawnX
 	self.spawnY = spawnY
+
+	local gameData = {
+		currentLevel = level,
+		spawnX = spawnX,
+		spawnY = spawnY,
+		doubleJump = self.player.doubleJumpAbility,
+		dash = self.player.dashAbility
+	}
+
+	pd.datastore.write(gameData)
 end
 
 
