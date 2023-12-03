@@ -25,15 +25,17 @@ class("GameScene").extends()
 function GameScene:init()
 	if gd then
 		self:goToLevel(gd.currentLevel)
+		self.loadX = gd.loadX
+		self.loadY = gd.loadY
 		self.spawnX = gd.spawnX
 		self.spawnY = gd.spawnY
+		self.player = Player(self.loadX, self.loadY, self)
 	else
 		self:goToLevel("Level_0")
 		self.spawnX = 12 * 16
 		self.spawnY = 8 * 16
+		self.player = Player(self.spawnX, self.spawnY, self)
 	end
-
-	self.player = Player(self.spawnX, self.spawnY, self)
 
 	if gd then
 		self.player.doubleJumpAbility = gd.doubleJump
@@ -120,8 +122,10 @@ end
 function GameScene:saveGame()
 	local saveData = {
 		currentLevel = self.level,
-		spawnX = self.player.x,
-		spawnY = self.player.y,
+		spawnX = self.spawnX,
+		spawnY = self.spawnY,
+		loadX = self.player.x,
+		loadY = self.player.y,
 		doubleJump = self.player.doubleJumpAbility,
 		dash = self.player.dashAbility
 	}
