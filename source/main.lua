@@ -4,7 +4,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
--- GitHub Libraries
+-- Libraries from GitHub
 import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk"
 
@@ -15,11 +15,19 @@ import "scripts/Spike"
 import "scripts/Spikeball"
 import "scripts/Ability"
 
-GameScene()
-
 -- PlayDate Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+local gs <const> = GameScene()
+
+-- PlayDate Functions
+function pd.gameWillTerminate()
+	gs:saveGameData()
+end
+
+function pd.deviceWillSleep()
+	gs:saveGameData()
+end
 
 -- Main Game Loop
 function pd.update()

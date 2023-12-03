@@ -3,18 +3,12 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 
--- Load data for the player and location
-local gameData = playdate.datastore.read()
-
-
--- Create an array of tags (used to identify the collision objects)
 TAGS = {
 	Player = 1,
 	Hazard = 2,
 	Pickup = 3
 }
 
--- Create an array of Z indexes for the objects (how far in the foreground they are)
 Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
@@ -22,18 +16,17 @@ Z_INDEXES = {
 }
 
 
+-- Load data for the player and location
+local gameData = pd.datastore.read()
+
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
-
--- Create the game scene class
-class("GameScene").extends()
 
 
 --- The initialising method of the game scene class,
 --- It loads the level, and spawns the player
+class("GameScene").extends()
 function GameScene:init()
-	print("Game opened")
-
 	if gameData then
 		self:goToLevel(gameData.currentLevel)
 		self.spawnX = gameData.spawnX
@@ -49,6 +42,11 @@ function GameScene:init()
 	if gameData then
 		self.player.doubleJumpAbility = gameData.doubleJump
 		self.player.dashAbility = gameData.dash
+		self.level = gameData.currentLevel
+	else
+		self.player.doubleJumpAbility = false
+		self.player.dashAbility = false
+		self.level = "Level_0"
 	end
 end
 
@@ -80,16 +78,9 @@ function GameScene:enterRoom(direction)
 	self.player:moveTo(spawnX, spawnY)
 	self.spawnX = spawnX
 	self.spawnY = spawnY
+	self.level = level
 
-	local gameData = {
-		currentLevel = level,
-		spawnX = spawnX,
-		spawnY = spawnY,
-		doubleJump = self.player.doubleJumpAbility,
-		dash = self.player.dashAbility
-	}
-
-	pd.datastore.write(gameData)
+	self:saveGameData()
 end
 
 
@@ -128,4 +119,16 @@ function GameScene:goToLevel(level_name)
 			Ability(entityX, entityY, entity)
 		end
 	end
+end
+
+function GameScene:saveGameData()
+	gameData = {
+		currentLevel = self.level,
+		spawnX = self.player.x,
+		spawnY = self.player.y,
+		doubleJump = self.player.doubleJumpAbility,
+		dash = self.player.dashAbility
+	}
+
+	pd.datastore.write(gameData)
 end
