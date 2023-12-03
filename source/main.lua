@@ -22,11 +22,11 @@ local gs <const> = GameScene()
 
 -- PlayDate Functions
 function pd.gameWillTerminate()
-	gs:saveGameData()
+	gs:saveGame()
 end
 
 function pd.deviceWillSleep()
-	gs:saveGameData()
+	gs:saveGame()
 end
 
 -- Main Game Loop
