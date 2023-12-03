@@ -29,8 +29,8 @@ function GameScene:init()
 		self.spawnY = gd.spawnY
 	else
 		self:goToLevel("Level_0")
-		self.spawnX = 2 * 16
-		self.spawnY = 9 * 16
+		self.spawnX = 12 * 16
+		self.spawnY = 8 * 16
 	end
 
 	self.player = Player(self.spawnX, self.spawnY, self)
