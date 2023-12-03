@@ -2,6 +2,7 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
+local gd <const> = pd.datastore.read()
 
 TAGS = {
 	Player = 1,
@@ -15,22 +16,17 @@ Z_INDEXES = {
 	Pickup = 50
 }
 
-
--- Load data for the player and location
-local gameData = pd.datastore.read()
-
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
-
 
 --- The initialising method of the game scene class,
 --- It loads the level, and spawns the player
 class("GameScene").extends()
 function GameScene:init()
-	if gameData then
-		self:goToLevel(gameData.currentLevel)
-		self.spawnX = gameData.spawnX
-		self.spawnY = gameData.spawnY
+	if gd then
+		self:goToLevel(gd.currentLevel)
+		self.spawnX = gd.spawnX
+		self.spawnY = gd.spawnY
 	else
 		self:goToLevel("Level_0")
 		self.spawnX = 2 * 16
@@ -39,10 +35,10 @@ function GameScene:init()
 
 	self.player = Player(self.spawnX, self.spawnY, self)
 
-	if gameData then
-		self.player.doubleJumpAbility = gameData.doubleJump
-		self.player.dashAbility = gameData.dash
-		self.level = gameData.currentLevel
+	if gd then
+		self.player.doubleJumpAbility = gd.doubleJump
+		self.player.dashAbility = gd.dash
+		self.level = gd.currentLevel
 	else
 		self.player.doubleJumpAbility = false
 		self.player.dashAbility = false
@@ -80,7 +76,7 @@ function GameScene:enterRoom(direction)
 	self.spawnY = spawnY
 	self.level = level
 
-	self:saveGameData()
+	self:saveGame()
 end
 
 
@@ -121,8 +117,8 @@ function GameScene:goToLevel(level_name)
 	end
 end
 
-function GameScene:saveGameData()
-	gameData = {
+function GameScene:saveGame()
+	local saveData = {
 		currentLevel = self.level,
 		spawnX = self.player.x,
 		spawnY = self.player.y,
@@ -130,5 +126,5 @@ function GameScene:saveGameData()
 		dash = self.player.dashAbility
 	}
 
-	pd.datastore.write(gameData)
+	pd.datastore.write(saveData)
 end
