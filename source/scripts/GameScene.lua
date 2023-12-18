@@ -47,13 +47,7 @@ function GameScene:init()
 		self.level = "Level_0"
 	end
 
-	-- Set Background
-	if self.level == "Level_2" then
-		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
-		gfx.sprite.setBackgroundDrawingCallback(function()
-			backgroundImage:draw(0, 0)
-		end)
-	end
+	self:loadBackground(self.level)
 end
 
 
@@ -86,14 +80,7 @@ function GameScene:enterRoom(direction)
 	self.spawnY = spawnY
 	self.level = level
 
-	-- Set Background
-	if self.level == "Level_2" then
-		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
-		gfx.sprite.setBackgroundDrawingCallback(function()
-			backgroundImage:draw(0, 0)
-		end)
-	end
-
+	self:loadBackground(level)
 	self:saveGame()
 end
 
@@ -147,4 +134,13 @@ function GameScene:saveGame()
 	}
 
 	pd.datastore.write(saveData)
+end
+
+function GameScene:loadBackground(level)
+	if level == "Level_0" then
+		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
+		gfx.sprite.setBackgroundDrawingCallback(function()
+			backgroundImage:draw(0, 0)
+		end)
+	end
 end
