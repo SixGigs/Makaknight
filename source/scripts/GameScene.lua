@@ -32,8 +32,8 @@ function GameScene:init()
 		self.player = Player(self.loadX, self.loadY, self)
 	else
 		self:goToLevel("Level_0")
-		self.spawnX = 12 * 16
-		self.spawnY = 8 * 16
+		self.spawnX = 2 * 16
+		self.spawnY = 11 * 16
 		self.player = Player(self.spawnX, self.spawnY, self)
 	end
 
@@ -137,7 +137,7 @@ function GameScene:saveGame()
 end
 
 function GameScene:loadBackground(level)
-	if level == "Level_0" then
+	if level ~= "Level_99" then
 		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
