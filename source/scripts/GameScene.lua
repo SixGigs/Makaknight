@@ -43,7 +43,7 @@ function GameScene:init()
 		self.level = gd.currentLevel
 	else
 		self.player.doubleJumpAbility = false
-		self.player.dashAbility = false
+		self.player.dashAbility = true
 		self.level = "Level_0"
 	end
 

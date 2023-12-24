@@ -20,7 +20,7 @@ function Player:init(x, y, gameManager)
 
 	-- States
 	self:addState("idle", 4, 4)
-	self:addState("run", 1, 4, {tickStep = 4})
+	self:addState("run", 1, 4, {tickStep = 3.2})
 	self:addState("jump", 5, 5)
 	self:addState("dash", 1, 1)
 	self:playAnimation()
@@ -29,14 +29,14 @@ function Player:init(x, y, gameManager)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(10, 3, 12, 29)
+	self:setCollideRect(9, 3, 14, 30)
 
 	-- Physics Properties
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 2.0
-	self.jumpVelocity = -8
+	self.maxSpeed = 2.6
+	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
 
@@ -46,7 +46,7 @@ function Player:init(x, y, gameManager)
 
 	--Abilities
 	self.doubleJumpAbility = false
-	self.dashAbility = false
+	self.dashAbility = true
 
 	--Double Jump
 	self.doubleJumpAvailable = true
@@ -181,7 +181,7 @@ function Player:handleMovementAndCollisions()
 		self.gameManager:enterRoom("west")
 	elseif self.x > 400 then
 		self.gameManager:enterRoom("east")
-	elseif self.y < 0 then
+	elseif self.y < -8 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
 		self.gameManager:enterRoom("north")
 	elseif self.y > 240 then
 		self.gameManager:enterRoom("south")
