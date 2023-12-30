@@ -10,7 +10,8 @@
         "Player",
         "Spike",
         "Spikeball",
-        "Ability"
+        "Ability",
+        "Checkpoint"
     ],
     "Lua.diagnostics.disable": [
         "param-type-mismatch",

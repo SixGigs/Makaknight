@@ -70,7 +70,7 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup then
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 
@@ -168,6 +168,21 @@ function Player:handleMovementAndCollisions()
 			died = true
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
+		elseif collisionTag == TAGS.Checkpoint then
+			if collisionObject.active == false then
+				local allSprites = gfx.sprite.getAllSprites()
+				for _, sprite in ipairs(allSprites) do
+					if sprite:isa(Checkpoint) then
+						sprite:deactivate()
+					end
+				end
+				collisionObject:hit()
+				self.gameManager.checkpoint = collisionObject.ID
+				self.gameManager.spawnX = self.x
+				self.gameManager.spawnY = self.y
+				self.gameManager.respawnLevel = self.gameManager.level
+				self.gameManager:saveGame()
+			end
 		end
 	end
 
@@ -294,6 +309,7 @@ function Player:changeToDashState()
 			self.xVelocity = self.dashSpeed
 		end
 	end
+
 	self:changeState("dash")
 end
 
