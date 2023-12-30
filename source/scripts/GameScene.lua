@@ -4,16 +4,20 @@ local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 local gd <const> = pd.datastore.read()
 
+-- These tags are used to set collide interactions
 TAGS = {
 	Player = 1,
 	Hazard = 2,
-	Pickup = 3
+	Pickup = 3,
+	Checkpoint = 4
 }
 
+-- This array contains how far in the foreground each object type is
 Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
-	Pickup = 50
+	Pickup = 50,
+	Checkpoint = 70
 }
 
 -- Load the level used for the game
@@ -24,36 +28,46 @@ ldtk.load("levels/world.ldtk", false)
 class("GameScene").extends()
 function GameScene:init()
 	if gd then
-		self:goToLevel(gd.currentLevel)
-		self.loadX = gd.loadX
-		self.loadY = gd.loadY
+		self.respawnLevel = gd.respawnLevel
+		self.level = gd.currentLevel
+		self.checkpoint = gd.checkpoint
 		self.spawnX = gd.spawnX
 		self.spawnY = gd.spawnY
-		self.player = Player(self.loadX, self.loadY, self)
-	else
-		self:goToLevel("Level_0")
-		self.spawnX = 2 * 16
-		self.spawnY = 11 * 16
-		self.player = Player(self.spawnX, self.spawnY, self)
-	end
+		self.loadX = gd.loadX
+		self.loadY = gd.loadY
 
-	if gd then
+		self:goToLevel(self.level)
+		self.player = Player(self.loadX, self.loadY, self)
+
 		self.player.doubleJumpAbility = gd.doubleJump
 		self.player.dashAbility = gd.dash
-		self.level = gd.currentLevel
 	else
-		self.player.doubleJumpAbility = false
-		self.player.dashAbility = true
+		self.respawnLevel = "Level_0"
 		self.level = "Level_0"
-	end
+		self.checkpoint = 0
+		self.spawnX = 2 * 16
+		self.spawnY = 11 * 16
+		self.loadX = 2 * 16
+		self.loadY = 11 * 16
 
-	self:loadBackground(self.level)
+		self:goToLevel(self.level)
+		self.player = Player(self.loadX, self.loadY, self)
+
+		self.player.doubleJumpAbility = false
+		self.player.dashAbility = false
+	end
 end
 
 
 --- The reset player method moves the player back to the most recent spawn X & Y coordinates
 function GameScene:resetPlayer()
-	self.player:moveTo(self.spawnX, self.spawnY)
+	if self.level ~= self.respawnLevel then
+		self:goToLevel(self.respawnLevel)
+		self.player = Player(self.spawnX, self.spawnY, self)
+		self.level = self.respawnLevel
+	else
+		self.player:moveTo(self.spawnX, self.spawnY)
+	end
 end
 
 
@@ -76,12 +90,7 @@ function GameScene:enterRoom(direction)
 	end
 
 	self.player:moveTo(spawnX, spawnY)
-	self.spawnX = spawnX
-	self.spawnY = spawnY
 	self.level = level
-
-	self:loadBackground(level)
-	self:saveGame()
 end
 
 
@@ -118,13 +127,19 @@ function GameScene:goToLevel(level_name)
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Ability" then
 			Ability(entityX, entityY, entity)
+		elseif entityName == "Checkpoint" then
+			Checkpoint(entityX, entityY, entity)
 		end
 	end
+
+	self:loadBackground(self.level)
 end
 
 function GameScene:saveGame()
 	local saveData = {
+		respawnLevel = self.respawnLevel,
 		currentLevel = self.level,
+		checkpoint = self.checkpoint,
 		spawnX = self.spawnX,
 		spawnY = self.spawnY,
 		loadX = self.player.x,

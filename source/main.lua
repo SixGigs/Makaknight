@@ -14,6 +14,7 @@ import "scripts/Player"
 import "scripts/Spike"
 import "scripts/Spikeball"
 import "scripts/Ability"
+import "scripts/Checkpoint"
 
 -- PlayDate Constants
 local pd <const> = playdate
