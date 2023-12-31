@@ -169,7 +169,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Checkpoint then
-			if collisionObject.active == false then
+			if collisionObject.checked == false then
 				local allSprites = gfx.sprite.getAllSprites()
 				for _, sprite in ipairs(allSprites) do
 					if sprite:isa(Checkpoint) then
@@ -177,7 +177,7 @@ function Player:handleMovementAndCollisions()
 					end
 				end
 				collisionObject:hit()
-				self.gameManager.checkpoint = collisionObject.ID
+				self.gameManager.checkpoint = collisionObject.id
 				self.gameManager.spawnX = self.x
 				self.gameManager.spawnY = self.y
 				self.gameManager.respawnLevel = self.gameManager.level
