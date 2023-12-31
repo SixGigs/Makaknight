@@ -23,38 +23,13 @@ Z_INDEXES = {
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
 
---- The initialising method of the game scene class,
---- It loads the level, and spawns the player
+--- The initialising method of the game scene class
 class("GameScene").extends()
 function GameScene:init()
 	if gd then
-		self.respawnLevel = gd.respawnLevel
-		self.level = gd.currentLevel
-		self.checkpoint = gd.checkpoint
-		self.spawnX = gd.spawnX
-		self.spawnY = gd.spawnY
-		self.loadX = gd.loadX
-		self.loadY = gd.loadY
-
-		self:goToLevel(self.level)
-		self.player = Player(self.loadX, self.loadY, self)
-
-		self.player.doubleJumpAbility = gd.doubleJump
-		self.player.dashAbility = gd.dash
+		self:loadGame()
 	else
-		self.respawnLevel = "Level_0"
-		self.level = "Level_0"
-		self.checkpoint = 0
-		self.spawnX = 2 * 16
-		self.spawnY = 11 * 16
-		self.loadX = 2 * 16
-		self.loadY = 11 * 16
-
-		self:goToLevel(self.level)
-		self.player = Player(self.loadX, self.loadY, self)
-
-		self.player.doubleJumpAbility = false
-		self.player.dashAbility = false
+		self:createGame()
 	end
 end
 
@@ -135,6 +110,8 @@ function GameScene:goToLevel(level_name)
 	self:loadBackground(self.level)
 end
 
+
+--- Function used for saving the game
 function GameScene:saveGame()
 	local saveData = {
 		respawnLevel = self.respawnLevel,
@@ -151,6 +128,9 @@ function GameScene:saveGame()
 	pd.datastore.write(saveData)
 end
 
+
+--- Load the background for the level sent into the function
+---@param level string The name of the 
 function GameScene:loadBackground(level)
 	if level ~= "Level_99" then
 		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
@@ -158,4 +138,40 @@ function GameScene:loadBackground(level)
 			backgroundImage:draw(0, 0)
 		end)
 	end
+end
+
+
+--- Create game data
+function GameScene:createGame()
+	self.respawnLevel = "Level_0"
+	self.level = "Level_0"
+	self.checkpoint = 0
+	self.spawnX = 2 * 16
+	self.spawnY = 11 * 16
+	self.loadX = 2 * 16
+	self.loadY = 11 * 16
+
+	self:goToLevel(self.level)
+	self.player = Player(self.loadX, self.loadY, self)
+
+	self.player.doubleJumpAbility = false
+	self.player.dashAbility = false
+end
+
+
+--- Load game data
+function GameScene:loadGame()
+	self.respawnLevel = gd.respawnLevel
+	self.level = gd.currentLevel
+	self.checkpoint = gd.checkpoint
+	self.spawnX = gd.spawnX
+	self.spawnY = gd.spawnY
+	self.loadX = gd.loadX
+	self.loadY = gd.loadY
+
+	self:goToLevel(self.level)
+	self.player = Player(self.loadX, self.loadY, self)
+
+	self.player.doubleJumpAbility = gd.doubleJump
+	self.player.dashAbility = gd.dash
 end

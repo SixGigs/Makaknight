@@ -10,12 +10,11 @@ class('Spike').extends(gfx.sprite)
 --- @param x integer The X coordinate to spawn the spike
 --- @param y integer The Y coordinate to spawn the spike
 function Spike:init(x, y)
-	self:setZIndex(Z_INDEXES.Hazard)
-	self:setImage(spikeImage)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
-	self:add()
-
+	self:setZIndex(Z_INDEXES.Hazard)
 	self:setTag(TAGS.Hazard)
 	self:setCollideRect(2, 9, 12, 7)
+	self:setImage(spikeImage)
+	self:add()
 end

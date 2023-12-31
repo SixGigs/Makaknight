@@ -222,8 +222,6 @@ function Player:die()
 end
 
 
--- Input Helper Functions ------------------------------------------------------------------------------------------
-
 --- Handle input while the player is on the ground. Like going left, right, dashing, and jumping
 function Player:handleGroundInput()
 	if self:playerJumped() then
@@ -255,14 +253,13 @@ function Player:handleAirInput()
 end
 
 
--- State Transitions -----------------------------------------------------------------------------------------------
-
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
 	self.xVelocity = 0
 
 	self:changeState("idle")
 end
+
 
 --- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
 --- @param direction string Contains the direction the player is moving in as a string
@@ -313,8 +310,6 @@ function Player:changeToDashState()
 	self:changeState("dash")
 end
 
-
--- Physics Helper Functions ----------------------------------------------------------------------------------------
 
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a cieling or the ground
