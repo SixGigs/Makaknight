@@ -46,6 +46,7 @@ function Checkpoint:init(x, y, entity)
 	end
 end
 
+
 --- If the flag is touched let's activate it
 function Checkpoint:hit()
 	if self.checked == false then
@@ -56,6 +57,7 @@ function Checkpoint:hit()
 		end)
 	end
 end
+
 
 --- Turn the flag back to an inactive state
 function Checkpoint:deactivate()
