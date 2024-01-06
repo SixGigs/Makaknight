@@ -93,7 +93,7 @@ local function setImage(self)
 end
 
 ---Start/resume the animation  
----If `currentState` is nil then `defaultState` will be choosen as current
+---If `currentState` is nil then `defaultState` will be chosen as current
 function AnimatedSprite:playAnimation()
 
 	local state = self.states[self.currentState]
