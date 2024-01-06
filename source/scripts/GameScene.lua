@@ -70,7 +70,7 @@ end
 
 
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
---- @param level_name string Contains the name of the level to load as a scring
+--- @param level_name string Contains the name of the level to load as a string
 function GameScene:goToLevel(level_name)
 	gfx.sprite.removeAll()
 
@@ -122,7 +122,8 @@ function GameScene:saveGame()
 		loadX = self.player.x,
 		loadY = self.player.y,
 		doubleJump = self.player.doubleJumpAbility,
-		dash = self.player.dashAbility
+		dash = self.player.dashAbility,
+		facing = self.player.globalFlip
 	}
 
 	pd.datastore.write(saveData)
@@ -143,6 +144,8 @@ end
 
 --- Create game data
 function GameScene:createGame()
+	local facing = 0
+
 	self.respawnLevel = "Level_0"
 	self.level = "Level_0"
 	self.checkpoint = 0
@@ -152,7 +155,7 @@ function GameScene:createGame()
 	self.loadY = 11 * 16
 
 	self:goToLevel(self.level)
-	self.player = Player(self.loadX, self.loadY, self)
+	self.player = Player(self.loadX, self.loadY, self, facing)
 
 	self.player.doubleJumpAbility = false
 	self.player.dashAbility = false
@@ -161,6 +164,8 @@ end
 
 --- Load game data
 function GameScene:loadGame()
+	local facing = gd.facing
+
 	self.respawnLevel = gd.respawnLevel
 	self.level = gd.currentLevel
 	self.checkpoint = gd.checkpoint
@@ -170,7 +175,7 @@ function GameScene:loadGame()
 	self.loadY = gd.loadY
 
 	self:goToLevel(self.level)
-	self.player = Player(self.loadX, self.loadY, self)
+	self.player = Player(self.loadX, self.loadY, self, facing)
 
 	self.player.doubleJumpAbility = gd.doubleJump
 	self.player.dashAbility = gd.dash

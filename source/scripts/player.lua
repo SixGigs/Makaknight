@@ -10,8 +10,8 @@ class('Player').extends(AnimatedSprite)
 --- @param x           integer The X coordinate to spawn the player
 --- @param y           integer The Y coordinate to spawn the player
 --- @param gameManager table   The game manager is passed in to manage player on object interactions
-function Player:init(x, y, gameManager)
-	--Game Manager
+function Player:init(x, y, gameManager, facing)
+	-- Game Manager
 	self.gameManager = gameManager
 
 	-- State Machine
@@ -58,6 +58,7 @@ function Player:init(x, y, gameManager)
 	self.dashDrag = 0.8
 
 	-- Player State
+	self.globalFlip = facing
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -238,7 +239,7 @@ function Player:handleGroundInput()
 end
 
 
---- Hendle input while the player is in the air. Like going left, right, double jumping, and dashing
+--- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
 		self.doubleJumpAvailable = false
@@ -312,7 +313,7 @@ end
 
 
 --- Applies gravity to the player, used if the player is not touching a surface
---- Resets Y velocity when colliding with a cieling or the ground
+--- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + self.gravity
 	if self.touchingGround or self.touchingCeiling then
@@ -321,8 +322,8 @@ function Player:applyGravity()
 end
 
 
---- Applys air drag to the player if they're not holding the direction they are moving in while airborn
---- @param amount integer The amount to decrease movement by while in the air if recieving no directional input
+--- Applies air drag to the player if they're not holding the direction they are moving in while airborne
+--- @param amount integer The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
 		self.xVelocity = self.xVelocity - amount
