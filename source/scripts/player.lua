@@ -211,7 +211,7 @@ function Player:triggerCheckpoint(collisionObject)
 		self.gameManager.checkpoint = collisionObject.id
 		self.gameManager.spawnX = collisionObject.x + 36
 		self.gameManager.spawnY = collisionObject.y + 16
-		self.gameManager.respawnLevel = self.gameManager.level
+		self.gameManager.spawnLevel = self.gameManager.currentLevel
 		self.gameManager:saveGame()
 	end
 end
