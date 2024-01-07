@@ -34,12 +34,69 @@ function GameScene:init()
 end
 
 
+--- Create game data
+function GameScene:createGame()
+	self.spawnLevel = "Level_0"
+	self.currentLevel = "Level_0"
+	self.checkpoint = 0
+	self.spawnX = 2 * 16
+	self.spawnY = 11 * 16
+	self.currentX = 2 * 16
+	self.currentY = 11 * 16
+	self.facing = 0
+
+	self:goToLevel(self.currentLevel)
+	self.player = Player(self.currentX, self.currentY, self, self.facing)
+
+	self.player.doubleJumpAbility = false
+	self.player.dashAbility = true
+end
+
+
+--- Function used for saving the game
+function GameScene:saveGame()
+	local saveData = {
+		spawnLevel = self.spawnLevel,
+		spawnX = self.spawnX,
+		spawnY = self.spawnY,
+		currentLevel = self.currentLevel,
+		currentX = self.player.x,
+		currentY = self.player.y,
+		checkpoint = self.checkpoint,
+		facing = self.player.globalFlip,
+		doubleJump = self.player.doubleJumpAbility,
+		dash = self.player.dashAbility
+	}
+
+	pd.datastore.write(saveData)
+end
+
+
+--- Load game data
+function GameScene:loadGame()
+	self.spawnLevel = gd.spawnLevel
+	self.spawnX = gd.spawnX
+	self.spawnY = gd.spawnY
+	self.currentLevel = gd.currentLevel
+	self.currentX = gd.currentX
+	self.currentY = gd.currentY
+	self.checkpoint = gd.checkpoint
+	self.facing = gd.facing
+
+	self:goToLevel(self.currentLevel)
+	self.player = Player(self.currentX, self.currentY, self, self.facing)
+
+	self.player.doubleJumpAbility = gd.doubleJump
+	self.player.dashAbility = gd.dash
+end
+
+
 --- The reset player method moves the player back to the most recent spawn X & Y coordinates
 function GameScene:resetPlayer()
-	if self.level ~= self.respawnLevel then
-		self:goToLevel(self.respawnLevel)
+	if self.currentLevel ~= self.spawnLevel then
+		self:goToLevel(self.spawnLevel)
 		self.player = Player(self.spawnX, self.spawnY, self, self.facing)
-		self.level = self.respawnLevel
+		self.currentLevel = self.spawnLevel
 	else
 		self.player:moveTo(self.spawnX, self.spawnY)
 	end
@@ -65,7 +122,7 @@ function GameScene:enterRoom(direction)
 	end
 
 	self.player:moveTo(spawnX, spawnY)
-	self.level = level
+	self.currentLevel = level
 end
 
 
@@ -111,25 +168,6 @@ function GameScene:goToLevel(level_name)
 end
 
 
---- Function used for saving the game
-function GameScene:saveGame()
-	local saveData = {
-		respawnLevel = self.respawnLevel,
-		currentLevel = self.level,
-		checkpoint = self.checkpoint,
-		spawnX = self.spawnX,
-		spawnY = self.spawnY,
-		loadX = self.player.x,
-		loadY = self.player.y,
-		doubleJump = self.player.doubleJumpAbility,
-		dash = self.player.dashAbility,
-		facing = self.player.globalFlip
-	}
-
-	pd.datastore.write(saveData)
-end
-
-
 --- Load the background for the level sent into the function
 ---@param level string The name of the 
 function GameScene:loadBackground(level)
@@ -139,42 +177,4 @@ function GameScene:loadBackground(level)
 			backgroundImage:draw(0, 0)
 		end)
 	end
-end
-
-
---- Create game data
-function GameScene:createGame()
-	self.respawnLevel = "Level_0"
-	self.level = "Level_0"
-	self.checkpoint = 0
-	self.spawnX = 2 * 16
-	self.spawnY = 11 * 16
-	self.loadX = 2 * 16
-	self.loadY = 11 * 16
-	self.facing = 0
-
-	self:goToLevel(self.level)
-	self.player = Player(self.loadX, self.loadY, self, self.facing)
-
-	self.player.doubleJumpAbility = false
-	self.player.dashAbility = false
-end
-
-
---- Load game data
-function GameScene:loadGame()
-	self.respawnLevel = gd.respawnLevel
-	self.level = gd.currentLevel
-	self.checkpoint = gd.checkpoint
-	self.spawnX = gd.spawnX
-	self.spawnY = gd.spawnY
-	self.loadX = gd.loadX
-	self.loadY = gd.loadY
-	self.facing = gd.facing
-
-	self:goToLevel(self.level)
-	self.player = Player(self.loadX, self.loadY, self, self.facing)
-
-	self.player.doubleJumpAbility = gd.doubleJump
-	self.player.dashAbility = gd.dash
 end
