@@ -164,15 +164,20 @@ function GameScene:goToLevel(level_name)
 		end
 	end
 
-	self:loadBackground(self.level)
+	self:loadBackground(level_name)
 end
 
 
 --- Load the background for the level sent into the function
 ---@param level string The name of the 
 function GameScene:loadBackground(level)
-	if level ~= "Level_99" then
+	if level == "Level_0" or level == "Level_1" or level == "Level_2" then
 		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
+		gfx.sprite.setBackgroundDrawingCallback(function()
+			backgroundImage:draw(0, 0)
+		end)
+	elseif (level == "Level_3" or level == "Level_4" or level == "Level_5") then
+		local backgroundImage = gfx.image.new("levels/desert-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
 		end)

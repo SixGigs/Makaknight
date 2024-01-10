@@ -29,7 +29,7 @@ function Player:init(x, y, gameManager, facing)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(9, 3, 14, 30)
+	self:setCollideRect(9, 3, 14, 29)
 
 	-- Physics Properties
 	self.xVelocity = 0
