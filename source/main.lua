@@ -34,5 +34,5 @@ end
 function pd.update()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	pd.drawFPS(0, 0)
+	pd.drawFPS(2, 2)
 end
