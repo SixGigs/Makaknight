@@ -7,9 +7,9 @@ local gfx <const> = playdate.graphics
 class('Checkpoint').extends(AnimatedSprite)
 
 --- Checkpoints are created using this method
----@param x      integer The X coordinate to spawn the checkpoint
----@param y      integer The Y coordinate to spawn the checkpoint
----@param entity table   The list of entities the checkpoint has
+--- @param x      integer The X coordinate to spawn the checkpoint
+--- @param y      integer The Y coordinate to spawn the checkpoint
+--- @param entity table   The list of entities the checkpoint has
 function Checkpoint:init(x, y, entity)
 	-- Initialise the state machine
 	local gd <const> = pd.datastore.read()
