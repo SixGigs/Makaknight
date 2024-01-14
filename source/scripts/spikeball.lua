@@ -2,14 +2,14 @@
 local gfx <const> = playdate.graphics
 local spikeballImage <const> = gfx.image.new("images/spikeball")
 
--- Create the spikeball class
+-- Create the spike-ball class
 class('Spikeball').extends(gfx.sprite)
 
 
---- Initialise the spikeball object using the information given
---- @param x      integer The X coordinate to spawn the spikeball
---- @param y      integer The Y coordinate to spawn the spikeball
---- @param entity table   The entities that come with the spikeball
+--- Initialise the spike-ball object using the information given
+--- @param x      integer The X coordinate to spawn the spike-ball
+--- @param y      integer The Y coordinate to spawn the spike-ball
+--- @param entity table   The entities that come with the spike-ball
 function Spikeball:init(x, y, entity)
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setImage(spikeballImage)
@@ -26,7 +26,7 @@ function Spikeball:init(x, y, entity)
 end
 
 
---- The method the spikeball uses to handle collisions
+--- The method the spike-ball uses to handle collisions
 --- @param  other   table The object being collided with
 --- @return unknown table The collision response to use
 function Spikeball:collisionResponse(other)
@@ -38,7 +38,7 @@ function Spikeball:collisionResponse(other)
 end
 
 
---- The update method for the spikeball, it will run every tick
+--- The update method for the spike-ball, it will run every tick
 function Spikeball:update()
 	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
 	local hitWall = false
