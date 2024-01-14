@@ -15,14 +15,14 @@ function Player:init(x, y, gameManager, facing)
 	self.gameManager = gameManager
 
 	-- State Machine
-	local playerImageTable = gfx.imagetable.new("images/player-table-32-32")
+	local playerImageTable = gfx.imagetable.new("images/seraphina-table-32-32")
 	Player.super.init(self, playerImageTable)
 
 	-- States
-	self:addState("idle", 4, 4)
-	self:addState("run", 1, 4, {tickStep = 3.2})
-	self:addState("jump", 5, 5)
-	self:addState("dash", 1, 1)
+	self:addState("idle", 1, 1)
+	self:addState("run", 2, 7, {tickStep = 3.2})
+	self:addState("jump", 8, 8)
+	self:addState("dash", 5, 5)
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -35,7 +35,7 @@ function Player:init(x, y, gameManager, facing)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 2.6
+	self.maxSpeed = 1.6
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
