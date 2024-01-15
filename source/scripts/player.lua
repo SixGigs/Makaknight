@@ -20,11 +20,13 @@ function Player:init(x, y, gameManager, facing)
 
 	-- States
 	self:addState("idle", 1, 1)
-	self:addState("run", 2, 7, {tickStep = 3.2})
+	self:addState("walk", 2, 7, {tickStep = 3.2})
+	self:addState("run", 11, 16, {tickStep = 3.2})
 	self:addState("jump", 9, 9)
 	self:addState("fall", 10, 10)
 	self:addState("dash", 5, 5)
 	self:addState("duck", 8, 8)
+	self:addState("ready", 17, 26, {tickStep = 3.2})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -37,7 +39,8 @@ function Player:init(x, y, gameManager, facing)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 1.6
+	self.maxSpeed = 3.2
+	self.walkSpeed = 1.6
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
@@ -119,7 +122,7 @@ function Player:handleState()
 	if self.currentState == "idle" then
 		self:applyGravity()
 		self:handleGroundInput()
-	elseif self.currentState == "run" then
+	elseif self.currentState == "walk" then
 		self:applyGravity()
 		self:handleGroundInput()
 	elseif self.currentState == "duck" then
@@ -150,6 +153,14 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
+	
+	--- Ready state
+	elseif self.currentState == "ready" then
+		self:applyGravity()
+		self:handleReadyInput()
+	elseif self.currentState == "run" then
+		self:applyGravity()
+		self:handleReadyInput()
 	end
 end
 
@@ -253,10 +264,12 @@ end
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
+	elseif pd.buttonJustPressed(pd.kButtonB) then
+		self:changeToReadyState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self:changeToRunState("left")
+		self:changeToWalkState("left")
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self:changeToRunState("right")
+		self:changeToWalkState("right")
 	elseif pd.buttonIsPressed(pd.kButtonDown) then
 		self:changeToDuckState()
 	else
@@ -273,17 +286,33 @@ function Player:handleDuckInput()
 end
 
 
+--- Handle input while the player is ready. Running left, right, and jumping
+function Player:handleReadyInput()
+	if self:playerJumped() then
+		self:changeToJumpState()
+	elseif pd.buttonJustReleased(pd.kButtonB) then
+		self:changeToIdleState()
+	elseif pd.buttonIsPressed(pd.kButtonLeft) then
+		self:changeToRunState("left")
+	elseif pd.buttonIsPressed(pd.kButtonRight) then
+		self:changeToRunState("right")
+	else
+		self:changeToReadyState()
+	end
+end
+
+
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
 		self.doubleJumpAvailable = false
 		self:changeToJumpState()
-	elseif pd.buttonIsPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
+	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
 		self:changeToDashState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = -self.maxSpeed
+		self.xVelocity = -self.walkSpeed
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.maxSpeed
+		self.xVelocity = self.walkSpeed
 	end
 end
 
@@ -296,8 +325,28 @@ function Player:changeToIdleState()
 end
 
 
+function Player:changeToReadyState()
+	self.xVelocity = 0
+
+	self:changeState("ready")
+end
+
+
 --- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
 --- @param direction string Contains the direction the player is moving in as a string
+function Player:changeToWalkState(direction)
+	if direction == "left" then
+		self.xVelocity = -self.walkSpeed
+		self.globalFlip = 1
+	elseif direction == "right" then
+		self.xVelocity = self.walkSpeed
+		self.globalFlip = 0
+	end
+
+	self:changeState("walk")
+end
+
+
 function Player:changeToRunState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.maxSpeed
