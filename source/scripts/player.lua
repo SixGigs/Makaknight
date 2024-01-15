@@ -24,6 +24,7 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("jump", 9, 9)
 	self:addState("fall", 10, 10)
 	self:addState("dash", 5, 5)
+	self:addState("duck", 8, 8)
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -121,6 +122,9 @@ function Player:handleState()
 	elseif self.currentState == "run" then
 		self:applyGravity()
 		self:handleGroundInput()
+	elseif self.currentState == "duck" then
+		self:applyGravity()
+		self:handleDuckInput()
 	elseif self.currentState == "jump" then
 		if self.touchingGround then
 			self:changeToIdleState()
@@ -249,13 +253,21 @@ end
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
-	-- elseif pd.buttonIsPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility and self.touchingGround then
-	-- 	  self:changeToDashState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
 		self:changeToRunState("left")
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
 		self:changeToRunState("right")
+	elseif pd.buttonIsPressed(pd.kButtonDown) then
+		self:changeToDuckState()
 	else
+		self:changeToIdleState()
+	end
+end
+
+
+--- Handle input while the player is crouched
+function Player:handleDuckInput()
+	if pd.buttonJustReleased(pd.kButtonDown) then
 		self:changeToIdleState()
 	end
 end
@@ -311,6 +323,14 @@ end
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
+end
+
+
+--- Changes the player sprite to the crouch state when down is pressed
+function Player:changeToDuckState()
+	self.xVelocity = 0
+
+	self:changeState("duck")
 end
 
 
