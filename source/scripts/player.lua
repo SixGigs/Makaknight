@@ -21,7 +21,8 @@ function Player:init(x, y, gameManager, facing)
 	-- States
 	self:addState("idle", 1, 1)
 	self:addState("run", 2, 7, {tickStep = 3.2})
-	self:addState("jump", 8, 8)
+	self:addState("jump", 9, 9)
+	self:addState("fall", 10, 10)
 	self:addState("dash", 5, 5)
 	self:playAnimation()
 
@@ -44,14 +45,14 @@ function Player:init(x, y, gameManager, facing)
 	self.jumpBufferAmount = 5
 	self.jumpBuffer = 0
 
-	--Abilities
+	-- Abilities
 	self.doubleJumpAbility = false
 	self.dashAbility = true
 
-	--Double Jump
+	-- Double Jump
 	self.doubleJumpAvailable = true
 
-	--Dash
+	-- Dash
 	self.dashAvailable = true
 	self.dashSpeed = 8
 	self.dashMinimumSpeed = 3
@@ -95,6 +96,7 @@ end
 --- The jump buffer helps jumping appear more natural in the game
 function Player:updateJumpBuffer()
 	self.jumpBuffer = self.jumpBuffer - 1
+
 	if self.jumpBuffer <= 0 then
 		self.jumpBuffer = 0
 	end
@@ -124,6 +126,10 @@ function Player:handleState()
 			self:changeToIdleState()
 		end
 
+		if self.yVelocity > 0 then
+			self:changeToFallState()
+		end
+
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
@@ -132,6 +138,14 @@ function Player:handleState()
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
 			self:changeToFallState()
 		end
+	elseif self.currentState == "fall" then
+		if self.touchingGround then
+			self:changeToIdleState()
+		end
+
+		self:applyGravity()
+		self:applyDrag(self.drag)
+		self:handleAirInput()
 	end
 end
 
@@ -235,8 +249,8 @@ end
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
-	elseif pd.buttonIsPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
-		self:changeToDashState()
+	-- elseif pd.buttonIsPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility and self.touchingGround then
+	-- 	  self:changeToDashState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
 		self:changeToRunState("left")
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
@@ -296,7 +310,7 @@ end
 
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
-	self:changeState("jump")
+	self:changeState("fall")
 end
 
 
