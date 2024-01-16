@@ -63,7 +63,7 @@ function Player:init(x, y, gameManager, facing)
 	self.dashAvailable = true
 	self.dashSpeed = 8
 	self.dashMinimumSpeed = 3
-	self.dashDrag = 0.8
+	self.dashDrag = 1.6
 
 	-- Player State
 	self.globalFlip = facing
