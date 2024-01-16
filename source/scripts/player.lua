@@ -356,6 +356,7 @@ end
 function Player:changeToIdleState()
 	self.xVelocity = 0
 
+	self:setCollideRect(9, 3, 14, 29)
 	self:changeState("idle")
 end
 
@@ -427,6 +428,7 @@ end
 function Player:changeToDuckState()
 	self.xVelocity = 0
 
+	self:setCollideRect(9, 16, 14, 16)
 	self:changeState("duck")
 end
 
