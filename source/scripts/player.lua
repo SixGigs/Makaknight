@@ -150,7 +150,11 @@ function Player:handleState()
 		end
 	elseif self.currentState == "fall" then
 		if self.touchingGround then
-			self:changeToIdleState()
+			if pd.buttonIsPressed(pd.kButtonB) then
+				self:changeToReadyState()
+			else
+				self:changeToIdleState()
+			end
 		end
 
 		self:applyGravity()
