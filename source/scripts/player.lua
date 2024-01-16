@@ -63,7 +63,7 @@ function Player:init(x, y, gameManager, facing)
 	self.dashAvailable = true
 	self.dashSpeed = 8
 	self.dashMinimumSpeed = 3
-	self.dashDrag = 1.6
+	self.dashDrag = 1.8
 
 	-- Player State
 	self.globalFlip = facing
@@ -160,34 +160,12 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	
-	--- Ready state
 	elseif self.currentState == "ready" then
 		self:applyGravity()
-		self:handleReadyInput()
+		self:handleGroundInput()
 	elseif self.currentState == "run" then
 		self:applyGravity()
-		self:handleReadyInput()
-	elseif self.currentState == "runJump" then
-		if self.yVelocity > 0 then
-			self:changeToRunFallState()
-		end
-
-		self:applyGravity()
-		self:applyDrag(self.drag)
-		self:handleReadyAirInput()
-	elseif self.currentState == "runFall" then
-		if self.touchingGround then
-			if pd.buttonIsPressed(pd.kButtonB) then
-				self:changeToReadyState()
-			else
-				self:changeToIdleState()
-			end
-		end
-		
-		self:applyGravity()
-		self:applyDrag(self.drag)
-		self:handleReadyAirInput()
+		self:handleGroundInput()
 	end
 end
 
@@ -291,16 +269,28 @@ end
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
-	elseif pd.buttonJustPressed(pd.kButtonB) then
-		self:changeToReadyState()
+--	elseif pd.buttonJustPressed(pd.kButtonB) then
+--		self:changeToReadyState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self:changeToWalkState("left")
+		if pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToRunState("left")
+		else
+			self:changeToWalkState("left")
+		end
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self:changeToWalkState("right")
+		if pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToRunState("right")
+		else
+			self:changeToWalkState("right")
+		end
 	elseif pd.buttonIsPressed(pd.kButtonDown) then
 		self:changeToDuckState()
 	else
-		self:changeToIdleState()
+		if pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToReadyState()
+		else
+			self:changeToIdleState()
+		end
 	end
 end
 
@@ -343,19 +333,6 @@ function Player:handleAirInput()
 	end
 end
 
-
-function Player:handleReadyAirInput()
-	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
-		self.doubleJumpAvailable = false
-		self:changeToJumpState()
-	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
-		self:changeToDashState()
-	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = -self.maxSpeed
-	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.maxSpeed
-	end
-end
 
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
