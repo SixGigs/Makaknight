@@ -269,25 +269,21 @@ end
 function Player:handleGroundInput()
 	if self:playerJumped() then
 		self:changeToJumpState()
---	elseif pd.buttonJustPressed(pd.kButtonB) then
---		self:changeToReadyState()
-	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		if pd.buttonIsPressed(pd.kButtonB) then
+	elseif pd.buttonIsPressed(pd.kButtonB) then
+		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:changeToRunState("left")
-		else
-			self:changeToWalkState("left")
-		end
-	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		if pd.buttonIsPressed(pd.kButtonB) then
+		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
 		else
-			self:changeToWalkState("right")
-		end
-	elseif pd.buttonIsPressed(pd.kButtonDown) then
-		self:changeToDuckState()
-	else
-		if pd.buttonIsPressed(pd.kButtonB) then
 			self:changeToReadyState()
+		end
+	else
+		if pd.buttonIsPressed(pd.kButtonLeft) then
+			self:changeToWalkState("left")
+		elseif pd.buttonIsPressed(pd.kButtonRight) then
+			self:changeToWalkState("right")
+		elseif pd.buttonIsPressed(pd.kButtonDown) then
+			self:changeToDuckState()
 		else
 			self:changeToIdleState()
 		end
