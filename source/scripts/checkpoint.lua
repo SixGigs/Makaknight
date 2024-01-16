@@ -28,7 +28,7 @@ function Checkpoint:init(x, y, entity)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Checkpoint)
 	self:setTag(TAGS.Checkpoint)
-	self:setCollideRect(28, 21, 7, 27)
+	self:setCollideRect(29, 21, 5, 27)
 
 	-- Let's save those checkpoint fields
 	self.id = entity.fields.id
