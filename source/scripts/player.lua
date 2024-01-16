@@ -23,7 +23,9 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("walk", 2, 7, {tickStep = 3.2})
 	self:addState("run", 11, 16, {tickStep = 3.2})
 	self:addState("jump", 9, 9)
+	self:addState("runJump", 9, 9)
 	self:addState("fall", 10, 10)
+	self:addState("runFall", 10, 10)
 	self:addState("dash", 5, 5)
 	self:addState("duck", 8, 8)
 	self:addState("ready", 17, 26, {tickStep = 3.2})
@@ -161,6 +163,26 @@ function Player:handleState()
 	elseif self.currentState == "run" then
 		self:applyGravity()
 		self:handleReadyInput()
+	elseif self.currentState == "runJump" then
+		if self.yVelocity > 0 then
+			self:changeToRunFallState()
+		end
+
+		self:applyGravity()
+		self:applyDrag(self.drag)
+		self:handleReadyAirInput()
+	elseif self.currentState == "runFall" then
+		if self.touchingGround then
+			if pd.buttonIsPressed(pd.kButtonB) then
+				self:changeToReadyState()
+			else
+				self:changeToIdleState()
+			end
+		end
+		
+		self:applyGravity()
+		self:applyDrag(self.drag)
+		self:handleReadyAirInput()
 	end
 end
 
@@ -289,7 +311,7 @@ end
 --- Handle input while the player is ready. Running left, right, and jumping
 function Player:handleReadyInput()
 	if self:playerJumped() then
-		self:changeToJumpState()
+		self:changeToRunJumpState()
 	elseif pd.buttonJustReleased(pd.kButtonB) then
 		self:changeToIdleState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
@@ -316,6 +338,19 @@ function Player:handleAirInput()
 	end
 end
 
+
+function Player:handleReadyAirInput()
+	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
+		self.doubleJumpAvailable = false
+		self:changeToJumpState()
+	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
+		self:changeToDashState()
+	elseif pd.buttonIsPressed(pd.kButtonLeft) then
+		self.xVelocity = -self.maxSpeed
+	elseif pd.buttonIsPressed(pd.kButtonRight) then
+		self.xVelocity = self.maxSpeed
+	end
+end
 
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
@@ -369,9 +404,22 @@ function Player:changeToJumpState()
 end
 
 
+function Player:changeToRunJumpState()
+	self.yVelocity = self.jumpVelocity
+	self.jumpBuffer = 0
+
+	self:changeState("runJump")
+end
+
+
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
+end
+
+
+function Player:changeToRunFallState()
+	self:changeState("runFall")
 end
 
 
