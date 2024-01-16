@@ -43,6 +43,7 @@ function Player:init(x, y, gameManager, facing)
 	self.gravity = 1.0
 	self.maxSpeed = 3.2
 	self.walkSpeed = 1.6
+	self.jumpSpeed = 2.4
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
@@ -332,9 +333,9 @@ function Player:handleAirInput()
 	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
 		self:changeToDashState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = -self.walkSpeed
+		self.xVelocity = -self.jumpSpeed
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.walkSpeed
+		self.xVelocity = self.jumpSpeed
 	end
 end
 
