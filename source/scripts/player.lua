@@ -41,7 +41,7 @@ function Player:init(x, y, gameManager, facing)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 3.2
+	self.maxSpeed = 3.4
 	self.walkSpeed = 1.6
 	self.jumpSpeed = 2.4
 	self.jumpVelocity = -9.5
