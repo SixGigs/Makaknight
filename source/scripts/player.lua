@@ -20,13 +20,13 @@ function Player:init(x, y, gameManager, facing)
 
 	-- States
 	self:addState("idle", 1, 1)
-	self:addState("walk", 2, 7, {tickStep = 3.2})
-	self:addState("run", 11, 16, {tickStep = 3.2})
+	self:addState("walk", 2, 7, {tickStep = 3})
+	self:addState("run", 11, 16, {tickStep = 3})
 	self:addState("jump", 9, 9)
 	self:addState("runJump", 9, 9)
 	self:addState("fall", 10, 10)
 	self:addState("runFall", 10, 10)
-	self:addState("dash", 27, 30, {tickStep = 6.4})
+	self:addState("dash", 27, 29, {tickStep = 1})
 	self:addState("duck", 8, 8)
 	self:addState("ready", 17, 26, {tickStep = 3.2})
 	self:playAnimation()
@@ -42,8 +42,8 @@ function Player:init(x, y, gameManager, facing)
 	self.yVelocity = 0
 	self.gravity = 1.0
 	self.maxSpeed = 3.4
-	self.walkSpeed = 1.6
-	self.jumpSpeed = 2.4
+	self.walkSpeed = 2
+	self.jumpSpeed = 2.6
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
@@ -63,7 +63,7 @@ function Player:init(x, y, gameManager, facing)
 	self.dashAvailable = true
 	self.dashSpeed = 8
 	self.dashMinimumSpeed = 3
-	self.dashDrag = 1.8
+	self.dashDrag = 1.4
 
 	-- Player State
 	self.globalFlip = facing
