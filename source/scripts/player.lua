@@ -23,12 +23,13 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("jump", 9, 9)
 	self:addState("fall", 10, 10)
 	self:addState("duck", 8, 8)
+	self:addState("dead", 35, 35)
 	self:addState("walk", 2, 7, {tickStep = 3})
 	self:addState("run", 11, 16, {tickStep = 3})
 	self:addState("dash", 27, 29, {tickStep = 1})
 	self:addState("ready", 17, 26, {tickStep = 3})
 	self:addState("dive", 30, 31, {tickStep = 1})
-	self:addState("die", 32, 35, {tickStep = 2})
+	self:addState("die", 32, 34, {tickStep = 2})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -259,7 +260,7 @@ function Player:die()
 	self.yVelocity = 0
 	self.dead = true
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(200, function()
+	pd.timer.performAfterDelay(750, function()
 		self:setCollisionsEnabled(true)
 		self.dead = false
 		self.gameManager:resetPlayer()
@@ -381,6 +382,9 @@ end
 
 function Player:changeToDieState()
 	self:changeState("die")
+	pd.timer.performAfterDelay(150, function()
+		self:changeState("dead")
+	end)
 end
 
 
