@@ -28,7 +28,8 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("runFall", 10, 10)
 	self:addState("dash", 27, 29, {tickStep = 1})
 	self:addState("duck", 8, 8)
-	self:addState("ready", 17, 26, {tickStep = 3.2})
+	self:addState("ready", 17, 26, {tickStep = 3})
+	self:addState("dive", 30, 31, {tickStep = 1})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -148,7 +149,7 @@ function Player:handleState()
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
 			self:changeToFallState()
 		end
-	elseif self.currentState == "fall" then
+	elseif self.currentState == "fall" or self.currentState == "dive" then
 		if self.touchingGround then
 			if pd.buttonIsPressed(pd.kButtonB) then
 				self:changeToReadyState()
@@ -299,22 +300,6 @@ function Player:handleDuckInput()
 end
 
 
---- Handle input while the player is ready. Running left, right, and jumping
-function Player:handleReadyInput()
-	if self:playerJumped() then
-		self:changeToRunJumpState()
-	elseif pd.buttonJustReleased(pd.kButtonB) then
-		self:changeToIdleState()
-	elseif pd.buttonIsPressed(pd.kButtonLeft) then
-		self:changeToRunState("left")
-	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self:changeToRunState("right")
-	else
-		self:changeToReadyState()
-	end
-end
-
-
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
@@ -326,6 +311,10 @@ function Player:handleAirInput()
 		self.xVelocity = -self.jumpSpeed
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
 		self.xVelocity = self.jumpSpeed
+	end
+
+	if pd.buttonJustPressed(pd.kButtonDown) then
+		self:changeToDiveState()
 	end
 end
 
@@ -394,6 +383,18 @@ end
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
+end
+
+
+function Player:changeToDiveState()
+	self.yVelocity = 12
+	if self.globalFlip == 0 then
+		self.xVelocity = 3
+	else
+		self.xVelocity = -3
+	end
+
+	self:changeState("dive")
 end
 
 
