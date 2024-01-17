@@ -20,16 +20,15 @@ function Player:init(x, y, gameManager, facing)
 
 	-- States
 	self:addState("idle", 1, 1)
+	self:addState("jump", 9, 9)
+	self:addState("fall", 10, 10)
+	self:addState("duck", 8, 8)
 	self:addState("walk", 2, 7, {tickStep = 3})
 	self:addState("run", 11, 16, {tickStep = 3})
-	self:addState("jump", 9, 9)
-	self:addState("runJump", 9, 9)
-	self:addState("fall", 10, 10)
-	self:addState("runFall", 10, 10)
 	self:addState("dash", 27, 29, {tickStep = 1})
-	self:addState("duck", 8, 8)
 	self:addState("ready", 17, 26, {tickStep = 3})
 	self:addState("dive", 30, 31, {tickStep = 1})
+	self:addState("die", 32, 35, {tickStep = 2})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -90,11 +89,12 @@ end
 
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
+	self:updateAnimation()
+	
 	if self.dead then
 		return
 	end
 
-	self:updateAnimation()
 	self:updateJumpBuffer()
 	self:handleState()
 	self:handleMovementAndCollisions()
@@ -202,6 +202,7 @@ function Player:handleMovementAndCollisions()
 
 		if collisionTag == TAGS.Hazard then
 			died = true
+			self:changeToDieState()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Checkpoint then
@@ -372,34 +373,26 @@ function Player:changeToJumpState()
 end
 
 
-function Player:changeToRunJumpState()
-	self.yVelocity = self.jumpVelocity
-	self.jumpBuffer = 0
-
-	self:changeState("runJump")
-end
-
-
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
 end
 
 
-function Player:changeToDiveState()
-	self.yVelocity = 12
-	if self.globalFlip == 0 then
-		self.xVelocity = 3
-	else
-		self.xVelocity = -3
-	end
-
-	self:changeState("dive")
+function Player:changeToDieState()
+	self:changeState("die")
 end
 
 
-function Player:changeToRunFallState()
-	self:changeState("runFall")
+function Player:changeToDiveState()
+	self.yVelocity = 12
+	if self.globalFlip == 0 then
+		self.xVelocity = 4
+	else
+		self.xVelocity = -4
+	end
+
+	self:changeState("dive")
 end
 
 

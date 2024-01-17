@@ -97,8 +97,10 @@ function GameScene:resetPlayer()
 		self:goToLevel(self.spawnLevel)
 		self.player = Player(self.spawnX, self.spawnY, self, self.facing)
 		self.currentLevel = self.spawnLevel
+		self.player:changeToFallState()
 	else
 		self.player:moveTo(self.spawnX, self.spawnY)
+		self.player:changeToFallState()
 	end
 end
 
