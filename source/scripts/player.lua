@@ -31,6 +31,7 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("dive", 30, 31, {tickStep = 1})
 	self:addState("die", 32, 34, {tickStep = 2})
 	self:addState("roll", 36, 43, {tickStep = 1})
+	self:addState("respawn", 44, 49, {tickStep = 3})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -282,8 +283,8 @@ function Player:triggerCheckpoint(collisionObject)
 
 		collisionObject:hit()
 		self.gameManager.checkpoint = collisionObject.id
-		self.gameManager.spawnX = collisionObject.x + 36
-		self.gameManager.spawnY = collisionObject.y + 16
+		self.gameManager.spawnX = collisionObject.x + 16
+		self.gameManager.spawnY = collisionObject.y + 32
 		self.gameManager.spawnLevel = self.gameManager.currentLevel
 	end
 end
@@ -463,6 +464,13 @@ function Player:changeToDieState()
 	self:changeState("die")
 	pd.timer.performAfterDelay(150, function()
 		self:changeState("dead")
+	end)
+end
+
+function Player:changeToRespawnState()
+	self:changeState("respawn")
+	pd.timer.performAfterDelay(530, function()
+		self:changeState("idle")
 	end)
 end
 
