@@ -162,7 +162,7 @@ function GameScene:goToLevel(level_name)
 		elseif entityName == "Ability" then
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Checkpoint" then
-			Checkpoint(entityX, entityY, entity)
+			Checkpoint(entityX, entityY, entity, self)
 		end
 	end
 

@@ -10,9 +10,8 @@ class('Checkpoint').extends(AnimatedSprite)
 --- @param x      integer The X coordinate to spawn the checkpoint
 --- @param y      integer The Y coordinate to spawn the checkpoint
 --- @param entity table   The list of entities the checkpoint has
-function Checkpoint:init(x, y, entity)
+function Checkpoint:init(x, y, entity, gameManager)
 	-- Initialise the state machine
-	local gd <const> = pd.datastore.read()
 	local checkpointImageTable <const> = gfx.imagetable.new("images/check-table-64-48")
 	Checkpoint.super.init(self, checkpointImageTable)
 
@@ -32,14 +31,15 @@ function Checkpoint:init(x, y, entity)
 
 	-- Let's save those checkpoint fields
 	self.id = entity.fields.id
-	if gd then
-		if self.id == gd.checkpoint then
-			self.checked = true
-			self:changeState("active")
-		else
-			self.checked = false
-			self:changeState("inactive")
-		end
+	
+	print("Checkpoint ID:")
+	print(self.id)
+	print("Active ID:")
+	print(gameManager.checkpoint)
+
+	if self.id == gameManager.checkpoint then
+		self.checked = true
+		self:changeState("active")
 	else
 		self.checked = false
 		self:changeState("inactive")

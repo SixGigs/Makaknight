@@ -54,7 +54,7 @@ function Player:init(x, y, gameManager, facing)
 	self.rollAvailable = true
 	self.rollFallSpeed = 4
 	self.rollSpeed = 6
-	self.rollBufferAmount = 3
+	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 260
 	
@@ -285,7 +285,6 @@ function Player:triggerCheckpoint(collisionObject)
 		self.gameManager.spawnX = collisionObject.x + 36
 		self.gameManager.spawnY = collisionObject.y + 16
 		self.gameManager.spawnLevel = self.gameManager.currentLevel
-		self.gameManager:saveGame()
 	end
 end
 
