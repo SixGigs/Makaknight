@@ -30,6 +30,7 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("ready", 17, 26, {tickStep = 3})
 	self:addState("dive", 30, 31, {tickStep = 1})
 	self:addState("die", 32, 34, {tickStep = 2})
+	self:addState("roll", 36, 43, {tickStep = 1})
 	self:playAnimation()
 
 	-- Sprite Properties
@@ -48,6 +49,18 @@ function Player:init(x, y, gameManager, facing)
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
+
+	-- Roll
+	self.rollAvailable = true
+	self.rollFallSpeed = 4
+	self.rollSpeed = 6
+	self.rollBufferAmount = 3
+	self.rollBuffer = 0
+	self.rollRecharge = 260
+	
+	-- Dive
+	self.diveSpeed = 12
+	self.diveHorizontal = 4
 
 	-- Jump Buffer
 	self.jumpBufferAmount = 5
@@ -97,6 +110,7 @@ function Player:update()
 	end
 
 	self:updateJumpBuffer()
+	self:updateRollBuffer()
 	self:handleState()
 	self:handleMovementAndCollisions()
 end
@@ -116,9 +130,29 @@ function Player:updateJumpBuffer()
 end
 
 
+
+function Player:updateRollBuffer()
+	self.rollBuffer = self.rollBuffer - 1
+	
+	if self.rollBuffer <= 0 then
+		self.rollBuffer = 0
+	end
+	
+	if pd.buttonJustPressed(pd.kButtonB) then
+		self.rollBuffer = self.rollBufferAmount
+	end
+end
+
+
 --- A function to detect whether the player has jumped based on jump buffer
 function Player:playerJumped()
 	return self.jumpBuffer > 0
+end
+
+
+
+function Player:playerRolled()
+	return self.rollBuffer > 0
 end
 
 
@@ -133,6 +167,8 @@ function Player:handleState()
 	elseif self.currentState == "duck" then
 		self:applyGravity()
 		self:handleDuckInput()
+	elseif self.currentState == "roll" then
+		self:applyGravity()
 	elseif self.currentState == "jump" then
 		if self.touchingGround then
 			self:changeToIdleState()
@@ -291,6 +327,14 @@ function Player:handleGroundInput()
 			self:changeToIdleState()
 		end
 	end
+
+	if self:playerRolled() then
+		if pd.buttonJustPressed(pd.kButtonRight) and self.rollAvailable then
+			self:changeToRollState("right")
+		elseif pd.buttonJustPressed(pd.kButtonLeft) and self.rollAvailable then
+			self:changeToRollState("left")
+		end
+	end
 end
 
 
@@ -330,6 +374,7 @@ function Player:changeToIdleState()
 end
 
 
+
 function Player:changeToReadyState()
 	self.xVelocity = 0
 
@@ -352,6 +397,7 @@ function Player:changeToWalkState(direction)
 end
 
 
+
 function Player:changeToRunState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.maxSpeed
@@ -362,6 +408,40 @@ function Player:changeToRunState(direction)
 	end
 
 	self:changeState("run")
+end
+
+
+
+function Player:changeToRollState(direction)
+	self.rollAvailable = false
+	
+	if direction == "left" then
+		self.xVelocity = -self.rollSpeed
+		self.globalFlip = 1
+	elseif direction == "right" then
+		self.xVelocity = self.rollSpeed
+		self.globalFlip = 0
+	end
+
+	pd.timer.performAfterDelay(260, function()
+		pd.timer.performAfterDelay(self.rollRecharge, function()
+			self.rollAvailable = true
+		end)
+		
+		if self.touchingGround then
+			self:changeState("idle")
+		else
+			if self.globalFlip == 0 then
+				self.xVelocity = self.rollFallSpeed
+			else
+				self.xVelocity = -self.rollFallSpeed
+			end
+			
+			self:changeState("fall")
+		end
+	end)
+
+	self:changeState("roll")
 end
 
 
@@ -389,11 +469,11 @@ end
 
 
 function Player:changeToDiveState()
-	self.yVelocity = 12
+	self.yVelocity = self.diveSpeed
 	if self.globalFlip == 0 then
-		self.xVelocity = 4
+		self.xVelocity = self.diveHorizontal
 	else
-		self.xVelocity = -4
+		self.xVelocity = -self.diveHorizontal
 	end
 
 	self:changeState("dive")
