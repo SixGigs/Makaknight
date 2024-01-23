@@ -31,12 +31,6 @@ function Checkpoint:init(x, y, entity, gameManager)
 
 	-- Let's save those checkpoint fields
 	self.id = entity.fields.id
-	
-	print("Checkpoint ID:")
-	print(self.id)
-	print("Active ID:")
-	print(gameManager.checkpoint)
-
 	if self.id == gameManager.checkpoint then
 		self.checked = true
 		self:changeState("active")

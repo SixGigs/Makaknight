@@ -9,7 +9,8 @@ TAGS = {
 	Player = 1,
 	Hazard = 2,
 	Pickup = 3,
-	Checkpoint = 4
+	Checkpoint = 4,
+	Ledge = 5
 }
 
 -- This array contains how far in the foreground each object type is
@@ -146,6 +147,11 @@ function GameScene:goToLevel(level_name)
 			layerSprite:add()
 
 			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Solid", layer_name)
+			if emptyTiles then
+				gfx.sprite.addWallSprites(tilemap, emptyTiles)
+			end
+
+			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Ledge", layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
 			end
