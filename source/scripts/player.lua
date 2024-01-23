@@ -469,7 +469,7 @@ end
 
 function Player:changeToRespawnState()
 	self:changeState("respawn")
-	pd.timer.performAfterDelay(530, function()
+	pd.timer.performAfterDelay(510, function()
 		self:changeState("idle")
 	end)
 end
