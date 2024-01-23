@@ -30,6 +30,9 @@ function pd.deviceWillSleep()
 	gs:saveGame()
 end
 
+-- Playdate Set Refresh Rate
+pd.display.setRefreshRate(30)
+
 -- Main Game Loop
 function pd.update()
 	gfx.sprite.update()
