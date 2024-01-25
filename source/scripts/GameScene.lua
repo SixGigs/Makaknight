@@ -40,10 +40,10 @@ function GameScene:createGame()
 	self.spawnLevel = "Level_0"
 	self.currentLevel = "Level_0"
 	self.checkpoint = 0
-	self.spawnX = 2 * 16
-	self.spawnY = 11 * 16
-	self.currentX = 2 * 16
-	self.currentY = 11 * 16
+	self.spawnX = 12 * 16
+	self.spawnY = 12 * 16
+	self.currentX = 12 * 16
+	self.currentY = 12 * 16
 	self.facing = 0
 
 	self:goToLevel(self.currentLevel)
@@ -179,12 +179,12 @@ end
 --- Load the background for the level sent into the function
 ---@param level string The name of the 
 function GameScene:loadBackground(level)
-	if level == "Level_0" or level == "Level_1" or level == "Level_2" then
+	if level == "Level_2" or level == "Level_8" or level == "Level_9" or level == "Level_10" or level == "Level_11" then
 		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
 		end)
-	elseif (level == "Level_3" or level == "Level_4" or level == "Level_5") then
+	elseif level == "Level_0" or level == "Level_1" or level == "Level_3" or level == "Level_4" or level == "Level_5" or level == "Level_6" or level == "Level_7" then
 		local backgroundImage = gfx.image.new("levels/desert-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
