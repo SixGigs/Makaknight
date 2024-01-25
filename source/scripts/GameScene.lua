@@ -17,6 +17,7 @@ TAGS = {
 Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
+	Prop = 30,
 	Pickup = 50,
 	Checkpoint = 70
 }
@@ -169,6 +170,14 @@ function GameScene:goToLevel(level_name)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Checkpoint" then
 			Checkpoint(entityX, entityY, entity, self)
+		elseif entityName == "Lightrock" then
+			Lightrock(entityX, entityY)
+		elseif entityName == "Darkrock" then
+			Darkrock(entityX, entityY)
+		elseif entityName == "Deadtree" then
+			Deadtree(entityX, entityY)
+		elseif entityName == "Tallcactus" then
+			Tallcactus(entityX, entityY)
 		end
 	end
 
