@@ -184,7 +184,7 @@ function GameScene:loadBackground(level)
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
 		end)
-	elseif level == "Level_0" or level == "Level_1" or level == "Level_3" or level == "Level_4" or level == "Level_5" or level == "Level_6" or level == "Level_7" then
+	elseif level == "Level_0" or level == "Level_1" or level == "Level_3" or level == "Level_4" or level == "Level_5" or level == "Level_6" or level == "Level_7"  or level == "Level_12" or level == "Level_13"  or level == "Level_14" or level == "Level_15" or level == "Level_16"then
 		local backgroundImage = gfx.image.new("levels/desert-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
