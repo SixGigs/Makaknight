@@ -10,7 +10,9 @@ TAGS = {
 	Hazard = 2,
 	Pickup = 3,
 	Checkpoint = 4,
-	Ledge = 5
+	Ledge = 5,
+	Prop = 6,
+	Entry = 7
 }
 
 -- This array contains how far in the foreground each object type is
@@ -18,6 +20,7 @@ Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
 	Prop = 30,
+	Entry = 40,
 	Pickup = 50,
 	Checkpoint = 70
 }
@@ -126,13 +129,12 @@ function GameScene:enterRoom(direction)
 	end
 
 	self.player:moveTo(spawnX, spawnY)
-	self.currentLevel = level
 end
 
 
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
 --- @param level_name string Contains the name of the level to load as a string
-function GameScene:goToLevel(level_name)
+function GameScene:goToLevelAndCreatePlayer(level_name, entryX, entryY)
 	gfx.sprite.removeAll()
 
 	self.levelName = level_name
@@ -148,11 +150,6 @@ function GameScene:goToLevel(level_name)
 			layerSprite:add()
 
 			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Solid", layer_name)
-			if emptyTiles then
-				gfx.sprite.addWallSprites(tilemap, emptyTiles)
-			end
-
-			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Ledge", layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
 			end
@@ -178,22 +175,79 @@ function GameScene:goToLevel(level_name)
 			Deadtree(entityX, entityY)
 		elseif entityName == "Tallcactus" then
 			Tallcactus(entityX, entityY)
+		elseif entityName == "Entry" then
+			Entry(entityX, entityY, entity)
 		end
 	end
 
 	self:loadBackground(level_name)
+	self.player = Player(entryX * 16, entryY * 16, self, self.facing)
+	self.currentLevel = level_name
+end
+
+
+--- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
+--- @param level_name string Contains the name of the level to load as a string
+function GameScene:goToLevel(level_name)
+	gfx.sprite.removeAll()
+
+	self.levelName = level_name
+	for layer_name, layer in pairs(ldtk.get_layers(level_name)) do
+		if layer.tiles then
+			local tilemap = ldtk.create_tilemap(level_name, layer_name)
+			local layerSprite = gfx.sprite.new()
+
+			layerSprite:setTilemap(tilemap)
+			layerSprite:setCenter(0, 0)
+			layerSprite:moveTo(0, 0)
+			layerSprite:setZIndex(layer.zIndex)
+			layerSprite:add()
+
+			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Solid", layer_name)
+			if emptyTiles then
+				gfx.sprite.addWallSprites(tilemap, emptyTiles)
+			end
+		end
+	end
+
+	for _, entity in ipairs(ldtk.get_entities(level_name)) do
+		local entityX, entityY = entity.position.x, entity.position.y
+		local entityName = entity.name
+		if entityName == "Spike" then
+			Spike(entityX, entityY)
+		elseif entityName == "Spikeball" then
+			Spikeball(entityX, entityY, entity)
+		elseif entityName == "Ability" then
+			Ability(entityX, entityY, entity)
+		elseif entityName == "Checkpoint" then
+			Checkpoint(entityX, entityY, entity, self)
+		elseif entityName == "Lightrock" then
+			Lightrock(entityX, entityY)
+		elseif entityName == "Darkrock" then
+			Darkrock(entityX, entityY)
+		elseif entityName == "Deadtree" then
+			Deadtree(entityX, entityY)
+		elseif entityName == "Tallcactus" then
+			Tallcactus(entityX, entityY)
+		elseif entityName == "Entry" then
+			Entry(entityX, entityY, entity)
+		end
+	end
+
+	self:loadBackground(level_name)
+	self.currentLevel = level_name
 end
 
 
 --- Load the background for the level sent into the function
 ---@param level string The name of the 
 function GameScene:loadBackground(level)
-	if level == "Level_2" or level == "Level_8" or level == "Level_9" or level == "Level_10" or level == "Level_11" then
+	if level == "Level_2" or level == "Level_8" or level == "Level_9" or level == "Level_10" or level == "Level_11" or level == "Level_17" then
 		local backgroundImage = gfx.image.new("levels/cave-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)
 		end)
-	elseif level == "Level_0" or level == "Level_1" or level == "Level_3" or level == "Level_4" or level == "Level_5" or level == "Level_6" or level == "Level_7"  or level == "Level_12" or level == "Level_13"  or level == "Level_14" or level == "Level_15" or level == "Level_16"then
+	elseif level == "Level_0" or level == "Level_1" or level == "Level_3" or level == "Level_4" or level == "Level_5" or level == "Level_6" or level == "Level_7"  or level == "Level_12" or level == "Level_13"  or level == "Level_14" or level == "Level_15" or level == "Level_16" then
 		local backgroundImage = gfx.image.new("levels/desert-background-400-240")
 		gfx.sprite.setBackgroundDrawingCallback(function()
 			backgroundImage:draw(0, 0)

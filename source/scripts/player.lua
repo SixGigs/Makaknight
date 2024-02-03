@@ -85,6 +85,11 @@ function Player:init(x, y, gameManager, facing)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	self.touchingEntry = false
+	self.entryCounter = 2
+	self.entryLevelID = nil
+	self.entryX = 0
+	self.entryY = 0
 	self.dead = false
 end
 
@@ -94,7 +99,7 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint then
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint or tag == TAGS.Prop or tag == TAGS.Entry then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 
@@ -245,8 +250,33 @@ function Player:handleMovementAndCollisions()
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Checkpoint then
 			self:triggerCheckpoint(collisionObject)
+		elseif collisionTag == TAGS.Entry then
+			self.entryCounter = 2
+			if self.touchingEntry == false then
+				self.touchingEntry = true
+				self.entryLevelID = collisionObject:getEntryLevelID()
+				self.entryX = collisionObject:getEntryX()
+				self.entryY = collisionObject:getEntryY()
+				
+				print(self.entryLevelID)
+				print(self.entryX)
+				print(self.entryY)
+			end
+		end
+		
+		-- Check if we are still touching the entryway
+		if self.touchingEntry == true and collisionTag ~= TAGS.Entry then
+			self.entryCounter = self.entryCounter - 1
+			if self.entryCounter <= 0 then
+				self.touchingEntry = false
+				self.entryLevelID = nil
+				self.entryX = 0
+				self.entryY = 0
+			end
 		end
 	end
+	
+	
 
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
@@ -333,6 +363,12 @@ function Player:handleGroundInput()
 			self:changeToRollState("right")
 		elseif pd.buttonJustPressed(pd.kButtonLeft) and self.rollAvailable then
 			self:changeToRollState("left")
+		end
+	end
+
+	if pd.buttonJustPressed(pd.kButtonUp) then
+		if self.entryLevelID ~= nil then
+			self.gameManager:goToLevelAndCreatePlayer(self.entryLevelID, self.entryX, self.entryY)
 		end
 	end
 end
