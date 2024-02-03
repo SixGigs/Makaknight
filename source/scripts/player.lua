@@ -257,10 +257,6 @@ function Player:handleMovementAndCollisions()
 				self.entryLevelID = collisionObject:getEntryLevelID()
 				self.entryX = collisionObject:getEntryX()
 				self.entryY = collisionObject:getEntryY()
-				
-				print(self.entryLevelID)
-				print(self.entryX)
-				print(self.entryY)
 			end
 		end
 		
@@ -368,7 +364,7 @@ function Player:handleGroundInput()
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
 		if self.entryLevelID ~= nil then
-			self.gameManager:goToLevelAndCreatePlayer(self.entryLevelID, self.entryX, self.entryY)
+			self.gameManager:goToLevel(self.entryLevelID, self.entryX, self.entryY, self.globalFlip)
 		end
 	end
 end
