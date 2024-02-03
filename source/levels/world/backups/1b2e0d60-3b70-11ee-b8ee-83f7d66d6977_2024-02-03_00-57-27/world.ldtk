@@ -10417,7 +10417,7 @@
 									"params": ["Level_17"]
 								}] },
 								{ "__identifier": "entryX", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
-								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
+								{ "__identifier": "entryY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
 							],
 							"__worldX": 1152,
 							"__worldY": -160
@@ -14176,7 +14176,7 @@
 									"params": ["Level_5"]
 								}] },
 								{ "__identifier": "entryX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
-								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
+								{ "__identifier": "entryY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
 							],
 							"__worldX": 1232,
 							"__worldY": -160

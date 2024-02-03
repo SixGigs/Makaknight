@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 2122,
+	"nextUid": 2121,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -7874,13 +7874,13 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "level",
+					"identifier": "goToLevel",
 					"doc": null,
-					"__type": "String",
-					"uid": 2121,
-					"type": "F_String",
+					"__type": "Int",
+					"uid": 2118,
+					"type": "F_Int",
 					"isArray": false,
-					"canBeNull": true,
+					"canBeNull": false,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "Hidden",
@@ -7911,7 +7911,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "entryX",
+					"identifier": "playerX",
 					"doc": null,
 					"__type": "Int",
 					"uid": 2119,
@@ -7948,7 +7948,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "entryY",
+					"identifier": "playerY",
 					"doc": null,
 					"__type": "Int",
 					"uid": 2120,
@@ -10412,12 +10412,9 @@
 									"id": "V_String",
 									"params": ["DesertEntryDark"]
 								}] },
-								{ "__identifier": "level", "__type": "String", "__value": "Level_17", "__tile": null, "defUid": 2121, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["Level_17"]
-								}] },
-								{ "__identifier": "entryX", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
-								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
+								{ "__identifier": "goToLevel", "__type": "Int", "__value": 17, "__tile": null, "defUid": 2118, "realEditorValues": [{ "id": "V_Int", "params": [17] }] },
+								{ "__identifier": "playerX", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
+								{ "__identifier": "playerY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
 							],
 							"__worldX": 1152,
 							"__worldY": -160
@@ -14171,12 +14168,9 @@
 									"id": "V_String",
 									"params": ["DesertEntryLight"]
 								}] },
-								{ "__identifier": "level", "__type": "String", "__value": "Level_5", "__tile": null, "defUid": 2121, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["Level_5"]
-								}] },
-								{ "__identifier": "entryX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
-								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
+								{ "__identifier": "goToLevel", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2118, "realEditorValues": [{ "id": "V_Int", "params": [5] }] },
+								{ "__identifier": "playerX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
+								{ "__identifier": "playerY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
 							],
 							"__worldX": 1232,
 							"__worldY": -160
