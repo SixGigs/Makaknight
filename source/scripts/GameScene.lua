@@ -127,7 +127,7 @@ function GameScene:goToLevel(level_name, entryX, entryY, facing)
 
 	self:loadBackground(level_name)
 	if entryX and entryY then
-		self.player = Player(entryX * 16, entryY * 16, self, facing)
+		self.player = Player(entryX * 16 + 8, entryY * 16, self, facing)
 	end
 
 	self.currentLevel = level_name
@@ -158,7 +158,7 @@ function GameScene:createGame()
 	self.checkpoint = 0
 	self.spawnX = 12 * 16
 	self.spawnY = 12 * 16
-	self.currentX = 12 * 16
+	self.currentX = 12 * 16 + 8
 	self.currentY = 12 * 16
 	self.facing = 0
 
