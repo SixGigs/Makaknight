@@ -113,7 +113,7 @@ function GameScene:goToLevel(level_name, entryX, entryY, facing)
 		elseif entityName == "Checkpoint" then
 			Checkpoint(entityX, entityY, entity, self)
 		elseif entityName == "Lightrock" or entityName == "Deadtree" or entityName == "Tallcactus" or entityName == "Darkrock" then
-			Prop(entityX, entityY, entity)
+			Prop(entityX, entityY, entityName)
 		elseif entityName == "Entry" then
 			Entry(entityX, entityY, entity)
 		end

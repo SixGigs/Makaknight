@@ -7,13 +7,9 @@ class('Prop').extends(gfx.sprite)
 --- Initialise the tree object using the data given
 --- @param x integer The X coordinate to spawn the spike
 --- @param y integer The Y coordinate to spawn the spike
-function Prop:init(x, y, entity)
-	-- If the ability has been picked up don't spawn it
-	self.fields = entity.fields
-
+function Prop:init(x, y, entityName)
 	-- If the ability hasn't been picked let's spawn it
-	self.prop = self.fields.prop
-	local propImage = gfx.image.new("images/"..self.prop)
+	local propImage = gfx.image.new("images/"..entityName)
 	assert(propImage)
 
 	self:setCenter(0, 0)
