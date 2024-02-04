@@ -15,10 +15,7 @@ import "scripts/Spike"
 import "scripts/Spikeball"
 import "scripts/Entry"
 import "scripts/Checkpoint"
-import "scripts/Lightrock"
-import "scripts/Darkrock"
-import "scripts/Deadtree"
-import "scripts/Tallcactus"
+import "scripts/Prop"
 
 -- PlayDate Constants
 local pd <const> = playdate

@@ -112,14 +112,8 @@ function GameScene:goToLevel(level_name, entryX, entryY, facing)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Checkpoint" then
 			Checkpoint(entityX, entityY, entity, self)
-		elseif entityName == "Lightrock" then
-			Lightrock(entityX, entityY)
-		elseif entityName == "Darkrock" then
-			Darkrock(entityX, entityY)
-		elseif entityName == "Deadtree" then
-			Deadtree(entityX, entityY)
-		elseif entityName == "Tallcactus" then
-			Tallcactus(entityX, entityY)
+		elseif entityName == "Lightrock" or entityName == "Deadtree" or entityName == "Tallcactus" or entityName == "Darkrock" then
+			Prop(entityX, entityY, entity)
 		elseif entityName == "Entry" then
 			Entry(entityX, entityY, entity)
 		end
