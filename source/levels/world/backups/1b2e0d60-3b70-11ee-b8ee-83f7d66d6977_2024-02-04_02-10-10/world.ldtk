@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 2121,
+	"nextUid": 2126,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -7874,13 +7874,13 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "goToLevel",
+					"identifier": "level",
 					"doc": null,
-					"__type": "Int",
-					"uid": 2118,
-					"type": "F_Int",
+					"__type": "String",
+					"uid": 2121,
+					"type": "F_String",
 					"isArray": false,
-					"canBeNull": false,
+					"canBeNull": true,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "Hidden",
@@ -7911,7 +7911,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "playerX",
+					"identifier": "entryX",
 					"doc": null,
 					"__type": "Int",
 					"uid": 2119,
@@ -7948,7 +7948,7 @@
 					"tilesetUid": null
 				},
 				{
-					"identifier": "playerY",
+					"identifier": "entryY",
 					"doc": null,
 					"__type": "Int",
 					"uid": 2120,
@@ -8092,7 +8092,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "prop",
+					"doc": null,
+					"__type": "String",
+					"uid": 2123,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		},
 		{
 			"identifier": "Darkrock",
@@ -8127,7 +8165,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "prop",
+					"doc": null,
+					"__type": "String",
+					"uid": 2125,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		},
 		{
 			"identifier": "Deadtree",
@@ -8162,7 +8238,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "prop",
+					"doc": null,
+					"__type": "String",
+					"uid": 2122,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		},
 		{
 			"identifier": "Tallcactus",
@@ -8197,7 +8311,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "prop",
+					"doc": null,
+					"__type": "String",
+					"uid": 2124,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -9979,7 +10131,10 @@
 							"height": 16,
 							"defUid": 2096,
 							"px": [304,144],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "prop", "__type": "String", "__value": "light-rock", "__tile": null, "defUid": 2123, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["light-rock"]
+							}] }],
 							"__worldX": 704,
 							"__worldY": -96
 						},
@@ -9995,7 +10150,10 @@
 							"height": 16,
 							"defUid": 2099,
 							"px": [368,144],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "prop", "__type": "String", "__value": "dark-rock", "__tile": null, "defUid": 2125, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["dark-rock"]
+							}] }],
 							"__worldX": 768,
 							"__worldY": -96
 						},
@@ -10011,7 +10169,10 @@
 							"height": 48,
 							"defUid": 2101,
 							"px": [272,112],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "prop", "__type": "String", "__value": "dead-tree", "__tile": null, "defUid": 2122, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["dead-tree"]
+							}] }],
 							"__worldX": 672,
 							"__worldY": -128
 						},
@@ -10027,7 +10188,10 @@
 							"height": 32,
 							"defUid": 2103,
 							"px": [352,128],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "prop", "__type": "String", "__value": "tall-cactus", "__tile": null, "defUid": 2124, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["tall-cactus"]
+							}] }],
 							"__worldX": 752,
 							"__worldY": -112
 						}
@@ -10412,9 +10576,12 @@
 									"id": "V_String",
 									"params": ["DesertEntryDark"]
 								}] },
-								{ "__identifier": "goToLevel", "__type": "Int", "__value": 17, "__tile": null, "defUid": 2118, "realEditorValues": [{ "id": "V_Int", "params": [17] }] },
-								{ "__identifier": "playerX", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
-								{ "__identifier": "playerY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
+								{ "__identifier": "level", "__type": "String", "__value": "Level_17", "__tile": null, "defUid": 2121, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Level_17"]
+								}] },
+								{ "__identifier": "entryX", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
+								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
 							],
 							"__worldX": 1152,
 							"__worldY": -160
@@ -14168,9 +14335,12 @@
 									"id": "V_String",
 									"params": ["DesertEntryLight"]
 								}] },
-								{ "__identifier": "goToLevel", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2118, "realEditorValues": [{ "id": "V_Int", "params": [5] }] },
-								{ "__identifier": "playerX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
-								{ "__identifier": "playerY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
+								{ "__identifier": "level", "__type": "String", "__value": "Level_5", "__tile": null, "defUid": 2121, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Level_5"]
+								}] },
+								{ "__identifier": "entryX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
+								{ "__identifier": "entryY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
 							],
 							"__worldX": 1232,
 							"__worldY": -160
