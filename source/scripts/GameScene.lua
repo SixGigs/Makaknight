@@ -12,15 +12,15 @@ TAGS = {
 	Checkpoint = 4,
 	Ledge = 5,
 	Prop = 6,
-	Entry = 7
+	Door = 7
 }
 
 -- This array contains how far in the foreground each object type is
 Z_INDEXES = {
 	Player = 100,
 	Hazard = 20,
-	Prop = 30,
-	Entry = 40,
+	Door = 30,
+	Prop = 40,
 	Pickup = 50,
 	Checkpoint = 70
 }
@@ -114,8 +114,8 @@ function GameScene:goToLevel(level_name, entryX, entryY, facing)
 			Checkpoint(entityX, entityY, entity, self)
 		elseif entityName == "Lightrock" or entityName == "Deadtree" or entityName == "Tallcactus" or entityName == "Darkrock" then
 			Prop(entityX, entityY, entityName)
-		elseif entityName == "Entry" then
-			Entry(entityX, entityY, entity)
+		elseif entityName == "Door" then
+			Door(entityX, entityY, entity)
 		end
 	end
 
