@@ -30,7 +30,7 @@ function Player:init(x, y, gameManager, facing)
 	self:addState("ready", 17, 26, {tickStep = 3})
 	self:addState("dive", 30, 31, {tickStep = 1})
 	self:addState("die", 32, 34, {tickStep = 2})
-	self:addState("roll", 36, 43, {tickStep = 1})
+	self:addState("roll", 36, 43, {tickStep = 2})
 	self:addState("respawn", 44, 49, {tickStep = 3})
 	self:playAnimation()
 
@@ -54,10 +54,10 @@ function Player:init(x, y, gameManager, facing)
 	-- Roll
 	self.rollAvailable = true
 	self.rollFallSpeed = 4
-	self.rollSpeed = 6
+	self.rollSpeed = 3
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
-	self.rollRecharge = 260
+	self.rollRecharge = 300
 	
 	-- Dive
 	self.diveSpeed = 12
@@ -463,7 +463,7 @@ function Player:changeToRollState(direction)
 		self.globalFlip = 0
 	end
 
-	pd.timer.performAfterDelay(260, function()
+	pd.timer.performAfterDelay(490, function()
 		pd.timer.performAfterDelay(self.rollRecharge, function()
 			self.rollAvailable = true
 		end)
