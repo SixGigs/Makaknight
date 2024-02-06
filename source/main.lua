@@ -13,7 +13,7 @@ import "scripts/GameScene"
 import "scripts/Player"
 import "scripts/Spike"
 import "scripts/Spikeball"
-import "scripts/Entry"
+import "scripts/Door"
 import "scripts/Checkpoint"
 import "scripts/Prop"
 

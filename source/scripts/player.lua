@@ -80,16 +80,18 @@ function Player:init(x, y, gameManager, facing)
 	self.dashMinimumSpeed = 3
 	self.dashDrag = 1.4
 
+	-- Door Management
+	self.touchingDoor = false
+	self.doorTimer = 2
+	self.nextLevelID = nil
+	self.exitX = 0
+	self.exitY = 0
+
 	-- Player State
 	self.globalFlip = facing
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
-	self.touchingEntry = false
-	self.entryCounter = 2
-	self.entryLevelID = nil
-	self.entryX = 0
-	self.entryY = 0
 	self.dead = false
 end
 
@@ -99,7 +101,7 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint or tag == TAGS.Prop or tag == TAGS.Entry then
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint or tag == TAGS.Prop or tag == TAGS.Door then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 
@@ -250,24 +252,18 @@ function Player:handleMovementAndCollisions()
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Checkpoint then
 			self:triggerCheckpoint(collisionObject)
-		elseif collisionTag == TAGS.Entry then
-			self.entryCounter = 2
-			if self.touchingEntry == false then
-				self.touchingEntry = true
-				self.entryLevelID = collisionObject:getEntryLevelID()
-				self.entryX = collisionObject:getEntryX()
-				self.entryY = collisionObject:getEntryY()
-			end
+		elseif collisionTag == TAGS.Door then
+			self:handleDoorCollision(collisionObject)
 		end
 		
-		-- Check if we are still touching the entryway
-		if self.touchingEntry == true and collisionTag ~= TAGS.Entry then
-			self.entryCounter = self.entryCounter - 1
-			if self.entryCounter <= 0 then
-				self.touchingEntry = false
-				self.entryLevelID = nil
-				self.entryX = 0
-				self.entryY = 0
+		-- Check if we are still touching the door
+		if self.touchingDoor == true and collisionTag ~= TAGS.Door then
+			self.doorTimer = self.doorTimer - 1
+			if self.doorTimer <= 0 then
+				self.touchingDoor = false
+				self.nextLevelID = nil
+				self.exitX = 0
+				self.exitY = 0
 			end
 		end
 	end
@@ -292,6 +288,18 @@ function Player:handleMovementAndCollisions()
 
 	if died then
 		self:die()
+	end
+end
+
+
+
+function Player:handleDoorCollision(collisionObject)
+	self.doorTimer = 2
+	if self.touchingDoor == false then
+		self.touchingDoor = true
+		self.nextLevelID = collisionObject:getNextLevelID()
+		self.exitX = collisionObject:getExitX()
+		self.exitY = collisionObject:getExitY()
 	end
 end
 
@@ -363,8 +371,8 @@ function Player:handleGroundInput()
 	end
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
-		if self.entryLevelID ~= nil then
-			self.gameManager:goToLevel(self.entryLevelID, self.entryX, self.entryY, self.globalFlip)
+		if self.nextLevelID ~= nil then
+			self.gameManager:goToLevel(self.nextLevelID, self.exitX, self.exitY, self.globalFlip)
 		end
 	end
 end
