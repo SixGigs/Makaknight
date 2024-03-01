@@ -1,28 +1,31 @@
 -- Creating the script constants
 local gfx <const> = playdate.graphics
-local spikeballImage <const> = gfx.image.new("images/spikeball")
 
--- Create the spike-ball class
+-- Create the Spike ball class
 class('Spikeball').extends(gfx.sprite)
 
 
---- Initialise the spike-ball object using the information given
+--- Initialise the spike ball object using the information given
 --- @param x      integer The X coordinate to spawn the spike-ball
 --- @param y      integer The Y coordinate to spawn the spike-ball
 --- @param entity table   The entities that come with the spike-ball
 function Spikeball:init(x, y, entity)
+	-- Load the spike ball image as a constant
+	local spikeballImage <const> = gfx.image.new("images/spikeball")
+
+	-- Sprite properties
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setImage(spikeballImage)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:add()
 
+	-- Set the object as a hazard and set the collision rectangle
 	self:setTag(TAGS.Hazard)
 	self:setCollideRect(4, 4, 8, 8)
 
-	local fields = entity.fields
-	self.xVelocity = fields.xVelocity
-	self.yVelocity = fields.yVelocity
+	self.xVelocity = entity.fields.xVelocity
+	self.yVelocity = entity.fields.yVelocity
 end
 
 

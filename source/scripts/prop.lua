@@ -1,16 +1,16 @@
--- Creating the script constants
+-- Create playdate graphics as a constant for props
 local gfx <const> = playdate.graphics
 
--- Create the light rock class
+-- Create the Prop class
 class('Prop').extends(gfx.sprite)
 
---- Initialise the tree object using the data given
---- @param x integer The X coordinate to spawn the spike
---- @param y integer The Y coordinate to spawn the spike
+--- The prop class is used to spawn entities that are decoration
+--- @param x          integer The X coordinate to spawn the spike
+--- @param y          integer The Y coordinate to spawn the spike
+--- @param entityName string  The name of the entity to create as a prop
 function Prop:init(x, y, entityName)
-	-- If the ability hasn't been picked let's spawn it
-	local propImage = gfx.image.new("images/"..entityName)
-	assert(propImage)
+	-- Find and open the image to use as a prop
+	local propImage <const> = gfx.image.new("images/"..entityName)
 
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
