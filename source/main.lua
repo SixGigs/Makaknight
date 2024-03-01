@@ -9,29 +9,29 @@ import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk"
 
 -- Scripts
-import "scripts/GameScene"
+import "scripts/Game"
 import "scripts/Player"
 import "scripts/Spike"
 import "scripts/Spikeball"
 import "scripts/Door"
-import "scripts/Checkpoint"
+import "scripts/Flag"
 import "scripts/Prop"
 
 -- PlayDate Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-local gs <const> = GameScene()
+local g <const> = Game()
 
 -- PlayDate Functions
 function pd.gameWillTerminate()
-	gs:saveGame()
+	g:save()
 end
 
 function pd.deviceWillSleep()
-	gs:saveGame()
+	g:save()
 end
 
--- Playdate Set Refresh Rate
+-- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
 
 -- Main Game Loop

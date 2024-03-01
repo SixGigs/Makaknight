@@ -1,29 +1,26 @@
--- Create the script constants
+-- Precompute frequently used constants
 local gfx <const> = playdate.graphics
+local newImage = gfx.image.new
+local Z_INDEXES = Z_INDEXES
+local TAGS = TAGS
 
 -- Create the door class
 class('Door').extends(gfx.sprite)
 
+--- Initialise the door object using the data given
+--- @param x integer The X coordinate to spawn the door
+--- @param y integer The Y coordinate to spawn the door
+--- @param e table   The table of entity attributes in the door
+function Door:init(x, y, e)
+	-- Use entity attribute 'doorSprite' to load the correct sprite
+	local doorImage = newImage("images/" .. e.fields.doorSprite)
 
---- Initialise the ability object using the data given
---- @param x      integer The X coordinate to spawn the ability pick-up
---- @param y      integer The Y coordinate to spawn the ability pick-up
---- @param entity table   The table of entities related to the ability
-function Door:init(x, y, entity)
-	-- If the ability has been picked up don't spawn it
-	self.fields = entity.fields
+	-- The level the door leads to
+	self.level = e.fields.level
 
-	-- If the ability hasn't been picked let's spawn it
-	self.doorSprite = self.fields.doorSprite
-	local doorImage = gfx.image.new("images/"..self.doorSprite)
-	assert(doorImage)
-
-	-- The level the entry leads to
-	self.level = self.fields.level
-
-	-- Get the exit X and Y
-	self.exitX = self.fields.exitX
-	self.exitY = self.fields.exitY
+	-- The coordinates the player will spawn at in the room
+	local exitX = e.fields.exitX * 16 + 8
+	local exitY = e.fields.exitY * 16
 
 	-- Sprite properties
 	self:setCenter(0, 0)
@@ -33,17 +30,13 @@ function Door:init(x, y, entity)
 	self:setCollideRect(7, 16, 2, 16)
 	self:setImage(doorImage)
 	self:add()
+
+	-- Store precomputed values
+	self.exitX = exitX
+	self.exitY = exitY
 end
 
-
-function Door:getNextLevelID()
-	return self.level
-end
-
-function Door:getExitX()
-	return self.exitX
-end
-
-function Door:getExitY()
-	return self.exitY
+-- Used by the player in the door collision event to set where to travel to if they enter the door
+function Door:getDetails()
+	return self.level, self.exitX, self.exitY
 end

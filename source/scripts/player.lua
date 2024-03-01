@@ -1,4 +1,4 @@
--- Constants used for the script
+-- Create constants for the playdate and playdate.graphics
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
@@ -10,15 +10,16 @@ class('Player').extends(AnimatedSprite)
 --- @param x           integer The X coordinate to spawn the player
 --- @param y           integer The Y coordinate to spawn the player
 --- @param gameManager table   The game manager is passed in to manage player on object interactions
-function Player:init(x, y, gameManager, facing)
+--- @param face        integer The direction the player is facing as a 1 or 0
+function Player:init(x, y, gameManager, face)
 	-- Game Manager
 	self.gameManager = gameManager
 
-	-- State Machine
+	-- Create the player state machine with the tile set
 	local playerImageTable = gfx.imagetable.new("images/seraphina-table-32-32")
 	Player.super.init(self, playerImageTable)
 
-	-- States
+	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 1)
 	self:addState("jump", 9, 9)
 	self:addState("fall", 10, 10)
@@ -53,7 +54,7 @@ function Player:init(x, y, gameManager, facing)
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollFallSpeed = 4
+	self.rollFallSpeed = 2.6
 	self.rollSpeed = 3
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
@@ -67,31 +68,28 @@ function Player:init(x, y, gameManager, facing)
 	self.jumpBufferAmount = 5
 	self.jumpBuffer = 0
 
-	-- Abilities
-	self.doubleJumpAbility = false
-	self.dashAbility = true
-
 	-- Double Jump
 	self.doubleJumpAvailable = true
+	self.doubleJumpVelocity = -6.5
 
 	-- Dash
 	self.dashAvailable = true
-	self.dashSpeed = 8
+	self.dashSpeed = 9
 	self.dashMinimumSpeed = 3
 	self.dashDrag = 1.4
 
 	-- Door Management
-	self.touchingDoor = false
 	self.doorTimer = 2
 	self.nextLevelID = nil
 	self.exitX = 0
 	self.exitY = 0
 
-	-- Player State
-	self.globalFlip = facing
+	-- Player Attributes
+	self.globalFlip = face
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	self.touchingDoor = false
 	self.dead = false
 end
 
@@ -101,7 +99,7 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Checkpoint or tag == TAGS.Prop or tag == TAGS.Door then
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 
@@ -112,7 +110,7 @@ end
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	self:updateAnimation()
-	
+
 	if self.dead then
 		return
 	end
@@ -138,7 +136,7 @@ function Player:updateJumpBuffer()
 end
 
 
-
+--- The roll buffer helps the player input the button combination for a roll
 function Player:updateRollBuffer()
 	self.rollBuffer = self.rollBuffer - 1
 	
@@ -158,7 +156,7 @@ function Player:playerJumped()
 end
 
 
-
+--- A function to detect if the player has input to roll based on roll buffer
 function Player:playerRolled()
 	return self.rollBuffer > 0
 end
@@ -166,12 +164,13 @@ end
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "idle" then
+	if self.currentState == "idle" or self.currentState == "walk" then
 		self:applyGravity()
 		self:handleGroundInput()
-	elseif self.currentState == "walk" then
-		self:applyGravity()
-		self:handleGroundInput()
+		
+		if self.yVelocity > 1 then
+			self:changeToFallState()
+		end
 	elseif self.currentState == "duck" then
 		self:applyGravity()
 		self:handleDuckInput()
@@ -226,10 +225,10 @@ function Player:handleMovementAndCollisions()
 	local died = false
 
 	for i = 1, length do
-		local collision = collisions[i]
-		local collisionType = collision.type
-		local collisionObject = collision.other
-		local collisionTag = collisionObject:getTag()
+		local collision <const> = collisions[i]
+		local collisionType <const> = collision.type
+		local collisionObject <const> = collision.other
+		local collisionTag <const> = collisionObject:getTag()
 
 		if collisionType == gfx.sprite.kCollisionTypeSlide then
 			if collision.normal.y == -1 then
@@ -250,8 +249,8 @@ function Player:handleMovementAndCollisions()
 			self:changeToDieState()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
-		elseif collisionTag == TAGS.Checkpoint then
-			self:triggerCheckpoint(collisionObject)
+		elseif collisionTag == TAGS.Flag then
+			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			self:handleDoorCollision(collisionObject)
 		end
@@ -267,59 +266,61 @@ function Player:handleMovementAndCollisions()
 			end
 		end
 	end
-	
-	
 
+	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
 	elseif self.xVelocity > 0 then
 		self.globalFlip = 0
 	end
 
+	-- If touching the edge of the level, lets move into the next room
 	if self.x < 0 then
 		self.gameManager:enterRoom("west")
 	elseif self.x > 400 then
 		self.gameManager:enterRoom("east")
-	elseif self.y < -8 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
+	elseif self.y < -12 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
 		self.gameManager:enterRoom("north")
 	elseif self.y > 240 then
 		self.gameManager:enterRoom("south")
 	end
 
+	-- If the player touched a hazard, die
 	if died then
 		self:die()
 	end
 end
 
 
-
-function Player:handleDoorCollision(collisionObject)
+--- This function gets details from the door the player has just collided with
+--- @param door table The collisionObject in this function will be the door
+function Player:handleDoorCollision(door)
 	self.doorTimer = 2
 	if self.touchingDoor == false then
 		self.touchingDoor = true
-		self.nextLevelID = collisionObject:getNextLevelID()
-		self.exitX = collisionObject:getExitX()
-		self.exitY = collisionObject:getExitY()
+		self.nextLevelID, self.exitX, self.exitY = door:getDetails()
 	end
 end
 
 
 --- Trigger checkpoint
---- param collisionObject table The checkpoint triggered
-function Player:triggerCheckpoint(collisionObject)
-	if collisionObject.checked == false then
+--- param flag table The checkpoint triggered
+function Player:handleFlagCollision(flag)
+	if flag.active == false then
 		local allSprites = gfx.sprite.getAllSprites()
 		for _, sprite in ipairs(allSprites) do
-			if sprite:isa(Checkpoint) then
-				sprite:deactivate()
+			if sprite:isa(Flag) then
+				sprite:lower()
 			end
 		end
 
-		collisionObject:hit()
-		self.gameManager.checkpoint = collisionObject.id
-		self.gameManager.spawnX = collisionObject.x + 16
-		self.gameManager.spawnY = collisionObject.y + 32
-		self.gameManager.spawnLevel = self.gameManager.currentLevel
+		flag:hoist()
+
+		-- TODO: How can this be done better?
+		self.gameManager.flag = flag.id
+		self.gameManager.spawn = self.gameManager.level
+		self.gameManager.spawnX = flag.x + 16
+		self.gameManager.spawnY = flag.y + 32
 	end
 end
 
@@ -329,8 +330,9 @@ function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
+
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(750, function()
+	pd.timer.performAfterDelay(1000, function()
 		self:setCollisionsEnabled(true)
 		self.dead = false
 		self.gameManager:resetPlayer()
@@ -372,7 +374,7 @@ function Player:handleGroundInput()
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
 		if self.nextLevelID ~= nil then
-			self.gameManager:goToLevel(self.nextLevelID, self.exitX, self.exitY, self.globalFlip)
+			self.gameManager:enterDoor(self.nextLevelID, self.exitX, self.exitY)
 		end
 	end
 end
@@ -388,10 +390,10 @@ end
 
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	if self:playerJumped() and self.doubleJumpAvailable and self.doubleJumpAbility then
+	if self:playerJumped() and self.doubleJumpAvailable then
 		self.doubleJumpAvailable = false
-		self:changeToJumpState()
-	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
+		self:changeToDoubleJumpState()
+	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable then
 		self:changeToDashState()
 	elseif pd.buttonIsPressed(pd.kButtonLeft) then
 		self.xVelocity = -self.jumpSpeed
@@ -414,7 +416,7 @@ function Player:changeToIdleState()
 end
 
 
-
+--- Move the player into the ready state
 function Player:changeToReadyState()
 	self.xVelocity = 0
 
@@ -437,7 +439,7 @@ function Player:changeToWalkState(direction)
 end
 
 
-
+--- Change the player into a running state
 function Player:changeToRunState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.maxSpeed
@@ -451,7 +453,7 @@ function Player:changeToRunState(direction)
 end
 
 
-
+--- Change the player into a roll state
 function Player:changeToRollState(direction)
 	self.rollAvailable = false
 	
@@ -470,6 +472,8 @@ function Player:changeToRollState(direction)
 		
 		if self.touchingGround then
 			self:changeState("idle")
+		elseif self.dead then
+			self:changeState("dead")
 		else
 			if self.globalFlip == 0 then
 				self.xVelocity = self.rollFallSpeed
@@ -488,6 +492,15 @@ end
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
 	self.yVelocity = self.jumpVelocity
+	self.jumpBuffer = 0
+
+	self:changeState("jump")
+end
+
+
+--- Allow the player to double jump
+function Player:changeToDoubleJumpState()
+	self.yVelocity = self.doubleJumpVelocity
 	self.jumpBuffer = 0
 
 	self:changeState("jump")
@@ -536,7 +549,7 @@ function Player:changeToDuckState()
 end
 
 
---- Makes the player dash in the direction they are facing
+--- Makes the player dash in the direction they face
 function Player:changeToDashState()
 	self.dashAvailable = false
 	self.yVelocity = 0
