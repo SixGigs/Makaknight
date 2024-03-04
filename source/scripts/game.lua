@@ -34,7 +34,9 @@ local caveLevels <const> = {
 	'21',
 	'22',
 	'23',
-	'24'
+	'24',
+	'38',
+	'39'
 }
 
 -- A table of levels which use the desert background

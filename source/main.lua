@@ -38,5 +38,5 @@ pd.display.setRefreshRate(30)
 function pd.update()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	pd.drawFPS(383, 2)
+	pd.drawFPS(383, 2) -- Show current FPS
 end
