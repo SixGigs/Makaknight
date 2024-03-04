@@ -25,54 +25,6 @@ Z_INDEXES = {
 	Player = 100
 }
 
--- A table of levels which use the cave background
-local caveLevels <const> = {
-	'3',
-	'6',
-	'7',
-	'17',
-	'21',
-	'22',
-	'23',
-	'24',
-	'38',
-	'39'
-}
-
--- A table of levels which use the desert background
-local desertLevels <const> = {
-	'0',
-	'1',
-	'2',
-	'4',
-	'5',
-	'8',
-	'9',
-	'10',
-	'11',
-	'12',
-	'13',
-	'14',
-	'15',
-	'16',
-	'18',
-	'19',
-	'20',
-	'25',
-	'26',
-	'27',
-	'28',
-	'29',
-	'30',
-	'31',
-	'32',
-	'33',
-	'34',
-	'35',
-	'36',
-	'37'
-}
-
 -- A table of props that exist in the game
 local props <const> = {
 	"Lightrock",
@@ -197,24 +149,12 @@ end
 --- Load the background for the level sent into the function
 --- @param level string The name of the 
 function Game:loadBackground(level)
-	-- Are we giving the level a cave background?
-	for index, value in ipairs(caveLevels) do
-		if 'Level_'..value == level then
-			local backgroundImage <const> = gfx.image.new("levels/cave-background-400-240")
-			gfx.sprite.setBackgroundDrawingCallback(function()
-				backgroundImage:draw(0, 0)
-			end)
-		end
-	end
-
-	-- Are we giving the level a desert background?
-	for index, value in ipairs(desertLevels) do
-		if 'Level_'..value == level then
-			local backgroundImage <const> = gfx.image.new("levels/desert-background-400-240")
-			gfx.sprite.setBackgroundDrawingCallback(function()
-				backgroundImage:draw(0, 0)
-			end)
-		end
+	local bgImage <const> = LDtk.get_background(level)
+	if bgImage then
+		local backgroundImage <const> = gfx.image.new("levels/" .. bgImage)
+		gfx.sprite.setBackgroundDrawingCallback(function()
+			backgroundImage:draw(0, 0)
+		end)
 	end
 end
 

@@ -266,6 +266,9 @@ function LDtk.load_level( level_name )
 		level.custom_data = {}
 		level.custom_data[ field_data.__identifier ] = field_data.__value
 	end
+	
+	-- load level's background image
+	level.bgImage = level_data.bgRelPath
 
 	-- handle layers
 	level.layers = {}
@@ -426,6 +429,13 @@ function LDtk.get_entities( level_name, layer_name )
 	if not layer then return end
 
 	return layer.entities or {}
+end
+
+-- return the background used for the level given
+-- @level_name is used to get the background
+function LDtk.get_background( level_name )
+	local level = _levels[level_name] 
+	return level.bgImage
 end
 
 -- return a tilemap for the level
