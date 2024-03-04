@@ -164,7 +164,7 @@ end
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "idle" or self.currentState == "walk" then
+	if self.currentState == "idle" or self.currentState == "walk" or self.currentState == "run" then
 		self:applyGravity()
 		self:handleGroundInput()
 		
@@ -206,9 +206,6 @@ function Player:handleState()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
 	elseif self.currentState == "ready" then
-		self:applyGravity()
-		self:handleGroundInput()
-	elseif self.currentState == "run" then
 		self:applyGravity()
 		self:handleGroundInput()
 	end
