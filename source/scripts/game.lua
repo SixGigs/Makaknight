@@ -133,6 +133,7 @@ function Game:goToLevel(level)
 		elseif entityName == "Ability" then
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
+			-- print(entity.iid)
 			Flag(entityX, entityY, entity, self)
 		elseif entityName == "Door" then
 			Door(entityX, entityY, entity)
