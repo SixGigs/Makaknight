@@ -23,11 +23,12 @@ function Flag:init(x, y, entity, gameManager)
 	self:playAnimation()
 
 	-- Save the ID of the flag as an attribute
-	self.id = entity.fields.id
+	self.id = entity.iid
+	print(self.id)
 
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
-	if entity.fields.id == gameManager.flag then
+	if self.id == gameManager.flag then
 		self.active = true
 		self:changeState("up")
 	else
