@@ -35452,7 +35452,24 @@
 					"seed": 2254994,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Deadtree",
+							"__grid": [3,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": { "tilesetUid": 2100, "x": 0, "y": 0, "w": 32, "h": 48 },
+							"__smartColor": "#3E8948",
+							"iid": "ba12e7f0-d7b0-11ee-95c9-7f433d0c214e",
+							"width": 32,
+							"height": 48,
+							"defUid": 2101,
+							"px": [48,112],
+							"fieldInstances": [],
+							"__worldX": 4848,
+							"__worldY": 352
+						}
+					]
 				},
 				{
 					"__identifier": "Walls",
