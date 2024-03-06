@@ -67,7 +67,6 @@ local _ = {} -- for private functions
 --	false: will load .ldtk files (slower)
 --	nil: will load lua files if they exist
 function LDtk.load( ldtk_file, use_lua_levels )
-	print("Loading file paths...")
 	_ldtk_filepath = ldtk_file
 	_ldtk_folder, _ldtk_filename = _.get_folder_and_filename( ldtk_file )
 	_ldtk_folder_table = _.get_folder_table( _ldtk_folder )
@@ -76,7 +75,6 @@ function LDtk.load( ldtk_file, use_lua_levels )
 	local lua_filename = _ldtk_lua_folder.._ldtk_filename..".pdz"
 
 	-- check if we should load the lua files instead of the json files
-	print("Checking for Lua precompile...")
 	_use_lua_levels = use_lua_levels
 	if _use_lua_levels then
 		_use_lua_levels = playdate.file.exists( lua_filename )
@@ -102,16 +100,11 @@ function LDtk.load( ldtk_file, use_lua_levels )
 		return
 	end
 
-    print("Decoding level file...")
 	local data = json.decodeFile(ldtk_file)
-	
-	print("Waiting!")
-	pd.wait(500)
 
 	_use_external_files = data.externalLevels
 
 	-- handle the tilesets
-	print("Handling tile sets...")
 	for tileset_index, tileset_data in ipairs(data.defs.tilesets) do
 		local tileset = {}
 
@@ -186,14 +179,12 @@ function LDtk.load( ldtk_file, use_lua_levels )
 	end
 
 	-- we list the level names (the complete list needs to be ready before calling LDtk.load_level())
-	print("Listing level names...")
 	for level_index, level_data in ipairs(data.levels) do
 		_level_names[ level_data.iid ] = level_data.identifier
 		_level_rects[ level_data.identifier ] = { x=level_data.worldX, y=level_data.worldY, width=level_data.pxWid, height=level_data.pxHei }
 	end
 
 	-- we load the levels
-	print("Loading levels...")
 	for level_index, level_data in ipairs(data.levels) do
 		if level_data.externalRelPath then
 			_level_files[ level_data.identifier ] = _.convert_relative_folder( level_data.externalRelPath )
@@ -202,7 +193,6 @@ function LDtk.load( ldtk_file, use_lua_levels )
 			_.load_tileset( level_data.identifier )
 		end
 	end
-	print("Done!")
 end
 
 -- Call this function to save the LDtk level in lua files to improve loading performance
