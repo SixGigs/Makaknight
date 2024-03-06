@@ -7,30 +7,19 @@ local gd <const> = pd.datastore.read()
 
 -- This table stores entity tags used for collisions
 TAGS = {
-	Player = 1,
-	Hazard = 2,
-	Pickup = 3,
-	Flag = 4,
-	Prop = 6,
-	Door = 7
+	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
+	Prop = 6, Door = 7
 }
 
 -- This table stores the Z axis of each entity
 Z_INDEXES = {
-	Hazard = 20,
-	Door = 30,
-	Prop = 40,
-	Pickup = 50,
-	Flag = 70,
-	Player = 100
+	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
+	Flag = 70, Player = 100
 }
 
 -- A table of props that exist in the game
 local props <const> = {
-	"Lightrock",
-	"Deadtree",
-	"Tallcactus",
-	"Darkrock"
+	"Lightrock", "Deadtree", "Tallcactus", "Darkrock"
 }
 
 -- Load the level used for the game
@@ -39,12 +28,10 @@ ldtk.load("levels/world.ldtk", false)
 --- The initialising method of the game scene class
 class("Game").extends()
 
-
-
 --- Create the game class
 function Game:init()
-	-- Load the game if there is a save file and create a game if there isn't	
-	if gd then self:load() else self:create() end
+	-- Load the game if there is a save file and create a game if there isn't
+	self:load()
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
@@ -181,22 +168,9 @@ function Game:resetPlayer()
 end
 
 
---- Create all the game data
-function Game:create()
-	self.spawn = "Level_0"
-	self.spawnX = 12 * 16 + 8
-	self.spawnY = 8 * 16
-	self.level = self.spawn
-	self.levelX = self.spawnX
-	self.levelY = self.spawnY
-	self.flag = 0
-	self.face = 0
-end
-
-
 --- Save the current game data into the save file
 function Game:save()
-	local saveData = {
+	local saveData <const> = {
 		spawn = self.spawn,
 		spawnX = self.spawnX,
 		spawnY = self.spawnY,
@@ -211,14 +185,14 @@ function Game:save()
 end
 
 
---- Load the game from the JSON save file
+--- Load the game from the JSON save file and restore game attributes
 function Game:load()
-	self.spawn = gd.spawn
-	self.spawnX = gd.spawnX
-	self.spawnY = gd.spawnY
-	self.level = gd.level
-	self.levelX = gd.levelX
-	self.levelY = gd.levelY
-	self.flag = gd.flag
-	self.face = gd.face
+	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
+	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
+	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
+	self.level = (gd and (gd.level and gd.level or self.spawn) or self.spawn)
+	self.levelX = (gd and (gd.levelX and gd.levelX or self.spawnX) or self.spawnX)
+	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
+	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
+	self.face = (gd and (gd.face and gd.face or 0) or 0)
 end
