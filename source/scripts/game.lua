@@ -60,9 +60,9 @@ function Game:enterRoom(direction)
 	elseif direction == "south" then
 		x, y = self.player.x, 0
 	elseif direction == "east" then
-		x, y = 0, self.player.y
+		x, y = 4, self.player.y
 	elseif direction == "west" then
-		x, y = 400, self.player.y
+		x, y = 396, self.player.y
 	end
 
 	-- Move the player to the new X and Y
