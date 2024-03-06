@@ -38,6 +38,8 @@
 -- in the simulator call LDtk.export_to_lua_files() after a LDtl file is loaded to save the exported lua files in the save folder
 -- copy the LDtk_lua_levels/ next to your .ldtk file in your project directory
 
+local pd <const> = playdate
+
 LDtk = {}
 
 local _ldtk_filepath = nil

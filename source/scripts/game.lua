@@ -56,8 +56,12 @@ end
 --- @param direction string Contains in text form, the direction from the current level to load the next level piece
 function Game:enterRoom(direction)
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
+	local oldLevel <const> = self.level
 	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
 	self:goToLevel(level)
+
+	-- Delete old level data to free up RAM
+	ldtk.release_level(oldLevel)
 
 	-- Add the player to the new level
 	self.player:add()
@@ -99,6 +103,9 @@ end
 function Game:goToLevel(level)
 	-- Remove all playdate sprite objects to give us a blank slate
 	gfx.sprite.removeAll()
+
+	-- Load the individual level
+	ldtk.load_level(level)
 
 	-- Update local level attribute and build the new tile map
 	self.level = level

@@ -1,8 +1,8 @@
 -- Precompute frequently used constants
 local gfx <const> = playdate.graphics
 local newImage = gfx.image.new
-local Z_INDEXES = Z_INDEXES
-local TAGS = TAGS
+-- local Z_INDEXES = Z_INDEXES
+-- local TAGS = TAGS
 
 -- Create the door class
 class('Door').extends(gfx.sprite)

@@ -24,7 +24,6 @@ function Flag:init(x, y, entity, gameManager)
 
 	-- Save the ID of the flag as an attribute
 	self.id = entity.iid
-	print(self.id)
 
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
