@@ -16,6 +16,7 @@ import "scripts/Spikeball"
 import "scripts/Door"
 import "scripts/Flag"
 import "scripts/Prop"
+import "scripts/Lizard"
 
 -- PlayDate Constants
 local pd <const> = playdate

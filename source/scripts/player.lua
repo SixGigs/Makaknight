@@ -35,7 +35,7 @@ function Player:init(x, y, gameManager, face)
 	self:addState("respawn", 44, 49, {tickStep = 3})
 	self:playAnimation()
 
-	-- Sprite Properties
+	-- Sprite properties
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
@@ -98,8 +98,8 @@ end
 --- @param  other   table   This variable contains what the player has collided with
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
-	local tag = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door then
+	local tag <const> = other:getTag()
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door or tag == TAGS.Animal then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 

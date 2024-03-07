@@ -150,7 +150,7 @@
 				},
 				{
 					"__identifier": "Lizard",
-					"__grid": [7,5],
+					"__grid": [7,1],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
@@ -159,10 +159,10 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 2973,
-					"px": [112,80],
+					"px": [112,16],
 					"fieldInstances": [],
 					"__worldX": 2912,
-					"__worldY": 320
+					"__worldY": 256
 				}
 			]
 		},
