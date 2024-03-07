@@ -8,13 +8,13 @@ local gd <const> = pd.datastore.read()
 -- This table stores entity tags used for collisions
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
-	Prop = 6, Door = 7
+	Prop = 6, Door = 7, Animal = 8
 }
 
 -- This table stores the Z axis of each entity
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
-	Flag = 70, Player = 100
+	Flag = 70, Animal = 110, Player = 100
 }
 
 -- A table of props that exist in the game
@@ -127,10 +127,11 @@ function Game:goToLevel(level)
 		elseif entityName == "Ability" then
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
-			-- print(entity.iid)
 			Flag(entityX, entityY, entity, self)
 		elseif entityName == "Door" then
 			Door(entityX, entityY, entity)
+		elseif entityName == "Lizard" then
+			Lizard(entityX, entityY)
 		else
 			Prop(entityX, entityY, entityName)
 		end

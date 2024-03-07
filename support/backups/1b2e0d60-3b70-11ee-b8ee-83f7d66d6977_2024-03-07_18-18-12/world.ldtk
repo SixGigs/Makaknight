@@ -8255,7 +8255,7 @@
 			"allowOutOfBounds": false,
 			"doc": null,
 			"width": 16,
-			"height": 16,
+			"height": 8,
 			"resizableX": false,
 			"resizableY": false,
 			"minWidth": null,
