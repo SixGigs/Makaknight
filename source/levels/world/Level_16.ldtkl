@@ -160,7 +160,7 @@
 					"height": 16,
 					"defUid": 2973,
 					"px": [144,112],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] }],
 					"__worldX": 3744,
 					"__worldY": 352
 				}

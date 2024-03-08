@@ -174,6 +174,22 @@
 					"fieldInstances": [],
 					"__worldX": 2016,
 					"__worldY": -208
+				},
+				{
+					"__identifier": "Snake",
+					"__grid": [16,2],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "8c2ff5d0-d7b0-11ee-b16d-3bc4684c8f02",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [256,32],
+					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] }],
+					"__worldX": 2256,
+					"__worldY": -208
 				}
 			]
 		},

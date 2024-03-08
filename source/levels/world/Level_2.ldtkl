@@ -51,7 +51,24 @@
 			"seed": 6983226,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [
+				{
+					"__identifier": "Snake",
+					"__grid": [14,11],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "8245f740-d7b0-11ee-b16d-d3e4e1a8daeb",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [224,176],
+					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] }],
+					"__worldX": 1024,
+					"__worldY": -64
+				}
+			]
 		},
 		{
 			"__identifier": "Walls",
