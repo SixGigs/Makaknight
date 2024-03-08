@@ -41,7 +41,7 @@ function Player:init(x, y, gameManager, face)
 	self:setTag(TAGS.Player)
 	self:setCollideRect(9, 3, 14, 29)
 
-	-- Physics Properties
+	-- Physics properties
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
@@ -272,9 +272,9 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If touching the edge of the level, lets move into the next room
-	if self.x < -8 then
+	if self.x < -6 then
 		self.gameManager:enterRoom("west")
-	elseif self.x > 408 then
+	elseif self.x > 406 then
 		self.gameManager:enterRoom("east")
 	elseif self.y < -12 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
 		self.gameManager:enterRoom("north")

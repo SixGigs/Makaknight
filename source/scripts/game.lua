@@ -131,7 +131,7 @@ function Game:goToLevel(level)
 		elseif entityName == "Door" then
 			Door(entityX, entityY, entity)
 		elseif entityName == "Lizard" then
-			Lizard(entityX, entityY)
+			Lizard(entityX, entityY + 8)
 		else
 			Prop(entityX, entityY, entityName)
 		end
