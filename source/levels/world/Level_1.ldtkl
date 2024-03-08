@@ -99,6 +99,22 @@
 					"fieldInstances": [],
 					"__worldX": 496,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Lizard",
+					"__grid": [16,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "762a9460-d7b0-11ee-b16d-a19d64010f1c",
+					"width": 16,
+					"height": 16,
+					"defUid": 2973,
+					"px": [256,160],
+					"fieldInstances": [],
+					"__worldX": 656,
+					"__worldY": -80
 				}
 			]
 		},

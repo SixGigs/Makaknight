@@ -150,18 +150,18 @@
 				},
 				{
 					"__identifier": "Lizard",
-					"__grid": [7,5],
+					"__grid": [6,5],
 					"__pivot": [0,0],
 					"__tags": [],
-					"__tile": null,
+					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#B55088",
-					"iid": "82a86130-d7b0-11ee-b16d-1f747070a44a",
+					"iid": "870af400-d7b0-11ee-b16d-9b6519d83f23",
 					"width": 16,
 					"height": 16,
 					"defUid": 2973,
-					"px": [112,80],
+					"px": [96,80],
 					"fieldInstances": [],
-					"__worldX": 2912,
+					"__worldX": 2896,
 					"__worldY": 320
 				}
 			]
