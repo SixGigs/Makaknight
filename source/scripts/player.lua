@@ -26,14 +26,15 @@ function Player:init(x, y, gm, face)
 	self:addState("jump", 16, 16)
 	self:addState("midJump", 17, 17)
 	self:addState("fall", 18, 18)
-	self:addState("run", 19, 30, {tickStep = 1.5})
-	self:addState("ready", 31, 40, {tickStep = 3})
-	self:addState("dash", 41, 43, {tickStep = 1})
-	self:addState("dive", 44, 45, {tickStep = 1})
-	self:addState("die", 46, 49, {tickStep = 2})
-	self:addState("dead", 49, 49)
-	self:addState("roll", 50, 57, {tickStep = 2})
-	self:addState("spawn", 58, 63, {tickStep = 3})
+	self:addState("contact", 19, 20, {tickStep = 3})
+	self:addState("run", 21, 32, {tickStep = 1.5})
+	self:addState("ready", 33, 42, {tickStep = 3})
+	self:addState("dash", 43, 45, {tickStep = 1})
+	self:addState("dive", 46, 47, {tickStep = 1})
+	self:addState("die", 48, 51, {tickStep = 2})
+	self:addState("dead", 51, 51)
+	self:addState("roll", 52, 59, {tickStep = 2})
+	self:addState("spawn", 60, 65, {tickStep = 3})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -167,8 +168,24 @@ end
 function Player:handleState()
 	if self.currentState == "roll" then
 		self:applyGravity()
-	elseif self.currentState == "jump" or self.currentState == "midJump" then
+
 		if self.yVelocity > 1 then
+			self:applyDrag(self.drag)
+		end
+	elseif self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" then
+		if self.touchingGround then
+			if self.yVelocity > 15 then
+				if pd.buttonIsPressed(pd.kButtonRight) then
+					self:changeToRollState("right")
+				elseif pd.buttonIsPressed(pd.kButtonLeft) then
+					self:changeToRollState("left")
+				else
+					self:changeToContactState()
+				end
+			else
+				self:changeToIdleState()
+			end
+		elseif self.yVelocity > 1 then
 			self:changeToFallState()
 		elseif self.yVelocity > -2 then
 			self:changeToMidJumpState()
@@ -177,23 +194,12 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
+	elseif self.currentState == "contact" or self.currentState == "spawn" then
 	elseif self.currentState == "dash" then
 		self:applyDrag(self.dashDrag)
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
-			self:changeToFallState()
+			self:changeToMidJumpState()
 		end
-	elseif self.currentState == "fall" or self.currentState == "dive" then
-		if self.touchingGround then
-			if pd.buttonIsPressed(pd.kButtonB) then
-				self:changeToReadyState()
-			else
-				self:changeToIdleState()
-			end
-		end
-
-		self:applyGravity()
-		self:applyDrag(self.drag)
-		self:handleAirInput()
 	else
 		self:applyGravity()
 		self:handleGroundInput()
@@ -502,6 +508,17 @@ end
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
+end
+
+
+function Player:changeToContactState()
+	self.xVelocity = 0
+
+	pd.timer.performAfterDelay(75, function()
+		self:changeState("idle")
+	end)
+	
+	self:changeState("contact")
 end
 
 
