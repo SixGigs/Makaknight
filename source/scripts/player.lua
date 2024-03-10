@@ -7,16 +7,16 @@ class('Player').extends(AnimatedSprite)
 
 
 --- The player is initialised with this method
---- @param x           integer The X coordinate to spawn the player
---- @param y           integer The Y coordinate to spawn the player
---- @param gameManager table   The game manager is passed in to manage player on object interactions
---- @param face        integer The direction the player is facing as a 1 or 0
-function Player:init(x, y, gameManager, face)
+--- @param x    integer The X coordinate to spawn the player
+--- @param y    integer The Y coordinate to spawn the player
+--- @param gm   table   The game manager is passed in to manage player on object interactions
+--- @param face integer The direction the player is facing as a 1 or 0
+function Player:init(x, y, gm, face)
 	-- Game Manager
-	self.gameManager = gameManager
+	self.gm = gm
 
 	-- Create the player state machine with the tile set
-	local playerImageTable = gfx.imagetable.new("images/seraphina-table-32-32")
+	local playerImageTable <const> = gfx.imagetable.new("images/seraphina-table-48-48")
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds
@@ -32,14 +32,14 @@ function Player:init(x, y, gameManager, face)
 	self:addState("dive", 30, 31, {tickStep = 1})
 	self:addState("die", 32, 34, {tickStep = 2})
 	self:addState("roll", 36, 43, {tickStep = 2})
-	self:addState("respawn", 44, 49, {tickStep = 3})
+	self:addState("spawn", 44, 48, {tickStep = 3})
 	self:playAnimation()
 
 	-- Sprite properties
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(9, 3, 14, 29)
+	self:setCollideRect(19, 19, 10, 29)
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -59,7 +59,7 @@ function Player:init(x, y, gameManager, face)
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 300
-	
+
 	-- Dive
 	self.diveSpeed = 12
 	self.diveHorizontal = 4
@@ -139,11 +139,11 @@ end
 --- The roll buffer helps the player input the button combination for a roll
 function Player:updateRollBuffer()
 	self.rollBuffer = self.rollBuffer - 1
-	
+
 	if self.rollBuffer <= 0 then
 		self.rollBuffer = 0
 	end
-	
+
 	if pd.buttonJustPressed(pd.kButtonB) then
 		self.rollBuffer = self.rollBufferAmount
 	end
@@ -164,17 +164,7 @@ end
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "idle" or self.currentState == "walk" or self.currentState == "run" then
-		self:applyGravity()
-		self:handleGroundInput()
-		
-		if self.yVelocity > 1 then
-			self:changeToFallState()
-		end
-	elseif self.currentState == "duck" then
-		self:applyGravity()
-		self:handleDuckInput()
-	elseif self.currentState == "roll" then
+	if self.currentState == "roll" then
 		self:applyGravity()
 	elseif self.currentState == "jump" then
 		if self.touchingGround then
@@ -205,9 +195,13 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "ready" then
+	else
 		self:applyGravity()
 		self:handleGroundInput()
+
+		if self.yVelocity > 1 then
+			self:changeToFallState()
+		end
 	end
 end
 
@@ -251,7 +245,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Door then
 			self:handleDoorCollision(collisionObject)
 		end
-		
+
 		-- Check if we are still touching the door
 		if self.touchingDoor == true and collisionTag ~= TAGS.Door then
 			self.doorTimer = self.doorTimer - 1
@@ -273,13 +267,13 @@ function Player:handleMovementAndCollisions()
 
 	-- If touching the edge of the level, lets move into the next room
 	if self.x < -6 then
-		self.gameManager:enterRoom("west")
+		self.gm:enterRoom("west")
 	elseif self.x > 406 then
-		self.gameManager:enterRoom("east")
+		self.gm:enterRoom("east")
 	elseif self.y < -12 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
-		self.gameManager:enterRoom("north")
-	elseif self.y > 264 then
-		self.gameManager:enterRoom("south")
+		self.gm:enterRoom("north")
+	elseif self.y > 252 then
+		self.gm:enterRoom("south")
 	end
 
 	-- If the player touched a hazard, die
@@ -314,10 +308,10 @@ function Player:handleFlagCollision(flag)
 		flag:hoist()
 
 		-- TODO: How can this be done better?
-		self.gameManager.flag = flag.id
-		self.gameManager.spawn = self.gameManager.level
-		self.gameManager.spawnX = flag.x + 16
-		self.gameManager.spawnY = flag.y + 32
+		self.gm.flag = flag.id
+		self.gm.spawn = self.gm.level
+		self.gm.spawnX = flag.x + 8
+		self.gm.spawnY = flag.y + 24
 	end
 end
 
@@ -332,7 +326,7 @@ function Player:die()
 	pd.timer.performAfterDelay(1000, function()
 		self:setCollisionsEnabled(true)
 		self.dead = false
-		self.gameManager:resetPlayer()
+		self.gm:resetPlayer()
 	end)
 end
 
@@ -346,6 +340,8 @@ function Player:handleGroundInput()
 			self:changeToRunState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
+		elseif pd.buttonJustPressed(pd.kButtonUp) then
+			print("Pull out weapon")
 		else
 			self:changeToReadyState()
 		end
@@ -371,7 +367,7 @@ function Player:handleGroundInput()
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
 		if self.nextLevelID ~= nil then
-			self.gameManager:enterDoor(self.nextLevelID, self.exitX, self.exitY)
+			self.gm:enterDoor(self.nextLevelID, self.exitX, self.exitY)
 		end
 	end
 end
@@ -408,7 +404,7 @@ end
 function Player:changeToIdleState()
 	self.xVelocity = 0
 
-	self:setCollideRect(10, 3, 12, 29)
+	self:setCollideRect(19, 19, 10, 29)
 	self:changeState("idle")
 end
 
@@ -453,7 +449,7 @@ end
 --- Change the player into a roll state
 function Player:changeToRollState(direction)
 	self.rollAvailable = false
-	
+
 	if direction == "left" then
 		self.xVelocity = -self.rollSpeed
 		self.globalFlip = 1
@@ -466,7 +462,7 @@ function Player:changeToRollState(direction)
 		pd.timer.performAfterDelay(self.rollRecharge, function()
 			self.rollAvailable = true
 		end)
-		
+
 		if self.touchingGround then
 			self:changeState("idle")
 		elseif self.dead then
@@ -477,7 +473,7 @@ function Player:changeToRollState(direction)
 			else
 				self.xVelocity = -self.rollFallSpeed
 			end
-			
+
 			self:changeState("fall")
 		end
 	end)
@@ -517,8 +513,8 @@ function Player:changeToDieState()
 	end)
 end
 
-function Player:changeToRespawnState()
-	self:changeState("respawn")
+function Player:changeToSpawnState()
+	self:changeState("spawn")
 	pd.timer.performAfterDelay(510, function()
 		self:changeState("idle")
 	end)
@@ -541,7 +537,7 @@ end
 function Player:changeToDuckState()
 	self.xVelocity = 0
 
-	self:setCollideRect(10, 16, 12, 16)
+	self:setCollideRect(17, 32, 12, 16)
 	self:changeState("duck")
 end
 
