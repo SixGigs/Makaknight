@@ -161,10 +161,10 @@ function Game:resetPlayer()
 		self:goToLevel(self.spawn)
 		self.player:add()
 		self.player:moveTo(self.spawnX, self.spawnY)
-		self.player:changeToRespawnState()
+		self.player:changeToSpawnState()
 	else
 		self.player:moveTo(self.spawnX, self.spawnY)
-		self.player:changeToRespawnState()
+		self.player:changeToSpawnState()
 	end
 end
 
