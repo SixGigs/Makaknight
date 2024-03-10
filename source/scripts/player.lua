@@ -20,19 +20,20 @@ function Player:init(x, y, gm, face)
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds
-	self:addState("jump", 16, 16)
-	self:addState("fall", 17, 17)
-	self:addState("duck", 15, 15)
-	self:addState("dead", 48, 48)
 	self:addState("idle", 1, 8, {tickStep = 3})
 	self:addState("walk", 9, 14, {tickStep = 3})
-	self:addState("run", 18, 29, {tickStep = 1.5})
-	self:addState("dash", 40, 42, {tickStep = 1})
-	self:addState("ready", 30, 39, {tickStep = 3})
-	self:addState("dive", 43, 44, {tickStep = 1})
-	self:addState("die", 45, 48, {tickStep = 2})
-	self:addState("roll", 49, 56, {tickStep = 2})
-	self:addState("spawn", 57, 62, {tickStep = 3})
+	self:addState("duck", 15, 15)
+	self:addState("jump", 16, 16)
+	self:addState("midJump", 17, 17)
+	self:addState("fall", 18, 18)
+	self:addState("run", 19, 30, {tickStep = 1.5})
+	self:addState("ready", 31, 40, {tickStep = 3})
+	self:addState("dash", 41, 43, {tickStep = 1})
+	self:addState("dive", 44, 45, {tickStep = 1})
+	self:addState("die", 46, 49, {tickStep = 2})
+	self:addState("dead", 49, 49)
+	self:addState("roll", 50, 57, {tickStep = 2})
+	self:addState("spawn", 58, 63, {tickStep = 3})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -166,13 +167,11 @@ end
 function Player:handleState()
 	if self.currentState == "roll" then
 		self:applyGravity()
-	elseif self.currentState == "jump" then
-		if self.touchingGround then
-			self:changeToIdleState()
-		end
-
-		if self.yVelocity > 0 then
+	elseif self.currentState == "jump" or self.currentState == "midJump" then
+		if self.yVelocity > 1 then
 			self:changeToFallState()
+		elseif self.yVelocity > -2 then
+			self:changeToMidJumpState()
 		end
 
 		self:applyGravity()
@@ -503,6 +502,12 @@ end
 --- Changes the player sprite to the jump state when falling
 function Player:changeToFallState()
 	self:changeState("fall")
+end
+
+
+--- Changes the player sprite to the jump state when falling
+function Player:changeToMidJumpState()
+	self:changeState("midJump")
 end
 
 
