@@ -35,6 +35,7 @@ function Player:init(x, y, gm, face)
 	self:addState("dead", 51, 51)
 	self:addState("roll", 52, 59, {tickStep = 2})
 	self:addState("spawn", 60, 65, {tickStep = 3})
+	self:addState("punch", 66, 69, {tickStep = 1})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -85,6 +86,11 @@ function Player:init(x, y, gm, face)
 	self.nextLevelID = nil
 	self.exitX = 0
 	self.exitY = 0
+	
+	-- Punch buffer
+	self.punching = false
+	self.punchBufferAmount = 5
+	self.punchBuffer = 0
 
 	-- Player Attributes
 	self.globalFlip = face
@@ -119,6 +125,7 @@ function Player:update()
 
 	self:updateJumpBuffer()
 	self:updateRollBuffer()
+	self:updatePunchBuffer()
 	self:handleState()
 	self:handleMovementAndCollisions()
 end
@@ -152,6 +159,20 @@ function Player:updateRollBuffer()
 end
 
 
+--- The punch buffer is used to measure if an input is fast enough to be considered a punch
+function Player:updatePunchBuffer()
+	self.punchBuffer = self.punchBuffer - 1
+	
+	if self.punchBuffer <= 0 then
+		self.punchBuffer = 0
+	end
+	
+	if pd.buttonJustPressed(pd.kButtonB) then
+		self.punchBuffer = self.punchBufferAmount
+	end
+end
+
+
 --- A function to detect whether the player has jumped based on jump buffer
 function Player:playerJumped()
 	return self.jumpBuffer > 0
@@ -161,6 +182,12 @@ end
 --- A function to detect if the player has input to roll based on roll buffer
 function Player:playerRolled()
 	return self.rollBuffer > 0
+end
+
+
+--- A function to detect if the player has input enough to punch
+function Player:playerPunched()
+	return self.punchBuffer > 0
 end
 
 
@@ -174,10 +201,7 @@ function Player:handleState()
 		end
 	elseif self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" then
 		if self.touchingGround then
-			if self.yVelocity > 30 then
-				self:die()
-				self:changeToDieState()
-			elseif self.yVelocity > 15 then
+			if self.yVelocity > 15 then
 				if pd.buttonIsPressed(pd.kButtonRight) then
 					self:changeToRollState("right")
 				elseif pd.buttonIsPressed(pd.kButtonLeft) then
@@ -197,7 +221,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "contact" or self.currentState == "spawn" then
+	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" then
 	elseif self.currentState == "dash" then
 		self:applyDrag(self.dashDrag)
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
@@ -245,7 +269,6 @@ function Player:handleMovementAndCollisions()
 
 		if collisionTag == TAGS.Hazard then
 			died = true
-			self:changeToDieState()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
@@ -282,6 +305,13 @@ function Player:handleMovementAndCollisions()
 		self.gm:enterRoom("north")
 	elseif self.y > 252 then
 		self.gm:enterRoom("south")
+	end
+	
+	-- Check if we die from fall damage
+	if self.touchingGround then
+		if self.yVelocity > 30 then
+			died = true
+		end
 	end
 
 	-- If the player touched a hazard, die
@@ -330,6 +360,11 @@ function Player:die()
 	self.yVelocity = 0
 	self.dead = true
 
+	self:changeState("die")
+	pd.timer.performAfterDelay(150, function()
+		self:changeState("dead")
+	end)
+
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(1000, function()
 		self:setCollisionsEnabled(true)
@@ -370,6 +405,12 @@ function Player:handleGroundInput()
 			self:changeToRollState("right")
 		elseif pd.buttonJustPressed(pd.kButtonLeft) and self.rollAvailable then
 			self:changeToRollState("left")
+		end
+	end
+	
+	if self:playerPunched() then
+		if pd.buttonJustReleased(pd.kButtonB) and not self.punching then
+			self:changeToPunchState()
 		end
 	end
 
@@ -522,6 +563,26 @@ function Player:changeToContactState()
 	end)
 	
 	self:changeState("contact")
+end
+
+
+function Player:changeToPunchState()
+	self.punching = true
+	self.xVelocity = 0
+
+	pd.timer.performAfterDelay(75, function()
+		if pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToReadyState()
+		else
+			self:changeToIdleState()
+		end
+		
+		pd.timer.performAfterDelay(50, function()
+			self.punching = false
+		end)
+	end)
+	
+	self:changeState("punch")
 end
 
 
