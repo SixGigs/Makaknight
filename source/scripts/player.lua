@@ -123,11 +123,33 @@ function Player:update()
 		return
 	end
 
-	self:updateJumpBuffer()
-	self:updateRollBuffer()
-	self:updatePunchBuffer()
+	self:updateBuffers()
 	self:handleState()
 	self:handleMovementAndCollisions()
+end
+
+
+--- Update all game buffers
+function Player:updateBuffers()
+	-- Update each game buffer
+	self.jumpBuffer = self.jumpBuffer - 1
+	self.rollBuffer = self.rollBuffer - 1
+	self.punchBuffer = self.punchBuffer - 1
+	
+	-- Reset the game buffers if needed
+	if self.jumpBuffer <= 0 then self.jumpBuffer = 0 end
+	if self.rollBuffer <= 0 then self.rollBuffer = 0 end
+	if self.punchBuffer <= 0 then self.punchBuffer = 0 end
+	
+	-- Set the game buffers if each button is pressed
+	if pd.buttonJustPressed(pd.kButtonA) then
+		self.jumpBuffer = self.jumpBufferAmount
+	end
+	
+	if pd.buttonJustPressed(pd.kButtonB) then
+		self.rollBuffer = self.rollBufferAmount
+		self.punchBuffer = self.punchBufferAmount
+	end
 end
 
 
@@ -221,12 +243,12 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" then
 	elseif self.currentState == "dash" then
 		self:applyDrag(self.dashDrag)
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
 			self:changeToMidJumpState()
 		end
+	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" then
 	else
 		self:applyGravity()
 		self:handleGroundInput()
