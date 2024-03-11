@@ -174,7 +174,10 @@ function Player:handleState()
 		end
 	elseif self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" then
 		if self.touchingGround then
-			if self.yVelocity > 15 then
+			if self.yVelocity > 30 then
+				self:die()
+				self:changeToDieState()
+			elseif self.yVelocity > 15 then
 				if pd.buttonIsPressed(pd.kButtonRight) then
 					self:changeToRollState("right")
 				elseif pd.buttonIsPressed(pd.kButtonLeft) then
