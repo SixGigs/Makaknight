@@ -25,17 +25,18 @@ function Player:init(x, y, gm, face)
 	self:addState("duck", 15, 15)
 	self:addState("jump", 16, 16)
 	self:addState("midJump", 17, 17)
-	self:addState("fall", 18, 18)
-	self:addState("contact", 19, 20, {tickStep = 3})
-	self:addState("run", 21, 32, {tickStep = 1.5})
-	self:addState("ready", 33, 42, {tickStep = 3})
-	self:addState("dash", 43, 45, {tickStep = 1})
-	self:addState("dive", 46, 47, {tickStep = 1})
-	self:addState("die", 48, 51, {tickStep = 2})
-	self:addState("dead", 51, 51)
-	self:addState("roll", 52, 59, {tickStep = 2})
-	self:addState("spawn", 60, 65, {tickStep = 3})
-	self:addState("punch", 66, 69, {tickStep = 1})
+	self:addState("doubleJump", 18, 25, {tickStep = 2})
+	self:addState("fall", 26, 26)
+	self:addState("contact", 27, 28, {tickStep = 3})
+	self:addState("run", 29, 40, {tickStep = 1.5})
+	self:addState("ready", 41, 50, {tickStep = 3})
+	self:addState("dash", 51, 53, {tickStep = 1})
+	self:addState("dive", 54, 55, {tickStep = 1})
+	self:addState("die", 56, 59, {tickStep = 2})
+	self:addState("dead", 59, 59)
+	self:addState("roll", 60, 67, {tickStep = 2})
+	self:addState("spawn", 68, 73, {tickStep = 3})
+	self:addState("punch", 74, 77, {tickStep = 1})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -205,6 +206,14 @@ function Player:handleState()
 		if self.yVelocity > 1 then
 			self:changeState("fall")
 		end
+	elseif self.currentState == "doubleJump" then
+		if self.touchingGround then
+			self:changeToIdleState()
+		end
+
+		self:applyGravity()
+		self:applyDrag(self.drag)
+		self:handleAirInput()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" then
 	else
 		self:applyGravity()
@@ -483,7 +492,15 @@ function Player:changeToDoubleJumpState()
 	self.yVelocity = self.doubleJumpVelocity
 	self.jumpBuffer = 0
 
-	self:changeState("jump")
+	pd.timer.performAfterDelay(400, function()
+		if self.currentState == "dash" then
+			return
+		end
+
+		self:changeState("fall")
+	end)
+
+	self:changeState("doubleJump")
 end
 
 
