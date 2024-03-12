@@ -169,6 +169,19 @@ function Game:resetPlayer()
 end
 
 
+--- Load the game from the JSON save file and restore game attributes
+function Game:load()
+	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
+	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
+	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
+	self.level = (gd and (gd.level and gd.level or self.spawn) or self.spawn)
+	self.levelX = (gd and (gd.levelX and gd.levelX or self.spawnX) or self.spawnX)
+	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
+	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
+	self.face = (gd and (gd.face and gd.face or 0) or 0)
+end
+
+
 --- Save the current game data into the save file
 function Game:save()
 	local saveData <const> = {
@@ -183,17 +196,4 @@ function Game:save()
 	}
 
 	pd.datastore.write(saveData)
-end
-
-
---- Load the game from the JSON save file and restore game attributes
-function Game:load()
-	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
-	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
-	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
-	self.level = (gd and (gd.level and gd.level or self.spawn) or self.spawn)
-	self.levelX = (gd and (gd.levelX and gd.levelX or self.spawnX) or self.spawnX)
-	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
-	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
-	self.face = (gd and (gd.face and gd.face or 0) or 0)
 end
