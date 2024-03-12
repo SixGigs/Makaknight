@@ -37,6 +37,7 @@ function Player:init(x, y, gm, face)
 	self:addState("roll", 60, 67, {tickStep = 2})
 	self:addState("spawn", 68, 73, {tickStep = 3})
 	self:addState("punch", 74, 77, {tickStep = 1})
+	self:addState("duckPunch", 78, 81, {tickStep = 1})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -214,7 +215,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" then
+	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" then
 	else
 		self:applyGravity()
 		self:handleGroundInput()
@@ -419,6 +420,12 @@ function Player:handleDuckInput()
 		self:setCollideRect(19, 19, 10, 29)
 		self:changeToIdleState()
 	end
+	
+	if self:playerPunched() then
+		if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
+			self:changeToDuckPunchState()
+		end
+	end
 end
 
 
@@ -580,12 +587,32 @@ function Player:changeToPunchState()
 			self:changeToIdleState()
 		end
 		
-		pd.timer.performAfterDelay(50, function()
+		pd.timer.performAfterDelay(25, function()
 			self.punchAvailable = false
 		end)
 	end)
 	
 	self:changeState("punch")
+end
+
+--- Changes the player to a punch state
+function Player:changeToDuckPunchState()
+	self.punchAvailable = true
+	self.xVelocity = 0
+
+	pd.timer.performAfterDelay(75, function()
+		if pd.buttonIsPressed(pd.kButtonDown) then
+			self:changeToDuckState()
+		else
+			self:changeToIdleState()
+		end
+		
+		pd.timer.performAfterDelay(25, function()
+			self.punchAvailable = false
+		end)
+	end)
+	
+	self:changeState("duckPunch")
 end
 
 
