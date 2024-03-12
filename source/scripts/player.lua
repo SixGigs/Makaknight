@@ -110,11 +110,20 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag <const> = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door or tag == TAGS.Animal then
-		return gfx.sprite.kCollisionTypeOverlap
-	end
+	local overlapTags <const> = {
+		[TAGS.Hazard] = true,
+		[TAGS.Pickup] = true,
+		[TAGS.Flag] = true,
+		[TAGS.Prop] = true,
+		[TAGS.Door] = true,
+		[TAGS.Animal] = true
+	}
 
-	return gfx.sprite.kCollisionTypeSlide
+	if overlapTags[tag] then
+		return gfx.sprite.kCollisionTypeOverlap
+	else
+		return gfx.sprite.kCollisionTypeSlide
+	end
 end
 
 
@@ -135,16 +144,12 @@ end
 
 ----------------------------------------------------------------------------------------------------------
 --- Update all game buffers
+--- Update all game buffers
 function Player:updateBuffers()
-	-- Update each game buffer
-	self.jumpBuffer = self.jumpBuffer - 1
-	self.rollBuffer = self.rollBuffer - 1
-	self.punchBuffer = self.punchBuffer - 1
-
-	-- Reset the game buffers if needed
-	if self.jumpBuffer <= 0 then self.jumpBuffer = 0 end
-	if self.rollBuffer <= 0 then self.rollBuffer = 0 end
-	if self.punchBuffer <= 0 then self.punchBuffer = 0 end
+	-- Update each game buffer, math.max ensures it never goes below zero
+	self.jumpBuffer = math.max(self.jumpBuffer - 1, 0)
+	self.rollBuffer = math.max(self.rollBuffer - 1, 0)
+	self.punchBuffer = math.max(self.punchBuffer - 1, 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -402,7 +407,7 @@ function Player:handleGroundInput()
 
 	if self:playerPunched() then
 		if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
-			self:changeToPunchState()
+			self:changeToPunchState("punch")
 		end
 	end
 
@@ -423,7 +428,7 @@ function Player:handleDuckInput()
 	
 	if self:playerPunched() then
 		if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
-			self:changeToDuckPunchState()
+			self:changeToPunchState("duckPunch")
 		end
 	end
 end
@@ -576,43 +581,25 @@ end
 
 
 --- Changes the player to a punch state
-function Player:changeToPunchState()
-	self.punchAvailable = true
-	self.xVelocity = 0
-
-	pd.timer.performAfterDelay(75, function()
-		if pd.buttonIsPressed(pd.kButtonB) then
-			self:changeToReadyState()
-		else
-			self:changeToIdleState()
-		end
-		
-		pd.timer.performAfterDelay(25, function()
-			self.punchAvailable = false
-		end)
-	end)
-	
-	self:changeState("punch")
-end
-
---- Changes the player to a punch state
-function Player:changeToDuckPunchState()
+function Player:changeToPunchState(state)
 	self.punchAvailable = true
 	self.xVelocity = 0
 
 	pd.timer.performAfterDelay(75, function()
 		if pd.buttonIsPressed(pd.kButtonDown) then
 			self:changeToDuckState()
+		elseif pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToReadyState()
 		else
 			self:changeToIdleState()
 		end
-		
-		pd.timer.performAfterDelay(25, function()
+
+		pd.timer.performAfterDelay(10, function()
 			self.punchAvailable = false
 		end)
 	end)
-	
-	self:changeState("duckPunch")
+
+	self:changeState(state)
 end
 
 
