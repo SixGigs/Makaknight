@@ -116,7 +116,8 @@ function Player:collisionResponse(other)
 		[TAGS.Flag] = true,
 		[TAGS.Prop] = true,
 		[TAGS.Door] = true,
-		[TAGS.Animal] = true
+		[TAGS.Animal] = true,
+		[TAGS.Hitbox] = true
 	}
 
 	if overlapTags[tag] then
@@ -591,13 +592,23 @@ function Player:changeToPunchState(state)
 		elseif pd.buttonIsPressed(pd.kButtonB) then
 			self:changeToReadyState()
 		else
+			self:setCollideRect(19, 19, 10, 29)
 			self:changeToIdleState()
 		end
-
-		pd.timer.performAfterDelay(10, function()
-			self.punchAvailable = false
-		end)
 	end)
+
+	pd.timer.performAfterDelay(60, function()
+		self.punchAvailable = false
+	end)
+
+	local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
+	local hitboxY = self.y + 7
+	if state == "punch" then
+		hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 20
+		hitboxY = self.y + 5
+	end
+
+	Hitbox(hitboxX, hitboxY, 8, 8, 50)
 
 	self:changeState(state)
 end

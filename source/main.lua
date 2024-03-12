@@ -17,6 +17,7 @@ import "scripts/Door"
 import "scripts/Flag"
 import "scripts/Prop"
 import "scripts/Animal"
+import "scripts/Hitbox"
 
 -- PlayDate Constants
 local pd <const> = playdate
