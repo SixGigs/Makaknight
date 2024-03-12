@@ -48,7 +48,7 @@ end
 --- @return unknown unknown The collision response for the object
 function Animal:collisionResponse(other)
 	local tag <const> = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door or tag == TAGS.Player or tag == TAGS.Animal then
+	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door or tag == TAGS.Player or tag == TAGS.Animal or tag == TAGS.Hitbox then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 
@@ -104,7 +104,7 @@ function Animal:handleMovementAndCollisions()
 		end
 
 		-- Process the collision based on the collision tag
-		if collisionTag == TAGS.Hazard then
+		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
 			self.dead = true
 		end
 	end
