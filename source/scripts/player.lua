@@ -16,11 +16,11 @@ function Player:init(x, y, gm, face)
 	self.gm = gm
 
 	-- Create the player state machine with the tile set
-	local playerImageTable <const> = gfx.imagetable.new("images/seraphina-table-48-48")
+	local playerImageTable <const> = gfx.imagetable.new("images/player-table-80-80")
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds
-	self:addState("idle", 1, 8, {tickStep = 3})
+	self:addState("idle", 1, 16, {tickStep = 2})
 	self:addState("walk", 9, 14, {tickStep = 2.8})
 	self:addState("duck", 15, 15)
 	self:addState("jump", 16, 16)
@@ -44,7 +44,7 @@ function Player:init(x, y, gm, face)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(19, 19, 10, 29)
+	self:setCollideRect(34, 40, 12, 40)
 
 	-- Physics properties
 	self.xVelocity = 0
