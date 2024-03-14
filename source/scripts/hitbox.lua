@@ -13,7 +13,7 @@ function Hitbox:init(x, y, width, height, duration)
 	self:setTag(TAGS.Hitbox)
 	self:setZIndex(Z_INDEXES.Hitbox)
 	self:add()
-	
+
 	-- Start a timer to deactivate the hit box after the specified duration
 	pd.timer.performAfterDelay(duration, function()
 		self:remove()
