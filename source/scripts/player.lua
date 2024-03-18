@@ -22,7 +22,7 @@ function Player:init(x, y, gm, face)
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
 	self:addState("walk", 17, 28, {tickStep = 1.5})
-	self:addState("duck", 15, 15)
+	self:addState("duck", 29, 29)
 	self:addState("jump", 16, 16)
 	self:addState("midJump", 17, 17)
 	self:addState("doubleJump", 18, 25, {tickStep = 2})
@@ -51,7 +51,7 @@ function Player:init(x, y, gm, face)
 	self.yVelocity = 0
 	self.gravity = 1.0
 	self.maxSpeed = 3.4
-	self.walkSpeed = 1.8
+	self.walkSpeed = 2
 	self.jumpSpeed = 2.6
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
@@ -423,7 +423,7 @@ end
 --- Handle input while the player is crouched
 function Player:handleDuckInput()
 	if pd.buttonJustReleased(pd.kButtonDown) then
-		self:setCollideRect(19, 19, 10, 29)
+		self:setCollideRect(34, 40, 12, 40)
 		self:changeToIdleState()
 	end
 	
@@ -521,7 +521,7 @@ end
 function Player:changeToDuckState()
 	self.xVelocity = 0
 
-	self:setCollideRect(17, 32, 12, 16)
+	self:setCollideRect(34, 57, 12, 23)
 	self:changeState("duck")
 end
 
@@ -592,7 +592,7 @@ function Player:changeToPunchState(state)
 		elseif pd.buttonIsPressed(pd.kButtonB) then
 			self:changeToReadyState()
 		else
-			self:setCollideRect(19, 19, 10, 29)
+			self:setCollideRect(34, 40, 12, 40)
 			self:changeToIdleState()
 		end
 	end)
