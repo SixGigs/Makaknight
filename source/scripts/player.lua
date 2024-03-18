@@ -21,7 +21,7 @@ function Player:init(x, y, gm, face)
 
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
-	self:addState("walk", 17, 22, {tickStep = 2.7})
+	self:addState("walk", 17, 28, {tickStep = 1.5})
 	self:addState("duck", 15, 15)
 	self:addState("jump", 16, 16)
 	self:addState("midJump", 17, 17)
@@ -51,7 +51,7 @@ function Player:init(x, y, gm, face)
 	self.yVelocity = 0
 	self.gravity = 1.0
 	self.maxSpeed = 3.4
-	self.walkSpeed = 2
+	self.walkSpeed = 1.8
 	self.jumpSpeed = 2.6
 	self.jumpVelocity = -9.5
 	self.drag = 0.1
