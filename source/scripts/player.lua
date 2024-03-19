@@ -53,7 +53,7 @@ function Player:init(x, y, gm, face)
 	self.maxSpeed = 3.4
 	self.walkSpeed = 2
 	self.jumpSpeed = 2.6
-	self.jumpVelocity = -9.5
+	self.jumpVelocity = -10
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
 
