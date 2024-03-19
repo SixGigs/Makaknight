@@ -44,7 +44,7 @@ function Player:init(x, y, gm, face)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(34, 40, 12, 40)
+	self:setCollideRect(35, 44, 10, 36)
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -423,7 +423,7 @@ end
 --- Handle input while the player is crouched
 function Player:handleDuckInput()
 	if pd.buttonJustReleased(pd.kButtonDown) then
-		self:setCollideRect(34, 40, 12, 40)
+		self:setCollideRect(35, 44, 10, 36)
 		self:changeToIdleState()
 	end
 	
@@ -521,7 +521,7 @@ end
 function Player:changeToDuckState()
 	self.xVelocity = 0
 
-	self:setCollideRect(34, 57, 12, 23)
+	self:setCollideRect(35, 61, 10, 19)
 	self:changeState("duck")
 end
 
@@ -592,7 +592,7 @@ function Player:changeToPunchState(state)
 		elseif pd.buttonIsPressed(pd.kButtonB) then
 			self:changeToReadyState()
 		else
-			self:setCollideRect(34, 40, 12, 40)
+			self:setCollideRect(35, 44, 10, 36)
 			self:changeToIdleState()
 		end
 	end)
