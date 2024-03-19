@@ -22,7 +22,11 @@ function Player:init(x, y, gm, face)
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
 	self:addState("walk", 17, 28, {tickStep = 1.5})
-	self:addState("duck", 29, 29)
+
+	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 0})
+	self:addState("duck", 30, 30)
+	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 0})
+
 	self:addState("jump", 16, 16)
 	self:addState("midJump", 17, 17)
 	self:addState("doubleJump", 18, 25, {tickStep = 2})
@@ -39,6 +43,15 @@ function Player:init(x, y, gm, face)
 	self:addState("punch", 74, 77, {tickStep = 1})
 	self:addState("duckPunch", 78, 81, {tickStep = 1})
 	self:playAnimation()
+
+	-- Add end of animation states
+	self.states["duckUp"].onAnimationEndEvent = function()
+		self:changeToIdleState()
+	end
+	
+	self.states["duckDown"].onAnimationEndEvent = function()
+		self:changeState("duck")
+	end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -221,7 +234,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" then
+	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
 		self:applyGravity()
 		self:handleGroundInput()
@@ -424,7 +437,7 @@ end
 function Player:handleDuckInput()
 	if pd.buttonJustReleased(pd.kButtonDown) then
 		self:setCollideRect(35, 44, 10, 36)
-		self:changeToIdleState()
+		self:changeState("duckUp")
 	end
 	
 	if self:playerPunched() then
@@ -522,7 +535,7 @@ function Player:changeToDuckState()
 	self.xVelocity = 0
 
 	self:setCollideRect(35, 61, 10, 19)
-	self:changeState("duck")
+	self:changeState("duckDown")
 end
 
 
