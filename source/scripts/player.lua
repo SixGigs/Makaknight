@@ -22,18 +22,16 @@ function Player:init(x, y, gm, face)
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
 	self:addState("walk", 17, 28, {tickStep = 1.5})
-
-	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 0})
+	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 1, nextAnimation = "duck"})
 	self:addState("duck", 30, 30)
-	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 0})
-
-	self:addState("jump", 16, 16)
-	self:addState("midJump", 17, 17)
+	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
+	self:addState("jump", 32, 32)
+	self:addState("midJump", 33, 33)
 	self:addState("doubleJump", 18, 25, {tickStep = 2})
-	self:addState("fall", 26, 26)
-	self:addState("contact", 27, 28, {tickStep = 3})
-	self:addState("run", 29, 40, {tickStep = 1.5})
-	self:addState("ready", 41, 50, {tickStep = 3})
+	self:addState("fall", 34, 34)
+	self:addState("contact", 35, 36, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("run", 17, 28, {tickStep = 1})
+	self:addState("ready", 1, 16, {tickStep = 1})
 	self:addState("dash", 51, 53, {tickStep = 1})
 	self:addState("dive", 54, 55, {tickStep = 1})
 	self:addState("die", 56, 59, {tickStep = 2})
@@ -43,15 +41,6 @@ function Player:init(x, y, gm, face)
 	self:addState("punch", 74, 77, {tickStep = 1})
 	self:addState("duckPunch", 78, 81, {tickStep = 1})
 	self:playAnimation()
-
-	-- Add end of animation states
-	self.states["duckUp"].onAnimationEndEvent = function()
-		self:changeToIdleState()
-	end
-	
-	self.states["duckDown"].onAnimationEndEvent = function()
-		self:changeState("duck")
-	end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -585,10 +574,6 @@ end
 --- Changes the player to the contact state
 function Player:changeToContactState()
 	self.xVelocity = 0
-
-	pd.timer.performAfterDelay(75, function()
-		self:changeState("idle")
-	end)
 
 	self:changeState("contact")
 end
