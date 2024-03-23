@@ -295,11 +295,11 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If touching the edge of the level, lets move into the next room
-	if self.x < -6 then
+	if self.x < -5 then
 		self.gm:enterRoom("west")
-	elseif self.x > 406 then
+	elseif self.x > 405 then
 		self.gm:enterRoom("east")
-	elseif self.y < -12 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
+	elseif self.y < -24 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
 		self.gm:enterRoom("north")
 	elseif self.y > 252 then
 		self.gm:enterRoom("south")
