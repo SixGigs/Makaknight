@@ -29,12 +29,13 @@ function Player:init(x, y, gm, face)
 	self:addState("jumpToMid", 33, 33)
 	self:addState("midJump", 34, 34)
 	self:addState("midToFall", 35, 35)
+	self:addState("dash", 35, 35, {tickStep = 1})
 	self:addState("fall", 36, 36)
 	self:addState("contact", 37, 38, {tickStep = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("doubleJump", 18, 25, {tickStep = 2})
+
+	self:addState("doubleJump", 17, 28, {tickStep = 1.5})
 	self:addState("run", 17, 28, {tickStep = 1})
 	self:addState("ready", 1, 16, {tickStep = 1})
-	self:addState("dash", 35, 35, {tickStep = 1})
 	self:addState("dive", 54, 55, {tickStep = 1})
 	self:addState("die", 56, 59, {tickStep = 2})
 	self:addState("dead", 59, 59)
@@ -79,7 +80,7 @@ function Player:init(x, y, gm, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -6.5
+	self.doubleJumpVelocity = -7.5
 
 	-- Dash
 	self.dashAvailable = true
@@ -518,7 +519,7 @@ function Player:changeToDoubleJumpState()
 			return
 		end
 
-		self:changeState("midToFall")
+		self:changeState("midJump")
 	end)
 
 	self:changeState("doubleJump")
