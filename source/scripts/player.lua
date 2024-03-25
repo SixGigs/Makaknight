@@ -26,13 +26,15 @@ function Player:init(x, y, gm, face)
 	self:addState("duck", 30, 30)
 	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
 	self:addState("jump", 32, 32)
-	self:addState("midJump", 33, 33)
+	self:addState("jumpToMid", 33, 33)
+	self:addState("midJump", 34, 34)
+	self:addState("midToFall", 35, 35)
+	self:addState("fall", 36, 36)
+	self:addState("contact", 37, 38, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("doubleJump", 18, 25, {tickStep = 2})
-	self:addState("fall", 34, 34)
-	self:addState("contact", 35, 36, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("run", 17, 28, {tickStep = 1})
 	self:addState("ready", 1, 16, {tickStep = 1})
-	self:addState("dash", 51, 53, {tickStep = 1})
+	self:addState("dash", 35, 35, {tickStep = 1})
 	self:addState("dive", 54, 55, {tickStep = 1})
 	self:addState("die", 56, 59, {tickStep = 2})
 	self:addState("dead", 59, 59)
@@ -175,7 +177,7 @@ function Player:playerPunched() return self.punchBuffer > 0 end --- This method 
 ----------------------------------------------------------------------------------------------------------
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" then
+	if self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" or self.currentState == "jumpToMid" or self.currentState == "midToFall" then
 		if self.touchingGround then
 			if self.yVelocity > 15 then
 				if pd.buttonIsPressed(pd.kButtonRight) then
@@ -188,10 +190,14 @@ function Player:handleState()
 			else
 				self:changeToIdleState()
 			end
-		elseif self.yVelocity > 1 then
+		elseif self.yVelocity > 4 then
 			self:changeState("fall")
+		elseif self.yVelocity > 1 then
+			self:changeState("midToFall")
 		elseif self.yVelocity > -2 then
 			self:changeState("midJump")
+		elseif self.yVelocity > -6 then
+			self:changeState("jumpToMid")
 		end
 
 		self:applyGravity()
@@ -229,7 +235,7 @@ function Player:handleState()
 		self:handleGroundInput()
 
 		if self.yVelocity > 1 then
-			self:changeState("fall")
+			self:changeState("midToFall")
 		end
 	end
 end
@@ -512,7 +518,7 @@ function Player:changeToDoubleJumpState()
 			return
 		end
 
-		self:changeState("fall")
+		self:changeState("midToFall")
 	end)
 
 	self:changeState("doubleJump")
