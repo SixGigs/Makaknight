@@ -150,7 +150,6 @@ end
 
 ----------------------------------------------------------------------------------------------------------
 --- Update all game buffers
---- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
 	self.jumpBuffer = math.max(self.jumpBuffer - 1, 0)
@@ -306,7 +305,7 @@ function Player:handleMovementAndCollisions()
 		self.gm:enterRoom("west")
 	elseif self.x > 405 then
 		self.gm:enterRoom("east")
-	elseif self.y < -24 then -- Decreased from 0 to -8 to prevent glitches when jumping up a level
+	elseif self.y < -24 then
 		self.gm:enterRoom("north")
 	elseif self.y > 252 then
 		self.gm:enterRoom("south")
