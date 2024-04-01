@@ -32,6 +32,7 @@ function Player:init(x, y, gm, face)
 	self:addState("dash", 35, 35, {tickStep = 1})
 	self:addState("fall", 36, 36)
 	self:addState("contact", 37, 38, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("roll", 39, 46, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 
 	self:addState("doubleJump", 17, 28, {tickStep = 1.5})
 	self:addState("run", 17, 28, {tickStep = 1})
@@ -39,7 +40,6 @@ function Player:init(x, y, gm, face)
 	self:addState("dive", 54, 55, {tickStep = 1})
 	self:addState("die", 56, 59, {tickStep = 2})
 	self:addState("dead", 59, 59)
-	self:addState("roll", 60, 67, {tickStep = 2})
 	self:addState("spawn", 68, 73, {tickStep = 3})
 	self:addState("punch", 74, 77, {tickStep = 1})
 	self:addState("duckPunch", 78, 81, {tickStep = 1})
@@ -557,20 +557,6 @@ function Player:changeToRollState(direction)
 		pd.timer.performAfterDelay(self.rollRecharge, function()
 			self.rollAvailable = true
 		end)
-
-		if self.dead then
-			self:changeState("dead")
-		elseif self.touchingGround then
-			self:changeState("idle")
-		else
-			if self.globalFlip == 0 then
-				self.xVelocity = self.rollFallSpeed
-			else
-				self.xVelocity = -self.rollFallSpeed
-			end
-
-			self:changeState("fall")
-		end
 	end)
 
 	self:changeState("roll")
