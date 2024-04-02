@@ -403,8 +403,8 @@ function Player:handleGroundInput()
 			self:changeToRunState("right")
 		elseif pd.buttonJustPressed(pd.kButtonUp) then
 			print("Pull out weapon")
-		else
-			self:changeToReadyState()
+		-- else
+		-- 	self:changeToReadyState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
@@ -591,8 +591,6 @@ function Player:changeToPunchState(state)
 	pd.timer.performAfterDelay(75, function()
 		if pd.buttonIsPressed(pd.kButtonDown) then
 			self:changeToDuckState()
-		elseif pd.buttonIsPressed(pd.kButtonB) then
-			self:changeToReadyState()
 		else
 			self:setCollideRect(35, 44, 10, 36)
 			self:changeToIdleState()
