@@ -3,5 +3,5 @@ author=SixGigs
 description=Adventure awaits
 bundleID=com.six.makaknight
 version=0.1.0
-buildNumber=42
+buildNumber=44
 imagePath=images/launcher
