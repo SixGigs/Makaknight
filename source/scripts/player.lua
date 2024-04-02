@@ -36,7 +36,7 @@ function Player:init(x, y, gm, face)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 43, 50, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("roll", 43, 58, {tickStep = 1, loop = 1, nextAnimation = "idle"})
 
 	self:addState("doubleJump", 17, 28, {tickStep = 1.5})
 	self:addState("run", 17, 28, {tickStep = 1})
@@ -69,7 +69,7 @@ function Player:init(x, y, gm, face)
 	-- Roll
 	self.rollAvailable = true
 	self.rollFallSpeed = 2.6
-	self.rollSpeed = 3
+	self.rollSpeed = 4
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 300
