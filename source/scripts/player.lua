@@ -26,13 +26,17 @@ function Player:init(x, y, gm, face)
 	self:addState("duck", 30, 30)
 	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
 	self:addState("jump", 32, 32)
-	self:addState("jumpToMid", 33, 33)
-	self:addState("midJump", 34, 34)
-	self:addState("midToFall", 35, 35)
-	self:addState("dash", 35, 35, {tickStep = 1})
-	self:addState("fall", 36, 36)
-	self:addState("contact", 37, 38, {tickStep = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 39, 46, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("jump1", 33, 33)
+	self:addState("jump2", 34, 34)
+	self:addState("jump3", 35, 35)
+	self:addState("midJump", 36, 36)
+	self:addState("dash", 36, 36, {tickStep = 1})
+	self:addState("fall", 37, 37)
+	self:addState("fall1", 38, 38)
+	self:addState("fall2", 39, 39)
+	self:addState("fall3", 40, 40)
+	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("roll", 43, 50, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 
 	self:addState("doubleJump", 17, 28, {tickStep = 1.5})
 	self:addState("run", 17, 28, {tickStep = 1})
@@ -177,7 +181,7 @@ function Player:playerPunched() return self.punchBuffer > 0 end --- This method 
 ----------------------------------------------------------------------------------------------------------
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "jump" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "dive" or self.currentState == "jumpToMid" or self.currentState == "midToFall" then
+	if self.currentState == "jump" or self.currentState == "jump1" or self.currentState == "jump2" or self.currentState == "jump3" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "fall1" or self.currentState == "fall2" or self.currentState == "fall3" or self.currentState == "dive" then
 		if self.touchingGround then
 			if self.yVelocity > 15 then
 				if pd.buttonIsPressed(pd.kButtonRight) then
@@ -190,14 +194,22 @@ function Player:handleState()
 			else
 				self:changeToIdleState()
 			end
-		elseif self.yVelocity > 4 then
+		elseif self.yVelocity > 5 then
+			self:changeState("fall3")
+		elseif self.yVelocity > 2 then
+			self:changeState("fall2")
+		elseif self.yVelocity > 0 then
+			self:changeState("fall1")
+		elseif self.yVelocity > -1 then
 			self:changeState("fall")
-		elseif self.yVelocity > 1 then
-			self:changeState("midToFall")
 		elseif self.yVelocity > -2 then
 			self:changeState("midJump")
-		elseif self.yVelocity > -6 then
-			self:changeState("jumpToMid")
+		elseif self.yVelocity > -3 then
+			self:changeState("jump3")
+		elseif self.yVelocity > -5 then
+			self:changeState("jump2")
+		elseif self.yVelocity > -8 then
+			self:changeState("jump1")
 		end
 
 		self:applyGravity()
@@ -219,7 +231,7 @@ function Player:handleState()
 		self:handleDuckInput()
 
 		if self.yVelocity > 1 then
-			self:changeState("fall")
+			self:changeState("fall3")
 		end
 	elseif self.currentState == "doubleJump" then
 		if self.touchingGround then
@@ -235,7 +247,7 @@ function Player:handleState()
 		self:handleGroundInput()
 
 		if self.yVelocity > 1 then
-			self:changeState("midToFall")
+			self:changeState("fall1")
 		end
 	end
 end
