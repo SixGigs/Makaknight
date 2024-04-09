@@ -37,8 +37,8 @@ function Player:init(x, y, gm, face)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1, nextAnimation = "idle"})
+	self:addState("doubleJump", 59, 66, {tickStep = 2, loop = 1, nextAnimation = "midJump"})
 
-	self:addState("doubleJump", 17, 28, {tickStep = 1.5})
 	self:addState("run", 17, 28, {tickStep = 1})
 	self:addState("ready", 1, 16, {tickStep = 1})
 	self:addState("dive", 54, 55, {tickStep = 1})
@@ -325,7 +325,7 @@ function Player:handleMovementAndCollisions()
 	
 	-- Check if we die from fall damage
 	if self.touchingGround then
-		if self.yVelocity > 30 then
+		if self.yVelocity > 45 then
 			died = true
 		end
 	end
@@ -403,8 +403,6 @@ function Player:handleGroundInput()
 			self:changeToRunState("right")
 		elseif pd.buttonJustPressed(pd.kButtonUp) then
 			print("Pull out weapon")
-		-- else
-		-- 	self:changeToReadyState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
@@ -524,14 +522,6 @@ end
 function Player:changeToDoubleJumpState()
 	self.yVelocity = self.doubleJumpVelocity
 	self.jumpBuffer = 0
-
-	pd.timer.performAfterDelay(400, function()
-		if self.currentState == "dash" then
-			return
-		end
-
-		self:changeState("midJump")
-	end)
 
 	self:changeState("doubleJump")
 end
