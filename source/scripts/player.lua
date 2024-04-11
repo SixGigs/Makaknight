@@ -21,7 +21,7 @@ function Player:init(x, y, gm, face)
 
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
-	self:addState("walk", 17, 28, {tickStep = 1.5})
+	self:addState("walk", 17, 28, {tickStep = 1.4})
 	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 1, nextAnimation = "duck"})
 	self:addState("duck", 30, 30)
 	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
@@ -36,11 +36,10 @@ function Player:init(x, y, gm, face)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 43, 58, {tickStep = 1, loop = 1, nextAnimation = "idle"})
-	self:addState("doubleJump", 59, 66, {tickStep = 2, loop = 1, nextAnimation = "midJump"})
+	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
+	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1, nextAnimation = "midJump"})
 
 	self:addState("run", 17, 28, {tickStep = 1})
-	self:addState("ready", 1, 16, {tickStep = 1})
 	self:addState("dive", 54, 55, {tickStep = 1})
 	self:addState("die", 56, 59, {tickStep = 2})
 	self:addState("dead", 59, 59)
@@ -48,6 +47,14 @@ function Player:init(x, y, gm, face)
 	self:addState("punch", 74, 77, {tickStep = 1})
 	self:addState("duckPunch", 78, 81, {tickStep = 1})
 	self:playAnimation()
+
+	self.states["roll"].onAnimationEndEvent = function (self)
+		if self.touchingGround then
+			self:changeToIdleState()
+		else
+			self:changeState("midJump")
+		end
+	end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -59,17 +66,17 @@ function Player:init(x, y, gm, face)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 3.4
+	self.maxSpeed = 3.5
 	self.walkSpeed = 2
-	self.jumpSpeed = 2.6
-	self.jumpVelocity = -10
+	self.jumpSpeed = 3
+	self.jumpVelocity = -11.2
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollFallSpeed = 2.6
-	self.rollSpeed = 4
+	self.rollFallSpeed = 3
+	self.rollSpeed = 3.2
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 300
@@ -84,11 +91,11 @@ function Player:init(x, y, gm, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -7.5
+	self.doubleJumpVelocity = -8.5
 
 	-- Dash
 	self.dashAvailable = true
-	self.dashSpeed = 9
+	self.dashSpeed = 11
 	self.dashMinimumSpeed = 3
 	self.dashDrag = 1.4
 
@@ -173,8 +180,8 @@ end
 
 
 ----------------------------------------------------------------------------------------------------------
-function Player:playerJumped() return self.jumpBuffer > 0 end --- This method is used to make jumping easier
-function Player:playerRolled() return self.rollBuffer > 0 end --- This method is used to make rolling easier
+function Player:playerJumped() return self.jumpBuffer > 0 end   --- This method is used to make jumping easier
+function Player:playerRolled() return self.rollBuffer > 0 end   --- This method is used to make rolling easier
 function Player:playerPunched() return self.punchBuffer > 0 end --- This method used to calculate if the player can
 
 
@@ -403,6 +410,8 @@ function Player:handleGroundInput()
 			self:changeToRunState("right")
 		elseif pd.buttonJustPressed(pd.kButtonUp) then
 			print("Pull out weapon")
+		else
+			self:changeToIdleState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
@@ -533,13 +542,6 @@ function Player:changeToDuckState()
 
 	self:setCollideRect(35, 61, 10, 19)
 	self:changeState("duckDown")
-end
-
-
---- Move the player into the ready state
-function Player:changeToReadyState()
-	self.xVelocity = 0
-	self:changeState("ready")
 end
 
 
