@@ -37,7 +37,7 @@ function Player:init(x, y, gm, face)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
-	self:addState("doubleJump", 59, 74, {tickStep = 1.5, loop = 1, nextAnimation = "midJump"})
+	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1, nextAnimation = "midJump"})
 
 	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
 	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
@@ -77,8 +77,7 @@ function Player:init(x, y, gm, face)
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollFallSpeed = 3
-	self.rollSpeed = 3.2
+	self.rollSpeed = 3.5
 	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 300
