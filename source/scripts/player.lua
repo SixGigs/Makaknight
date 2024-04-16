@@ -37,24 +37,26 @@ function Player:init(x, y, gm, face)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
-	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1, nextAnimation = "midJump"})
+	self:addState("doubleJump", 59, 74, {tickStep = 1.5, loop = 1, nextAnimation = "midJump"})
 
-	self:addState("run", 17, 28, {tickStep = 1})
-	self:addState("dive", 54, 55, {tickStep = 1})
-	self:addState("die", 56, 59, {tickStep = 2})
-	self:addState("dead", 59, 59)
-	self:addState("spawn", 68, 73, {tickStep = 3})
-	self:addState("punch", 74, 77, {tickStep = 1})
-	self:addState("duckPunch", 78, 81, {tickStep = 1})
+	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
+	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
+	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"}) -- Temporary sprite
+	self:addState("dead", 30, 30) -- Temporary sprite
+	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
+	self:addState("punch", 74, 77, {tickStep = 1}) -- State temporarily removed
+	self:addState("duckPunch", 78, 81, {tickStep = 1}) -- State temporarily removed
 	self:playAnimation()
 
-	self.states["roll"].onAnimationEndEvent = function (self)
-		if self.touchingGround then
-			self:changeToIdleState()
-		else
-			self:changeState("midJump")
-		end
-	end
+	-- self.states["roll"].onAnimationEndEvent = function(self)
+	-- 	if self.touchingGround then
+	-- 		self:changeToIdleState()
+	-- 	else
+	-- 		self:changeState("midJump")
+	-- 	end
+	-- end
+	
+	self.states["roll"].onAnimationEndEvent = self.touchingGround and self:changeToIdleState() or self:changeState("midJump")
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -82,7 +84,7 @@ function Player:init(x, y, gm, face)
 	self.rollRecharge = 300
 
 	-- Dive
-	self.diveSpeed = 12
+	self.diveSpeed = 20
 	self.diveHorizontal = 4
 
 	-- Jump Buffer
@@ -190,14 +192,8 @@ function Player:playerPunched() return self.punchBuffer > 0 end --- This method 
 function Player:handleState()
 	if self.currentState == "jump" or self.currentState == "jump1" or self.currentState == "jump2" or self.currentState == "jump3" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "fall1" or self.currentState == "fall2" or self.currentState == "fall3" or self.currentState == "dive" then
 		if self.touchingGround then
-			if self.yVelocity > 15 then
-				if pd.buttonIsPressed(pd.kButtonRight) then
-					self:changeToRollState("right")
-				elseif pd.buttonIsPressed(pd.kButtonLeft) then
-					self:changeToRollState("left")
-				else
-					self:changeToContactState()
-				end
+			if self.yVelocity > 14 then
+				self:changeToContactState()
 			else
 				self:changeToIdleState()
 			end
@@ -386,9 +382,6 @@ function Player:die()
 	self.dead = true
 
 	self:changeState("die")
-	pd.timer.performAfterDelay(150, function()
-		self:changeState("dead")
-	end)
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(1000, function()
@@ -408,8 +401,8 @@ function Player:handleGroundInput()
 			self:changeToRunState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
-		elseif pd.buttonJustPressed(pd.kButtonUp) then
-			print("Pull out weapon")
+		-- elseif pd.buttonJustPressed(pd.kButtonUp) then
+		-- 	print("Pull out weapon")
 		else
 			self:changeToIdleState()
 		end
@@ -433,11 +426,11 @@ function Player:handleGroundInput()
 		end
 	end
 
-	if self:playerPunched() then
-		if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
-			self:changeToPunchState("punch")
-		end
-	end
+	-- if self:playerPunched() then
+	-- 	if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
+	-- 		self:changeToPunchState("punch")
+	-- 	end
+	-- end
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
 		if self.nextLevelID ~= nil then
@@ -453,12 +446,12 @@ function Player:handleDuckInput()
 		self:setCollideRect(35, 44, 10, 36)
 		self:changeState("duckUp")
 	end
-	
-	if self:playerPunched() then
-		if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
-			self:changeToPunchState("duckPunch")
-		end
-	end
+
+	-- if self:playerPunched() then
+	-- 	if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
+	-- 		self:changeToPunchState("duckPunch")
+	-- 	end
+	-- end
 end
 
 
@@ -520,18 +513,16 @@ end
 
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
-	self.yVelocity = self.jumpVelocity
 	self.jumpBuffer = 0
-
+	self.yVelocity = self.jumpVelocity
 	self:changeState("jump")
 end
 
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
-	self.yVelocity = self.doubleJumpVelocity
 	self.jumpBuffer = 0
-
+	self.yVelocity = self.doubleJumpVelocity
 	self:changeState("doubleJump")
 end
 
@@ -539,7 +530,6 @@ end
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckState()
 	self.xVelocity = 0
-
 	self:setCollideRect(35, 61, 10, 19)
 	self:changeState("duckDown")
 end
@@ -570,7 +560,6 @@ end
 --- Changes the player to the contact state
 function Player:changeToContactState()
 	self.xVelocity = 0
-
 	self:changeState("contact")
 end
 
@@ -608,15 +597,12 @@ end
 
 function Player:changeToSpawnState()
 	self:changeState("spawn")
-	pd.timer.performAfterDelay(510, function()
-		self:changeState("idle")
-	end)
 end
 
 
 --- Changes the player to the dive state
 function Player:changeToDiveState()
-	self.yVelocity = self.diveSpeed
+	self.yVelocity = self.yVelocity + self.diveSpeed
 	if self.globalFlip == 0 then
 		self.xVelocity = self.diveHorizontal
 	else
