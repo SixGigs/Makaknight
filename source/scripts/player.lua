@@ -319,7 +319,7 @@ function Player:handleMovementAndCollisions()
 		self.gm:enterRoom("west")
 	elseif self.x > 405 then
 		self.gm:enterRoom("east")
-	elseif self.y < -24 then
+	elseif self.y < -32 then
 		self.gm:enterRoom("north")
 	elseif self.y > 264 then
 		self.gm:enterRoom("south")
