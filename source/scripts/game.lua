@@ -56,9 +56,9 @@ function Game:enterRoom(direction)
 	-- Create a local X and Y, and use them to spawn the player
 	local x, y
 	if direction == "north" then
-		x, y = self.player.x, 208
+		x, y = self.player.x, 216
 	elseif direction == "south" then
-		x, y = self.player.x, 0
+		x, y = self.player.x, 24
 	elseif direction == "east" then
 		x, y = 4, self.player.y
 	elseif direction == "west" then
