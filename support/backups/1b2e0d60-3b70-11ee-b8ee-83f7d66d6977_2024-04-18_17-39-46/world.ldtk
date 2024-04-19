@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 3019,
+	"nextUid": 3010,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -123,7 +123,7 @@
 					"isOptional": false,
 					"rules": [
 						{
-							"uid": 3010,
+							"uid": 3001,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[312]],
@@ -150,12 +150,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8365624,
+							"perlinSeed": 960354,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3011,
+							"uid": 3002,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[315]],
@@ -182,12 +182,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 9693951,
+							"perlinSeed": 6928607,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3012,
+							"uid": 3003,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[387]],
@@ -214,12 +214,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7593472,
+							"perlinSeed": 9246253,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3013,
+							"uid": 3004,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[384]],
@@ -246,15 +246,15 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1106110,
+							"perlinSeed": 7693399,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3014,
+							"uid": 3005,
 							"active": true,
 							"size": 3,
-							"tileRectsIds": [ [313], [314] ],
+							"tileRectsIds": [[313]],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,
@@ -278,12 +278,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5853426,
+							"perlinSeed": 4961033,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3015,
+							"uid": 3006,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [339], [363] ],
@@ -310,12 +310,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 3596088,
+							"perlinSeed": 6813778,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3016,
+							"uid": 3007,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [385], [386] ],
@@ -342,12 +342,12 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8008310,
+							"perlinSeed": 8129097,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3017,
+							"uid": 3008,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [336], [360] ],
@@ -374,15 +374,15 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5602695,
+							"perlinSeed": 9398559,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 3018,
+							"uid": 3009,
 							"active": true,
 							"size": 1,
-							"tileRectsIds": [ [337], [338], [361], [362] ],
+							"tileRectsIds": [ [337], [361], [338], [362] ],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,
@@ -406,7 +406,7 @@
 							"outOfBoundsValue": 9,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8638304,
+							"perlinSeed": 5969684,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						}
@@ -10282,7 +10282,7 @@
 			"__bgColor": "#696A79",
 			"bgColor": null,
 			"useAutoIdentifier": true,
-			"bgRelPath": "grass-background-400-240.png",
+			"bgRelPath": "desert-background-400-240.png",
 			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
