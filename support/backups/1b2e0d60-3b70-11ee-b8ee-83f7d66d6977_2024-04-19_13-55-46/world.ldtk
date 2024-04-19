@@ -10282,7 +10282,7 @@
 			"__bgColor": "#696A79",
 			"bgColor": null,
 			"useAutoIdentifier": true,
-			"bgRelPath": "grass-background-400-240.png",
+			"bgRelPath": "cave-background-400-240.png",
 			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
