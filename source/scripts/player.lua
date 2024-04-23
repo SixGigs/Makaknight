@@ -48,14 +48,7 @@ function Player:init(x, y, gm, face)
 	self:addState("duckPunch", 78, 81, {tickStep = 1}) -- State temporarily removed
 	self:playAnimation()
 
-	-- self.states["roll"].onAnimationEndEvent = function(self)
-	-- 	if self.touchingGround then
-	-- 		self:changeToIdleState()
-	-- 	else
-	-- 		self:changeState("midJump")
-	-- 	end
-	-- end
-	
+	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = self.touchingGround and self:changeToIdleState() or self:changeState("midJump")
 
 	-- Sprite properties
@@ -324,7 +317,7 @@ function Player:handleMovementAndCollisions()
 	elseif self.y > 264 then
 		self.gm:enterRoom("south")
 	end
-	
+
 	-- Check if we die from fall damage
 	if self.touchingGround then
 		if self.yVelocity > 45 then
