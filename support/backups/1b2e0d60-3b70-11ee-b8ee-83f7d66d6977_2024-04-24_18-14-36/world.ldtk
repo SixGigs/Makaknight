@@ -112,7 +112,7 @@
 				{ "value": 8, "identifier": "Desert_half", "color": "#D77643", "tile": { "tilesetUid": 1, "x": 208, "y": 96, "w": 16, "h": 16 }, "groupUid": 2 },
 				{ "value": 9, "identifier": "Grass_tiles", "color": "#63C74D", "tile": { "tilesetUid": 1, "x": 0, "y": 208, "w": 16, "h": 16 }, "groupUid": 0 },
 				{ "value": 10, "identifier": "Grass_bridge", "color": "#3E8948", "tile": { "tilesetUid": 1, "x": 0, "y": 288, "w": 16, "h": 16 }, "groupUid": 0 },
-				{ "value": 11, "identifier": "Grass_half", "color": "#265C42", "tile": { "tilesetUid": 1, "x": 16, "y": 304, "w": 16, "h": 16 }, "groupUid": 0 }
+				{ "value": 11, "identifier": "Grass_half", "color": "#FEE761", "tile": { "tilesetUid": 1, "x": 16, "y": 304, "w": 16, "h": 16 }, "groupUid": 0 }
 			],
 			"intGridValuesGroups": [ { "uid": 1, "identifier": "Cave", "color": null }, { "uid": 2, "identifier": "Desert", "color": null } ],
 			"autoRuleGroups": [
