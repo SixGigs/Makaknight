@@ -78,6 +78,22 @@
 					],
 					"__worldX": 144,
 					"__worldY": -560
+				},
+				{
+					"__identifier": "Bigtree",
+					"__grid": [7,3],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3212, "x": 0, "y": 0, "w": 80, "h": 80 },
+					"__smartColor": "#3E8948",
+					"iid": "cd413a30-fec0-11ee-84ee-577eeb8145ae",
+					"width": 80,
+					"height": 80,
+					"defUid": 3211,
+					"px": [112,48],
+					"fieldInstances": [],
+					"__worldX": 112,
+					"__worldY": -672
 				}
 			]
 		},
