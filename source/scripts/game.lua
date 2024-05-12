@@ -19,7 +19,7 @@ Z_INDEXES = {
 
 -- A table of props that exist in the game
 local props <const> = {
-	"Lightrock", "Deadtree", "Tallcactus", "Darkrock"
+	"Lightrock", "Deadtree", "Tallcactus", "Darkrock", "Bigtree"
 }
 
 -- Load the level used for the game
