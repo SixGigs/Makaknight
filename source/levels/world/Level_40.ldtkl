@@ -53,7 +53,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [16,8],
 					"__pivot": [0,0],
 					"__tags": [],
