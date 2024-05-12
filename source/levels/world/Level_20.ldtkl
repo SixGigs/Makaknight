@@ -53,7 +53,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Deadtree",
+					"__identifier": "Snag",
 					"__grid": [7,2],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -69,7 +69,7 @@
 					"__worldY": 32
 				},
 				{
-					"__identifier": "Lightrock",
+					"__identifier": "Stone",
 					"__grid": [19,6],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -85,7 +85,7 @@
 					"__worldY": 96
 				},
 				{
-					"__identifier": "Tallcactus",
+					"__identifier": "Cacti",
 					"__grid": [3,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -101,7 +101,7 @@
 					"__worldY": 160
 				},
 				{
-					"__identifier": "Tallcactus",
+					"__identifier": "Cacti",
 					"__grid": [21,5],
 					"__pivot": [0,0],
 					"__tags": [],

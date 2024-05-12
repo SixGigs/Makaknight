@@ -69,7 +69,7 @@
 					"__worldY": -624
 				},
 				{
-					"__identifier": "Tallcactus",
+					"__identifier": "Cacti",
 					"__grid": [19,11],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -85,7 +85,7 @@
 					"__worldY": -544
 				},
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [9,13],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -101,7 +101,7 @@
 					"__worldY": -512
 				},
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [15,8],
 					"__pivot": [0,0],
 					"__tags": [],

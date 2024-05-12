@@ -80,7 +80,7 @@
 					"__worldY": 400
 				},
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [5,11],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -96,7 +96,7 @@
 					"__worldY": 416
 				},
 				{
-					"__identifier": "Lightrock",
+					"__identifier": "Stone",
 					"__grid": [19,12],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -112,7 +112,7 @@
 					"__worldY": 432
 				},
 				{
-					"__identifier": "Lightrock",
+					"__identifier": "Stone",
 					"__grid": [15,11],
 					"__pivot": [0,0],
 					"__tags": [],

@@ -80,7 +80,7 @@
 					"__worldY": -560
 				},
 				{
-					"__identifier": "Bigtree",
+					"__identifier": "Tree",
 					"__grid": [7,3],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -94,6 +94,38 @@
 					"fieldInstances": [],
 					"__worldX": 112,
 					"__worldY": -672
+				},
+				{
+					"__identifier": "Tree",
+					"__grid": [2,0],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3212, "x": 0, "y": 0, "w": 80, "h": 80 },
+					"__smartColor": "#3E8948",
+					"iid": "8c0584a0-fec0-11ee-aa05-bb07d4e560a9",
+					"width": 80,
+					"height": 80,
+					"defUid": 3211,
+					"px": [32,0],
+					"fieldInstances": [],
+					"__worldX": 32,
+					"__worldY": -720
+				},
+				{
+					"__identifier": "Tree",
+					"__grid": [19,7],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3212, "x": 0, "y": 0, "w": 80, "h": 80 },
+					"__smartColor": "#3E8948",
+					"iid": "9f0e6990-fec0-11ee-aa05-53b06a5bc41d",
+					"width": 80,
+					"height": 80,
+					"defUid": 3211,
+					"px": [304,112],
+					"fieldInstances": [],
+					"__worldX": 304,
+					"__worldY": -608
 				}
 			]
 		},

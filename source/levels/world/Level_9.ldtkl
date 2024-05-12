@@ -53,7 +53,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Tallcactus",
+					"__identifier": "Cacti",
 					"__grid": [3,5],
 					"__pivot": [0,0],
 					"__tags": [],

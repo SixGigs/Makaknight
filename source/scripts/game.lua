@@ -17,11 +17,6 @@ Z_INDEXES = {
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000
 }
 
--- A table of props that exist in the game
-local props <const> = {
-	"Lightrock", "Deadtree", "Tallcactus", "Darkrock", "Bigtree"
-}
-
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
 

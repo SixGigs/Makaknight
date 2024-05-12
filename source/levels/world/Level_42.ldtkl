@@ -69,7 +69,7 @@
 					"__worldY": 1328
 				},
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [2,4],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -85,7 +85,7 @@
 					"__worldY": 1264
 				},
 				{
-					"__identifier": "Darkrock",
+					"__identifier": "Rock",
 					"__grid": [22,2],
 					"__pivot": [0,0],
 					"__tags": [],

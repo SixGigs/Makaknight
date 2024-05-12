@@ -165,7 +165,7 @@
 					"__worldY": 432
 				},
 				{
-					"__identifier": "Deadtree",
+					"__identifier": "Snag",
 					"__grid": [9,2],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -181,7 +181,7 @@
 					"__worldY": 272
 				},
 				{
-					"__identifier": "Lightrock",
+					"__identifier": "Stone",
 					"__grid": [12,5],
 					"__pivot": [0,0],
 					"__tags": [],

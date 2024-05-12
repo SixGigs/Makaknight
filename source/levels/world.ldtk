@@ -12726,7 +12726,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Lightrock",
+			"identifier": "Stone",
 			"uid": 2096,
 			"tags": [],
 			"exportToToc": false,
@@ -12761,7 +12761,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Darkrock",
+			"identifier": "Rock",
 			"uid": 2099,
 			"tags": [],
 			"exportToToc": false,
@@ -12796,7 +12796,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Deadtree",
+			"identifier": "Snag",
 			"uid": 2101,
 			"tags": [],
 			"exportToToc": false,
@@ -12831,7 +12831,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Tallcactus",
+			"identifier": "Cacti",
 			"uid": 2103,
 			"tags": [],
 			"exportToToc": false,
@@ -12866,7 +12866,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Bigtree",
+			"identifier": "Tree",
 			"uid": 3211,
 			"tags": [],
 			"exportToToc": false,
@@ -13141,7 +13141,7 @@
 			"__cHei": 1,
 			"identifier": "Light_rock",
 			"uid": 2097,
-			"relPath": "../images/Lightrock.png",
+			"relPath": "../images/Stone.png",
 			"embedAtlas": null,
 			"pxWid": 32,
 			"pxHei": 16,
@@ -13160,7 +13160,7 @@
 			"__cHei": 1,
 			"identifier": "Dark_rock",
 			"uid": 2098,
-			"relPath": "../images/Darkrock.png",
+			"relPath": "../images/Rock.png",
 			"embedAtlas": null,
 			"pxWid": 32,
 			"pxHei": 16,
@@ -13179,7 +13179,7 @@
 			"__cHei": 3,
 			"identifier": "Dead_tree",
 			"uid": 2100,
-			"relPath": "../images/Deadtree.png",
+			"relPath": "../images/snag.png",
 			"embedAtlas": null,
 			"pxWid": 32,
 			"pxHei": 48,
@@ -13198,7 +13198,7 @@
 			"__cHei": 2,
 			"identifier": "Tall_cactus",
 			"uid": 2102,
-			"relPath": "../images/Tallcactus.png",
+			"relPath": "../images/Cacti.png",
 			"embedAtlas": null,
 			"pxWid": 16,
 			"pxHei": 32,
@@ -13274,7 +13274,7 @@
 			"__cHei": 5,
 			"identifier": "BigTree",
 			"uid": 3212,
-			"relPath": "../images/BigTree.png",
+			"relPath": "../images/Tree.png",
 			"embedAtlas": null,
 			"pxWid": 80,
 			"pxHei": 80,
