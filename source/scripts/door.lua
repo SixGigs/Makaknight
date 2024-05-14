@@ -20,7 +20,7 @@ function Door:init(x, y, e)
 
 	-- The coordinates the player will spawn at in the room
 	local exitX = e.fields.exitX * 16 + 8
-	local exitY = e.fields.exitY * 16
+	local exitY = e.fields.exitY * 16 + 8
 
 	-- Sprite properties
 	self:setCenter(0, 0)
