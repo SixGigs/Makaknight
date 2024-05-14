@@ -74,7 +74,7 @@
 							"params": ["Level_28"]
 						}] },
 						{ "__identifier": "exitX", "__type": "Int", "__value": 12, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [12] }] },
-						{ "__identifier": "exitY", "__type": "Int", "__value": 8, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [8] }] }
+						{ "__identifier": "exitY", "__type": "Int", "__value": 7, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }
 					],
 					"__worldX": 3392,
 					"__worldY": -64
