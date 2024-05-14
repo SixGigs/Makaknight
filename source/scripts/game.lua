@@ -127,6 +127,8 @@ function Game:goToLevel(level)
 			Door(entityX, entityY, entity)
 		elseif entityName == "Lizard" or entityName == "Snake" then
 			Animal(entityX, entityY + 8, entity)
+		elseif entityName == "Butterfly" then
+			Moth(entityX + 4, entityY + 4, entity)
 		else
 			Prop(entityX, entityY, entityName)
 		end

@@ -43,7 +43,7 @@ function Animal:init(x, y, e)
 end
 
 
--- This method is used to handle the collisions the Animal has with the world
+--- This method is used to handle the collisions the Animal has with the world
 --- @param  other   table   Contains what the Animal has collided with
 --- @return unknown unknown The collision response for the object
 function Animal:collisionResponse(other)
