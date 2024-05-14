@@ -143,10 +143,7 @@ end
 function Player:update()
 	self:updateAnimation()
 
-	if self.dead then
-		return
-	end
-
+	if self.dead then return end
 	self:updateBuffers()
 	self:handleState()
 	self:handleMovementAndCollisions()
