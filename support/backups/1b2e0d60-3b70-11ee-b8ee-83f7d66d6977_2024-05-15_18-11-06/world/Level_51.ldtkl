@@ -256,6 +256,22 @@
 					"__worldY": -592
 				},
 				{
+					"__identifier": "Crag",
+					"__grid": [15,11],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "709649d0-fec0-11ee-904d-990d9503c905",
+					"width": 32,
+					"height": 16,
+					"defUid": 3348,
+					"px": [240,176],
+					"fieldInstances": [],
+					"__worldX": 240,
+					"__worldY": -544
+				},
+				{
 					"__identifier": "Stump",
 					"__grid": [19,3],
 					"__pivot": [0,0],
@@ -270,22 +286,6 @@
 					"fieldInstances": [],
 					"__worldX": 304,
 					"__worldY": -672
-				},
-				{
-					"__identifier": "Crag",
-					"__grid": [20,11],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "1ba9b080-fec0-11ee-904d-2d3c2e501c08",
-					"width": 32,
-					"height": 16,
-					"defUid": 3348,
-					"px": [320,176],
-					"fieldInstances": [],
-					"__worldX": 320,
-					"__worldY": -544
 				}
 			]
 		},
