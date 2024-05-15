@@ -110,38 +110,6 @@
 					],
 					"__worldX": 48,
 					"__worldY": -112
-				},
-				{
-					"__identifier": "Snake",
-					"__grid": [14,8],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "420bdd90-fec0-11ee-904d-1bb70ac72b4c",
-					"width": 16,
-					"height": 16,
-					"defUid": 2975,
-					"px": [224,128],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] }],
-					"__worldX": 224,
-					"__worldY": -112
-				},
-				{
-					"__identifier": "Lizard",
-					"__grid": [6,10],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "460eef40-fec0-11ee-904d-8bde0206638b",
-					"width": 16,
-					"height": 16,
-					"defUid": 2973,
-					"px": [96,160],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] }],
-					"__worldX": 96,
-					"__worldY": -80
 				}
 			]
 		},
