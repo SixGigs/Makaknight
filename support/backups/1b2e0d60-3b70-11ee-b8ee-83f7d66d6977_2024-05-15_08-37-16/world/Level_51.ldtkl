@@ -238,22 +238,6 @@
 					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] }],
 					"__worldX": 160,
 					"__worldY": -624
-				},
-				{
-					"__identifier": "Stump",
-					"__grid": [2,8],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3345, "x": 0, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "f7be5770-fec0-11ee-904d-eb548f96191c",
-					"width": 32,
-					"height": 16,
-					"defUid": 3346,
-					"px": [32,128],
-					"fieldInstances": [],
-					"__worldX": 32,
-					"__worldY": -592
 				}
 			]
 		},
