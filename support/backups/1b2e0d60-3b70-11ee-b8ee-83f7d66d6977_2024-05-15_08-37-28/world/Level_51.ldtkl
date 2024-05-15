@@ -241,19 +241,19 @@
 				},
 				{
 					"__identifier": "Stump",
-					"__grid": [2,8],
+					"__grid": [11,2],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 3345, "x": 0, "y": 0, "w": 32, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "f7be5770-fec0-11ee-904d-eb548f96191c",
+					"iid": "f242af80-fec0-11ee-904d-9b5d87868eb6",
 					"width": 32,
 					"height": 16,
 					"defUid": 3346,
-					"px": [32,128],
+					"px": [176,32],
 					"fieldInstances": [],
-					"__worldX": 32,
-					"__worldY": -592
+					"__worldX": 176,
+					"__worldY": -688
 				}
 			]
 		},
