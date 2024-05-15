@@ -85,22 +85,6 @@
 					"__worldY": -96
 				},
 				{
-					"__identifier": "Rock",
-					"__grid": [6,10],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2098, "x": 0, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "ee575e80-b0a0-11ee-9a6e-53fd983f0249",
-					"width": 32,
-					"height": 16,
-					"defUid": 2099,
-					"px": [96,160],
-					"fieldInstances": [],
-					"__worldX": 496,
-					"__worldY": -80
-				},
-				{
 					"__identifier": "Lizard",
 					"__grid": [16,10],
 					"__pivot": [0,0],
@@ -131,6 +115,22 @@
 					"fieldInstances": [],
 					"__worldX": 672,
 					"__worldY": -160
+				},
+				{
+					"__identifier": "Rock",
+					"__grid": [6,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2098, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "d29a08f0-fec0-11ee-904d-99d2f1e3e52a",
+					"width": 32,
+					"height": 16,
+					"defUid": 2099,
+					"px": [96,160],
+					"fieldInstances": [],
+					"__worldX": 496,
+					"__worldY": -80
 				}
 			]
 		},

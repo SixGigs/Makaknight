@@ -256,36 +256,20 @@
 					"__worldY": -592
 				},
 				{
-					"__identifier": "Stump",
-					"__grid": [19,3],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3345, "x": 0, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "772c3b60-fec0-11ee-904d-272997fdce33",
-					"width": 32,
-					"height": 16,
-					"defUid": 3346,
-					"px": [304,48],
-					"fieldInstances": [],
-					"__worldX": 304,
-					"__worldY": -672
-				},
-				{
 					"__identifier": "Crag",
-					"__grid": [20,11],
+					"__grid": [19,3],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "1ba9b080-fec0-11ee-904d-2d3c2e501c08",
+					"iid": "5f038a20-fec0-11ee-904d-014c7634f1a9",
 					"width": 32,
 					"height": 16,
 					"defUid": 3348,
-					"px": [320,176],
+					"px": [304,48],
 					"fieldInstances": [],
-					"__worldX": 320,
-					"__worldY": -544
+					"__worldX": 304,
+					"__worldY": -672
 				}
 			]
 		},

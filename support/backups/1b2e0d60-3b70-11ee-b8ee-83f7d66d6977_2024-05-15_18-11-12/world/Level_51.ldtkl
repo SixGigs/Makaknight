@@ -273,7 +273,7 @@
 				},
 				{
 					"__identifier": "Crag",
-					"__grid": [20,11],
+					"__grid": [21,11],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
@@ -282,9 +282,9 @@
 					"width": 32,
 					"height": 16,
 					"defUid": 3348,
-					"px": [320,176],
+					"px": [336,176],
 					"fieldInstances": [],
-					"__worldX": 320,
+					"__worldX": 336,
 					"__worldY": -544
 				}
 			]
