@@ -19,7 +19,7 @@ function Door:init(x, y, e)
 	self.level = e.fields.level
 
 	-- The coordinates the player will spawn at in the room
-	local exitX = e.fields.exitX * 16 + 8
+	local exitX = e.fields.exitX * 16 + 16
 	local exitY = e.fields.exitY * 16 + 8
 
 	-- Sprite properties
@@ -27,7 +27,7 @@ function Door:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Door)
 	self:setTag(TAGS.Door)
-	self:setCollideRect(7, 16, 2, 16)
+	self:setCollideRect(14, 32, 4, 16)
 	self:setImage(doorImage)
 	self:add()
 
