@@ -15073,7 +15073,13 @@
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 2, "values": [ { "id": "Solid", "tileRect": null, "color": 12470831 }, { "id": "Ledge", "tileRect": null, "color": 16217634 } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": ["Level_Data"] },
 		{ "identifier": "Ability", "uid": 74, "values": [ { "id": "Dash", "tileRect": null, "color": 12470831 }, { "id": "DoubleJump", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
-		{ "identifier": "Door", "uid": 2115, "values": [ { "id": "Door1", "tileRect": null, "color": 12470831 }, { "id": "Door2", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+		{ "identifier": "Door", "uid": 2115, "values": [
+			{ "id": "Door0", "tileRect": null, "color": 12470831 },
+			{ "id": "Door1", "tileRect": null, "color": 14120515 },
+			{ "id": "Door2", "tileRect": null, "color": 15389866 },
+			{ "id": "Door3", "tileRect": null, "color": 14984818 },
+			{ "id": "Door4", "tileRect": null, "color": 7552569 }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{

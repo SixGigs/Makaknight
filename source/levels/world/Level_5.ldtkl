@@ -97,9 +97,9 @@
 					"defUid": 2116,
 					"px": [256,144],
 					"fieldInstances": [
-						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door1", "__tile": null, "defUid": 2117, "realEditorValues": [{
+						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door0", "__tile": null, "defUid": 2117, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["Door1"]
+							"params": ["Door0"]
 						}] },
 						{ "__identifier": "level", "__type": "String", "__value": "Level_6", "__tile": null, "defUid": 2121, "realEditorValues": [{
 							"id": "V_String",
