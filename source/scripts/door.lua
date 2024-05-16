@@ -13,7 +13,7 @@ class('Door').extends(gfx.sprite)
 --- @param e table   The table of entity attributes in the door
 function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
-	local doorImage = newImage("images/" .. e.fields.doorSprite)
+	local doorImage = newImage("images/" .. e.fields.sprite)
 
 	-- The level the door leads to
 	self.level = e.fields.level
