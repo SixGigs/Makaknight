@@ -14120,9 +14120,9 @@
 			"pivotY": 0,
 			"fieldDefs": [
 				{
-					"identifier": "doorSprite",
+					"identifier": "sprite",
 					"doc": null,
-					"__type": "LocalEnum.Entry",
+					"__type": "LocalEnum.Door",
 					"uid": 2117,
 					"type": "F_Enum(2115)",
 					"isArray": false,
@@ -15073,7 +15073,7 @@
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 2, "values": [ { "id": "Solid", "tileRect": null, "color": 12470831 }, { "id": "Ledge", "tileRect": null, "color": 16217634 } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": ["Level_Data"] },
 		{ "identifier": "Ability", "uid": 74, "values": [ { "id": "Dash", "tileRect": null, "color": 12470831 }, { "id": "DoubleJump", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
-		{ "identifier": "Entry", "uid": 2115, "values": [ { "id": "DesertEntryDark", "tileRect": null, "color": 12470831 }, { "id": "DesertEntryLight", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+		{ "identifier": "Door", "uid": 2115, "values": [ { "id": "Door1", "tileRect": null, "color": 12470831 }, { "id": "Door2", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{

@@ -65,9 +65,9 @@
 					"defUid": 2116,
 					"px": [192,128],
 					"fieldInstances": [
-						{ "__identifier": "doorSprite", "__type": "LocalEnum.Entry", "__value": "DesertEntryLight", "__tile": null, "defUid": 2117, "realEditorValues": [{
+						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door2", "__tile": null, "defUid": 2117, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["DesertEntryLight"]
+							"params": ["Door2"]
 						}] },
 						{ "__identifier": "level", "__type": "String", "__value": "Level_24", "__tile": null, "defUid": 2121, "realEditorValues": [{
 							"id": "V_String",
