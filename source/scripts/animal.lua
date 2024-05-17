@@ -10,17 +10,11 @@ class('Animal').extends(AnimatedSprite)
 --- @param x integer The X coordinate to spawn the Animal
 --- @param y integer The Y coordinate to spawn the Animal
 function Animal:init(x, y, e)
-	local tableSize = "16-8"
-
-	if e.name == "Butterfly" then
-		tableSize = "4-4"
-	end
-
 	-- Create the Animal state machine with the Animal tile set
-	Animal.super.init(self, gfx.imagetable.new("images/" .. string.lower(e.name) .. "-table-" .. tableSize))
+	Animal.super.init(self, gfx.imagetable.new("images/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
 
 	-- Animal states, sprites, and animation speeds
-	if e.name == "Butterfly" then
+	if e.fields.fly then
 		self:addState("fly", 1, 4, {tickStep = 3})
 	else
 		self:addState("idle", 1, 1)
@@ -34,11 +28,7 @@ function Animal:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Animal)
 	self:setTag(TAGS.Animal)
-	if e.name == "Butterfly" then
-		self:setCollideRect(0, 0, 4, 4)
-	else
-		self:setCollideRect(4, 4, 8, 4)
-	end
+	self:setCollideRect(0, 0, e.fields.tableWidth, e.fields.tableHeight)
 
 	-- Physics properties
 	self.xVelocity = 0
