@@ -103,6 +103,12 @@ function Player:init(x, y, gm, face)
 	self.punchAvailable = false
 	self.punchBufferAmount = 5
 	self.punchBuffer = 0
+	
+	-- Left & Right buffers
+	self.leftBufferAmount = 5
+	self.leftBuffer = 0
+	self.rightBufferAmount = 5
+	self.rightBuffer = 0
 
 	-- Player Attributes
 	self.globalFlip = face
@@ -157,6 +163,8 @@ function Player:updateBuffers()
 	self.jumpBuffer = math.max(self.jumpBuffer - 1, 0)
 	self.rollBuffer = math.max(self.rollBuffer - 1, 0)
 	self.punchBuffer = math.max(self.punchBuffer - 1, 0)
+	self.leftBuffer = math.max(self.leftBuffer - 1, 0)
+	self.rightBuffer = math.max(self.rightBuffer - 1, 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -167,6 +175,14 @@ function Player:updateBuffers()
 		self.rollBuffer = self.rollBufferAmount
 		self.punchBuffer = self.punchBufferAmount
 	end
+
+	if pd.buttonJustPressed(pd.kButtonLeft) then
+		self.leftBuffer = self.leftBufferAmount
+	end
+
+	if pd.buttonJustPressed(pd.kbuttonRight) then
+		self.rightBuffer = self.rightBufferAmount
+	end
 end
 
 
@@ -174,6 +190,8 @@ end
 function Player:playerJumped() return self.jumpBuffer > 0 end   --- This method is used to make jumping easier
 function Player:playerRolled() return self.rollBuffer > 0 end   --- This method is used to make rolling easier
 function Player:playerPunched() return self.punchBuffer > 0 end --- This method used to calculate if the player can
+function Player:playerPressedLeft() return self.leftBuffer > 0 end --- Used to check if left was recently pressed
+function Player:playerPressedRight() return self.rightBuffer > 0 end --- Used to check if right was pressed recently
 
 
 ----------------------------------------------------------------------------------------------------------
@@ -390,7 +408,7 @@ function Player:handleGroundInput()
 			self:changeToRunState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
-		-- elseif pd.buttonJustPressed(pd.kButtonUp) then
+		-- elseif pd.buttonJustPressed(pd.kButtonDown) then
 		-- 	print("Pull out weapon")
 		else
 			self:changeToIdleState()
@@ -412,6 +430,14 @@ function Player:handleGroundInput()
 			self:changeToRollState("right")
 		elseif pd.buttonJustPressed(pd.kButtonLeft) and self.rollAvailable then
 			self:changeToRollState("left")
+		end
+	elseif self:playerPressedLeft() then
+		if pd.buttonJustPressed(pd.kButtonB) and self.rollAvailable then
+			self:changeToRollState("left")
+		end
+	elseif self:playerPressedRight() then
+		if pd.buttonJustPressed(pd.kButtonB) and self.rollAvailable then
+			self:changeToRollState("right")
 		end
 	end
 
