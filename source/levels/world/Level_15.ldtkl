@@ -163,7 +163,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3375, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3375, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
 					],
 					"__worldX": 3168,
 					"__worldY": 1584

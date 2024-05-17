@@ -142,7 +142,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 256,
 					"__worldY": -560
@@ -162,7 +164,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 272,
 					"__worldY": -560
@@ -182,7 +186,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 272,
 					"__worldY": -576
@@ -202,7 +208,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 256,
 					"__worldY": -592
@@ -222,7 +230,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 240,
 					"__worldY": -576
@@ -242,7 +252,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 128,
 					"__worldY": -560
@@ -262,7 +274,9 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] }
+						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 160,
 					"__worldY": -624
