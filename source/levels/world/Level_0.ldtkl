@@ -123,7 +123,10 @@
 					"height": 16,
 					"defUid": 2975,
 					"px": [96,160],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 2977, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] }
+					],
 					"__worldX": 96,
 					"__worldY": -80
 				},
@@ -139,7 +142,10 @@
 					"height": 16,
 					"defUid": 2973,
 					"px": [240,144],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [] }
+					],
 					"__worldX": 240,
 					"__worldY": -96
 				}

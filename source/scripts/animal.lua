@@ -35,7 +35,7 @@ function Animal:init(x, y, e)
 	self.minimumAirSpeed = 0.5
 
 	-- Animal attributes
-	self.globalFlip = 0
+	self.globalFlip = tonumber(e.fields.facing)
 	self.timerActive = false
 	self.touchingGround = false
 	self.touchingWall = false
