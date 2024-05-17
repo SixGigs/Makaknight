@@ -54,7 +54,7 @@
 			"entityInstances": [
 				{
 					"__identifier": "Lizard",
-					"__grid": [6,11],
+					"__grid": [13,7],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -63,13 +63,13 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 2973,
-					"px": [96,176],
+					"px": [208,112],
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [null] }
 					],
-					"__worldX": 496,
-					"__worldY": -544
+					"__worldX": 608,
+					"__worldY": -608
 				},
 				{
 					"__identifier": "Snake",
@@ -105,22 +105,6 @@
 					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] }],
 					"__worldX": 576,
 					"__worldY": -560
-				},
-				{
-					"__identifier": "Butterfly",
-					"__grid": [13,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "e641cd30-fec0-11ee-b003-61658ba6c6da",
-					"width": 16,
-					"height": 16,
-					"defUid": 3213,
-					"px": [208,144],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] }],
-					"__worldX": 608,
-					"__worldY": -576
 				}
 			]
 		},

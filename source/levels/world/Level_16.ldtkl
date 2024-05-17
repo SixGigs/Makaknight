@@ -160,7 +160,10 @@
 					"height": 16,
 					"defUid": 2973,
 					"px": [144,112],
-					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 2976, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [] }
+					],
 					"__worldX": 3744,
 					"__worldY": 352
 				}
