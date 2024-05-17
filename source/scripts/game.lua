@@ -125,10 +125,8 @@ function Game:goToLevel(level)
 			Flag(entityX, entityY, entity, self)
 		elseif entityName == "Door" then
 			Door(entityX, entityY, entity)
-		elseif entityName == "Lizard" or entityName == "Snake" then
+		elseif entityName == "Lizard" or entityName == "Snake" or entityName == "Butterfly" then
 			Animal(entityX, entityY + 8, entity)
-		elseif entityName == "Butterfly" then
-			Moth(entityX + 4, entityY + 4, entity)
 		else
 			Prop(entityX, entityY, entityName)
 		end
