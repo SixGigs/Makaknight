@@ -67,11 +67,13 @@ function Player:init(x, y, gm, face)
 	self.jumpVelocity = -11.2
 	self.drag = 0.1
 	self.minimumAirSpeed = 0.5
+	
+	-- Buffer
+	self.bufferAmount = 2
 
 	-- Roll
 	self.rollAvailable = true
 	self.rollSpeed = 3.5
-	self.rollBufferAmount = 2
 	self.rollBuffer = 0
 	self.rollRecharge = 300
 
@@ -105,9 +107,7 @@ function Player:init(x, y, gm, face)
 	self.punchBuffer = 0
 	
 	-- Left & Right buffers
-	self.leftBufferAmount = 5
 	self.leftBuffer = 0
-	self.rightBufferAmount = 5
 	self.rightBuffer = 0
 
 	-- Player Attributes
@@ -172,16 +172,16 @@ function Player:updateBuffers()
 	end
 
 	if pd.buttonJustPressed(pd.kButtonB) then
-		self.rollBuffer = self.rollBufferAmount
+		self.rollBuffer = self.bufferAmount
 		self.punchBuffer = self.punchBufferAmount
 	end
 
 	if pd.buttonJustPressed(pd.kButtonLeft) then
-		self.leftBuffer = self.leftBufferAmount
+		self.leftBuffer = self.bufferAmount
 	end
 
-	if pd.buttonJustPressed(pd.kbuttonRight) then
-		self.rightBuffer = self.rightBufferAmount
+	if pd.buttonJustPressed(pd.kButtonRight) then
+		self.rightBuffer = self.bufferAmount
 	end
 end
 
@@ -425,18 +425,10 @@ function Player:handleGroundInput()
 		end
 	end
 
-	if self:playerRolled() then
-		if pd.buttonJustPressed(pd.kButtonRight) and self.rollAvailable then
-			self:changeToRollState("right")
-		elseif pd.buttonJustPressed(pd.kButtonLeft) and self.rollAvailable then
+	if self.rollAvailable and self:playerRolled() then
+		if self:playerPressedLeft() then
 			self:changeToRollState("left")
-		end
-	elseif self:playerPressedLeft() then
-		if pd.buttonJustPressed(pd.kButtonB) and self.rollAvailable then
-			self:changeToRollState("left")
-		end
-	elseif self:playerPressedRight() then
-		if pd.buttonJustPressed(pd.kButtonB) and self.rollAvailable then
+		elseif self:playerPressedRight() then
 			self:changeToRollState("right")
 		end
 	end
