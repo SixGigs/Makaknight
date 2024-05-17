@@ -10,13 +10,23 @@ class('Animal').extends(AnimatedSprite)
 --- @param x integer The X coordinate to spawn the Animal
 --- @param y integer The Y coordinate to spawn the Animal
 function Animal:init(x, y, e)
+	local tableSize = "16-8"
+
+	if e.name == "Butterfly" then
+		tableSize = "4-4"
+	end
+
 	-- Create the Animal state machine with the Animal tile set
-	Animal.super.init(self, gfx.imagetable.new("images/" .. string.lower(e.name) .. "-table-16-8"))
+	Animal.super.init(self, gfx.imagetable.new("images/" .. string.lower(e.name) .. "-table-" .. tableSize))
 
 	-- Animal states, sprites, and animation speeds
-	self:addState("idle", 1, 1)
-	self:addState("blep", 2, 4, {tickStep = 3})
-	self:addState("walk", 5, 8, {tickStep = 3})
+	if e.name == "Butterfly" then
+		self:addState("fly", 1, 4, {tickStep = 3})
+	else
+		self:addState("idle", 1, 1)
+		self:addState("blep", 2, 4, {tickStep = 3})
+		self:addState("walk", 5, 8, {tickStep = 3})
+	end
 	self:playAnimation()
 
 	-- Animal properties
@@ -24,7 +34,11 @@ function Animal:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Animal)
 	self:setTag(TAGS.Animal)
-	self:setCollideRect(4, 4, 8, 4)
+	if e.name == "Butterfly" then
+		self:setCollideRect(0, 0, 4, 4)
+	else
+		self:setCollideRect(4, 4, 8, 4)
+	end
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -39,6 +53,7 @@ function Animal:init(x, y, e)
 	self.timerActive = false
 	self.touchingGround = false
 	self.touchingWall = false
+	self.fly = e.fields.fly
 	self.dead = false
 end
 
@@ -64,7 +79,7 @@ function Animal:update()
 		self:remove()
 	end
 
-	self:handleState()
+	if self.fly then self:handleFlight() else self:handleState() end
 	self:handleMovementAndCollisions()
 end
 
@@ -73,6 +88,25 @@ end
 function Animal:handleState()
 	self:applyGravity()
 	self:handleGroundInput()
+end
+
+
+--- Handle the possible ground events for the Animal
+function Animal:handleFlight()
+	if self.timerActive then
+		return
+	end
+
+	if not self.timer then
+		self.timer = true
+		pd.timer.performAfterDelay(math.random(50, 150), function()
+			local xSpeed <const> = math.random(-self.speed, self.speed)
+			local ySpeed <const> = math.random(-self.speed, self.speed)
+			self.xVelocity = xSpeed
+			self.yVelocity = ySpeed
+			self.timer = false
+		end)
+	end
 end
 
 
