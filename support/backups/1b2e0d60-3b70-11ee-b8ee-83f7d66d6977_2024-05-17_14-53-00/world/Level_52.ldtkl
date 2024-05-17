@@ -99,6 +99,38 @@
 					"fieldInstances": [{ "__identifier": "speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3215, "realEditorValues": [] }],
 					"__worldX": 576,
 					"__worldY": -560
+				},
+				{
+					"__identifier": "Flag",
+					"__grid": [1,9],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 64, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "fcd69070-fec0-11ee-b003-73046b0bd601",
+					"width": 64,
+					"height": 48,
+					"defUid": 1401,
+					"px": [16,144],
+					"fieldInstances": [],
+					"__worldX": 416,
+					"__worldY": -576
+				},
+				{
+					"__identifier": "Flag",
+					"__grid": [11,9],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 64, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "ffd37cc0-fec0-11ee-b003-2b675e227108",
+					"width": 64,
+					"height": 48,
+					"defUid": 1401,
+					"px": [176,144],
+					"fieldInstances": [],
+					"__worldX": 576,
+					"__worldY": -576
 				}
 			]
 		},

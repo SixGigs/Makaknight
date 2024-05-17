@@ -15077,7 +15077,8 @@
 			{ "id": "Door0", "tileRect": null, "color": 12470831 },
 			{ "id": "Door1", "tileRect": null, "color": 14120515 },
 			{ "id": "Door2", "tileRect": null, "color": 15389866 },
-			{ "id": "Door3", "tileRect": null, "color": 14984818 }
+			{ "id": "Door3", "tileRect": null, "color": 14984818 },
+			{ "id": "Door4", "tileRect": null, "color": 7552569 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
