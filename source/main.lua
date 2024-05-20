@@ -7,9 +7,13 @@ import "CoreLibs/timer"
 -- Libraries from GitHub
 import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk"
+import "scripts/libraries/SceneManager" -- Takes a long time to load, why!?
+
+-- Scenes
+import "scripts/scenes/Game"
+import "scripts/scenes/Title"
 
 -- Scripts
-import "scripts/Game"
 import "scripts/Player"
 import "scripts/Spike"
 import "scripts/Spikeball"
@@ -22,16 +26,12 @@ import "scripts/Hitbox"
 -- PlayDate Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-local g <const> = Game()
 
--- PlayDate Functions
-function pd.gameWillTerminate()
-	g:save()
-end
+-- PlayDate Globals
+sm = SceneManager()
 
-function pd.deviceWillSleep()
-	g:save()
-end
+-- Create Title Screen
+Title()
 
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
@@ -40,5 +40,8 @@ pd.display.setRefreshRate(30)
 function pd.update()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	pd.drawFPS(383, 2) -- Show current FPS
+	pd.drawFPS(383, 2)
 end
+
+-- function pd.gameWillTerminate() g:save() end
+-- function pd.deviceWillSleep() g:save() end
