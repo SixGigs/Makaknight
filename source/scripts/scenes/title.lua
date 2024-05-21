@@ -12,13 +12,13 @@ function Title:init()
 	self:add()
 
 	-- Fade from black to the title screen
-	sm:fadeTransition(1, 0)
+	gm:fadeTransition(1, 0)
 end
 
 -- This method runs every frame when the title scene is added to the sprite group
 -- It listens for the A button press and moves over to the game scene
 function Title:update()
 	if pd.buttonJustPressed(pd.kButtonA) then
-		sm:switchScene(Game, "fade")
+		gm:switchScene(World, "fade")
 	end
 end

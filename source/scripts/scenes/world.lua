@@ -21,10 +21,10 @@ Z_INDEXES = {
 ldtk.load("levels/world.ldtk", false)
 
 --- The initialising method of the game scene class
-class("Game").extends()
+class("World").extends()
 
 --- Create the game class
-function Game:init()
+function World:init()
 	-- Load the game if there is a save file and create a game if there isn't
 	self:load()
 
@@ -36,7 +36,7 @@ end
 
 --- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
 --- @param direction string Contains in text form, the direction from the current level to load the next level piece
-function Game:enterRoom(direction)
+function World:enterRoom(direction)
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
 	local oldLevel <const> = self.level
 	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
@@ -70,7 +70,7 @@ end
 --- @param level string  Contains the name of the level we want to travel to as a string
 --- @param x     integer Contains the X coordinate to spawn the player after moving to the new level
 --- @param y     integer Contains the Y coordinate to spawn the player after moving to the new level
-function Game:enterDoor(level, x, y)
+function World:enterDoor(level, x, y)
 	if level ~= self.level then
 		self:goToLevel(level)
 		self.player:add()
@@ -85,7 +85,7 @@ end
 
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
 --- @param level  string  Contains the name of the level to load as a string
-function Game:goToLevel(level)
+function World:goToLevel(level)
 	-- Remove all playdate sprite objects to give us a blank slate
 	gfx.sprite.removeAll()
 
@@ -142,7 +142,7 @@ end
 
 --- Load the background for the level sent into the function
 --- @param level string The name of the 
-function Game:loadBackground(level)
+function World:loadBackground(level)
 	local bgImage <const> = LDtk.get_background(level)
 	if bgImage then
 		local backgroundImage <const> = gfx.image.new("levels/" .. bgImage)
@@ -154,7 +154,7 @@ end
 
 
 --- The reset player method moves the player back to the most recent spawn X & Y coordinates
-function Game:resetPlayer()
+function World:resetPlayer()
 	if self.level ~= self.spawn then
 		self:goToLevel(self.spawn)
 		self.player:add()
@@ -168,7 +168,7 @@ end
 
 
 --- Load the game from the JSON save file and restore game attributes
-function Game:load()
+function World:load()
 	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
 	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
 	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
@@ -181,7 +181,7 @@ end
 
 
 --- Save the current game data into the save file
-function Game:save()
+function World:save()
 	local data <const> = {
 		spawn = self.spawn,
 		spawnX = self.spawnX,

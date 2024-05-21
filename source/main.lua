@@ -7,10 +7,10 @@ import "CoreLibs/timer"
 -- Libraries from GitHub
 import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk"
-import "scripts/libraries/SceneManager" -- Takes a long time to load, why!?
+import "scripts/libraries/GameManager"
 
 -- Scenes
-import "scripts/scenes/Game"
+import "scripts/scenes/World"
 import "scripts/scenes/Title"
 
 -- Scripts
@@ -27,8 +27,8 @@ import "scripts/Hitbox"
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
--- PlayDate Globals
-sm = SceneManager()
+-- PlayDate Global Game Manager
+gm = Game()
 
 -- Create Title Screen
 Title()

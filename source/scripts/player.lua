@@ -13,7 +13,7 @@ class('Player').extends(AnimatedSprite)
 --- @param face integer The direction the player is facing as a 1 or 0
 function Player:init(x, y, gm, face)
 	-- Game Manager
-	self.gm = gm
+	self.world = gm
 
 	-- Create the player state machine with the tile set
 	local playerImageTable <const> = gfx.imagetable.new("images/player-table-80-80")
@@ -324,13 +324,13 @@ function Player:handleMovementAndCollisions()
 
 	-- If touching the edge of the level, lets move into the next room
 	if self.x < -5 then
-		self.gm:enterRoom("west")
+		self.world:enterRoom("west")
 	elseif self.x > 405 then
-		self.gm:enterRoom("east")
+		self.world:enterRoom("east")
 	elseif self.y < -32 then
-		self.gm:enterRoom("north")
+		self.world:enterRoom("north")
 	elseif self.y > 264 then
-		self.gm:enterRoom("south")
+		self.world:enterRoom("south")
 	end
 
 	-- Check if we die from fall damage
@@ -375,10 +375,10 @@ function Player:handleFlagCollision(flag)
 	flag:hoist()
 
 	-- TODO: How can this be done better?
-	self.gm.flag = flag.id
-	self.gm.spawn = self.gm.level
-	self.gm.spawnX = flag.x + 8
-	self.gm.spawnY = flag.y + 24
+	self.world.flag = flag.id
+	self.world.spawn = self.world.level
+	self.world.spawnX = flag.x + 8
+	self.world.spawnY = flag.y + 24
 end       
 
 
@@ -394,7 +394,7 @@ function Player:die()
 	pd.timer.performAfterDelay(1000, function()
 		self:setCollisionsEnabled(true)
 		self.dead = false
-		self.gm:resetPlayer()
+		self.world:resetPlayer()
 	end)
 end
 
@@ -441,7 +441,7 @@ function Player:handleGroundInput()
 
 	if pd.buttonJustPressed(pd.kButtonUp) then
 		if self.nextLevelID ~= nil then
-			self.gm:enterDoor(self.nextLevelID, self.exitX, self.exitY)
+			self.world:enterDoor(self.nextLevelID, self.exitX, self.exitY)
 		end
 	end
 end
