@@ -78,7 +78,7 @@ function Game:enterDoor(level, x, y)
 	else
 		self.player:moveTo(x, y)
 	end
-	
+
 	self:save()
 end
 
