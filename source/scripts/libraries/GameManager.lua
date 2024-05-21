@@ -3,10 +3,10 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 -- Scene Manager Class
-class('SceneManager').extends()
+class('Game').extends()
 
 -- Creates an instance of the scene manager
-function SceneManager:init()
+function Game:init()
 	self.transitionTime = 1000
 	self.transitioning = false
 end
@@ -16,7 +16,7 @@ end
 ---The three dots represent no or many arguments can be passed
 ---@param scene function The class you would like to change to
 ---@param ...   unknown  Any data you want that scene to have
-function SceneManager:switchScene(scene, transition, ...)
+function Game:switchScene(scene, transition, ...)
 	if self.transitioning then
 		return
 	end
@@ -28,14 +28,14 @@ end
 
 
 --- Load the new scene at last
-function SceneManager:loadNewScene()
+function Game:loadNewScene()
 	self:cleanupScene()
 	self.newScene(self.sceneArgs)
 end
 
 
 -- Used by the class to delete all current sprites and timers
-function SceneManager:cleanupScene()
+function Game:cleanupScene()
 	gfx.sprite.removeAll()
 	self:removeAllTimers()
 	gfx.setDrawOffset(0, 0)
@@ -43,7 +43,7 @@ end
 
 
 -- Deletes all timers in the timers group
-function SceneManager:removeAllTimers()
+function Game:removeAllTimers()
 	local allTimers = pd.timer.allTimers()
 
 	for _, timer in ipairs(allTimers) do
@@ -53,7 +53,7 @@ end
 
 
 -- Starts and handles the transition
-function SceneManager:startTransition(transition)
+function Game:startTransition(transition)
 	local transitionTimer
 
 	if transition == "wipe" then
@@ -79,7 +79,7 @@ end
 
 
 -- Does the "wipe" transition
-function SceneManager:wipeTransition(startValue, endValue)
+function Game:wipeTransition(startValue, endValue)
 	local transitionSprite = self:createTransitionSprite()
 	transitionSprite:setClipRect(0, 0, startValue, 240)
 
@@ -96,7 +96,7 @@ end
 
 
 -- Does the "fade" transition
-function SceneManager:fadeTransition(startValue, endValue)
+function Game:fadeTransition(startValue, endValue)
 	local transitionSprite = self:createTransitionSprite()
 	transitionSprite:setImage(self:getFadedImage(startValue))
 
@@ -113,7 +113,7 @@ end
 
 
 -- Used by the fade transition to optimise the performance
-function SceneManager:getFadedImage(alpha)
+function Game:getFadedImage(alpha)
 	local fadedImage = gfx.image.new(400, 240)
 	gfx.pushContext(fadedImage)
 		-- To change this for an image replace "gfx.kColorBlack" with the image
@@ -125,7 +125,7 @@ end
 
 
 -- Creates a sprite to transition too and from for the scene change
-function SceneManager:createTransitionSprite()
+function Game:createTransitionSprite()
 	-- To change this for an image replace "gfx.kColorBlack" with the image
 	local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
 	local transitionSprite = gfx.sprite.new(filledRect)
