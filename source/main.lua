@@ -33,6 +33,9 @@ sm = SceneManager()
 -- Create Title Screen
 Title()
 
+-- Temporary Save Function
+function pd.gameWillTerminate() sm.newScene:save() end
+
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
 
