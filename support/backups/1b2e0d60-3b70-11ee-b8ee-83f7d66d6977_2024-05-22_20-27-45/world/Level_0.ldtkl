@@ -154,22 +154,6 @@
 					],
 					"__worldX": 240,
 					"__worldY": -96
-				},
-				{
-					"__identifier": "Crown",
-					"__grid": [21,1],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3385, "x": 0, "y": 0, "w": 48, "h": 48 },
-					"__smartColor": "#FEE761",
-					"iid": "5ac97d20-fec0-11ee-8d9e-cdc35a8d9dbe",
-					"width": 48,
-					"height": 48,
-					"defUid": 3384,
-					"px": [336,16],
-					"fieldInstances": [],
-					"__worldX": 336,
-					"__worldY": -224
 				}
 			]
 		},

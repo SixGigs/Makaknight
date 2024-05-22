@@ -3,26 +3,27 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
-local gd <const> = pd.datastore.read()
 local m <const> = pd.getSystemMenu()
 
 -- This table stores entity tags used for collisions
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
-	Prop = 6, Door = 7, Animal = 8, Hitbox = 9
+	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
+	Crown = 10
 }
 
 -- This table stores the Z axis of each entity
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
-	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000
+	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
+	Crown = 120
 }
 
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
 
 --- The initialising method of the game scene class
-class("World").extends()
+class("World").extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
@@ -130,6 +131,8 @@ function World:goToLevel(level)
 			Door(entityX, entityY, entity)
 		elseif entityName == "Lizard" or entityName == "Snake" or entityName == "Butterfly" then
 			Animal(entityX, entityY + 8, entity)
+		elseif entityName == "Crown" then
+			Crown(entityX, entityY, entityName)
 		else
 			Prop(entityX, entityY, entityName)
 		end
@@ -169,6 +172,8 @@ end
 
 --- Load the game from the JSON save file and restore game attributes
 function World:load()
+	local gd <const> = pd.datastore.read()
+
 	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
 	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
 	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
@@ -211,4 +216,9 @@ function World:quickSave()
 	}
 
 	pd.datastore.write(data)
+end
+
+
+function World:unsetMenu()
+	m:removeAllMenuItems()
 end

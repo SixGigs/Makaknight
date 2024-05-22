@@ -2,6 +2,7 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 local gd <const> = pd.datastore.read()
+local m <const> pd.getSystemMenu()
 
 -- Scene Manager Class
 class('Game').extends()
