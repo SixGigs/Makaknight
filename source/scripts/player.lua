@@ -379,7 +379,9 @@ function Player:handleFlagCollision(flag)
 	self.world.spawn = self.world.level
 	self.world.spawnX = flag.x + 8
 	self.world.spawnY = flag.y + 24
-end       
+
+	self.world:save()
+end
 
 
 --- This function handles when the player dies, what to do and when to respawn
