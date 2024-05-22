@@ -26,7 +26,7 @@ class("World").extends()
 
 --- Create the game class
 function World:init()
-	m:addMenuItem("Quick save", function() self:save() end)
+	m:addMenuItem("Quick save", function() self:quickSave() end)
 
 	-- Load the game if there is a save file and create a game if there isn't
 	self:load()
@@ -182,6 +182,23 @@ end
 
 --- Save the current game data into the save file
 function World:save()
+	local data <const> = {
+		spawn = self.spawn,
+		spawnX = self.spawnX,
+		spawnY = self.spawnY,
+		level = self.spawn,
+		levelX = self.spawnX,
+		levelY = self.spawnY,
+		flag = self.flag,
+		face = self.player.globalFlip
+	}
+
+	pd.datastore.write(data)
+end
+
+
+--- Quick save the current game data into the save file
+function World:quickSave()
 	local data <const> = {
 		spawn = self.spawn,
 		spawnX = self.spawnX,
