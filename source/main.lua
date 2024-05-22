@@ -22,6 +22,7 @@ import "scripts/Flag"
 import "scripts/Prop"
 import "scripts/Animal"
 import "scripts/Hitbox"
+import "scripts/Crown"
 
 -- PlayDate Constants & Globals
 local pd <const> = playdate

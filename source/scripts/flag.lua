@@ -11,7 +11,7 @@ class('Flag').extends(AnimatedSprite)
 --- @param y      integer The Y coordinate to spawn the checkpoint
 --- @param entity table   The list of entities the checkpoint has
 --- @param gameManager table The game manager passed into the object
-function Flag:init(x, y, entity, gameManager)
+function Flag:init(x, y, entity, world)
 	-- Initialise the state machine using the flag sprite sheet
 	Flag.super.init(self, gfx.imagetable.new("images/flag-table-64-48"))
 
@@ -27,7 +27,7 @@ function Flag:init(x, y, entity, gameManager)
 
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
-	if self.id == gameManager.flag then
+	if self.id == world.flag then
 		self.active = true
 		self:changeState("up")
 	else

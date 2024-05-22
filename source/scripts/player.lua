@@ -133,7 +133,8 @@ function Player:collisionResponse(other)
 		[TAGS.Prop] = true,
 		[TAGS.Door] = true,
 		[TAGS.Animal] = true,
-		[TAGS.Hitbox] = true
+		[TAGS.Hitbox] = true,
+		[TAGS.Crown] = true
 	}
 
 	if overlapTags[tag] then
@@ -301,6 +302,9 @@ function Player:handleMovementAndCollisions()
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			self:handleDoorCollision(collisionObject)
+		elseif collisionTag == TAGS.Crown then
+			self.world:unsetMenu()
+			gm:switchScene(Title, "fade")
 		end
 
 		-- Check if we are still touching the door
