@@ -86,7 +86,7 @@
 				},
 				{
 					"__identifier": "Door",
-					"__grid": [16,9],
+					"__grid": [16,8],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 2126, "x": 0, "y": 0, "w": 32, "h": 48 },
@@ -95,7 +95,7 @@
 					"width": 32,
 					"height": 48,
 					"defUid": 2116,
-					"px": [256,144],
+					"px": [256,128],
 					"fieldInstances": [
 						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door0", "__tile": null, "defUid": 2117, "realEditorValues": [{
 							"id": "V_String",
@@ -109,7 +109,7 @@
 						{ "__identifier": "exitY", "__type": "Int", "__value": 5, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [5] }] }
 					],
 					"__worldX": 2256,
-					"__worldY": -96
+					"__worldY": -112
 				},
 				{
 					"__identifier": "Snag",

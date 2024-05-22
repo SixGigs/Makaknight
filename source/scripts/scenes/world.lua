@@ -4,6 +4,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 local gd <const> = pd.datastore.read()
+local m <const> = pd.getSystemMenu()
 
 -- This table stores entity tags used for collisions
 TAGS = {
@@ -25,6 +26,8 @@ class("World").extends()
 
 --- Create the game class
 function World:init()
+	m:addMenuItem("Quick save", function() self:save() end)
+
 	-- Load the game if there is a save file and create a game if there isn't
 	self:load()
 
@@ -62,7 +65,6 @@ function World:enterRoom(direction)
 
 	-- Move the player to the new X and Y
 	self.player:moveTo(x, y)
-	self:save()
 end
 
 
@@ -78,8 +80,6 @@ function World:enterDoor(level, x, y)
 	else
 		self.player:moveTo(x, y)
 	end
-
-	self:save()
 end
 
 

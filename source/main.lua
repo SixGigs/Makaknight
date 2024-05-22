@@ -23,18 +23,13 @@ import "scripts/Prop"
 import "scripts/Animal"
 import "scripts/Hitbox"
 
--- PlayDate Constants
+-- PlayDate Constants & Globals
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-
--- PlayDate Global Game Manager
 gm = Game()
 
 -- Create Title Screen
 Title()
-
--- Temporary Save Function
-function pd.gameWillTerminate() sm.newScene:save() end
 
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
