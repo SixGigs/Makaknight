@@ -1,57 +1,28 @@
 -- PlayDate shorthand constants
 local pd <const> = playdate
 local gfx <const> = pd.graphics
-local gd <const> = pd.datastore.read()
-local m <const> pd.getSystemMenu()
 
--- Scene Manager Class
+-- Game manager Class
 class('Game').extends()
 
--- Creates an instance of the scene manager
+
+-- Creates an instance of the Game manager
 function Game:init()
 	self.transitionTime = 1000
 	self.transitioning = false
-	self:load()
 end
 
 
----Switch the scene by passing the next scene class and any arguments you like
----The three dots represent no or many arguments can be passed
----@param scene function The class you would like to change to
----@param ...   unknown  Any data you want that scene to have
-function Game:switchScene(scene, transition, ...)
-	if self.transitioning then
-		return
-	end
+--- Switch the scene by passing the next scene class and any arguments
+--- you like, the three dots mean no or many arguments can be passed
+--- @param   nextScene   class     The class you would like to change to
+--- @param   ...         unknown   Any data you want that scene to have
+function Game:switchScene(nextScene, transition, ...)
+	if self.transitioning then return end
 
-	self.newScene = scene
+	self.newScene = nextScene
 	self.sceneArgs = ...
 	self:startTransition(transition)
-end
-
-
---- Load the new scene at last
-function Game:loadNewScene()
-	self:cleanupScene()
-	self.newScene(self.sceneArgs)
-end
-
-
--- Used by the class to delete all current sprites and timers
-function Game:cleanupScene()
-	gfx.sprite.removeAll()
-	self:removeAllTimers()
-	gfx.setDrawOffset(0, 0)
-end
-
-
--- Deletes all timers in the timers group
-function Game:removeAllTimers()
-	local allTimers = pd.timer.allTimers()
-
-	for _, timer in ipairs(allTimers) do
-		timer:remove()
-	end
 end
 
 
@@ -74,14 +45,39 @@ function Game:startTransition(transition)
 			transitionTimer = self:fadeTransition(1, 0)
 		end
 
-		transitionTimer .timerEndedCallback = function()
+		transitionTimer.timerEndedCallback = function()
 			self.transitioning = false
 		end
 	end
 end
 
 
--- Does the "wipe" transition
+--- Clean up any old scene data & create a new instance of the next scene
+function Game:loadNewScene()
+	self:cleanupScene()
+	self.newScene(self.sceneArgs)
+end
+
+
+--- Used by the class to delete all current sprites and timers
+function Game:cleanupScene()
+	self:removeAllTimers()
+	gfx.sprite.removeAll()
+	gfx.setDrawOffset(0, 0)
+end
+
+
+--- Deletes all timers in the timers group
+function Game:removeAllTimers()
+	local allTimers = pd.timer.allTimers()
+
+	for _, timer in ipairs(allTimers) do
+		timer:remove()
+	end
+end
+
+
+--- Does the "wipe" transition
 function Game:wipeTransition(startValue, endValue)
 	local transitionSprite = self:createTransitionSprite()
 	transitionSprite:setClipRect(0, 0, startValue, 240)
@@ -98,7 +94,7 @@ function Game:wipeTransition(startValue, endValue)
 end
 
 
--- Does the "fade" transition
+--- Does the "fade" transition
 function Game:fadeTransition(startValue, endValue)
 	local transitionSprite = self:createTransitionSprite()
 	transitionSprite:setImage(self:getFadedImage(startValue))
@@ -115,26 +111,30 @@ function Game:fadeTransition(startValue, endValue)
 end
 
 
--- Used by the fade transition to optimise the performance
+--- Used by the fade transition to optimise the performance
 function Game:getFadedImage(alpha)
 	local fadedImage = gfx.image.new(400, 240)
+
 	gfx.pushContext(fadedImage)
-		-- To change this for an image replace "gfx.kColorBlack" with the image
-		local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
-		filledRect:drawFaded(0, 0, alpha, gfx.image.kDitherTypeBayer8x8)
+	-- To change this for an image replace "gfx.kColorBlack" with the image
+	local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
+	filledRect:drawFaded(0, 0, alpha, gfx.image.kDitherTypeBayer8x8)
 	gfx.popContext()
+
 	return fadedImage
 end
 
 
--- Creates a sprite to transition too and from for the scene change
+--- Creates a sprite to transition too and from for the scene change
 function Game:createTransitionSprite()
 	-- To change this for an image replace "gfx.kColorBlack" with the image
 	local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
 	local transitionSprite = gfx.sprite.new(filledRect)
+
 	transitionSprite:moveTo(200, 120)
 	transitionSprite:setZIndex(32767)
 	transitionSprite:setIgnoresDrawOffset()
 	transitionSprite:add()
+
 	return transitionSprite
 end
