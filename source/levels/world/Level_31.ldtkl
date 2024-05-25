@@ -118,7 +118,7 @@
 				},
 				{
 					"__identifier": "Crown",
-					"__grid": [11,3],
+					"__grid": [11,1],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 3385, "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -127,10 +127,10 @@
 					"width": 48,
 					"height": 48,
 					"defUid": 3384,
-					"px": [176,48],
+					"px": [176,16],
 					"fieldInstances": [],
 					"__worldX": 3376,
-					"__worldY": -672
+					"__worldY": -704
 				}
 			]
 		},
