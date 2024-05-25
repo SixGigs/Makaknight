@@ -12,6 +12,7 @@ import "scripts/libraries/GameManager"
 -- Scenes
 import "scripts/scenes/World"
 import "scripts/scenes/Title"
+import "scripts/scenes/Win"
 
 -- Scripts
 import "scripts/Player"
@@ -30,7 +31,7 @@ local gfx <const> = playdate.graphics
 gm = Game()
 
 -- Create Title Screen
-Title()
+Win()
 
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
