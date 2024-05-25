@@ -54,7 +54,7 @@
 			"entityInstances": [
 				{
 					"__identifier": "Door",
-					"__grid": [12,9],
+					"__grid": [11,8],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 2126, "x": 0, "y": 0, "w": 32, "h": 48 },
@@ -63,7 +63,7 @@
 					"width": 32,
 					"height": 48,
 					"defUid": 2116,
-					"px": [192,144],
+					"px": [176,128],
 					"fieldInstances": [
 						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door0", "__tile": null, "defUid": 2117, "realEditorValues": [{
 							"id": "V_String",
@@ -76,8 +76,8 @@
 						{ "__identifier": "exitX", "__type": "Int", "__value": 12, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [12] }] },
 						{ "__identifier": "exitY", "__type": "Int", "__value": 9, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [9] }] }
 					],
-					"__worldX": 2592,
-					"__worldY": 144
+					"__worldX": 2576,
+					"__worldY": 128
 				},
 				{
 					"__identifier": "Stone",
