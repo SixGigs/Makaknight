@@ -15569,7 +15569,7 @@
 			"enumTags": [],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "000000000", "averageColors": "17442b9317448a53dd927a63584489644963" }
+			"cachedPixelData": { "opaqueTiles": "000000000", "averageColors": "377749992888a776e9989777666696666776" }
 		}
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 2, "values": [ { "id": "Solid", "tileRect": null, "color": 12470831 }, { "id": "Ledge", "tileRect": null, "color": 16217634 } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": ["Level_Data"] },
