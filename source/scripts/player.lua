@@ -116,6 +116,7 @@ function Player:init(x, y, gm, face)
 	self.touchingCeiling = false
 	self.touchingWall = false
 	self.touchingDoor = false
+	self.win = false
 	self.dead = false
 end
 
@@ -302,9 +303,10 @@ function Player:handleMovementAndCollisions()
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			self:handleDoorCollision(collisionObject)
-		elseif collisionTag == TAGS.Crown then
+		elseif collisionTag == TAGS.Crown and not self.win then
+			self.win = true
 			self.world:unsetMenu()
-			gm:switchScene(Title, "fade")
+			gm:switchScene(Title, "wipe")
 		end
 
 		-- Check if we are still touching the door
