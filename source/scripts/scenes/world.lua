@@ -20,17 +20,20 @@ Z_INDEXES = {
 }
 
 -- Load the level used for the game
-ldtk.load("levels/world.ldtk", false)
+ldtk.load('levels/world.ldtk', false)
 
 --- The initialising method of the game scene class
-class("World").extends(gfx.sprite)
+class('World').extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
-	m:addMenuItem("Quick save", function() self:save(true) end)
-
 	-- Load the game if there is a save file and create a game if there isn't
 	self:load()
+	
+	-- Add the Quick save option to the pause menu
+	m:addMenuItem('Quick save', function() 
+		self:save(true)
+	end)
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
@@ -44,12 +47,15 @@ function World:enterRoom(direction)
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
 	local oldLevel <const> = self.level
 	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
+
+	-- If there is no neighbouring level die unless its north in which case just don't move
+	if not level then
+		if direction == 'north' then return else return self.player:die() end
+	end
+
+	-- Load the new level, remove the old level, and add the player
 	self:goToLevel(level)
-
-	-- Delete old level data to free up RAM
 	ldtk.release_level(oldLevel)
-
-	-- Add the player to the new level
 	self.player:add()
 
 	-- Create a local X and Y, and use them to spawn the player
