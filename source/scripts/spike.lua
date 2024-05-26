@@ -2,7 +2,7 @@
 local gfx <const> = playdate.graphics
 
 -- Create the spike class
-class('Spike').extends(gfx.sprite)
+class("Spike").extends(gfx.sprite)
 
 
 --- Initialise the spike object using the data given

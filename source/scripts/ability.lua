@@ -2,7 +2,7 @@
 local gfx <const> = playdate.graphics
 
 -- Create the ability class
-class('Ability').extends(gfx.sprite)
+class("Ability").extends(gfx.sprite)
 
 
 --- Initialise the ability object using the data given
@@ -18,7 +18,7 @@ function Ability:init(x, y, entity)
 
 	-- If the ability hasn't been picked let's spawn it
 	self.abilityName = self.fields.ability
-	local abilityImage = gfx.image.new("images/"..self.abilityName)
+	local abilityImage = gfx.image.new("images/abilities/"..self.abilityName)
 	assert(abilityImage)
 
 	-- Sprite properties

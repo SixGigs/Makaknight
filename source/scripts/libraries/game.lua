@@ -3,7 +3,7 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 -- Game manager Class
-class('Game').extends()
+class("Game").extends()
 
 
 -- Creates an instance of the Game manager

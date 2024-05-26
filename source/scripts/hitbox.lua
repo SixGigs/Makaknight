@@ -3,7 +3,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Create the hit box class
-class('Hitbox').extends(gfx.sprite)
+class("Hitbox").extends(gfx.sprite)
 
 --- Initialise the hit box object using the data given
 function Hitbox:init(x, y, width, height, duration)		

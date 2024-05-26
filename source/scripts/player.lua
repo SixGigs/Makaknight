@@ -3,7 +3,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Create the player class
-class('Player').extends(AnimatedSprite)
+class("Player").extends(AnimatedSprite)
 
 
 --- The player is initialised with this method
