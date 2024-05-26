@@ -10,7 +10,7 @@ class('Crown').extends(AnimatedSprite)
 --- @param entityName string  The name of the entity to create as a prop
 function Crown:init(x, y)
 	-- Find and open the image to use as a prop
-	Crown.super.init(self, gfx.imagetable.new("images/crown-table-48-48"))
+	Crown.super.init(self, gfx.imagetable.new("images/entities/crown-table-48-48"))
 
 	-- Crown states, sprites, and animation speeds
 	self:addState("spin", 1, 32, {tickStep = 1})

@@ -11,7 +11,7 @@ class('Animal').extends(AnimatedSprite)
 --- @param y integer The Y coordinate to spawn the Animal
 function Animal:init(x, y, e)
 	-- Create the Animal state machine with the Animal tile set
-	Animal.super.init(self, gfx.imagetable.new("images/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
+	Animal.super.init(self, gfx.imagetable.new("images/animals/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
 
 	-- Animal states, sprites, and animation speeds
 	if e.fields.fly then
