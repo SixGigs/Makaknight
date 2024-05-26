@@ -20,10 +20,10 @@ Z_INDEXES = {
 }
 
 -- Load the level used for the game
-ldtk.load('levels/world.ldtk', false)
+ldtk.load("levels/world.ldtk", false)
 
 --- The initialising method of the game scene class
-class('World').extends(gfx.sprite)
+class("World").extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
@@ -31,7 +31,7 @@ function World:init()
 	self:load()
 	
 	-- Add the Quick save option to the pause menu
-	m:addMenuItem('Quick save', function() 
+	m:addMenuItem("Quick save", function() 
 		self:save(true)
 	end)
 
@@ -50,7 +50,7 @@ function World:enterRoom(direction)
 
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	if not level then
-		if direction == 'north' then return else return self.player:die() end
+		if direction == "north" then return else return self.player:die() end
 	end
 
 	-- Load the new level, remove the old level, and add the player

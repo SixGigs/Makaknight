@@ -2,7 +2,7 @@
 local gfx <const> = playdate.graphics
 
 -- Create the Prop class
-class('Crown').extends(AnimatedSprite)
+class("Crown").extends(AnimatedSprite)
 
 --- The prop class is used to spawn entities that are decoration
 --- @param x          integer The X coordinate to spawn the spike

@@ -3,7 +3,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Create the checkpoint class
-class('Flag').extends(AnimatedSprite)
+class("Flag").extends(AnimatedSprite)
 
 
 --- Checkpoints are created using this method

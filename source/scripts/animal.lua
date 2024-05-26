@@ -3,7 +3,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Create the Animal class
-class('Animal').extends(AnimatedSprite)
+class("Animal").extends(AnimatedSprite)
 
 
 --- The Animal is initialised using this method

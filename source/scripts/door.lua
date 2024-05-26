@@ -5,7 +5,7 @@ local Z_INDEXES = Z_INDEXES
 local TAGS = TAGS
 
 -- Create the door class
-class('Door').extends(gfx.sprite)
+class("Door").extends(gfx.sprite)
 
 
 --- Initialise the door object using the data given
