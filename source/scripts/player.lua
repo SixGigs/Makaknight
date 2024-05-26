@@ -306,7 +306,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Crown and not self.win then
 			self.win = true
 			self.world:unsetMenu()
-			gm:switchScene(Win, "wipe")
+			gm:switchScene(Screen, "wipe", "win")
 		end
 
 		-- Check if we are still touching the door
