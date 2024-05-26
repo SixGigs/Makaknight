@@ -11,7 +11,7 @@ class('Spikeball').extends(gfx.sprite)
 --- @param entity table   The entities that come with the spike-ball
 function Spikeball:init(x, y, entity)
 	-- Load the spike ball image as a constant
-	local spikeballImage <const> = gfx.image.new("images/spikeball")
+	local spikeballImage <const> = gfx.image.new("images/hazards/spikeball")
 
 	-- Sprite properties
 	self:setZIndex(Z_INDEXES.Hazard)

@@ -4,12 +4,13 @@ local gfx <const> = playdate.graphics
 -- Create the spike class
 class('Spike').extends(gfx.sprite)
 
+
 --- Initialise the spike object using the data given
 --- @param x integer The X coordinate to spawn the spike
 --- @param y integer The Y coordinate to spawn the spike
 function Spike:init(x, y)
 	-- Open the spike image as a constant
-	local spikeImage <const> = gfx.image.new("images/spike")
+	local spikeImage <const> = gfx.image.new("images/hazards/spike")
 
 	self:setCenter(0, 0)
 	self:moveTo(x, y)

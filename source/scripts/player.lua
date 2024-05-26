@@ -16,7 +16,7 @@ function Player:init(x, y, gm, face)
 	self.world = gm
 
 	-- Create the player state machine with the tile set
-	local playerImageTable <const> = gfx.imagetable.new("images/player-table-80-80")
+	local playerImageTable <const> = gfx.imagetable.new("images/player/player-table-80-80")
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds

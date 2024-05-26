@@ -7,13 +7,14 @@ local TAGS = TAGS
 -- Create the door class
 class('Door').extends(gfx.sprite)
 
+
 --- Initialise the door object using the data given
 --- @param x integer The X coordinate to spawn the door
 --- @param y integer The Y coordinate to spawn the door
 --- @param e table   The table of entity attributes in the door
 function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
-	local doorImage = newImage("images/" .. e.fields.sprite)
+	local doorImage = newImage("images/doors/" .. e.fields.sprite)
 
 	-- The level the door leads to
 	self.level = e.fields.level
@@ -35,6 +36,7 @@ function Door:init(x, y, e)
 	self.exitX = exitX
 	self.exitY = exitY
 end
+
 
 -- Used by the player in the door collision event to set where to travel to if they enter the door
 function Door:getDetails()

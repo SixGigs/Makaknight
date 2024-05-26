@@ -10,7 +10,7 @@ class('Prop').extends(gfx.sprite)
 --- @param entityName string  The name of the entity to create as a prop
 function Prop:init(x, y, name)
 	-- Find and open the image to use as a prop
-	local image <const> = gfx.image.new("images/"..name)
+	local image <const> = gfx.image.new("images/entities/" .. name)
 
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
