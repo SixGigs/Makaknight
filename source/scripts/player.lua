@@ -303,10 +303,8 @@ function Player:handleMovementAndCollisions()
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			self:handleDoorCollision(collisionObject)
-		elseif collisionTag == TAGS.Crown and not self.win then
-			self.win = true
-			self.world:unsetMenu()
-			gm:switchScene(Screen, "wipe", "win")
+		elseif collisionTag == TAGS.Crown then
+			self:handleCrownCollision()
 		end
 
 		-- Check if we are still touching the door
@@ -364,6 +362,7 @@ function Player:handleDoorCollision(door)
 	end
 end
 
+
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
@@ -387,6 +386,16 @@ function Player:handleFlagCollision(flag)
 	self.world.spawnY = flag.y + 24
 
 	self.world:save()
+end
+
+
+--- If the player collides with a crown, run this function
+function Player:handleCrownCollision()
+	if not self.win then
+		self.win = true
+		self.world:unsetMenu()
+		gm:switchScene(Screen, "wipe", "win")
+	end
 end
 
 
