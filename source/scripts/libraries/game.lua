@@ -30,19 +30,19 @@ end
 function Game:startTransition(transition)
 	local transitionTimer
 
-	if transition == "wipe" then
-		transitionTimer = self:wipeTransition(0, 400)
-	else
+	if transition == "fade" then
 		transitionTimer = self:fadeTransition(0, 1)
+	else
+		transitionTimer = self:wipeTransition(0, 400)
 	end
 
 	transitionTimer.timerEndedCallback = function()
 		self:loadNewScene()
 
-		if transition == "wipe" then
-			transitionTimer = self:wipeTransition(400, 0)
-		else
+		if transition == "fade" then
 			transitionTimer = self:fadeTransition(1, 0)
+		else
+			transitionTimer = self:wipeTransition(400, 0)
 		end
 
 		transitionTimer.timerEndedCallback = function()

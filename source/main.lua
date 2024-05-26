@@ -10,8 +10,7 @@ import "scripts/libraries/Game"
 import "scripts/libraries/LDtk"
 
 -- Scenes
-import "scripts/scenes/Title"
-import "scripts/scenes/Win"
+import "scripts/scenes/Screen"
 import "scripts/scenes/World"
 
 -- Scripts
@@ -31,7 +30,7 @@ local gfx <const> = playdate.graphics
 gm = Game()
 
 -- Create Title Screen
-Title()
+Screen('title')
 
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
@@ -42,6 +41,3 @@ function pd.update()
 	pd.timer.updateTimers()
 	pd.drawFPS(383, 2)
 end
-
--- function pd.gameWillTerminate() g:save() end
--- function pd.deviceWillSleep() g:save() end
