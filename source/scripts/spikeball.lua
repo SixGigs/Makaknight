@@ -33,7 +33,9 @@ end
 --- @param  other   table The object being collided with
 --- @return unknown table The collision response to use
 function Spikeball:collisionResponse(other)
-	if other:getTag() == TAGS.Player then
+	local tag <const> = other:getTag()
+	
+	if tag == TAGS.Player or tag == TAGS.Hazard then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 

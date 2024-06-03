@@ -49,7 +49,10 @@ function Player:init(x, y, gm, face)
 	self:playAnimation()
 
 	-- Roll state finish process
-	self.states["roll"].onAnimationEndEvent = self.touchingGround and self:changeToIdleState() or self:changeState("midJump")
+	self.states["roll"].onAnimationEndEvent = function(self)
+		if self.touchingGround then self:changeToIdleState() else self:changeState("midJump") end
+		self:setCollideRect(35, 44, 10, 36)
+	end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -62,12 +65,12 @@ function Player:init(x, y, gm, face)
 	self.yVelocity = 0
 	self.gravity = 1.0
 	self.maxSpeed = 3.5
+	self.jumpVelocity = -11.2
+	self.minimumAirSpeed = 0.5
 	self.walkSpeed = 2
 	self.jumpSpeed = 3
-	self.jumpVelocity = -11.2
 	self.drag = 0.1
-	self.minimumAirSpeed = 0.5
-	
+
 	-- Buffer
 	self.bufferAmount = 2
 
@@ -91,7 +94,7 @@ function Player:init(x, y, gm, face)
 
 	-- Dash
 	self.dashAvailable = true
-	self.dashSpeed = 11
+	self.dashSpeed = 12
 	self.dashMinimumSpeed = 3
 	self.dashDrag = 1.4
 
@@ -562,6 +565,7 @@ end
 --- Change the player into a roll state
 function Player:changeToRollState(direction)
 	self.rollAvailable = false
+	self:setCollideRect(35, 61, 10, 19)
 
 	if direction == "left" then
 		self.xVelocity = -self.rollSpeed

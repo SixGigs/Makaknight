@@ -30,6 +30,7 @@ local gfx <const> = playdate.graphics
 gm = Game()
 
 -- Create Title Screen
+-- World()
 Screen("title")
 
 
