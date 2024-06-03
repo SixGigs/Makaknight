@@ -1,7 +1,7 @@
 name=Makaknight
 author=SixGigs
-description=Adventure awaits
+description=Reach the tower and claim your crown!
 bundleID=com.six.makaknight
 version=0.1.0
-buildNumber=98
+buildNumber=99
 imagePath=images/launcher
