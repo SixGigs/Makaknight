@@ -209,6 +209,22 @@
 					],
 					"__worldX": 1056,
 					"__worldY": -160
+				},
+				{
+					"__identifier": "Stone",
+					"__grid": [1,7],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2097, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "20016360-fec0-11ee-983d-7d7baa839fb9",
+					"width": 32,
+					"height": 16,
+					"defUid": 2096,
+					"px": [16,112],
+					"fieldInstances": [],
+					"__worldX": 816,
+					"__worldY": -128
 				}
 			]
 		},
@@ -697,5 +713,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "a818a190-fec0-11ee-a12c-2f1ed95233a5", "dir": "w" }, { "levelIid": "f0a1a5a0-fec0-11ee-a12c-ed1147c02f1c", "dir": "e" }, { "levelIid": "805bab80-fec0-11ee-a12c-fb5b83e39307", "dir": "nw" } ]
+	"__neighbours": [ { "levelIid": "a818a190-fec0-11ee-a12c-2f1ed95233a5", "dir": "w" }, { "levelIid": "f0a1a5a0-fec0-11ee-a12c-ed1147c02f1c", "dir": "e" } ]
 }
