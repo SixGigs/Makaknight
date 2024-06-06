@@ -50,7 +50,7 @@ function Player:init(x, y, gm, face)
 
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self)
-		if self.touchingGround then self:changeToIdleState() else self:changeState("midJump") end
+		self:changeState("midJump")
 		self:setCollideRect(35, 44, 10, 36)
 	end
 
@@ -64,11 +64,11 @@ function Player:init(x, y, gm, face)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 1.0
-	self.maxSpeed = 3.5
+	self.maxSpeed = 4.5
 	self.jumpVelocity = -11.2
 	self.minimumAirSpeed = 0.5
 	self.walkSpeed = 2
-	self.jumpSpeed = 3
+	self.jumpSpeed = 3.5
 	self.drag = 0.1
 
 	-- Buffer
@@ -76,17 +76,29 @@ function Player:init(x, y, gm, face)
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollSpeed = 3.5
+	self.rollSpeed = 4
 	self.rollBuffer = 0
-	self.rollRecharge = 300
+	self.rollRecharge = 600
 
 	-- Dive
-	self.diveSpeed = 20
+	self.diveSpeed = 25
 	self.diveHorizontal = 4
 
-	-- Jump Buffer
+	-- Jump attributes
 	self.jumpBufferAmount = 5
 	self.jumpBuffer = 0
+	self.jumpStates = {
+		["jump"] = true,
+		["jump1"] = true,
+		["jump2"] = true,
+		["jump3"] = true,
+		["midJump"] = true,
+		["fall"] = true,
+		["fall1"] = true,
+		["fall2"] = true,
+		["fall3"] = true,
+		["dive"] = true
+	}
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
@@ -202,7 +214,8 @@ function Player:playerPressedRight() return self.rightBuffer > 0 end --- Used to
 ----------------------------------------------------------------------------------------------------------
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	if self.currentState == "jump" or self.currentState == "jump1" or self.currentState == "jump2" or self.currentState == "jump3" or self.currentState == "midJump" or self.currentState == "fall" or self.currentState == "fall1" or self.currentState == "fall2" or self.currentState == "fall3" or self.currentState == "dive" then
+	-- If the player is in the air we use this statement to handle that
+	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
 			if self.yVelocity > 14 then
 				self:changeToContactState()

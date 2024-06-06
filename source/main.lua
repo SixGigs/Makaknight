@@ -30,9 +30,7 @@ local gfx <const> = playdate.graphics
 gm = Game()
 
 -- Create Title Screen
--- World()
 Screen("title")
-
 
 -- Set Playdate Refresh Rate
 pd.display.setRefreshRate(30)
