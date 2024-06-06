@@ -13,13 +13,14 @@ class("Flag").extends(AnimatedSprite)
 --- @param gameManager table The game manager passed into the object
 function Flag:init(x, y, entity, world)
 	-- Initialise the state machine using the flag sprite sheet
-	Flag.super.init(self, gfx.imagetable.new("images/entities/flag-table-64-48"))
+	local flagImageTable <const> = gfx.imagetable.new("images/entities/flag-table-64-48")
+	Flag.super.init(self, flagImageTable)
 
 	-- Set states in the state machine
 	self:addState("down", 1, 1)
-	self:addState("raise", 2, 9, {tickStep = 1.5})
+	self:addState("raise", 2, 9, {tickStep = 1.5, loop = 1, nextAnimation = "up"})
 	self:addState("up", 10, 14, {tickStep = 3})
-	self:addState("lower", 15, 24, {tickStep = 1.5})
+	self:addState("lower", 15, 24, {tickStep = 1.5, loop = 1, nextAnimation = "down"})
 	self:playAnimation()
 
 	-- Save the ID of the flag as an attribute
@@ -28,11 +29,11 @@ function Flag:init(x, y, entity, world)
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
 	if self.id == world.flag then
-		self.active = true
 		self:changeState("up")
+		self.active = true
 	else
-		self.active = false
 		self:changeState("down")
+		self.active = false
 	end
 
 	-- Flag properties
@@ -48,11 +49,8 @@ end
 --- TODO: Can we get this method called from this object using the update? If when updating the player collides with self?
 function Flag:hoist()
 	if self.active == false then
-		self.active = true
 		self:changeState("raise")
-		pd.timer.performAfterDelay(325, function()
-			self:changeState("up")
-		end)
+		self.active = true
 	end
 end
 
@@ -61,10 +59,7 @@ end
 --- TODO: Can we get this method called from this object using the update? Get any existing checkpoints and deactivate them?
 function Flag:lower()
 	if self.active == true then
-		self.active = false
 		self:changeState("lower")
-		pd.timer.performAfterDelay(325, function()
-			self:changeState("down")
-		end)
+		self.active = false
 	end
 end
