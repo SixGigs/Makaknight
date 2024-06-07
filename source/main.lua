@@ -28,12 +28,13 @@ import "scripts/Spikeball"
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 gm = Game()
+fps = 30
 
 -- Create Title Screen
 Screen("title")
 
 -- Set Playdate Refresh Rate
-pd.display.setRefreshRate(30)
+pd.display.setRefreshRate(fps)
 
 -- Main Game Loop
 function pd.update()
