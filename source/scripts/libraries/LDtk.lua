@@ -21,7 +21,7 @@
 -- Additional tileset filename: flipped-mytileset-table-8-8.png
 -- Original tiles
 --	(=\
--- Flipped tiles (image is 100% larger width and height, right side is flipped horozontally, bottom side is flipped vertically)
+-- Flipped tiles (image is 100% larger width and height, right side is flipped horizontally, bottom side is flipped vertically)
 --	(=\/=)
 --	(=/\=)
 

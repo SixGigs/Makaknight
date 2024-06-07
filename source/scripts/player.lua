@@ -218,7 +218,11 @@ function Player:handleState()
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
 			if self.yVelocity > 14 then
-				self:changeToContactState()
+				if pd.buttonIsPressed(pd.kButtonDown) then
+					self:changeToDuckState()
+				else
+					self:changeToContactState()
+				end
 			else
 				self:changeToIdleState()
 			end
@@ -452,7 +456,7 @@ function Player:handleGroundInput()
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToWalkState("right")
 		elseif pd.buttonIsPressed(pd.kButtonDown) then
-			self:changeToDuckState()
+			self:changeToDuckingState()
 		else
 			self:changeToIdleState()
 		end
@@ -567,8 +571,15 @@ function Player:changeToDoubleJumpState()
 end
 
 
---- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckState()
+	self.xVelocity = 0
+	self:setCollideRect(35, 61, 10, 19)
+	self:changeState("duck")
+end
+
+
+--- Changes the player sprite to the crouch state when down is pressed
+function Player:changeToDuckingState()
 	self.xVelocity = 0
 	self:setCollideRect(35, 61, 10, 19)
 	self:changeState("duckDown")
@@ -612,7 +623,7 @@ function Player:changeToPunchState(state)
 
 	pd.timer.performAfterDelay(75, function()
 		if pd.buttonIsPressed(pd.kButtonDown) then
-			self:changeToDuckState()
+			self:changeToDuckingState()
 		else
 			self:setCollideRect(35, 44, 10, 36)
 			self:changeToIdleState()
