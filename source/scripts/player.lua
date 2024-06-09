@@ -53,6 +53,16 @@ function Player:init(x, y, gm, face)
 		self:changeState("midJump")
 		self:setCollideRect(35, 44, 10, 36)
 	end
+	
+	-- Fall state on tick events
+	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -8 then self:changeState("jump1") end end
+	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -5 then self:changeState("jump2") end end
+	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -3 then self:changeState("jump3") end end
+	self.states["jump3"].onFrameChangedEvent = function(self) if self.yVelocity > -2 then self:changeState("midJump") end end
+	self.states["midJump"].onFrameChangedEvent = function(self) if self.yVelocity > -1 then self:changeState("fall") end end
+	self.states["fall"].onFrameChangedEvent = function(self) if self.yVelocity > 0 then self:changeState("fall1") end end
+	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 2 then self:changeState("fall2") end end
+	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 5 then self:changeState("fall3") end end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -226,22 +236,6 @@ function Player:handleState()
 			else
 				self:changeToIdleState()
 			end
-		elseif self.yVelocity > 5 then
-			self:changeState("fall3")
-		elseif self.yVelocity > 2 then
-			self:changeState("fall2")
-		elseif self.yVelocity > 0 then
-			self:changeState("fall1")
-		elseif self.yVelocity > -1 then
-			self:changeState("fall")
-		elseif self.yVelocity > -2 then
-			self:changeState("midJump")
-		elseif self.yVelocity > -3 then
-			self:changeState("jump3")
-		elseif self.yVelocity > -5 then
-			self:changeState("jump2")
-		elseif self.yVelocity > -8 then
-			self:changeState("jump1")
 		end
 
 		self:applyGravity()
@@ -263,7 +257,7 @@ function Player:handleState()
 		self:handleDuckInput()
 
 		if self.yVelocity > 1 then
-			self:changeState("fall3")
+			self:changeState("fall")
 		end
 	elseif self.currentState == "doubleJump" then
 		if self.touchingGround then
@@ -279,7 +273,7 @@ function Player:handleState()
 		self:handleGroundInput()
 
 		if self.yVelocity > 1 then
-			self:changeState("fall1")
+			self:changeState("fall")
 		end
 	end
 end

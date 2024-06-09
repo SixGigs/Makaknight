@@ -3,5 +3,5 @@ author=SixGigs
 description=Reach the tower and claim your crown!
 bundleID=com.six.makaknight
 version=0.0.2
-buildNumber=203
+buildNumber=204
 imagePath=images/launcher
