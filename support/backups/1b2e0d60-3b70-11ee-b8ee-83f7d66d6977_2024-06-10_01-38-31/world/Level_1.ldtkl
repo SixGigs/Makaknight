@@ -89,6 +89,22 @@
 					],
 					"__worldX": 640,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Crag",
+					"__grid": [14,5],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "155eea40-fec0-11ee-983d-07e17161f8e3",
+					"width": 32,
+					"height": 16,
+					"defUid": 3348,
+					"px": [224,80],
+					"fieldInstances": [],
+					"__worldX": 624,
+					"__worldY": -160
 				}
 			]
 		},
