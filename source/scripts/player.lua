@@ -37,7 +37,7 @@ function Player:init(x, y, gm, face)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
-	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1, nextAnimation = "midJump"})
+	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1})
 
 	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
 	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
@@ -51,7 +51,12 @@ function Player:init(x, y, gm, face)
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self)
 		self:changeState("midJump")
-		self:setCollideRect(35, 44, 10, 36)
+		self:setCollideRect(38, 44, 4, 36)
+	end
+
+	self.states["doubleJump"].onAnimationEndEvent = function(self)
+		self:changeState("midJump")
+		self:setCollideRect(38, 44, 4, 36)
 	end
 	
 	-- Fall state on tick events
@@ -64,11 +69,22 @@ function Player:init(x, y, gm, face)
 	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 2 then self:changeState("fall2") end end
 	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 5 then self:changeState("fall3") end end
 
+	-- Player Attributes
+	self.width = 4
+	self.height = 36
+	self.globalFlip = face
+	self.touchingGround = false
+	self.touchingCeiling = false
+	self.touchingWall = false
+	self.touchingDoor = false
+	self.win = false
+	self.dead = false
+
 	-- Sprite properties
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(35, 44, 10, 36)
+	self:setCollideRect(38, 44, 4, 36)
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -134,15 +150,6 @@ function Player:init(x, y, gm, face)
 	-- Left & Right buffers
 	self.leftBuffer = 0
 	self.rightBuffer = 0
-
-	-- Player Attributes
-	self.globalFlip = face
-	self.touchingGround = false
-	self.touchingCeiling = false
-	self.touchingWall = false
-	self.touchingDoor = false
-	self.win = false
-	self.dead = false
 end
 
 
@@ -231,9 +238,11 @@ function Player:handleState()
 				if pd.buttonIsPressed(pd.kButtonDown) then
 					self:changeToDuckState()
 				else
+					self:setCollideRect(38, 44, 4, 36)
 					self:changeToContactState()
 				end
 			else
+				self:setCollideRect(38, 44, 4, 36)
 				self:changeToIdleState()
 			end
 		end
@@ -261,6 +270,7 @@ function Player:handleState()
 		end
 	elseif self.currentState == "doubleJump" then
 		if self.touchingGround then
+			self:setCollideRect(38, 44, 4, 36)
 			self:changeToIdleState()
 		end
 
@@ -481,7 +491,7 @@ end
 --- Handle input while the player is crouched
 function Player:handleDuckInput()
 	if pd.buttonJustReleased(pd.kButtonDown) then
-		self:setCollideRect(35, 44, 10, 36)
+		self:setCollideRect(38, 44, 4, 36)
 		self:changeState("duckUp")
 	end
 
@@ -561,13 +571,14 @@ end
 function Player:changeToDoubleJumpState()
 	self.jumpBuffer = 0
 	self.yVelocity = self.doubleJumpVelocity
+	self:setCollideRect(38, 61, 4, 19)
 	self:changeState("doubleJump")
 end
 
 
 function Player:changeToDuckState()
 	self.xVelocity = 0
-	self:setCollideRect(35, 61, 10, 19)
+	self:setCollideRect(38, 61, 4, 19)
 	self:changeState("duck")
 end
 
@@ -575,7 +586,7 @@ end
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
 	self.xVelocity = 0
-	self:setCollideRect(35, 61, 10, 19)
+	self:setCollideRect(38, 61, 4, 19)
 	self:changeState("duckDown")
 end
 
@@ -583,7 +594,7 @@ end
 --- Change the player into a roll state
 function Player:changeToRollState(direction)
 	self.rollAvailable = false
-	self:setCollideRect(35, 61, 10, 19)
+	self:setCollideRect(38, 61, 4, 19)
 
 	if direction == "left" then
 		self.xVelocity = -self.rollSpeed
@@ -619,7 +630,7 @@ function Player:changeToPunchState(state)
 		if pd.buttonIsPressed(pd.kButtonDown) then
 			self:changeToDuckingState()
 		else
-			self:setCollideRect(35, 44, 10, 36)
+			self:setCollideRect(38, 44, 4, 36)
 			self:changeToIdleState()
 		end
 	end)
