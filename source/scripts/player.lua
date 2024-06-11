@@ -262,6 +262,7 @@ function Player:handleState()
 			self:changeState("midJump")
 		end
 	elseif self.currentState == "duck" then
+		self.xVelocity = 0
 		self:applyGravity()
 		self:handleDuckInput()
 
