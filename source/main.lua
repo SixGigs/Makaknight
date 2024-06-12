@@ -24,25 +24,23 @@ import "scripts/Prop"
 import "scripts/Spike"
 import "scripts/Spikeball"
 
--- PlayDate Constants & Globals
+-- Local Playdate Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+
+-- Game Globals
 g = Game()
-deltaTime = 0
+dt = 0
 fps = 50
 
--- Create Title Screen
-Screen("title")
-
--- Set Playdate Refresh Rate
-pd.display.setRefreshRate(fps)
+pd.display.setRefreshRate(fps) -- Set Playdate Refresh Rate
+Screen("title") -- Create Title Screen
 
 -- Main Game Loop
 function pd.update()
+	dt = playdate.getElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
 	pd.drawFPS(383, 2)
-
-	deltaTime = playdate.getElapsedTime()
 	playdate.resetElapsedTime()
 end

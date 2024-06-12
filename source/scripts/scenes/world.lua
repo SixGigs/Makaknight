@@ -65,9 +65,9 @@ function World:enterRoom(direction)
 	elseif direction == "south" then
 		x, y = self.player.x, 24
 	elseif direction == "east" then
-		x, y = 4, self.player.y
+		x, y = 8, self.player.y
 	elseif direction == "west" then
-		x, y = 396, self.player.y
+		x, y = 392, self.player.y
 	end
 
 	-- Move the player to the new X and Y
@@ -146,6 +146,8 @@ function World:goToLevel(level)
 
 	-- Load the background for the new level
 	self:loadBackground(level)
+	
+	playdate.resetElapsedTime()
 end
 
 

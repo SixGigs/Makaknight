@@ -15,11 +15,11 @@ function Animal:init(x, y, e)
 
 	-- Animal states, sprites, and animation speeds
 	if e.fields.fly then
-		self:addState("fly", 1, 4, {tickStep = g:fps(3)})
+		self:addState("fly", 1, 4, {tickStep = 3})
 	else
 		self:addState("idle", 1, 1)
-		self:addState("blep", 2, 4, {tickStep = g:fps(3)})
-		self:addState("walk", 5, 8, {tickStep = g:fps(3)})
+		self:addState("blep", 2, 4, {tickStep = 3})
+		self:addState("walk", 5, 8, {tickStep = 3})
 	end
 	self:playAnimation()
 
@@ -92,8 +92,8 @@ function Animal:handleFlight()
 		pd.timer.performAfterDelay(math.random(50, 150), function()
 			local xSpeed <const> = math.random(-self.speed, self.speed)
 			local ySpeed <const> = math.random(-self.speed, self.speed)
-			self.xVelocity = xSpeed * deltaTime
-			self.yVelocity = ySpeed * deltaTime
+			self.xVelocity = xSpeed * dt
+			self.yVelocity = ySpeed * dt
 			self.timer = false
 		end)
 	end
@@ -103,7 +103,7 @@ end
 --- Handles all Animal movement and any collisions it has
 function Animal:handleMovementAndCollisions()
 	-- Get a list of collisions
-	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
 
 	-- Reset the collision tracking attributes
 	self.touchingGround = false
