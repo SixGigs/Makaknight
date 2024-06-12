@@ -60,14 +60,14 @@ function Player:init(x, y, world, face)
 	end
 
 	-- Fall state on tick events
-	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -8 then self:changeState("jump1") end end
-	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -5 then self:changeState("jump2") end end
-	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -3 then self:changeState("jump3") end end
-	self.states["jump3"].onFrameChangedEvent = function(self) if self.yVelocity > -2 then self:changeState("midJump") end end
-	self.states["midJump"].onFrameChangedEvent = function(self) if self.yVelocity > -1 then self:changeState("fall") end end
+	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -240 then self:changeState("jump1") end end
+	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -150 then self:changeState("jump2") end end
+	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -90 then self:changeState("jump3") end end
+	self.states["jump3"].onFrameChangedEvent = function(self) if self.yVelocity > -60 then self:changeState("midJump") end end
+	self.states["midJump"].onFrameChangedEvent = function(self) if self.yVelocity > -30 then self:changeState("fall") end end
 	self.states["fall"].onFrameChangedEvent = function(self) if self.yVelocity > 0 then self:changeState("fall1") end end
-	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 2 then self:changeState("fall2") end end
-	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 5 then self:changeState("fall3") end end
+	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 60 then self:changeState("fall2") end end
+	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 150 then self:changeState("fall3") end end
 
 	-- Player Attributes
 	self.width = 4
@@ -89,29 +89,29 @@ function Player:init(x, y, world, face)
 	-- Physics properties
 	self.xVelocity = 0
 	self.yVelocity = 0
-	self.gravity = 1.0
-	self.maxSpeed = 4.5
-	self.jumpVelocity = -11.2
-	self.minimumAirSpeed = 0.5
-	self.walkSpeed = 2
-	self.jumpSpeed = 3.5
-	self.drag = 0.1
+	self.gravity = 900
+	self.maxSpeed = 135
+	self.jumpVelocity = -336
+	self.minimumAirSpeed = 15
+	self.walkSpeed = 60
+	self.jumpSpeed = 105
+	self.drag = 9
 
 	-- Buffer
 	self.bufferAmount = 2
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollSpeed = 4
+	self.rollSpeed = 150
 	self.rollBuffer = 0
 	self.rollRecharge = 600
 
 	-- Dive
-	self.diveSpeed = 25
-	self.diveHorizontal = 4
+	self.diveSpeed = 750
+	self.diveHorizontal = 160
 
 	-- Jump attributes
-	self.jumpBufferAmount = 5
+	self.jumpBufferAmount = 150
 	self.jumpBuffer = 0
 	self.jumpStates = {
 		["jump"] = true,
@@ -128,13 +128,13 @@ function Player:init(x, y, world, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -8.5
+	self.doubleJumpVelocity = -255
 
 	-- Dash
 	self.dashAvailable = true
-	self.dashSpeed = 12
-	self.dashMinimumSpeed = 3
-	self.dashDrag = 1.4
+	self.dashSpeed = 360
+	self.dashMinimumSpeed = 105
+	self.dashDrag = 1134
 
 	-- Door Management
 	self.doorTimer = 2
@@ -144,7 +144,7 @@ function Player:init(x, y, world, face)
 
 	-- Punch
 	self.punchAvailable = false
-	self.punchBufferAmount = 5
+	self.punchBufferAmount = 150
 	self.punchBuffer = 0
 	
 	-- Left & Right buffers
@@ -194,11 +194,13 @@ end
 --- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
-	self.jumpBuffer = math.max(self.jumpBuffer - 1, 0)
-	self.rollBuffer = math.max(self.rollBuffer - 1, 0)
-	self.punchBuffer = math.max(self.punchBuffer - 1, 0)
-	self.leftBuffer = math.max(self.leftBuffer - 1, 0)
-	self.rightBuffer = math.max(self.rightBuffer - 1, 0)
+	self.jumpBuffer = math.max(self.jumpBuffer - (30 * deltaTime), 0)
+	self.rollBuffer = math.max(self.rollBuffer - (30 * deltaTime), 0)
+	self.punchBuffer = math.max(self.punchBuffer - (30 * deltaTime), 0)
+	self.leftBuffer = math.max(self.leftBuffer - (30 * deltaTime), 0)
+	self.rightBuffer = math.max(self.rightBuffer - (30 * deltaTime), 0)
+
+	print(self.rollBuffer)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -234,7 +236,7 @@ function Player:handleState()
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
-			if self.yVelocity > 14 then
+			if self.yVelocity > 420 then
 				if pd.buttonIsPressed(pd.kButtonDown) then
 					self:changeToDuckState()
 				else
@@ -251,7 +253,7 @@ function Player:handleState()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
 	elseif self.currentState == "roll" then
-		if self.yVelocity > 1 then
+		if self.yVelocity > 90 then
 			self:applyDrag(self.drag)
 		end
 
@@ -266,7 +268,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:handleDuckInput()
 
-		if self.yVelocity > 1 then
+		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
 	elseif self.currentState == "doubleJump" then
@@ -283,7 +285,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:handleGroundInput()
 
-		if self.yVelocity > 1 then
+		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
 	end
@@ -293,7 +295,7 @@ end
 ----------------------------------------------------------------------------------------------------------
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
-	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * deltaTime), self.y + (self.yVelocity * deltaTime))
 
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -364,7 +366,7 @@ function Player:handleMovementAndCollisions()
 
 	-- Check if we die from fall damage
 	if self.touchingGround then
-		if self.yVelocity > 45 then
+		if self.yVelocity > 1350 then
 			died = true
 		end
 	end
@@ -660,7 +662,7 @@ end
 
 --- Changes the player to the dive state
 function Player:changeToDiveState()
-	self.yVelocity = self.yVelocity + self.diveSpeed
+	self.yVelocity = self.diveSpeed
 	if self.globalFlip == 0 then
 		self.xVelocity = self.diveHorizontal
 	else
@@ -695,7 +697,7 @@ end
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + self.gravity
+	self.yVelocity = self.yVelocity + (self.gravity * deltaTime)
 	if self.touchingGround or self.touchingCeiling then
 		self.yVelocity = 0
 	end
@@ -705,9 +707,9 @@ end
 --- @param amount integer The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
-		self.xVelocity = self.xVelocity - amount
+		self.xVelocity = self.xVelocity - (amount * deltaTime)
 	elseif self.xVelocity < 0 then
-		self.xVelocity = self.xVelocity + amount
+		self.xVelocity = self.xVelocity + (amount * deltaTime)
 	end
 
 	if math.abs(self.xVelocity) < self.minimumAirSpeed or self.touchingWall then

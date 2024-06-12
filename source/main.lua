@@ -28,7 +28,8 @@ import "scripts/Spikeball"
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 g = Game()
-fps = 30
+fps = 50
+deltaTime = 0
 
 -- Create Title Screen
 Screen("title")
@@ -41,4 +42,7 @@ function pd.update()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
 	pd.drawFPS(383, 2)
+
+	deltaTime = playdate.getElapsedTime()
+	playdate.resetElapsedTime()
 end
