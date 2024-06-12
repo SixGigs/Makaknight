@@ -138,3 +138,10 @@ function Game:createTransitionSprite()
 
 	return transitionSprite
 end
+
+
+--- Convert animation speed with FPS
+function Game:fps(tickStep)
+	tickStep = tickStep * 3
+	return tickStep / 100 * fps
+end
