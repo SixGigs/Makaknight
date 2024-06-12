@@ -152,11 +152,11 @@ end
 --- Load the background for the level sent into the function
 --- @param level string The name of the 
 function World:loadBackground(level)
-	local bgImage <const> = LDtk.get_background(level)
-	if bgImage then
-		local backgroundImage <const> = gfx.image.new("levels/" .. bgImage)
+	local bg <const> = LDtk.get_background(level)
+	if bg then
+		local background <const> = gfx.image.new("levels/"..bg)
 		gfx.sprite.setBackgroundDrawingCallback(function()
-			backgroundImage:draw(0, 0)
+			background:draw(0, 0)
 		end)
 	end
 end

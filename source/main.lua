@@ -27,7 +27,7 @@ import "scripts/Spikeball"
 -- PlayDate Constants & Globals
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-gm = Game()
+g = Game()
 fps = 30
 
 -- Create Title Screen

@@ -12,7 +12,7 @@ function Screen:init(scene)
 	self.scene = scene
 
 	-- Set image for the scene
-	self:setImage(gfx.image.new("images/" .. self.scene))
+	self:setImage(gfx.image.new("images/"..self.scene))
 	self:moveTo(200, 120)
 	self:add()
 end
@@ -22,9 +22,9 @@ end
 function Screen:update()
 	if pd.buttonJustPressed(pd.kButtonA) then
 		if self.scene == "title" then
-			gm:switchScene(World)
+			g:switchScene(World)
 		else
-			gm:switchScene(Screen, "wipe", "title")
+			g:switchScene(Screen, "wipe", "title")
 		end
 	end
 end

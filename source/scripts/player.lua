@@ -7,45 +7,45 @@ class("Player").extends(AnimatedSprite)
 
 
 --- The player is initialised with this method
---- @param x    integer The X coordinate to spawn the player
---- @param y    integer The Y coordinate to spawn the player
---- @param gm   table   The game manager is passed in to manage player on object interactions
---- @param face integer The direction the player is facing as a 1 or 0
-function Player:init(x, y, gm, face)
+--- @param x     integer The X coordinate to spawn the player
+--- @param y     integer The Y coordinate to spawn the player
+--- @param world table   The game manager is passed in to manage player on object interactions
+--- @param face  integer The direction the player is facing as a 1 or 0
+function Player:init(x, y, world, face)
 	-- Game Manager
-	self.world = gm
+	self.world = world
 
 	-- Create the player state machine with the tile set
 	local playerImageTable <const> = gfx.imagetable.new("images/player/player-table-80-80")
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds
-	self:addState("idle", 1, 16, {tickStep = 2})
-	self:addState("walk", 17, 28, {tickStep = 1.4})
-	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 1, nextAnimation = "duck"})
+	self:addState("idle", 1, 16, {tickStep = g:fps(2)})
+	self:addState("walk", 17, 28, {tickStep = g:fps(1.4)})
+	self:addState("duckDown", 29, 29, {tickStep = g:fps(1), loop = 1, nextAnimation = "duck"})
 	self:addState("duck", 30, 30)
-	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
+	self:addState("duckUp", 31, 31, {tickStep = g:fps(1), loop = 1, nextAnimation = "idle"})
 	self:addState("jump", 32, 32)
 	self:addState("jump1", 33, 33)
 	self:addState("jump2", 34, 34)
 	self:addState("jump3", 35, 35)
 	self:addState("midJump", 36, 36)
-	self:addState("dash", 36, 36, {tickStep = 1})
+	self:addState("dash", 36, 36)
 	self:addState("fall", 37, 37)
 	self:addState("fall1", 38, 38)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
-	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
-	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1})
+	self:addState("contact", 41, 42, {tickStep = g:fps(2), loop = 1, nextAnimation = "idle"})
+	self:addState("roll", 43, 58, {tickStep = g:fps(1), loop = 1})
+	self:addState("doubleJump", 59, 74, {tickStep = g:fps(1), loop = 1})
 
-	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
-	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
-	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"}) -- Temporary sprite
+	self:addState("run", 17, 28, {tickStep = g:fps(1)}) -- Temporary sprites (using the walk sprites)
+	self:addState("dive", 40, 40, {tickStep = g:fps(1)}) -- Temporary sprite
+	self:addState("die", 29, 29, {tickStep = g:fps(2), loop = 1, nextAnimation = "dead"}) -- Temporary sprite
 	self:addState("dead", 30, 30) -- Temporary sprite
-	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
-	self:addState("punch", 74, 77, {tickStep = 1}) -- State temporarily removed
-	self:addState("duckPunch", 78, 81, {tickStep = 1}) -- State temporarily removed
+	self:addState("spawn", 30, 31, {tickStep = g:fps(3), loop = 1, nextAnimation = "idle"}) -- Temporary sprites
+	self:addState("punch", 74, 77, {tickStep = g:fps(1)}) -- State temporarily removed
+	self:addState("duckPunch", 78, 81, {tickStep = g:fps(1)}) -- State temporarily removed
 	self:playAnimation()
 
 	-- Roll state finish process
@@ -58,7 +58,7 @@ function Player:init(x, y, gm, face)
 		self:changeState("midJump")
 		self:setCollideRect(38, 44, 4, 36)
 	end
-	
+
 	-- Fall state on tick events
 	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -8 then self:changeState("jump1") end end
 	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -5 then self:changeState("jump2") end end
@@ -419,7 +419,7 @@ function Player:handleCrownCollision()
 	if not self.win then
 		self.win = true
 		self.world:unsetMenu()
-		gm:switchScene(Screen, "wipe", "win")
+		g:switchScene(Screen, "wipe", "win")
 	end
 end
 
