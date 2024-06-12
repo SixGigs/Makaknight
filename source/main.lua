@@ -39,8 +39,8 @@ Screen("title") -- Create Title Screen
 -- Main Game Loop
 function pd.update()
 	dt = playdate.getElapsedTime()
+	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
 	pd.drawFPS(383, 2)
-	playdate.resetElapsedTime()
 end
