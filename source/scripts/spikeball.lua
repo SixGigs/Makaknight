@@ -45,7 +45,7 @@ end
 
 --- The update method for the spike-ball, it will run every tick
 function Spikeball:update()
-	local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * deltaTime), self.y + (self.yVelocity * deltaTime))
 	local hitWall = false
 
 	for i = 1, length do

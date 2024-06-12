@@ -200,8 +200,6 @@ function Player:updateBuffers()
 	self.leftBuffer = math.max(self.leftBuffer - (30 * deltaTime), 0)
 	self.rightBuffer = math.max(self.rightBuffer - (30 * deltaTime), 0)
 
-	print(self.rollBuffer)
-
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
 		self.jumpBuffer = self.jumpBufferAmount
