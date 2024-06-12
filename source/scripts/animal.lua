@@ -92,8 +92,8 @@ function Animal:handleFlight()
 		pd.timer.performAfterDelay(math.random(50, 150), function()
 			local xSpeed <const> = math.random(-self.speed, self.speed)
 			local ySpeed <const> = math.random(-self.speed, self.speed)
-			self.xVelocity = xSpeed
-			self.yVelocity = ySpeed
+			self.xVelocity = xSpeed * deltaTime
+			self.yVelocity = ySpeed * deltaTime
 			self.timer = false
 		end)
 	end

@@ -54,7 +54,7 @@
 			"entityInstances": [
 				{
 					"__identifier": "Spikeball",
-					"__grid": [13,9],
+					"__grid": [14,9],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -63,17 +63,17 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 69,
-					"px": [208,144],
+					"px": [224,144],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": 120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
-					"__worldX": 3408,
+					"__worldX": 3424,
 					"__worldY": -1296
 				},
 				{
 					"__identifier": "Spikeball",
-					"__grid": [13,8],
+					"__grid": [14,8],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -82,12 +82,12 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 69,
-					"px": [208,128],
+					"px": [224,128],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": 120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
-					"__worldX": 3408,
+					"__worldX": 3424,
 					"__worldY": -1312
 				},
 				{
@@ -103,7 +103,7 @@
 					"defUid": 69,
 					"px": [128,64],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": 120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
 					"__worldX": 3328,
@@ -122,7 +122,7 @@
 					"defUid": 69,
 					"px": [128,80],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": 120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
 					"__worldX": 3328,
@@ -141,7 +141,7 @@
 					"defUid": 69,
 					"px": [256,64],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": -3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [-3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": -120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [-120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
 					"__worldX": 3456,
@@ -160,7 +160,7 @@
 					"defUid": 69,
 					"px": [256,80],
 					"fieldInstances": [
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": -3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [-3] }] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": -120, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [-120] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
 					],
 					"__worldX": 3456,

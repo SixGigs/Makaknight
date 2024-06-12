@@ -28,8 +28,8 @@ import "scripts/Spikeball"
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 g = Game()
-fps = 50
 deltaTime = 0
+fps = 50
 
 -- Create Title Screen
 Screen("title")
