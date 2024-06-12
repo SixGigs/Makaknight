@@ -18,9 +18,9 @@ function Flag:init(x, y, entity, world)
 
 	-- Set states in the state machine
 	self:addState("down", 1, 1)
-	self:addState("raise", 2, 9, {tickStep = g:fps(1.5), loop = 1, nextAnimation = "up"})
-	self:addState("up", 10, 14, {tickStep = g:fps(3)})
-	self:addState("lower", 15, 24, {tickStep = g:fps(1.5), loop = 1, nextAnimation = "down"})
+	self:addState("raise", 2, 9, {tickStep = 1.5, loop = 1, nextAnimation = "up"})
+	self:addState("up", 10, 14, {tickStep = 3})
+	self:addState("lower", 15, 24, {tickStep = 1.5, loop = 1, nextAnimation = "down"})
 	self:playAnimation()
 
 	-- Save the ID of the flag as an attribute

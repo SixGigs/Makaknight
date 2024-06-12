@@ -13,7 +13,7 @@ function Crown:init(x, y)
 	Crown.super.init(self, gfx.imagetable.new("images/entities/crown-table-48-48"))
 
 	-- Crown states, sprites, and animation speeds
-	self:addState("spin", 1, 32, {tickStep = g:fps(1)})
+	self:addState("spin", 1, 32, {tickStep = 1})
 	self:playAnimation()
 
 	-- Crown properties

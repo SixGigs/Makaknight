@@ -20,11 +20,11 @@ function Player:init(x, y, world, face)
 	Player.super.init(self, playerImageTable)
 
 	-- Player states, sprites, and animation speeds
-	self:addState("idle", 1, 16, {tickStep = g:fps(2)})
-	self:addState("walk", 17, 28, {tickStep = g:fps(1.4)})
-	self:addState("duckDown", 29, 29, {tickStep = g:fps(1), loop = 1, nextAnimation = "duck"})
+	self:addState("idle", 1, 16, {tickStep = 2})
+	self:addState("walk", 17, 28, {tickStep = 1.4})
+	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 1, nextAnimation = "duck"})
 	self:addState("duck", 30, 30)
-	self:addState("duckUp", 31, 31, {tickStep = g:fps(1), loop = 1, nextAnimation = "idle"})
+	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
 	self:addState("jump", 32, 32)
 	self:addState("jump1", 33, 33)
 	self:addState("jump2", 34, 34)
@@ -35,17 +35,17 @@ function Player:init(x, y, world, face)
 	self:addState("fall1", 38, 38)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
-	self:addState("contact", 41, 42, {tickStep = g:fps(2), loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 43, 58, {tickStep = g:fps(1), loop = 1})
-	self:addState("doubleJump", 59, 74, {tickStep = g:fps(1), loop = 1})
+	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
+	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
+	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1})
 
-	self:addState("run", 17, 28, {tickStep = g:fps(1)}) -- Temporary sprites (using the walk sprites)
-	self:addState("dive", 40, 40, {tickStep = g:fps(1)}) -- Temporary sprite
-	self:addState("die", 29, 29, {tickStep = g:fps(2), loop = 1, nextAnimation = "dead"}) -- Temporary sprite
+	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
+	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
+	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"}) -- Temporary sprite
 	self:addState("dead", 30, 30) -- Temporary sprite
-	self:addState("spawn", 30, 31, {tickStep = g:fps(3), loop = 1, nextAnimation = "idle"}) -- Temporary sprites
-	self:addState("punch", 74, 77, {tickStep = g:fps(1)}) -- State temporarily removed
-	self:addState("duckPunch", 78, 81, {tickStep = g:fps(1)}) -- State temporarily removed
+	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
+	self:addState("punch", 74, 77, {tickStep = 1}) -- State temporarily removed
+	self:addState("duckPunch", 78, 81, {tickStep = 1}) -- State temporarily removed
 	self:playAnimation()
 
 	-- Roll state finish process
@@ -93,9 +93,9 @@ function Player:init(x, y, world, face)
 	self.maxSpeed = 135
 	self.jumpVelocity = -336
 	self.minimumAirSpeed = 15
-	self.walkSpeed = 60
+	self.walkSpeed = 75
 	self.jumpSpeed = 105
-	self.drag = 9
+	self.drag = 90
 
 	-- Buffer
 	self.bufferAmount = 2
@@ -194,11 +194,11 @@ end
 --- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
-	self.jumpBuffer = math.max(self.jumpBuffer - (30 * deltaTime), 0)
-	self.rollBuffer = math.max(self.rollBuffer - (30 * deltaTime), 0)
-	self.punchBuffer = math.max(self.punchBuffer - (30 * deltaTime), 0)
-	self.leftBuffer = math.max(self.leftBuffer - (30 * deltaTime), 0)
-	self.rightBuffer = math.max(self.rightBuffer - (30 * deltaTime), 0)
+	self.jumpBuffer = math.max(self.jumpBuffer - (30 * dt), 0)
+	self.rollBuffer = math.max(self.rollBuffer - (30 * dt), 0)
+	self.punchBuffer = math.max(self.punchBuffer - (30 * dt), 0)
+	self.leftBuffer = math.max(self.leftBuffer - (30 * dt), 0)
+	self.rightBuffer = math.max(self.rightBuffer - (30 * dt), 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -293,7 +293,7 @@ end
 ----------------------------------------------------------------------------------------------------------
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
-	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * deltaTime), self.y + (self.yVelocity * deltaTime))
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
 
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -352,9 +352,9 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If touching the edge of the level, lets move into the next room
-	if self.x < -5 then
+	if self.x < -2 then
 		self.world:enterRoom("west")
-	elseif self.x > 405 then
+	elseif self.x > 402 then
 		self.world:enterRoom("east")
 	elseif self.y < -32 then
 		self.world:enterRoom("north")
@@ -695,7 +695,7 @@ end
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + (self.gravity * deltaTime)
+	self.yVelocity = self.yVelocity + (self.gravity * dt)
 	if self.touchingGround or self.touchingCeiling then
 		self.yVelocity = 0
 	end
@@ -705,9 +705,9 @@ end
 --- @param amount integer The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
-		self.xVelocity = self.xVelocity - (amount * deltaTime)
+		self.xVelocity = self.xVelocity - (amount * dt)
 	elseif self.xVelocity < 0 then
-		self.xVelocity = self.xVelocity + (amount * deltaTime)
+		self.xVelocity = self.xVelocity + (amount * dt)
 	end
 
 	if math.abs(self.xVelocity) < self.minimumAirSpeed or self.touchingWall then
