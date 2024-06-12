@@ -102,7 +102,7 @@ function Player:init(x, y, world, face)
 
 	-- Roll
 	self.rollAvailable = true
-	self.rollSpeed = 150
+	self.rollSpeed = 120
 	self.rollBuffer = 0
 	self.rollRecharge = 600
 
