@@ -29,7 +29,25 @@ class("World").extends(gfx.sprite)
 function World:init()
 	-- Load the game if there is a save file and create a game if there isn't
 	self:load()
+
+	-- Add a FPS tick box to the pause menu
+	local fiftyHertz = false
+	if fps == 50 then
+		fiftyHertz = true
+	end
+
+	m:addCheckmarkMenuItem("50 FPS", fiftyHertz, function(status)
+		if status then
+			fps = 50
+			pd.display.setRefreshRate(fps)
+		else
+			fps = 30
+			pd.display.setRefreshRate(fps)
+		end
+	end)
 	
+	print(fiftyHertz)
+
 	-- Add the Quick save option to the pause menu
 	m:addMenuItem("Quick save", function() 
 		self:save(true)
@@ -190,6 +208,9 @@ function World:load()
 	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
 	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
 	self.face = (gd and (gd.face and gd.face or 0) or 0)
+	
+	fps = (gd and (gd.fps and gd.fps or 30) or 30)
+	pd.display.setRefreshRate(fps)
 end
 
 
@@ -203,7 +224,8 @@ function World:save(quickSave)
 		levelX = (quickSave and self.player.x or self.spawnX),
 		levelY = (quickSave and self.player.y or self.spawnY),
 		flag = self.flag,
-		face = self.player.globalFlip
+		face = self.player.globalFlip,
+		fps = fps
 	}
 
 	pd.datastore.write(data)
