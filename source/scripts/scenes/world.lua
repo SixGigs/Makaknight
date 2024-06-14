@@ -32,30 +32,27 @@ function World:init()
 
 	-- Add a FPS tick box to the pause menu
 	local fiftyHertz = false
-	if fps == 50 then
-		fiftyHertz = true
-	end
+	if self.fps == 50 then fiftyHertz = true end
 
 	m:addCheckmarkMenuItem("50 FPS", fiftyHertz, function(status)
-		if status then
-			fps = 50
-			pd.display.setRefreshRate(fps)
-		else
-			fps = 30
-			pd.display.setRefreshRate(fps)
+		if status ~= nil then
+			if status then
+				self.fps = 50
+			else
+				self.fps = 30
+			end
+
+			pd.display.setRefreshRate(self.fps)
 		end
 	end)
-	
-	print(fiftyHertz)
 
 	-- Add the Quick save option to the pause menu
-	m:addMenuItem("Quick save", function() 
-		self:save(true)
-	end)
+	m:addMenuItem("Quick Save", function() self:save(true) end)
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
 	self.player = Player(self.levelX, self.levelY, self, self.face)
+	pd.display.setRefreshRate(self.fps)
 end
 
 
@@ -208,9 +205,7 @@ function World:load()
 	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
 	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
 	self.face = (gd and (gd.face and gd.face or 0) or 0)
-	
-	fps = (gd and (gd.fps and gd.fps or 30) or 30)
-	pd.display.setRefreshRate(fps)
+	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
 end
 
 
@@ -225,7 +220,7 @@ function World:save(quickSave)
 		levelY = (quickSave and self.player.y or self.spawnY),
 		flag = self.flag,
 		face = self.player.globalFlip,
-		fps = fps
+		fps = self.fps
 	}
 
 	pd.datastore.write(data)

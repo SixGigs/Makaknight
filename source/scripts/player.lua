@@ -21,7 +21,7 @@ function Player:init(x, y, world, face)
 
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
-	self:addState("walk", 17, 28, {tickStep = 1.4})
+	self:addState("walk", 17, 28, {tickStep = 1.3})
 	self:addState("duckDown", 29, 29, {tickStep = 1, loop = 1, nextAnimation = "duck"})
 	self:addState("duck", 30, 30)
 	self:addState("duckUp", 31, 31, {tickStep = 1, loop = 1, nextAnimation = "idle"})
@@ -93,8 +93,8 @@ function Player:init(x, y, world, face)
 	self.maxSpeed = 135
 	self.jumpVelocity = -336
 	self.minimumAirSpeed = 15
-	self.walkSpeed = 75
-	self.jumpSpeed = 105
+	self.walkSpeed = 90
+	self.jumpSpeed = 115
 	self.drag = 90
 
 	-- Buffer
@@ -128,7 +128,7 @@ function Player:init(x, y, world, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -255
+	self.doubleJumpVelocity = -300
 
 	-- Dash
 	self.dashAvailable = true
