@@ -91,7 +91,7 @@ function Player:init(x, y, world, face)
 	self.yVelocity = 0
 	self.gravity = 900
 	self.maxSpeed = 135
-	self.jumpVelocity = -336
+	self.jumpVelocity = -224
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
 	self.jumpSpeed = 115
@@ -125,6 +125,12 @@ function Player:init(x, y, world, face)
 		["fall3"] = true,
 		["dive"] = true
 	}
+
+	-- Variable Jump Attributes
+	self.jumpPressed = false
+	self.jumpReleased = false
+	self.jumpCounter = 0
+	self.jumpCounterMax = 7
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
@@ -245,6 +251,20 @@ function Player:handleState()
 				self:setCollideRect(38, 44, 4, 36)
 				self:changeToIdleState()
 			end
+		end
+		
+		if self.jumpPressed then
+			self.jumpCounter = self.jumpCounter + (30 * dt)
+		end
+		
+		if self.jumpCounter >= self.jumpCounterMax then
+			self.jumpCounter = 0
+			self.jumpPressed = false
+			self.jumpReleased = false
+		end
+		
+		if self.jumpCounter ~= 0 then
+			print(self.jumpCounter)
 		end
 
 		self:applyGravity()
@@ -520,6 +540,16 @@ function Player:handleAirInput()
 	if pd.buttonJustPressed(pd.kButtonDown) then
 		self:changeToDiveState()
 	end
+
+	if pd.buttonJustReleased(pd.kButtonA) and self.jumpPressed then
+		self.jumpCounter = 0
+		self.jumpPressed = false
+		self.jumpReleased = true
+	end
+	
+	if self.jumpPressed then
+		self.yVelocity = self.jumpVelocity
+	end
 end
 
 
@@ -563,6 +593,7 @@ end
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
 	self.jumpBuffer = 0
+	self.jumpPressed = true
 	self.yVelocity = self.jumpVelocity
 	self:changeState("jump")
 end
