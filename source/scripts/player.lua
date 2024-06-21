@@ -111,6 +111,9 @@ function Player:init(x, y, world, face)
 	self.diveHorizontal = 160
 
 	-- Jump attributes
+	self.jumping = false
+	self.jumpCounter = 0
+	self.jumpCounterMax = 0.2
 	self.jumpBufferAmount = 150
 	self.jumpBuffer = 0
 	self.jumpStates = {
@@ -125,11 +128,6 @@ function Player:init(x, y, world, face)
 		["fall3"] = true,
 		["dive"] = true
 	}
-
-	-- Variable Jump Attributes
-	self.jumping = false
-	self.jumpCounter = 0
-	self.jumpCounterMax = 0.2
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
@@ -252,14 +250,7 @@ function Player:handleState()
 			end
 		end
 
-		if self.jumpCounter >= (self.jumpCounterMax * self.world.fps) then
-			self.jumpCounter = 0
-			self.jumping = false
-		end
-
-		if self.jumping then
-			self.jumpCounter = self.jumpCounter + 1
-		end
+		self:variableJump()
 
 		self:applyGravity()
 		self:applyDrag(self.drag)
@@ -438,6 +429,31 @@ function Player:handleCrownCollision()
 end
 
 
+--- Variable jump height handler
+function Player:variableJump()
+	if self.jumpCounter >= (self.jumpCounterMax * self.world.fps) then
+		self.jumpCounter = 0
+		self.jumping = false
+	end
+
+	if self.jumping then
+		self.jumpCounter = self.jumpCounter + 1
+	end
+end
+
+
+function Player:handleVariableJump()
+	if pd.buttonJustReleased(pd.kButtonA) then
+		self.jumpCounter = 0
+		self.jumping = false
+	end
+	
+	if self.jumping then
+		self.yVelocity = self.jumpVelocity
+	end
+end
+
+
 --- This function handles when the player dies, what to do and when to respawn
 function Player:die()
 	self.xVelocity = 0
@@ -533,14 +549,7 @@ function Player:handleAirInput()
 		self:changeToDiveState()
 	end
 
-	if pd.buttonJustReleased(pd.kButtonA) then
-		self.jumpCounter = 0
-		self.jumping = false
-	end
-
-	if self.jumping then
-		self.yVelocity = self.jumpVelocity
-	end
+	self:handleVariableJump()
 end
 
 
@@ -719,6 +728,8 @@ end
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + (self.gravity * dt)
 	if self.touchingGround or self.touchingCeiling then
+		self.jumping = false
+		self.jumpCounter = 0
 		self.yVelocity = 0
 	end
 end
