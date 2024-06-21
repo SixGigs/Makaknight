@@ -91,7 +91,7 @@ function Player:init(x, y, world, face)
 	self.yVelocity = 0
 	self.gravity = 900
 	self.maxSpeed = 135
-	self.jumpVelocity = -336
+	self.jumpVelocity = -220
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
 	self.jumpSpeed = 115
@@ -111,6 +111,9 @@ function Player:init(x, y, world, face)
 	self.diveHorizontal = 160
 
 	-- Jump attributes
+	self.jumping = false
+	self.jumpCounter = 0
+	self.jumpCounterMax = 0.2
 	self.jumpBufferAmount = 150
 	self.jumpBuffer = 0
 	self.jumpStates = {
@@ -128,7 +131,7 @@ function Player:init(x, y, world, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -300
+	self.doubleJumpVelocity = -320
 
 	-- Dash
 	self.dashAvailable = true
@@ -246,6 +249,8 @@ function Player:handleState()
 				self:changeToIdleState()
 			end
 		end
+
+		self:variableJump()
 
 		self:applyGravity()
 		self:applyDrag(self.drag)
@@ -424,6 +429,31 @@ function Player:handleCrownCollision()
 end
 
 
+--- Variable jump height handler
+function Player:variableJump()
+	if self.jumpCounter >= (self.jumpCounterMax * self.world.fps) then
+		self.jumpCounter = 0
+		self.jumping = false
+	end
+
+	if self.jumping then
+		self.jumpCounter = self.jumpCounter + 1
+	end
+end
+
+
+function Player:handleVariableJump()
+	if pd.buttonJustReleased(pd.kButtonA) then
+		self.jumpCounter = 0
+		self.jumping = false
+	end
+	
+	if self.jumping then
+		self.yVelocity = self.jumpVelocity
+	end
+end
+
+
 --- This function handles when the player dies, what to do and when to respawn
 function Player:die()
 	self.xVelocity = 0
@@ -450,8 +480,6 @@ function Player:handleGroundInput()
 			self:changeToRunState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
-		-- elseif pd.buttonJustPressed(pd.kButtonDown) then
-		-- 	print("Pull out weapon")
 		else
 			self:changeToIdleState()
 		end
@@ -520,6 +548,8 @@ function Player:handleAirInput()
 	if pd.buttonJustPressed(pd.kButtonDown) then
 		self:changeToDiveState()
 	end
+
+	self:handleVariableJump()
 end
 
 
@@ -562,6 +592,7 @@ end
 
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
+	self.jumping = true
 	self.jumpBuffer = 0
 	self.yVelocity = self.jumpVelocity
 	self:changeState("jump")
@@ -697,6 +728,8 @@ end
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + (self.gravity * dt)
 	if self.touchingGround or self.touchingCeiling then
+		self.jumping = false
+		self.jumpCounter = 0
 		self.yVelocity = 0
 	end
 end
