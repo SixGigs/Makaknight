@@ -118,7 +118,7 @@
 				},
 				{
 					"__identifier": "Flag",
-					"__grid": [11,3],
+					"__grid": [10,3],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 64, "h": 48 },
@@ -127,9 +127,9 @@
 					"width": 64,
 					"height": 48,
 					"defUid": 1401,
-					"px": [176,48],
+					"px": [160,48],
 					"fieldInstances": [],
-					"__worldX": 1376,
+					"__worldX": 1360,
 					"__worldY": -192
 				},
 				{
