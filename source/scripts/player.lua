@@ -412,8 +412,13 @@ function Player:handleFlagCollision(flag)
 	-- TODO: How can this be done better?
 	self.world.flag = flag.id
 	self.world.spawn = self.world.level
-	self.world.spawnX = flag.x + 8
-	self.world.spawnY = flag.y + 24
+	self.world.spawnY = flag.y + 8
+
+	if self.globalFlip == 0 then
+		self.world.spawnX = flag.x + 8
+	else
+		self.world.spawnX = flag.x + 56
+	end
 
 	self.world:save()
 end

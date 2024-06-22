@@ -54,7 +54,7 @@
 			"entityInstances": [
 				{
 					"__identifier": "Flag",
-					"__grid": [3,5],
+					"__grid": [4,5],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 64, "h": 48 },
@@ -63,9 +63,9 @@
 					"width": 64,
 					"height": 48,
 					"defUid": 1401,
-					"px": [48,80],
+					"px": [64,80],
 					"fieldInstances": [],
-					"__worldX": 848,
+					"__worldX": 864,
 					"__worldY": -160
 				},
 				{
