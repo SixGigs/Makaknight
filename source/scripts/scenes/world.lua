@@ -9,18 +9,20 @@ local m <const> = pd.getSystemMenu()
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10
+	Crown = 10, Bar = 11
 }
 
 -- This table stores the Z axis of each entity
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120
+	Crown = 120, Bar = 1000
 }
 
 -- Load the level used for the game
 ldtk.load("levels/world.ldtk", false)
+
+
 
 --- The initialising method of the game scene class
 class("World").extends(gfx.sprite)
@@ -51,7 +53,7 @@ function World:init()
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
-	self.player = Player(self.levelX, self.levelY, self, self.face)
+	self.player = Player(self.levelX, self.levelY, self)
 	pd.display.setRefreshRate(self.fps)
 end
 
@@ -159,10 +161,10 @@ function World:goToLevel(level)
 		end
 	end
 
-	-- Load the background for the new level
-	self:loadBackground(level)
-	
-	playdate.resetElapsedTime()
+	self:loadBackground(level) -- Load the background
+	self:loadHealthBar() -- Load the health bar
+
+	playdate.resetElapsedTime() -- Reset time elapsed to stop player jumping when changing rooms
 end
 
 
@@ -179,6 +181,22 @@ function World:loadBackground(level)
 end
 
 
+--- Load the health bar for the player with their current hit points
+function World:loadHealthBar()
+	if self.player then
+		self.bar = Bar(2, 2, self.player.hp)
+	else
+		self.bar = Bar(2, 2, self.hp)
+	end
+end
+
+
+--- Delete the health bar
+function World:deleteHealthBar()
+	self.bar:remove()
+end
+
+
 --- The reset player method moves the player back to the most recent spawn X & Y coordinates
 function World:resetPlayer()
 	if self.level ~= self.spawn then
@@ -186,9 +204,11 @@ function World:resetPlayer()
 		self.player:add()
 		self.player:moveTo(self.spawnX, self.spawnY)
 		self.player:changeToSpawnState()
+		self.bar = Bar(2, 2, self.player.hp)
 	else
 		self.player:moveTo(self.spawnX, self.spawnY)
 		self.player:changeToSpawnState()
+		self.bar = Bar(2, 2, self.player.hp)
 	end
 end
 
@@ -206,6 +226,7 @@ function World:load()
 	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
 	self.face = (gd and (gd.face and gd.face or 0) or 0)
 	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
+	self.hp = (gd and (gd.hp and gd.hp or 100) or 100)
 end
 
 
@@ -220,7 +241,8 @@ function World:save(quickSave)
 		levelY = (quickSave and self.player.y or self.spawnY),
 		flag = self.flag,
 		face = self.player.globalFlip,
-		fps = self.fps
+		fps = self.fps,
+		hp = self.player.hp
 	}
 
 	pd.datastore.write(data)

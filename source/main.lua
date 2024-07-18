@@ -15,6 +15,7 @@ import "scripts/scenes/World"
 
 -- Scripts
 import "scripts/Animal"
+import "scripts/Bar"
 import "scripts/Crown"
 import "scripts/Door"
 import "scripts/Flag"

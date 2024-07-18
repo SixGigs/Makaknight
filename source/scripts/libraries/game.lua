@@ -42,7 +42,7 @@ function Game:startTransition(transition)
 		if transition == "fade" then
 			transitionTimer = self:fadeTransition(1, 0)
 		else
-			transitionTimer = self:wipeTransition(400, 0)
+			transitionTimer = self:wipeTransition(400, -1)
 		end
 
 		transitionTimer.timerEndedCallback = function()

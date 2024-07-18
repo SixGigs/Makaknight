@@ -11,7 +11,7 @@ class("Player").extends(AnimatedSprite)
 --- @param y     integer The Y coordinate to spawn the player
 --- @param world table   The game manager is passed in to manage player on object interactions
 --- @param face  integer The direction the player is facing as a 1 or 0
-function Player:init(x, y, world, face)
+function Player:init(x, y, world)
 	-- Game Manager
 	self.world = world
 
@@ -38,28 +38,16 @@ function Player:init(x, y, world, face)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
 	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1})
-
-	self:addState("run", 17, 28, {tickStep = 1}) -- Temporary sprites (using the walk sprites)
-	self:addState("dive", 40, 40, {tickStep = 1}) -- Temporary sprite
-	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"}) -- Temporary sprite
-	self:addState("dead", 30, 30) -- Temporary sprite
+	self:addState("run", 17, 28, {tickStep = 1})                                     -- Temporary sprites
+	self:addState("dive", 40, 40, {tickStep = 1})                                    -- Temporary sprite
+	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"})   -- Temporary sprite
+	self:addState("dead", 30, 30)                                                    -- Temporary sprite
 	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
-	self:addState("punch", 74, 77, {tickStep = 1}) -- State temporarily removed
-	self:addState("duckPunch", 78, 81, {tickStep = 1}) -- State temporarily removed
+	self:addState("punch", 74, 77, {tickStep = 1})                                   -- State temporarily removed
+	self:addState("duckPunch", 78, 81, {tickStep = 1})                               -- State temporarily removed
 	self:playAnimation()
 
-	-- Roll state finish process
-	self.states["roll"].onAnimationEndEvent = function(self)
-		self:changeState("midJump")
-		self:setCollideRect(38, 44, 4, 36)
-	end
-
-	self.states["doubleJump"].onAnimationEndEvent = function(self)
-		self:changeState("midJump")
-		self:setCollideRect(38, 44, 4, 36)
-	end
-
-	-- Fall state on tick events
+	-- On frame change events
 	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -240 then self:changeState("jump1") end end
 	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -150 then self:changeState("jump2") end end
 	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -90 then self:changeState("jump3") end end
@@ -69,16 +57,9 @@ function Player:init(x, y, world, face)
 	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 60 then self:changeState("fall2") end end
 	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 150 then self:changeState("fall3") end end
 
-	-- Player Attributes
-	self.width = 4
-	self.height = 36
-	self.globalFlip = face
-	self.touchingGround = false
-	self.touchingCeiling = false
-	self.touchingWall = false
-	self.touchingDoor = false
-	self.win = false
-	self.dead = false
+	-- Roll state finish process
+	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
+	self.states["doubleJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -86,16 +67,26 @@ function Player:init(x, y, world, face)
 	self:setTag(TAGS.Player)
 	self:setCollideRect(38, 44, 4, 36)
 
+	-- Attributes
+	self.hp = self.world.hp
+	self.globalFlip = self.world.face
+	self.touchingGround = false
+	self.touchingCeiling = false
+	self.touchingWall = false
+	self.touchingDoor = false
+	self.dead = false
+	self.win = false
+
 	-- Physics properties
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.gravity = 900
-	self.maxSpeed = 135
 	self.jumpVelocity = -220
 	self.minimumAirSpeed = 15
+	self.maxSpeed = 150
 	self.walkSpeed = 90
 	self.jumpSpeed = 115
-	self.drag = 90
+	self.drag = 120
 
 	-- Buffer
 	self.bufferAmount = 2
@@ -131,7 +122,7 @@ function Player:init(x, y, world, face)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -320
+	self.doubleJumpVelocity = -270
 
 	-- Dash
 	self.dashAvailable = true
@@ -149,7 +140,7 @@ function Player:init(x, y, world, face)
 	self.punchAvailable = false
 	self.punchBufferAmount = 150
 	self.punchBuffer = 0
-	
+
 	-- Left & Right buffers
 	self.leftBuffer = 0
 	self.rightBuffer = 0
@@ -170,7 +161,8 @@ function Player:collisionResponse(other)
 		[TAGS.Door] = true,
 		[TAGS.Animal] = true,
 		[TAGS.Hitbox] = true,
-		[TAGS.Crown] = true
+		[TAGS.Crown] = true,
+		[TAGS.Bar] = true
 	}
 
 	if overlapTags[tag] then
@@ -326,7 +318,9 @@ function Player:handleMovementAndCollisions()
 		end
 
 		if collisionTag == TAGS.Hazard then
-			died = true
+			self.hp = self.hp - self.hp
+			self.world:deleteHealthBar()
+			self.world:loadHealthBar()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
@@ -347,6 +341,10 @@ function Player:handleMovementAndCollisions()
 				self.exitY = 0
 			end
 		end
+	end
+
+	if self.hp <= 0 then
+		died = true
 	end
 
 	-- Change to face the direction we are moving in
@@ -415,9 +413,9 @@ function Player:handleFlagCollision(flag)
 	self.world.spawnY = flag.y + 8
 
 	if self.globalFlip == 0 then
-		self.world.spawnX = flag.x + 8
+		self.world.spawnX = flag.x + 10
 	else
-		self.world.spawnX = flag.x + 56
+		self.world.spawnX = flag.x + 54
 	end
 
 	self.world:save()
@@ -469,6 +467,7 @@ function Player:die()
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(1000, function()
+		self.hp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
 		self.world:resetPlayer()
@@ -604,15 +603,22 @@ function Player:changeToJumpState()
 end
 
 
+--- Changes the player sprite to the mid jump sprite
+function Player:changeToMidJumpState()
+	self:setCollideRect(38, 44, 4, 36)
+	self:changeState("midJump")
+end
+
+
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
 	self.jumpBuffer = 0
 	self.yVelocity = self.doubleJumpVelocity
-	self:setCollideRect(38, 61, 4, 19)
 	self:changeState("doubleJump")
 end
 
 
+--- Changes the player to the duck state
 function Player:changeToDuckState()
 	self.xVelocity = 0
 	self:setCollideRect(38, 61, 4, 19)
