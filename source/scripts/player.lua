@@ -319,8 +319,7 @@ function Player:handleMovementAndCollisions()
 
 		if collisionTag == TAGS.Hazard then
 			self.hp = self.hp - self.hp
-			self.world:deleteHealthBar()
-			self.world:loadHealthBar()
+			self.world:updateHealthBar()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
@@ -341,7 +340,7 @@ function Player:handleMovementAndCollisions()
 				self.exitY = 0
 			end
 		end
-		
+
 		-- Check if we are colliding with the health bar
 		if collisionTag == TAGS.Bar and not self.world.bar.hidden then
 			self.world.bar:setVisible(false)

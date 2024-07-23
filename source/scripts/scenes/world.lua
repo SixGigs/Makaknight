@@ -181,6 +181,12 @@ function World:loadBackground(level)
 end
 
 
+function World:updateHealthBar()
+	self:deleteHealthBar()
+	self:loadHealthBar()
+end
+
+
 --- Load the health bar for the player with their current hit points
 function World:loadHealthBar()
 	if self.player then
@@ -204,11 +210,10 @@ function World:resetPlayer()
 		self.player:add()
 		self.player:moveTo(self.spawnX, self.spawnY)
 		self.player:changeToSpawnState()
-		self.bar = Bar(2, 2, self.player.hp)
 	else
 		self.player:moveTo(self.spawnX, self.spawnY)
 		self.player:changeToSpawnState()
-		self.bar = Bar(2, 2, self.player.hp)
+		self:updateHealthBar()
 	end
 end
 
