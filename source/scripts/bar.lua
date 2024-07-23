@@ -23,31 +23,3 @@ function Bar:init(x, y, hp)
 
 	self.hidden = false
 end
-
-function Bar:collisionResponse(other)
-	return gfx.sprite.kCollisionTypeOverlap
-end
-
-function Bar:update()
-	self:handleCollisions()
-end
-
-function Bar:handleCollisions()
-	local _, _, collisions, length = self:moveWithCollisions(self.x, self.y)
-
-	for i = 1, length do
-		local collision <const> = collisions[i]
-		local collisionType <const> = collision.type
-		local collisionObject <const> = collision.other
-		local collisionTag <const> = collisionObject:getTag()
-
-		if collisionTag == TAGS.Player and not self.hidden then
-			self:setVisible(false)
-			pd.timer.performAfterDelay(2000, function()
-				self:setVisible(true)
-				self.hidden = false
-			end)
-			self.hidden = true
-		end
-	end
-end

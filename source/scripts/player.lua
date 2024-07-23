@@ -341,6 +341,16 @@ function Player:handleMovementAndCollisions()
 				self.exitY = 0
 			end
 		end
+		
+		-- Check if we are colliding with the health bar
+		if collisionTag == TAGS.Bar and not self.world.bar.hidden then
+			self.world.bar:setVisible(false)
+			pd.timer.performAfterDelay(2000, function()
+				self.world.bar:setVisible(true)
+				self.world.bar.hidden = false
+			end)
+			self.world.bar.hidden = true
+		end
 	end
 
 	if self.hp <= 0 then
