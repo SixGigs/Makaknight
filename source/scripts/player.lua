@@ -415,10 +415,12 @@ end
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
+	-- If we are touching a flag that is already up, return immediately
 	if flag.active then
 		return
 	end
 
+	-- Lower any other flag on screen as we raise the new flag
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
 		if sprite:isa(Flag) then
@@ -426,19 +428,26 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
+	-- Raise the flag we just touched
 	flag:hoist()
+	
+	-- Top up the player health
+	self.hp = 100
+	self.world:updateHealthBar()
 
 	-- TODO: How can this be done better?
 	self.world.flag = flag.id
 	self.world.spawn = self.world.level
 	self.world.spawnY = flag.y + 8
 
+	-- Set the spawn point depending on the direction the flag was touched in
 	if self.globalFlip == 0 then
 		self.world.spawnX = flag.x + 10
 	else
 		self.world.spawnX = flag.x + 54
 	end
 
+	-- Save the game
 	self.world:save()
 end
 
