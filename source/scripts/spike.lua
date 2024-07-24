@@ -12,6 +12,8 @@ function Spike:init(x, y)
 	-- Open the spike image as a constant
 	local spikeImage <const> = gfx.image.new("images/hazards/spike")
 
+	self.damage = 999
+
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Hazard)
