@@ -143,7 +143,7 @@ function World:goToLevel(level)
 
 		-- Match the entity name to a script
 		if entityName == "Spike" then
-			Spike(entityX, entityY)
+			Spike(entityX, entityY, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Ability" then

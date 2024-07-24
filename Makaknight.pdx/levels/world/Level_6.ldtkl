@@ -160,7 +160,7 @@
 					"height": 16,
 					"defUid": 68,
 					"px": [176,160],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
 					"__worldX": 2176,
 					"__worldY": -80
 				},
@@ -176,7 +176,7 @@
 					"height": 16,
 					"defUid": 68,
 					"px": [192,160],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
 					"__worldX": 2192,
 					"__worldY": -80
 				},
@@ -192,7 +192,7 @@
 					"height": 16,
 					"defUid": 68,
 					"px": [208,160],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
 					"__worldX": 2208,
 					"__worldY": -80
 				},
