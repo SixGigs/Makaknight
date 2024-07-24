@@ -612,8 +612,13 @@ end
 
 --- Change the player into the hurt state
 function Player:changeToHurtState()
+	if self.globalFlip == 1 then
+		self.xVelocity = self.walkSpeed
+	else
+		self.xVelocity = -self.walkSpeed
+	end
+	
 	self.hurt = true
-	self.jumpBuffer = 0
 	self.world:updateHealthBar()
 	self:changeState("hurt")
 end
