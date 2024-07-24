@@ -108,6 +108,7 @@
 					"defUid": 69,
 					"px": [192,96],
 					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
 						{ "__identifier": "xVelocity", "__type": "Float", "__value": 60, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [60] }] },
 						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [null] }
 					],

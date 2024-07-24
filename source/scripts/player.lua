@@ -428,8 +428,7 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
-	-- Raise the flag we just touched
-	flag:hoist()
+	flag:hoist() -- Raise the flag we just touched
 	
 	-- Top up the player health
 	self.hp = 100
@@ -447,8 +446,7 @@ function Player:handleFlagCollision(flag)
 		self.world.spawnX = flag.x + 54
 	end
 
-	-- Save the game
-	self.world:save()
+	self.world:save() -- Save the game
 end
 
 
