@@ -38,6 +38,7 @@ function Player:init(x, y, world)
 	self:addState("contact", 41, 42, {tickStep = 2, loop = 1, nextAnimation = "idle"})
 	self:addState("roll", 43, 58, {tickStep = 1, loop = 1})
 	self:addState("doubleJump", 59, 74, {tickStep = 1, loop = 1})
+	self:addState("hurt", 75, 76, {tickStep = 1, loop = 12, nextAnimation = "fall"})
 	self:addState("run", 17, 28, {tickStep = 1})                                     -- Temporary sprites
 	self:addState("dive", 40, 40, {tickStep = 1})                                    -- Temporary sprite
 	self:addState("die", 29, 29, {tickStep = 2, loop = 1, nextAnimation = "dead"})   -- Temporary sprite
@@ -45,7 +46,6 @@ function Player:init(x, y, world)
 	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
 	self:addState("punch", 74, 77, {tickStep = 1})                                   -- State temporarily removed
 	self:addState("duckPunch", 78, 81, {tickStep = 1})                               -- State temporarily removed
-	self:addState("hurt", 75, 76, {tickStep = 1, loop = 8, nextAnimation = "idle"})
 	self:playAnimation()
 
 	-- On frame change events
@@ -61,7 +61,10 @@ function Player:init(x, y, world)
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
 	self.states["doubleJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
-	self.states["hurt"].onAnimationEndEvent = function(self) self.hurt = false end
+	self.states["hurt"].onAnimationEndEvent = function(self) 
+		self.hurt = false
+		self.doubleJumpAvailable = false
+	end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -108,7 +111,7 @@ function Player:init(x, y, world)
 	self.jumping = false
 	self.jumpCounter = 0
 	self.jumpCounterMax = 0.2
-	self.jumpBufferAmount = 150
+	self.jumpBufferAmount = 3
 	self.jumpBuffer = 0
 	self.jumpStates = {
 		["jump"] = true,
@@ -141,7 +144,7 @@ function Player:init(x, y, world)
 
 	-- Punch
 	self.punchAvailable = false
-	self.punchBufferAmount = 150
+	self.punchBufferAmount = 3
 	self.punchBuffer = 0
 
 	-- Left & Right buffers
@@ -246,7 +249,6 @@ function Player:handleState()
 		end
 
 		self:variableJump()
-
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
@@ -311,9 +313,9 @@ function Player:handleMovementAndCollisions()
 
 		if collisionType == gfx.sprite.kCollisionTypeSlide then
 			if collision.normal.y == -1 then
+				self.doubleJumpAvailable = true
 				self.touchingGround = true
 				self.dashAvailable = true
-				self.doubleJumpAvailable = true
 			elseif collision.normal.y == 1 then
 				self.touchingCeiling = true
 			end
@@ -568,7 +570,6 @@ end
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if self:playerJumped() and self.doubleJumpAvailable then
-		self.doubleJumpAvailable = false
 		self:changeToDoubleJumpState()
 	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable then
 		self:changeToDashState()
@@ -612,6 +613,7 @@ end
 --- Change the player into the hurt state
 function Player:changeToHurtState()
 	self.hurt = true
+	self.jumpBuffer = 0
 	self.world:updateHealthBar()
 	self:changeState("hurt")
 end
@@ -650,6 +652,7 @@ end
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
 	self.jumpBuffer = 0
+	self.doubleJumpAvailable = false
 	self.yVelocity = self.doubleJumpVelocity
 	self:changeState("doubleJump")
 end
