@@ -45,6 +45,7 @@ function Player:init(x, y, world)
 	self:addState("spawn", 30, 31, {tickStep = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
 	self:addState("punch", 74, 77, {tickStep = 1})                                   -- State temporarily removed
 	self:addState("duckPunch", 78, 81, {tickStep = 1})                               -- State temporarily removed
+	self:addState("hurt", 75, 76, {tickStep = 1, loop = 8, nextAnimation = "idle"})
 	self:playAnimation()
 
 	-- On frame change events
@@ -60,6 +61,7 @@ function Player:init(x, y, world)
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
 	self.states["doubleJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
+	self.states["hurt"].onAnimationEndEvent = function(self) self.hurt = false end
 
 	-- Sprite properties
 	self:moveTo(x, y)
@@ -69,6 +71,7 @@ function Player:init(x, y, world)
 
 	-- Attributes
 	self.hp = self.world.hp
+	self.hurt = false
 	self.globalFlip = self.world.face
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -117,7 +120,7 @@ function Player:init(x, y, world)
 		["fall1"] = true,
 		["fall2"] = true,
 		["fall3"] = true,
-		["dive"] = true
+		["dive"] = true,
 	}
 
 	-- Double Jump
@@ -247,6 +250,9 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
+	elseif self.currentState == "hurt" then
+		self:applyGravity()
+		self:applyDrag(self.drag)
 	elseif self.currentState == "roll" then
 		if self.yVelocity > 90 then
 			self:applyDrag(self.drag)
@@ -317,9 +323,14 @@ function Player:handleMovementAndCollisions()
 			end
 		end
 
-		if collisionTag == TAGS.Hazard then
-			self.hp = self.hp - self.hp
-			self.world:updateHealthBar()
+		if collisionTag == TAGS.Hazard and not self.hurt then
+			if self.hp - collisionObject.damage < 0 then
+				self.hp = self.hp - self.hp
+			else
+				self.hp = self.hp - collisionObject.damage
+			end
+
+			self:changeToHurtState("hurt")
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
@@ -352,10 +363,6 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	if self.hp <= 0 then
-		died = true
-	end
-
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
@@ -381,7 +388,12 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	-- If the player touched a hazard, die
+	-- Check if we are dead from no hit points
+	if self.hp <= 0 then
+		died = true
+	end
+
+	-- If the player is dead then run the die method
 	if died then
 		self:die()
 	end
@@ -459,7 +471,7 @@ function Player:handleVariableJump()
 		self.jumpCounter = 0
 		self.jumping = false
 	end
-	
+
 	if self.jumping then
 		self.yVelocity = self.jumpVelocity
 	end
@@ -479,6 +491,7 @@ function Player:die()
 		self.hp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
+		self.hurt = false
 		self.world:resetPlayer()
 	end)
 end
@@ -586,6 +599,14 @@ function Player:changeToWalkState(direction)
 	end
 
 	self:changeState("walk")
+end
+
+
+--- Change the player into the hurt state
+function Player:changeToHurtState()
+	self.hurt = true
+	self.world:updateHealthBar()
+	self:changeState("hurt")
 end
 
 

@@ -13,6 +13,8 @@ function Spikeball:init(x, y, entity)
 	-- Load the spike ball image as a constant
 	local spikeballImage <const> = gfx.image.new("images/hazards/spikeball")
 
+	self.damage = 20
+
 	-- Sprite properties
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setImage(spikeballImage)
