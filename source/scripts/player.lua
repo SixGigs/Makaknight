@@ -330,9 +330,8 @@ function Player:handleMovementAndCollisions()
 				self.hp = self.hp - self.hp
 			else
 				self.hp = self.hp - collisionObject.damage
+				self:changeToHurtState("hurt")
 			end
-
-			self:changeToHurtState("hurt")
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
@@ -494,6 +493,7 @@ function Player:die()
 	self.dead = true
 
 	self:changeState("die")
+	self.world:updateHealthBar() 
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(1000, function()
@@ -617,7 +617,7 @@ function Player:changeToHurtState()
 	else
 		self.xVelocity = -self.walkSpeed
 	end
-	
+
 	self.hurt = true
 	self.world:updateHealthBar()
 	self:changeState("hurt")

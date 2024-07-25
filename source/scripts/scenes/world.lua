@@ -142,7 +142,7 @@ function World:goToLevel(level)
 		local entityName = entity.name
 
 		-- Match the entity name to a script
-		if entityName == "Spike" then
+		if entityName == "Floorspike" or entityName == "Roofspike" or entityName == "Spearspike" or entityName == "Stalagmite" or entityName == "Stalactite" then
 			Spike(entityX, entityY, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
