@@ -149,7 +149,7 @@
 					"__worldY": -144
 				},
 				{
-					"__identifier": "Spike",
+					"__identifier": "Spearspike",
 					"__grid": [11,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -165,7 +165,7 @@
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Spike",
+					"__identifier": "Spearspike",
 					"__grid": [12,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -181,7 +181,7 @@
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Spike",
+					"__identifier": "Spearspike",
 					"__grid": [13,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -359,6 +359,22 @@
 					],
 					"__worldX": 2368,
 					"__worldY": -112
+				},
+				{
+					"__identifier": "Spearspike",
+					"__grid": [10,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 200, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "0ffb1e30-25d0-11ef-83df-11094e2c6106",
+					"width": 16,
+					"height": 16,
+					"defUid": 68,
+					"px": [160,160],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
+					"__worldX": 2160,
+					"__worldY": -80
 				}
 			]
 		},

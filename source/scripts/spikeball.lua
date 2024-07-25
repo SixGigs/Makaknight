@@ -9,11 +9,11 @@ class("Spikeball").extends(gfx.sprite)
 --- @param x      integer The X coordinate to spawn the spike-ball
 --- @param y      integer The Y coordinate to spawn the spike-ball
 --- @param entity table   The entities that come with the spike-ball
-function Spikeball:init(x, y, entity)
+function Spikeball:init(x, y, e)
 	-- Load the spike ball image as a constant
 	local spikeballImage <const> = gfx.image.new("images/hazards/spikeball")
 
-	self.damage = entity.fields.damage
+	self.damage = e.fields.damage
 
 	-- Sprite properties
 	self:setZIndex(Z_INDEXES.Hazard)
@@ -26,8 +26,8 @@ function Spikeball:init(x, y, entity)
 	self:setTag(TAGS.Hazard)
 	self:setCollideRect(4, 4, 8, 8)
 
-	self.xVelocity = entity.fields.xVelocity
-	self.yVelocity = entity.fields.yVelocity
+	self.xVelocity = e.fields.xVelocity
+	self.yVelocity = e.fields.yVelocity
 end
 
 
