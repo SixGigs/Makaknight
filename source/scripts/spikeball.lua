@@ -2,7 +2,7 @@
 local gfx <const> = playdate.graphics
 
 -- Create the Spike ball class
-class("Spikeball").extends(gfx.sprite)
+class("Spikeball").extends("Spike")
 
 
 --- Initialise the spike ball object using the information given
@@ -10,38 +10,12 @@ class("Spikeball").extends(gfx.sprite)
 --- @param y      integer The Y coordinate to spawn the spike-ball
 --- @param entity table   The entities that come with the spike-ball
 function Spikeball:init(x, y, e)
-	-- Load the spike ball image as a constant
-	local spikeballImage <const> = gfx.image.new("images/hazards/spikeball")
-
-	self.damage = e.fields.damage
-
-	-- Sprite properties
-	self:setZIndex(Z_INDEXES.Hazard)
-	self:setImage(spikeballImage)
-	self:setCenter(0, 0)
-	self:moveTo(x, y)
-	self:add()
-
-	-- Set the object as a hazard and set the collision rectangle
-	self:setTag(TAGS.Hazard)
-	self:setCollideRect(4, 4, 8, 8)
+	Spikeball.super.init(self, x, y, e)
 
 	self.xVelocity = e.fields.xVelocity
 	self.yVelocity = e.fields.yVelocity
-end
 
-
---- The method the spike-ball uses to handle collisions
---- @param  other   table The object being collided with
---- @return unknown table The collision response to use
-function Spikeball:collisionResponse(other)
-	local tag <const> = other:getTag()
-	
-	if tag == TAGS.Player or tag == TAGS.Hazard then
-		return gfx.sprite.kCollisionTypeOverlap
-	end
-
-	return gfx.sprite.kCollisionTypeBounce
+	self:setCollideRect(4, 4, 8, 8)
 end
 
 
