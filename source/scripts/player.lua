@@ -21,9 +21,9 @@ function Player:init(x, y, world)
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {ts = 2})
 	self:addState("walk", 17, 28, {ts = 1.3})
-	self:addState("duckDown", 29, 29, {ts = 1, loop = 1, nextAnimation = "duck"})
+	self:addState("duckDown", 29, 29, {ts = 1, l = 1, na = "duck"})
 	self:addState("duck", 30, 30)
-	self:addState("duckUp", 31, 31, {ts = 1, loop = 1, nextAnimation = "idle"})
+	self:addState("duckUp", 31, 31, {ts = 1, l = 1, na = "idle"})
 	self:addState("jump", 32, 32)
 	self:addState("jump1", 33, 33)
 	self:addState("jump2", 34, 34)
@@ -34,17 +34,19 @@ function Player:init(x, y, world)
 	self:addState("fall1", 38, 38)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
-	self:addState("contact", 41, 42, {ts = 2, loop = 1, nextAnimation = "idle"})
-	self:addState("roll", 43, 58, {ts = 1, loop = 1})
-	self:addState("doubleJump", 59, 74, {ts = 1, loop = 1})
-	self:addState("hurt", 75, 76, {ts = 1, loop = 12, nextAnimation = "fall"})
-	self:addState("run", 17, 28, {ts = 1})                                     -- Temporary sprites
-	self:addState("dive", 40, 40, {ts = 1})                                    -- Temporary sprite
-	self:addState("die", 29, 29, {ts = 2, loop = 1, nextAnimation = "dead"})   -- Temporary sprite
-	self:addState("dead", 30, 30)                                                    -- Temporary sprite
-	self:addState("spawn", 30, 31, {ts = 3, loop = 1, nextAnimation = "idle"}) -- Temporary sprites
-	self:addState("punch", 74, 77, {ts = 1})                                   -- State temporarily removed
-	self:addState("duckPunch", 78, 81, {ts = 1})                               -- State temporarily removed
+	self:addState("contact", 41, 42, {ts = 2, l = 1, na = "idle"})
+	self:addState("roll", 43, 58, {ts = 1, l = 1})
+	self:addState("doubleJump", 59, 74, {ts = 1, l = 1})
+	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
+	
+	-- The following are temporary sprites that will be animated later
+	self:addState("run", 17, 28, {ts = 1})
+	self:addState("dive", 40, 40, {ts = 1})
+	self:addState("die", 29, 29, {ts = 2, l = 1, na = "dead"})
+	self:addState("dead", 30, 30)
+	self:addState("spawn", 30, 31, {ts = 3, l = 1, na = "idle"})
+	self:addState("punch", 74, 77, {ts = 1})
+	self:addState("duckPunch", 78, 81, {ts = 1})
 	self:playAnimation()
 
 	-- On frame change events
