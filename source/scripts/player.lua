@@ -10,14 +10,13 @@ class("Player").extends(AnimatedSprite)
 --- @param x     integer The X coordinate to spawn the player
 --- @param y     integer The Y coordinate to spawn the player
 --- @param world table   The game manager is passed in to manage player on object interactions
---- @param face  integer The direction the player is facing as a 1 or 0
 function Player:init(x, y, world)
-	-- Game Manager
-	self.world = world
-
 	-- Create the player state machine with the tile set
 	local playerImageTable <const> = gfx.imagetable.new("images/player/player-table-80-80")
 	Player.super.init(self, playerImageTable)
+
+	-- Game Manager
+	self.world = world
 
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {tickStep = 2})
@@ -191,7 +190,6 @@ function Player:update()
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
@@ -221,15 +219,14 @@ function Player:updateBuffers()
 end
 
 
-----------------------------------------------------------------------------------------------------------
-function Player:playerJumped() return self.jumpBuffer > 0 end   --- This method is used to make jumping easier
-function Player:playerRolled() return self.rollBuffer > 0 end   --- This method is used to make rolling easier
-function Player:playerPunched() return self.punchBuffer > 0 end --- This method used to calculate if the player can
-function Player:playerPressedLeft() return self.leftBuffer > 0 end --- Used to check if left was recently pressed
-function Player:playerPressedRight() return self.rightBuffer > 0 end --- Used to check if right was pressed recently
+--- These methods return true if the buffer is greater than zero
+function Player:playerPunched() return self.punchBuffer > 0 end
+function Player:playerPressedRight() return self.rightBuffer > 0 end
+function Player:playerPressedLeft() return self.leftBuffer > 0 end
+function Player:playerJumped() return self.jumpBuffer > 0 end
+function Player:playerRolled() return self.rollBuffer > 0 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
 	-- If the player is in the air we use this statement to handle that
@@ -239,11 +236,9 @@ function Player:handleState()
 				if pd.buttonIsPressed(pd.kButtonDown) then
 					self:changeToDuckState()
 				else
-					self:setCollideRect(38, 44, 4, 36)
 					self:changeToContactState()
 				end
 			else
-				self:setCollideRect(38, 44, 4, 36)
 				self:changeToIdleState()
 			end
 		end
@@ -416,12 +411,12 @@ end
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
-	-- If we are touching a flag that is already up, return immediately
-	if flag.active then
+	-- If the flag is up do nothing
+	if flag.currentState == "up" then
 		return
 	end
 
-	-- Lower any other flag on screen as we raise the new flag
+	-- Lower any other flag on screen
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
 		if sprite:isa(Flag) then
@@ -429,25 +424,13 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
-	flag:hoist() -- Raise the flag we just touched
-	
+	-- Raise the touched flag
+	flag:hoist(self.world, self.globalFlip)
+
 	-- Top up the player health
 	self.hp = 100
 	self.world:updateHealthBar()
-
-	-- TODO: How can this be done better?
-	self.world.flag = flag.id
-	self.world.spawn = self.world.level
-	self.world.spawnY = flag.y + 8
-
-	-- Set the spawn point depending on the direction the flag was touched in
-	if self.globalFlip == 0 then
-		self.world.spawnX = flag.x + 10
-	else
-		self.world.spawnX = flag.x + 54
-	end
-
-	self.world:save() -- Save the game
+	self.world:save()
 end
 
 

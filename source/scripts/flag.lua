@@ -30,10 +30,8 @@ function Flag:init(x, y, entity, world)
 	-- The flag spawns up, if not then the flag spawns down
 	if self.id == world.flag then
 		self:changeState("up")
-		self.active = true
 	else
 		self:changeState("down")
-		self.active = false
 	end
 
 	-- Flag properties
@@ -47,10 +45,22 @@ end
 
 --- Hoist the flag. This method is called from the player when they collide with the flag
 --- TODO: Can we get this method called from this object using the update? If when updating the player collides with self?
-function Flag:hoist()
-	if self.active == false then
+function Flag:hoist(world, flip)
+	-- Change the flag state to raise
+	if self.currentState == "down" then
 		self:changeState("raise")
-		self.active = true
+	end
+
+	-- Update the world details
+	world.flag = self.id
+	world.spawn = world.level
+	world.spawnY = self.y + 8
+
+	-- Set the X value of the spawn
+	if flip == 0 then
+		world.spawnX = self.x + 10
+	else
+		world.spawnX = self.x + 54
 	end
 end
 
@@ -58,8 +68,7 @@ end
 --- Lower the flag. This method is called from the player when any collision is recorded against a flag
 --- TODO: Can we get this method called from this object using the update? Get any existing checkpoints and deactivate them?
 function Flag:lower()
-	if self.active == true then
+	if self.currentState == "up" then
 		self:changeState("lower")
-		self.active = false
 	end
 end
