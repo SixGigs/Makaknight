@@ -1,3 +1,9 @@
+-----------------------------------------------
+--                : WARNING :                --
+-----------------------------------------------
+-- I HAVE MADE AMENDMENTS TO THIS LIBRARY    --
+-- o - tickStep -> ts
+
 ---@diagnostic disable: redundant-parameter, undefined-field
 -----------------------------------------------
 --- Sprite class extension with support of  ---
@@ -44,7 +50,7 @@ function AnimatedSprite:init(imagetable, states, animate)
 			firstFrameIndex = 1,
 			framesCount = #self.imagetable,
 			animationStartingFrame = 1,
-			tickStep = 1,
+			ts = 1,
 			frameStep = 1,
 			reverse = false,
 			---@type boolean|integer
@@ -185,7 +191,7 @@ local function addState(self, params)
 	end
 	state["reverse"] = params.reverse -- You can reverse animation sequence
 	state["animationStartingFrame"] = params.animationStartingFrame or (state.reverse and state.framesCount or 1) -- Frame to start the animation from
-	state["tickStep"] = params.tickStep -- Speed of animation (2 = every second frame)
+	state["ts"] = params.ts -- Speed of animation (2 = every second frame)
 	state["frameStep"] = params.frameStep -- Number of images to skip on next frame
 	state["yoyo"] = params.yoyo -- Ping-pong animation (from 1 to n to 1 to n)
 	state["flip"] = params.flip -- You can set up flip mode, read Playdate SDK Docs for more info
@@ -454,7 +460,7 @@ end
 function AnimatedSprite:updateAnimation()
 	if (self._enabled) then
 		self._ticks = self._ticks + (30 * dt)
-		if ((self._ticks - self._previousTicks) >= self.states[self.currentState].tickStep) then
+		if ((self._ticks - self._previousTicks) >= self.states[self.currentState].ts) then
 			local state = self.states[self.currentState]
 			local loop = state.loop
 			local loopsFinished = self._loopsFinished
@@ -466,7 +472,7 @@ function AnimatedSprite:updateAnimation()
 			end
 			processAnimation(self)
 			drawFrame(self)
-			self._previousTicks = self._previousTicks + state.tickStep
+			self._previousTicks = self._previousTicks + state.ts
 		end
 	end
 end

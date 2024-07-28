@@ -1,4 +1,3 @@
--- Precompute frequently used constants
 local gfx <const> = playdate.graphics
 local newImage = gfx.image.new
 local Z_INDEXES = Z_INDEXES
@@ -14,7 +13,7 @@ class("Door").extends(gfx.sprite)
 --- @param e table   The table of entity attributes in the door
 function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
-	local doorImage = newImage("images/doors/" .. e.fields.sprite)
+	local img = newImage("images/doors/" .. e.fields.sprite)
 
 	-- The level the door leads to
 	self.level = e.fields.level
@@ -28,8 +27,8 @@ function Door:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Door)
 	self:setTag(TAGS.Door)
-	self:setCollideRect(14, 32, 4, 16)
-	self:setImage(doorImage)
+	self:setCollideRect(12, 32, 8, 16)
+	self:setImage(img)
 	self:add()
 
 	-- Store precomputed values

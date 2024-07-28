@@ -13,14 +13,14 @@ class("Flag").extends(AnimatedSprite)
 --- @param gameManager table The game manager passed into the object
 function Flag:init(x, y, entity, world)
 	-- Initialise the state machine using the flag sprite sheet
-	local flagImageTable <const> = gfx.imagetable.new("images/entities/flag-table-64-48")
-	Flag.super.init(self, flagImageTable)
+	local img <const> = gfx.imagetable.new("images/entities/flag-table-64-48")
+	Flag.super.init(self, img)
 
 	-- Set states in the state machine
 	self:addState("down", 1, 1)
-	self:addState("raise", 2, 9, {tickStep = 1.5, loop = 1, nextAnimation = "up"})
-	self:addState("up", 10, 14, {tickStep = 3})
-	self:addState("lower", 15, 24, {tickStep = 1.5, loop = 1, nextAnimation = "down"})
+	self:addState("raise", 2, 9, {ts = 1.5, loop = 1, nextAnimation = "up"})
+	self:addState("up", 10, 14, {ts = 3})
+	self:addState("lower", 15, 24, {ts = 1.5, loop = 1, nextAnimation = "down"})
 	self:playAnimation()
 
 	-- Save the ID of the flag as an attribute

@@ -1,16 +1,12 @@
--- Creating the playdate graphics module as a constant
 local gfx <const> = playdate.graphics
-
--- Create the spike class
 class("Spike").extends(gfx.sprite)
-
 
 --- Initialise the spike object using the data given
 --- @param x integer The X coordinate to spawn the spike
 --- @param y integer The Y coordinate to spawn the spike
 --- @param e table   The entity that come with the spike
 function Spike:init(x, y, e)
-	local spikeImage <const> = gfx.image.new("images/hazards/" .. e.name)
+	local img <const> = gfx.image.new("images/hazards/" .. e.name)
 
 	self.damage = e.fields.damage
 	self.xVelocity = e.fields.xVelocity
@@ -26,6 +22,6 @@ function Spike:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setTag(TAGS.Hazard)
-	self:setImage(spikeImage)
+	self:setImage(img)
 	self:add()
 end
