@@ -70,7 +70,7 @@
 				},
 				{
 					"__identifier": "Tree",
-					"__grid": [10,6],
+					"__grid": [9,6],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 3212, "x": 0, "y": 0, "w": 80, "h": 80 },
@@ -79,9 +79,9 @@
 					"width": 80,
 					"height": 80,
 					"defUid": 3211,
-					"px": [160,96],
+					"px": [144,96],
 					"fieldInstances": [],
-					"__worldX": 1760,
+					"__worldX": 1744,
 					"__worldY": -144
 				},
 				{
