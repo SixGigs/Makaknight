@@ -15,11 +15,11 @@ function Animal:init(x, y, e)
 
 	-- Animal states, sprites, and animation speeds
 	if e.fields.fly then
-		self:addState("fly", 1, 4, {tickStep = 3})
+		self:addState("fly", 1, 4, {ts = 3})
 	else
 		self:addState("idle", 1, 1)
-		self:addState("blep", 2, 4, {tickStep = 3})
-		self:addState("walk", 5, 8, {tickStep = 3})
+		self:addState("blep", 2, 4, {ts = 3})
+		self:addState("walk", 5, 8, {ts = 3})
 	end
 	self:playAnimation()
 
