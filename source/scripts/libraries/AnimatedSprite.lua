@@ -2,7 +2,9 @@
 --                : WARNING :                --
 -----------------------------------------------
 -- I HAVE MADE AMENDMENTS TO THIS LIBRARY    --
--- o - tickStep -> ts
+-- o - tickStep      -> ts                   --
+-- o - loop          -> l                    --
+-- o - nextAnimation -> na                   --
 
 ---@diagnostic disable: redundant-parameter, undefined-field
 -----------------------------------------------
@@ -54,12 +56,12 @@ function AnimatedSprite:init(imagetable, states, animate)
 			frameStep = 1,
 			reverse = false,
 			---@type boolean|integer
-			loop = true,
+			l = true,
 			yoyo = false,
 			flip = gfx.kImageUnflipped,
 			xScale = 1,
 			yScale = 1,
-			nextAnimation = nil,
+			na = nil,
 
 			onFrameChangedEvent = emptyFunc,
 			onStateChangedEvent = emptyFunc,
@@ -183,11 +185,11 @@ local function addState(self, params)
 		state["firstFrameIndex"] = params.firstFrameIndex -- index in the imagetable for the firstFrame
 	end
 	state["framesCount"] = params.framesCount and params.framesCount or (self.states.default.framesCount - state.firstFrameIndex + 1) -- This state frames count
-	state["nextAnimation"] = params.nextAnimation -- Animation to switch to after this finishes
-	if (params.nextAnimation == nil) then
-		state["loop"] = params.loop -- You can put in number of loops or true for endless loop
+	state["na"] = params.na -- Animation to switch to after this finishes
+	if (params.na == nil) then
+		state["l"] = params.l -- You can put in number of loops or true for endless loop
 	else
-		state["loop"] = params.loop or false
+		state["l"] = params.l or false
 	end
 	state["reverse"] = params.reverse -- You can reverse animation sequence
 	state["animationStartingFrame"] = params.animationStartingFrame or (state.reverse and state.framesCount or 1) -- Frame to start the animation from
@@ -336,8 +338,8 @@ function AnimatedSprite:forceNextAnimation(instant, state)
 			if (type(self.forcedState) == "string") then
 				self:changeState(self.forcedState)
 				self.forcedState = nil
-			elseif (currentState.nextAnimation) then
-				self:changeState(currentState.nextAnimation)
+			elseif (currentState.na) then
+				self:changeState(currentState.na)
 			else
 				self:stopAnimation()
 			end
@@ -462,10 +464,10 @@ function AnimatedSprite:updateAnimation()
 		self._ticks = self._ticks + (30 * dt)
 		if ((self._ticks - self._previousTicks) >= self.states[self.currentState].ts) then
 			local state = self.states[self.currentState]
-			local loop = state.loop
+			local l = state.l
 			local loopsFinished = self._loopsFinished
-			if (type(loop) == "number" and loop <= loopsFinished or
-				type(loop) == "boolean" and not loop and loopsFinished >= 1 or
+			if (type(l) == "number" and l <= loopsFinished or
+				type(l) == "boolean" and not l and loopsFinished >= 1 or
 				self.forcedSwitchOnLoop == loopsFinished) then
 				self:forceNextAnimation(true)
 				return
