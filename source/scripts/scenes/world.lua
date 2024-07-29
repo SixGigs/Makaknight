@@ -8,13 +8,13 @@ local m <const> = pd.getSystemMenu()
 -- This table stores entity tags used for collisions
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
-	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
+	Entity = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Bar = 11
 }
 
 -- This table stores the Z axis of each entity
 Z_INDEXES = {
-	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
+	Hazard = 20, Door = 30, Entity = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Bar = 1000
 }
@@ -157,7 +157,7 @@ function World:goToLevel(level)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
 		else
-			Prop(entityX, entityY, entityName)
+			Entity(entityX, entityY, entityName)
 		end
 	end
 
