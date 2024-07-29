@@ -164,7 +164,7 @@ function Player:collisionResponse(other)
 		[TAGS.Hazard] = true,
 		[TAGS.Pickup] = true,
 		[TAGS.Flag] = true,
-		[TAGS.Entity] = true,
+		[TAGS.Prop] = true,
 		[TAGS.Door] = true,
 		[TAGS.Animal] = true,
 		[TAGS.Hitbox] = true,

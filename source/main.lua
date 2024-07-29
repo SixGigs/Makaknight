@@ -21,7 +21,7 @@ import "scripts/Door"
 import "scripts/Flag"
 import "scripts/Hitbox"
 import "scripts/Player"
-import "scripts/Entity"
+import "scripts/Prop"
 import "scripts/Spike"
 import "scripts/Spikeball"
 
