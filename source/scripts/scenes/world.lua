@@ -23,13 +23,12 @@ Z_INDEXES = {
 ldtk.load("levels/world.ldtk", false)
 
 
-
 --- The initialising method of the game scene class
 class("World").extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
-	-- Load the game if there is a save file and create a game if there isn't
+	-- Load/Create the game
 	self:load()
 
 	-- Add a FPS tick box to the pause menu
@@ -99,8 +98,7 @@ end
 function World:enterDoor(level, x, y)
 	if level ~= self.level then
 		self:goToLevel(level)
-		self.player:add()
-		self.player:moveTo(x, y)
+		self.player = Player(x, y, self)
 	else
 		self.player:moveTo(x, y)
 	end

@@ -53,33 +53,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Door",
-					"__grid": [12,7],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2126, "x": 0, "y": 0, "w": 32, "h": 48 },
-					"__smartColor": "#BE4A2F",
-					"iid": "c6500190-fec0-11ee-a12c-bfb80719037d",
-					"width": 32,
-					"height": 48,
-					"defUid": 2116,
-					"px": [192,112],
-					"fieldInstances": [
-						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door1", "__tile": null, "defUid": 2117, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Door1"]
-						}] },
-						{ "__identifier": "level", "__type": "String", "__value": "Level_13", "__tile": null, "defUid": 2121, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Level_13"]
-						}] },
-						{ "__identifier": "exitX", "__type": "Int", "__value": 12, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [12] }] },
-						{ "__identifier": "exitY", "__type": "Int", "__value": 7, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }
-					],
-					"__worldX": 3392,
-					"__worldY": -848
-				},
-				{
 					"__identifier": "Stone",
 					"__grid": [7,2],
 					"__pivot": [0,0],
