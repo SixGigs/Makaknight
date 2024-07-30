@@ -150,7 +150,7 @@ function World:goToLevel(level)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
-		elseif entityName == "Door" then
+		elseif entityName == "Door0" or entityName == "Door1" or entityName == "Door2" or entityName == "Door3" or entityName == "Door4" then
 			Door(entityX, entityY, entity)
 		elseif entityName == "Lizard" or entityName == "Snake" or entityName == "Butterfly" then
 			Animal(entityX, entityY + 8, entity)

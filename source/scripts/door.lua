@@ -1,7 +1,4 @@
 local gfx <const> = playdate.graphics
-local newImage = gfx.image.new
-local Z_INDEXES = Z_INDEXES
-local TAGS = TAGS
 
 -- Create the door class
 class("Door").extends(gfx.sprite)
@@ -13,14 +10,12 @@ class("Door").extends(gfx.sprite)
 --- @param e table   The table of entity attributes in the door
 function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
-	local img = newImage("images/doors/" .. e.fields.sprite)
+	local img = gfx.image.new("images/doors/" .. e.name)
 
-	-- The level the door leads to
+	-- The level, X, & Y values the door leads to
 	self.level = e.fields.level
-
-	-- The coordinates the player will spawn at in the room
-	local exitX = e.fields.exitX * 16 + 16
-	local exitY = e.fields.exitY * 16 + 8
+	self.exitX = e.fields.exitX * 16 + 16
+	self.exitY = e.fields.exitY * 16 + 8
 
 	-- Sprite properties
 	self:setCenter(0, 0)
@@ -30,10 +25,6 @@ function Door:init(x, y, e)
 	self:setCollideRect(12, 32, 8, 16)
 	self:setImage(img)
 	self:add()
-
-	-- Store precomputed values
-	self.exitX = exitX
-	self.exitY = exitY
 end
 
 
