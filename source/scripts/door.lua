@@ -26,9 +26,3 @@ function Door:init(x, y, e)
 	self:setImage(img)
 	self:add()
 end
-
-
--- Used by the player in the door collision event to set where to travel to if they enter the door
-function Door:getDetails()
-	return self.level, self.exitX, self.exitY
-end

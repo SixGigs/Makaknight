@@ -80,7 +80,6 @@ function Player:init(x, y, world)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
-	self.touchingDoor = false
 	self.dead = false
 	self.win = false
 
@@ -137,12 +136,6 @@ function Player:init(x, y, world)
 	self.dashMinimumSpeed = 105
 	self.dashDrag = 1134
 
-	-- Door Management
-	self.doorTimer = 2
-	self.nextLevelID = nil
-	self.exitX = 0
-	self.exitY = 0
-
 	-- Punch
 	self.punchAvailable = false
 	self.punchBufferAmount = 3
@@ -151,6 +144,7 @@ function Player:init(x, y, world)
 	-- Left & Right buffers
 	self.leftBuffer = 0
 	self.rightBuffer = 0
+	self.upBuffer = 0
 end
 
 
@@ -333,21 +327,10 @@ function Player:handleMovementAndCollisions()
 			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
-		elseif collisionTag == TAGS.Door then
-			self:handleDoorCollision(collisionObject)
+		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
+			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision()
-		end
-
-		-- Check if we are still touching the door
-		if self.touchingDoor == true and collisionTag ~= TAGS.Door then
-			self.doorTimer = self.doorTimer - 1
-			if self.doorTimer <= 0 then
-				self.touchingDoor = false
-				self.nextLevelID = nil
-				self.exitX = 0
-				self.exitY = 0
-			end
 		end
 
 		-- Check if we are colliding with the health bar
@@ -399,17 +382,6 @@ end
 
 
 ----------------------------------------------------------------------------------------------------------
---- This function gets details from the door the player has just collided with
---- @param door table The collisionObject in this function will be the door
-function Player:handleDoorCollision(door)
-	self.doorTimer = 2
-	if self.touchingDoor == false then
-		self.touchingDoor = true
-		self.nextLevelID, self.exitX, self.exitY = door:getDetails()
-	end
-end
-
-
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
@@ -528,12 +500,6 @@ function Player:handleGroundInput()
 	-- 		self:changeToPunchState("punch")
 	-- 	end
 	-- end
-
-	if pd.buttonJustPressed(pd.kButtonUp) then
-		if self.nextLevelID ~= nil then
-			self.world:enterDoor(self.nextLevelID, self.exitX, self.exitY)
-		end
-	end
 end
 
 
