@@ -53,33 +53,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Door",
-					"__grid": [14,7],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2126, "x": 0, "y": 0, "w": 32, "h": 48 },
-					"__smartColor": "#BE4A2F",
-					"iid": "89225e90-fec0-11ee-a12c-5118e247b279",
-					"width": 32,
-					"height": 48,
-					"defUid": 2116,
-					"px": [224,112],
-					"fieldInstances": [
-						{ "__identifier": "sprite", "__type": "LocalEnum.Door", "__value": "Door1", "__tile": null, "defUid": 2117, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Door1"]
-						}] },
-						{ "__identifier": "level", "__type": "String", "__value": "Level_7", "__tile": null, "defUid": 2121, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Level_7"]
-						}] },
-						{ "__identifier": "exitX", "__type": "Int", "__value": 14, "__tile": null, "defUid": 2119, "realEditorValues": [{ "id": "V_Int", "params": [14] }] },
-						{ "__identifier": "exitY", "__type": "Int", "__value": 7, "__tile": null, "defUid": 2120, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }
-					],
-					"__worldX": 2624,
-					"__worldY": 352
-				},
-				{
 					"__identifier": "Rock",
 					"__grid": [15,9],
 					"__pivot": [0,0],
@@ -142,6 +115,29 @@
 					"fieldInstances": [],
 					"__worldX": 2736,
 					"__worldY": 416
+				},
+				{
+					"__identifier": "Door1",
+					"__grid": [14,7],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3616, "x": 0, "y": 0, "w": 32, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "40812160-4ce0-11ef-bc9d-07ce03575387",
+					"width": 32,
+					"height": 48,
+					"defUid": 3617,
+					"px": [224,112],
+					"fieldInstances": [
+						{ "__identifier": "level", "__type": "String", "__value": "Level_7", "__tile": null, "defUid": 3618, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["Level_7"]
+						}] },
+						{ "__identifier": "exitX", "__type": "Int", "__value": 14, "__tile": null, "defUid": 3619, "realEditorValues": [{ "id": "V_Int", "params": [14] }] },
+						{ "__identifier": "exitY", "__type": "Int", "__value": 7, "__tile": null, "defUid": 3620, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }
+					],
+					"__worldX": 2624,
+					"__worldY": 352
 				}
 			]
 		},
