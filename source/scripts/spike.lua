@@ -1,5 +1,5 @@
 local gfx <const> = playdate.graphics
-class("Spike").extends(gfx.sprite)
+class('Spike').extends(gfx.sprite)
 
 --- Initialise the spike object using the data given
 --- @param x integer The X coordinate to spawn the spike
