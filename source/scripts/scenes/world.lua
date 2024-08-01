@@ -1,41 +1,37 @@
--- Create constants for the playdate and playdate.graphics
--- Also create constants for the LDtk library and game data
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
-local m <const> = pd.getSystemMenu()
+local menu <const> = pd.getSystemMenu()
 
--- This table stores entity tags used for collisions
+-- An array of collision tags
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Bar = 11
 }
 
--- This table stores the Z axis of each entity
+-- An array of Z indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Bar = 1000
 }
 
--- Load the level used for the game
-ldtk.load("levels/world.ldtk", false)
+ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
 
 
 --- The initialising method of the game scene class
-class("World").extends(gfx.sprite)
+class('World').extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
-	-- Load/Create the game
-	self:load()
+	self:load() -- Load/Create the game
 
 	-- Add a FPS tick box to the pause menu
 	local fiftyHertz = false
 	if self.fps == 50 then fiftyHertz = true end
 
-	m:addCheckmarkMenuItem("50 FPS", fiftyHertz, function(status)
+	menu:addCheckmarkMenuItem("50 FPS", fiftyHertz, function(status)
 		if status ~= nil then
 			if status then
 				self.fps = 50
@@ -48,7 +44,7 @@ function World:init()
 	end)
 
 	-- Add the Quick save option to the pause menu
-	m:addMenuItem("Quick Save", function() self:save(true) end)
+	menu:addMenuItem("Quick Save", function() self:save(true) end)
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
@@ -60,18 +56,19 @@ end
 --- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
 --- @param direction string Contains in text form, the direction from the current level to load the next level piece
 function World:enterRoom(direction)
-	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
-	local oldLevel <const> = self.level
-	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
-
 	-- If there is no neighbouring level die unless its north in which case just don't move
+	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
 	if not level then
 		if direction == "north" then return else return self.player:die() end
 	end
 
+	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
+	local oldLevel <const> = self.level
+	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
+	ldtk.release_level(oldLevel)
+
 	-- Load the new level, remove the old level, and add the player
 	self:goToLevel(level)
-	ldtk.release_level(oldLevel)
 	self.player:add()
 
 	-- Create a local X and Y, and use them to spawn the player
@@ -92,13 +89,16 @@ end
 
 
 --- This function is called when the player enters a door, and is used to create the level they are travelling to
---- @param level string  Contains the name of the level we want to travel to as a string
---- @param x     integer Contains the X coordinate to spawn the player after moving to the new level
---- @param y     integer Contains the Y coordinate to spawn the player after moving to the new level
+--- @param  level  string   Contains the name of the level we want to travel to as a string
+--- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
+--- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
 	if level ~= self.level then
+		local oldLevel <const> = self.level
+		ldtk.release_level(oldLevel)
 		self:goToLevel(level)
-		self.player = Player(x, y, self)
+		self.player:add()
+		self.player:moveTo(x, y)
 	else
 		self.player:moveTo(x, y)
 	end
@@ -106,13 +106,10 @@ end
 
 
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
---- @param level  string  Contains the name of the level to load as a string
+--- @param  level  string  Contains the name of the level to load as a string
 function World:goToLevel(level)
-	-- Remove all playdate sprite objects to give us a blank slate
-	gfx.sprite.removeAll()
-
-	-- Load the individual level
-	ldtk.load_level(level)
+	ldtk.load_level(level) -- Load the next level
+	gfx.sprite.removeAll() -- Remove all playdate sprites
 
 	-- Update local level attribute and build the new tile map
 	self.level = level
@@ -120,13 +117,13 @@ function World:goToLevel(level)
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
 			local layerSprite <const> = gfx.sprite.new()
-
+	
 			layerSprite:setTilemap(tilemap)
 			layerSprite:setCenter(0, 0)
 			layerSprite:moveTo(0, 0)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
-
+	
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, "Solid", layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
@@ -254,5 +251,5 @@ end
 
 --- Unsets menu items
 function World:unsetMenu()
-	m:removeAllMenuItems()
+	menu:removeAllMenuItems()
 end

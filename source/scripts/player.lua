@@ -36,7 +36,7 @@ function Player:init(x, y, world)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {ts = 2, l = 1, na = "idle"})
 	self:addState("roll", 43, 58, {ts = 1, l = 1})
-	self:addState("doubleJump", 59, 74, {ts = 1, l = 1})
+	self:addState("dbJump", 59, 74, {ts = 1, l = 1})
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
 	
 	-- The following are temporary sprites that will be animated later
@@ -61,7 +61,7 @@ function Player:init(x, y, world)
 
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
-	self.states["doubleJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
+	self.states["dbJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
 	self.states["hurt"].onAnimationEndEvent = function(self) 
 		self.hurt = false
 		self.doubleJumpAvailable = false
@@ -265,7 +265,7 @@ function Player:handleState()
 		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
-	elseif self.currentState == "doubleJump" then
+	elseif self.currentState == "dbJump" then
 		if self.touchingGround then
 			self:setCollideRect(38, 44, 4, 36)
 			self:changeToIdleState()
@@ -334,13 +334,11 @@ function Player:handleMovementAndCollisions()
 		end
 
 		-- Check if we are colliding with the health bar
-		if collisionTag == TAGS.Bar and not self.world.bar.hidden then
+		if collisionTag == TAGS.Bar and self.world.bar:isVisible() then
 			self.world.bar:setVisible(false)
 			pd.timer.performAfterDelay(2000, function()
 				self.world.bar:setVisible(true)
-				self.world.bar.hidden = false
 			end)
-			self.world.bar.hidden = true
 		end
 	end
 
@@ -610,7 +608,7 @@ function Player:changeToDoubleJumpState()
 	self.jumpBuffer = 0
 	self.doubleJumpAvailable = false
 	self.yVelocity = self.doubleJumpVelocity
-	self:changeState("doubleJump")
+	self:changeState("dbJump")
 end
 
 

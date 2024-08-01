@@ -6,9 +6,9 @@ local gfx <const> = pd.graphics
 class('Bar').extends(gfx.sprite)
 
 function Bar:init(x, y, hp)
-	local barImage <const> = gfx.image.new("images/player/hitpoint")
+	local img <const> = gfx.image.new("images/player/hitpoint")
 
-	gfx.lockFocus(barImage)
+	gfx.lockFocus(img)
 	gfx.drawRect(33, 2, hp, 5)
 	gfx.fillRect(33, 6, hp, 8)
 	gfx.unlockFocus()
@@ -17,9 +17,7 @@ function Bar:init(x, y, hp)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Bar)
 	self:setTag(TAGS.Bar)
-	self:setImage(barImage)
+	self:setImage(img)
 	self:setCollideRect(0, 0, 128, 8)
 	self:add()
-
-	self.hidden = false
 end
