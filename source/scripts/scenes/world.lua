@@ -1,35 +1,31 @@
--- Create constants for the playdate and playdate.graphics
--- Also create constants for the LDtk library and game data
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 local menu <const> = pd.getSystemMenu()
 
--- This table stores entity tags used for collisions
+-- An array of collision tags
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Bar = 11
 }
 
--- This table stores the Z axis of each entity
+-- An array of Z indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Bar = 1000
 }
 
--- Load the level used for the game
-ldtk.load("levels/world.ldtk", false)
+ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
 
 
 --- The initialising method of the game scene class
-class("World").extends(gfx.sprite)
+class('World').extends(gfx.sprite)
 
 --- Create the game class
 function World:init()
-	-- Load/Create the game
-	self:load()
+	self:load() -- Load/Create the game
 
 	-- Add a FPS tick box to the pause menu
 	local fiftyHertz = false
@@ -65,7 +61,7 @@ function World:enterRoom(direction)
 	if not level then
 		if direction == "north" then return else return self.player:die() end
 	end
-	
+
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
 	local oldLevel <const> = self.level
 	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
@@ -93,13 +89,16 @@ end
 
 
 --- This function is called when the player enters a door, and is used to create the level they are travelling to
---- @param level string  Contains the name of the level we want to travel to as a string
---- @param x     integer Contains the X coordinate to spawn the player after moving to the new level
---- @param y     integer Contains the Y coordinate to spawn the player after moving to the new level
+--- @param  level  string   Contains the name of the level we want to travel to as a string
+--- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
+--- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
 	if level ~= self.level then
+		local oldLevel <const> = self.level
+		ldtk.release_level(oldLevel)
 		self:goToLevel(level)
-		self.player = Player(x, y, self)
+		self.player:add()
+		self.player:moveTo(x, y)
 	else
 		self.player:moveTo(x, y)
 	end
@@ -107,7 +106,7 @@ end
 
 
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
---- @param level  string  Contains the name of the level to load as a string
+--- @param  level  string  Contains the name of the level to load as a string
 function World:goToLevel(level)
 	ldtk.load_level(level) -- Load the next level
 	gfx.sprite.removeAll() -- Remove all playdate sprites

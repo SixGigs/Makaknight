@@ -11,6 +11,7 @@ function Prop:init(x, y, name)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Prop)
+	self:setTag(TAGS.Prop)
 	self:setImage(img)
 	self:add()
 end
