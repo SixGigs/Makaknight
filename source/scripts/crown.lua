@@ -1,13 +1,9 @@
--- Create playdate graphics as a constant for props
 local gfx <const> = playdate.graphics
-
--- Create the Crown class
-class("Crown").extends(AnimatedSprite)
+class('Crown').extends(AnimatedSprite)
 
 --- The prop class is used to spawn entities that are decoration
---- @param x          integer The X coordinate to spawn the spike
---- @param y          integer The Y coordinate to spawn the spike
---- @param entityName string  The name of the entity to create as a prop
+--- @param  x  integer The X coordinate to spawn the spike
+--- @param  y  integer The Y coordinate to spawn the spike
 function Crown:init(x, y)
 	-- Find and open the image to use as a prop
 	Crown.super.init(self, gfx.imagetable.new("images/entities/crown-table-48-48"))

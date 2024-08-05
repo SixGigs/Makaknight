@@ -25,15 +25,16 @@ import "scripts/Prop"
 import "scripts/Spike"
 import "scripts/Spikeball"
 
--- Local Playdate Constants
+-- Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
--- Game Globals
+-- Globals
 g = Game()
 dt = 0
 
-Screen("title") -- Create Title Screen
+--Screen("title") -- Create Title Screen
+World()
 
 -- Main Game Loop
 function pd.update()
