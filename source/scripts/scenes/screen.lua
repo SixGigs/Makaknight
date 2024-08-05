@@ -6,10 +6,9 @@ local gfx <const> = pd.graphics
 class("Screen").extends(gfx.sprite)
 
 --- Initialise the screen class
---- @param  string  scene  The scene to use
+--- @param  scene  string  The scene to use
 function Screen:init(scene)
-	-- Save scene data locally
-	self.scene = scene
+	self.scene = scene -- Save scene data locally
 
 	-- Set image for the scene
 	self:setImage(gfx.image.new("images/"..self.scene))

@@ -148,7 +148,6 @@ function Player:init(x, y, world)
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- This function is used to handle the collisions the player has with the world
 --- @param  other   table   This variable contains what the player has collided with
 --- @return unknown unknown The function returns the collision response to use
@@ -174,7 +173,6 @@ function Player:collisionResponse(other)
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	self:updateAnimation()
@@ -286,7 +284,6 @@ function Player:handleState()
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
 	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
@@ -379,7 +376,6 @@ function Player:handleMovementAndCollisions()
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
@@ -536,7 +532,6 @@ function Player:handleAirInput()
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
 	self.xVelocity = 0
@@ -629,6 +624,7 @@ end
 
 
 --- Change the player into a roll state
+--- @param  direction  string  The direction to roll in
 function Player:changeToRollState(direction)
 	self.rollAvailable = false
 	self:setCollideRect(38, 61, 4, 19)
@@ -689,6 +685,7 @@ function Player:changeToPunchState(state)
 end
 
 
+--- Change the player into the spawn state
 function Player:changeToSpawnState()
 	self:changeState("spawn")
 end
@@ -727,7 +724,6 @@ function Player:changeToDashState()
 end
 
 
-----------------------------------------------------------------------------------------------------------
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
@@ -739,8 +735,9 @@ function Player:applyGravity()
 	end
 end
 
+
 --- Applies air drag to the player if they're not holding the direction they are moving in while airborne
---- @param amount integer The amount to decrease movement by while in the air if receiving no directional input
+--- @param  amount  integer  The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
 		self.xVelocity = self.xVelocity - (amount * dt)
