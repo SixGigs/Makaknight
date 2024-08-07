@@ -402,12 +402,17 @@ end
 
 
 --- If the player collides with a crown, run this function
-function Player:handleCrownCollision(collisionObject)
-	if not self.win then
-		collisionObject:setVisible(false)
+function Player:handleCrownCollision(obj)
+	if obj:isVisible() and obj.level == "win" and not self.win then
+		obj:setVisible(false)
 		self.win = true
 		self.world:unsetMenu()
 		g:switchScene(Screen, "wipe", "win")
+	end
+
+	if obj.level ~= "win" then
+		obj:setVisible(false)
+		self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
 	end
 end
 
