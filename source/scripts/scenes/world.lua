@@ -152,7 +152,7 @@ function World:goToLevel(level)
 		elseif entityName == "Lizard" or entityName == "Snake" or entityName == "Butterfly" then
 			Animal(entityX, entityY + 8, entity)
 		elseif entityName == "Crown" then
-			Crown(entityX, entityY)
+			Crown(entityX, entityY, entity)
 		else
 			Prop(entityX, entityY, entityName)
 		end
