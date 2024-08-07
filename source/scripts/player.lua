@@ -162,7 +162,8 @@ function Player:collisionResponse(other)
 		[TAGS.Animal] = true,
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
-		[TAGS.Bar] = true
+		[TAGS.Bar] = true,
+		[TAGS.Bubble] = true
 	}
 
 	if overlapTags[tag] then
@@ -259,7 +260,6 @@ function Player:handleState()
 		self.xVelocity = 0
 		self:applyGravity()
 		self:handleDuckInput()
-
 		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
@@ -276,7 +276,6 @@ function Player:handleState()
 	else
 		self:applyGravity()
 		self:handleGroundInput()
-
 		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
@@ -327,7 +326,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
-			self:handleCrownCollision()
+			self:handleCrownCollision(collisionObject)
 		end
 
 		-- Check if we are colliding with the health bar
@@ -403,8 +402,9 @@ end
 
 
 --- If the player collides with a crown, run this function
-function Player:handleCrownCollision()
+function Player:handleCrownCollision(collisionObject)
 	if not self.win then
+		collisionObject:setVisible(false)
 		self.win = true
 		self.world:unsetMenu()
 		g:switchScene(Screen, "wipe", "win")
@@ -442,6 +442,7 @@ function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
+	self.hp = 0
 
 	self:changeState("die")
 	self.world:updateHealthBar() 

@@ -13,7 +13,7 @@ function Spike:init(x, y, e)
 	self.yVelocity = e.fields.yVelocity
 
 	if e.name == "Stalactite" or e.name == "Roofspike" then
-		self:setCollideRect(2, 1, 12, 2)
+		self:setCollideRect(2, 0, 12, 2)
 	else
 		self:setCollideRect(2, 14, 12, 2)
 	end

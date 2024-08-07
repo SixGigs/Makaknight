@@ -14,8 +14,10 @@ import "scripts/scenes/Screen"
 import "scripts/scenes/World"
 
 -- Scripts
+import "scripts/Ability"
 import "scripts/Animal"
 import "scripts/Bar"
+import "scripts/Bubble"
 import "scripts/Crown"
 import "scripts/Door"
 import "scripts/Flag"

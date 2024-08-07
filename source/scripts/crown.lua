@@ -17,6 +17,6 @@ function Crown:init(x, y)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Crown)
 	self:setTag(TAGS.Crown)
-	self:setCollideRect(16, 16, 16, 16)
+	self:setCollideRect(8, 8, 32, 32)
 	self:add()
 end
