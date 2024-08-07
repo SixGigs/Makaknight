@@ -7,14 +7,14 @@ local menu <const> = pd.getSystemMenu()
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, Bar = 11
+	Crown = 10, Bar = 11, Bubble = 12
 }
 
 -- An array of Z indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, Bar = 1000
+	Crown = 120, Bar = 1000, Bubble = 50
 }
 
 ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
@@ -141,7 +141,9 @@ function World:goToLevel(level)
 			Spike(entityX, entityY, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
-		elseif entityName == "Ability" then
+		elseif entityName == "Bubble" then
+			Bubble(entityX, entityY, entity)
+		elseif entityName == "DoubleJump" then
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
@@ -218,8 +220,8 @@ function World:load()
 	local gd <const> = pd.datastore.read()
 
 	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
-	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
-	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 8 * 16)
+	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 3 * 16 + 8) or 3 * 16 + 8)
+	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
 	self.level = (gd and (gd.level and gd.level or self.spawn) or self.spawn)
 	self.levelX = (gd and (gd.levelX and gd.levelX or self.spawnX) or self.spawnX)
 	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
