@@ -13,9 +13,13 @@ function Crown:init(x, y, e)
 	self:playAnimation()
 
 	-- A possible level & coordinate to move the player to
-	self.level = e.fields.level
-	self.exitX = e.fields.exitX * 16 + 16
-	self.exitY = e.fields.exitY * 16 + 8
+	self.win = e.fields.win
+
+	if e.fields.level ~= "" then
+		self.level = e.fields.level
+		self.exitX = e.fields.exitX * 16 + 16
+		self.exitY = e.fields.exitY * 16 + 8
+	end
 
 	-- Crown properties
 	self:setCenter(0, 0)

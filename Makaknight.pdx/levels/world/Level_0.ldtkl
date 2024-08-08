@@ -97,6 +97,7 @@
 					"defUid": 3384,
 					"px": [320,112],
 					"fieldInstances": [
+						{ "__identifier": "win", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3646, "realEditorValues": [] },
 						{ "__identifier": "level", "__type": "String", "__value": "Level_1", "__tile": null, "defUid": 3641, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["Level_1"]
