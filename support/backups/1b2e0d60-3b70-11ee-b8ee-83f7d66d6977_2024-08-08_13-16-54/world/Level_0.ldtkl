@@ -96,7 +96,15 @@
 					"height": 48,
 					"defUid": 3384,
 					"px": [320,112],
-					"fieldInstances": [],
+					"fieldInstances": [
+						{ "__identifier": "win", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3646, "realEditorValues": [] },
+						{ "__identifier": "level", "__type": "String", "__value": "Level_1", "__tile": null, "defUid": 3641, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["Level_1"]
+						}] },
+						{ "__identifier": "exitX", "__type": "Int", "__value": 3, "__tile": null, "defUid": 3642, "realEditorValues": [{ "id": "V_Int", "params": [3] }] },
+						{ "__identifier": "exitY", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3644, "realEditorValues": [{ "id": "V_Int", "params": [8] }] }
+					],
 					"__worldX": 320,
 					"__worldY": -128
 				},
@@ -506,5 +514,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": []
+	"__neighbours": [{ "levelIid": "e07b6d20-4ce0-11ef-adb2-3b3522d4536f", "dir": "e" }]
 }
