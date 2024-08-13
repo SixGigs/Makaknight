@@ -1,17 +1,26 @@
 local gfx <const> = playdate.graphics
-class("Spikeball").extends("Spike")
+class('Spikeball').extends(AnimatedSprite)
 
 --- Initialise the Spike-ball object using the information given
 --- @param  x  integer  The X coordinate to spawn the Spike-ball
 --- @param  y  integer  The Y coordinate to spawn the Spike-ball
 --- @param  e  table    The entities that come with the Spike-ball
 function Spikeball:init(x, y, e)
-	Spikeball.super.init(self, x, y, e)
+	Spikeball.super.init(self, gfx.imagetable.new('images/hazards/spikeball-table-23-23'))
 
-	self.xVelocity = e.fields.xVelocity
-	self.yVelocity = e.fields.yVelocity
+	self:addState('i', 1, 2, {ts = 20})
+	self:playAnimation()
 
-	self:setCollideRect(4, 4, 8, 8)
+	self.damage = e.fields.damage
+	self.xVelocity = e.fields.xVelocity * 30
+	self.yVelocity = e.fields.yVelocity * 30
+
+	self:setCenter(0, 0)
+	self:moveTo(x, y)
+	self:setZIndex(Z_INDEXES.Hazard)
+	self:setTag(TAGS.Hazard)
+	self:setCollideRect(4, 4, 15, 15)
+	self:add()
 end
 
 
@@ -27,7 +36,7 @@ end
 
 --- The update method for the Spike-ball, it will run every tick
 function Spikeball:update()
-	local _, _, collisions, length = self:moveWithCollisions(
+	local _, _, collisions, length <const> = self:moveWithCollisions(
 		self.x + (self.xVelocity * dt), 
 		self.y + (self.yVelocity * dt)
 	)
@@ -40,4 +49,6 @@ function Spikeball:update()
 			self.yVelocity = self.yVelocity * -1
 		end
 	end
+
+	self:updateAnimation()
 end

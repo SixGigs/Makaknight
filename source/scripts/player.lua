@@ -123,7 +123,7 @@ function Player:init(x, y, world)
 		["fall1"] = true,
 		["fall2"] = true,
 		["fall3"] = true,
-		["dive"] = true,
+		["dive"] = true
 	}
 
 	-- Double Jump
@@ -567,6 +567,8 @@ function Player:changeToHurtState()
 	else
 		self.xVelocity = -self.walkSpeed
 	end
+	
+	self.yVelocity = -self.maxSpeed
 
 	self.hurt = true
 	self.world:updateHealthBar()
