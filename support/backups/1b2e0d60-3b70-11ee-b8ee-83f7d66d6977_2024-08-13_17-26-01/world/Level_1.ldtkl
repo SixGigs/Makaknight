@@ -203,32 +203,12 @@
 				},
 				{
 					"__identifier": "Spikeball",
-					"__grid": [7,12],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "267d0700-4ce0-11ef-8ffb-952a2d032168",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [112,192],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 512,
-					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
 					"__grid": [8,12],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#FF0000",
-					"iid": "272024d0-4ce0-11ef-8ffb-395f27fb5ac2",
+					"iid": "a6d563e0-4ce0-11ef-8ffb-67e722be1f43",
 					"width": 23,
 					"height": 23,
 					"defUid": 69,
@@ -243,32 +223,12 @@
 				},
 				{
 					"__identifier": "Spikeball",
-					"__grid": [9,12],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "27a50c40-4ce0-11ef-8ffb-25b0fa31f500",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [144,192],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 544,
-					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
 					"__grid": [10,12],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#FF0000",
-					"iid": "283df0e0-4ce0-11ef-8ffb-27c52ae4bf10",
+					"iid": "a9d58480-4ce0-11ef-8ffb-99ee9fe90c79",
 					"width": 23,
 					"height": 23,
 					"defUid": 69,
@@ -283,32 +243,12 @@
 				},
 				{
 					"__identifier": "Spikeball",
-					"__grid": [11,12],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "28b9feb0-4ce0-11ef-8ffb-ff199ea10ab0",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [176,192],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 576,
-					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
 					"__grid": [12,12],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#FF0000",
-					"iid": "2a8dad40-4ce0-11ef-8ffb-b1d7ec984bb6",
+					"iid": "aa527cb0-4ce0-11ef-8ffb-f35249c2aae8",
 					"width": 23,
 					"height": 23,
 					"defUid": 69,
@@ -323,32 +263,12 @@
 				},
 				{
 					"__identifier": "Spikeball",
-					"__grid": [13,12],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "2b124690-4ce0-11ef-8ffb-f598be8e2cef",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [208,192],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 608,
-					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
 					"__grid": [14,12],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#FF0000",
-					"iid": "2b911380-4ce0-11ef-8ffb-3da26fc56a4c",
+					"iid": "ad29b890-4ce0-11ef-8ffb-a9171f2728ee",
 					"width": 23,
 					"height": 23,
 					"defUid": 69,
@@ -360,46 +280,6 @@
 					],
 					"__worldX": 624,
 					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
-					"__grid": [15,12],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "2c2711f0-4ce0-11ef-8ffb-3d44fdd80532",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [240,192],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 640,
-					"__worldY": -48
-				},
-				{
-					"__identifier": "Spikeball",
-					"__grid": [5,1],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#FF0000",
-					"iid": "2e90e600-4ce0-11ef-8ffb-151e36c593dc",
-					"width": 23,
-					"height": 23,
-					"defUid": 69,
-					"px": [80,16],
-					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
-						{ "__identifier": "xVelocity", "__type": "Float", "__value": 3, "__tile": null, "defUid": 70, "realEditorValues": [{ "id": "V_Float", "params": [3] }] },
-						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
-					],
-					"__worldX": 480,
-					"__worldY": -224
 				}
 			]
 		},

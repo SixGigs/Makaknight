@@ -3,14 +3,39 @@ local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 local menu <const> = pd.getSystemMenu()
 
--- An array of collision tags
+
+-- Entity type tables
+local hazards <const> = {
+	["Floorspike"] = true,
+	["Roofspike"] = true,
+	["Spearspike"] = true,
+	["Stalagmite"] = true,
+	["Stalactite"] = true
+}
+
+local doors <const> = {
+	["Door0"] = true,
+	["Door1"] = true,
+	["Door2"] = true,
+	["Door3"] = true,
+	["Door4"] = true
+}
+
+local animals <const> = {
+	["Lizard"] = true,
+	["Snake"] = true,
+	["Butterfly"] = true
+}
+
+
+-- A global table of entity tags
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Bar = 11, Bubble = 12
 }
 
--- An array of Z indexes
+-- A global table of entity indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
@@ -31,7 +56,7 @@ function World:init()
 	local fiftyHertz = false
 	if self.fps == 50 then fiftyHertz = true end
 
-	menu:addCheckmarkMenuItem("50 FPS", fiftyHertz, function(status)
+	menu:addCheckmarkMenuItem('50 FPS', fiftyHertz, function(status)
 		if status ~= nil then
 			if status then
 				self.fps = 50
@@ -44,7 +69,7 @@ function World:init()
 	end)
 
 	-- Add the Quick save option to the pause menu
-	menu:addMenuItem("Quick Save", function() self:save(true) end)
+	menu:addMenuItem('Quick Save', function() self:save(true) end)
 
 	-- Go to the level specified from the load or create and create the player
 	self:goToLevel(self.level)
@@ -59,7 +84,7 @@ function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
 	if not level then
-		if direction == "north" then return else return self.player:die() end
+		if direction == 'north' then return else return self.player:die() end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
@@ -73,13 +98,13 @@ function World:enterRoom(direction)
 
 	-- Create a local X and Y, and use them to spawn the player
 	local x, y
-	if direction == "north" then
+	if direction == 'north' then
 		x, y = self.player.x, 200
-	elseif direction == "south" then
+	elseif direction == 'south' then
 		x, y = self.player.x, 24
-	elseif direction == "east" then
+	elseif direction == 'east' then
 		x, y = 8, self.player.y
-	elseif direction == "west" then
+	elseif direction == 'west' then
 		x, y = 392, self.player.y
 	end
 
@@ -97,8 +122,8 @@ function World:enterDoor(level, x, y)
 		local oldLevel <const> = self.level
 		ldtk.release_level(oldLevel)
 		self:goToLevel(level)
-		self.player:add()
 		self.player:moveTo(x, y)
+		self.player:add()
 	else
 		self.player:moveTo(x, y)
 	end
@@ -124,7 +149,7 @@ function World:goToLevel(level)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
 	
-			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, "Solid", layer_name)
+			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Solid', layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
 			end
@@ -137,8 +162,12 @@ function World:goToLevel(level)
 		local entityName = entity.name
 
 		-- Match the entity name to a script
-		if entityName == "Floorspike" or entityName == "Roofspike" or entityName == "Spearspike" or entityName == "Stalagmite" or entityName == "Stalactite" then
+		if hazards[entityName] then
 			Spike(entityX, entityY, entity)
+		elseif doors[entityName] then
+			Door(entityX, entityY, entity)
+		elseif animals[entityName] then
+			Animal(entityX, entityY + 8, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Bubble" then
@@ -147,10 +176,6 @@ function World:goToLevel(level)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
-		elseif entityName == "Door0" or entityName == "Door1" or entityName == "Door2" or entityName == "Door3" or entityName == "Door4" then
-			Door(entityX, entityY, entity)
-		elseif entityName == "Lizard" or entityName == "Snake" or entityName == "Butterfly" then
-			Animal(entityX, entityY + 8, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY, entity)
 		else

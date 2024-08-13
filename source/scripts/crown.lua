@@ -6,7 +6,7 @@ class('Crown').extends(AnimatedSprite)
 --- @param  y  integer The Y coordinate to spawn the spike
 function Crown:init(x, y, e)
 	-- Find and open the image to use as a prop
-	Crown.super.init(self, gfx.imagetable.new("images/entities/crown-table-48-48"))
+	Crown.super.init(self, gfx.imagetable.new('images/entities/crown-table-48-48'))
 
 	-- Crown states, sprites, and animation speeds
 	self:addState("spin", 1, 32, {ts = 1})
@@ -15,13 +15,13 @@ function Crown:init(x, y, e)
 	-- A possible level & coordinate to move the player to
 	self.win = e.fields.win
 
-	if e.fields.level ~= "" then
+	if e.fields.level ~= '' then
 		self.level = e.fields.level
 		self.exitX = e.fields.exitX * 16 + 16
 		self.exitY = e.fields.exitY * 16 + 8
 	end
 
-	-- Crown properties
+	-- Properties
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Crown)
