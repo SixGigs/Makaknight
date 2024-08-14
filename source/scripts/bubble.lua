@@ -10,10 +10,10 @@ class('Bubble').extends(AnimatedSprite)
 --- @param entity table   The table of entities related to the Bubble
 function Bubble:init(x, y, entity)
 	-- If the Bubble has been picked up don't spawn it
-	self.fields = entity.fields
-	if self.fields.pickedUp then
-		return
-	end
+	-- self.fields = entity.fields
+	-- if self.fields.pickedUp then
+	-- 	return
+	-- end
 
 	Bubble.super.init(self, gfx.imagetable.new('images/abilities/doublejump-table-16-16'))
 
@@ -23,8 +23,8 @@ function Bubble:init(x, y, entity)
 	-- Sprite properties
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.Pickup)
-	self:setTag(TAGS.Pickup)
+	self:setZIndex(Z_INDEXES.Bubble)
+	self:setTag(TAGS.Bubble)
 	self:setCollideRect(0, 4, 16, 16)
 	self:add()
 end
@@ -32,7 +32,7 @@ end
 
 --- This method handles the Bubble being picked up by the player
 --- @param player table The player is passed into this function to manage the pick-up
-function Bubble:pickUp(player)
+function Bubble:bounce(player)
 	if self:isVisible() then
 		player.touchingGround = false
 		player.yVelocity = -270
@@ -43,7 +43,7 @@ function Bubble:pickUp(player)
 
 		self:setVisible(false)
 
-		pd.timer.performAfterDelay(4000, function()
+		pd.timer.performAfterDelay(3000, function()
 			self:setVisible(true)
 		end)
 	end

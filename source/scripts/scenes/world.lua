@@ -32,14 +32,14 @@ local animals <const> = {
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, Bar = 11, Bubble = 12
+	Crown = 10, Bar = 11, Bubble = 12, Fragileblock = 13
 }
 
 -- A global table of entity indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, Bar = 1000, Bubble = 50
+	Crown = 120, Bar = 1000, Bubble = 50, Fragileblock = 100
 }
 
 ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
@@ -176,6 +176,8 @@ function World:goToLevel(level)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
+		elseif entityName == "Fragileblock" then
+			Fragileblock(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY, entity)
 		else
