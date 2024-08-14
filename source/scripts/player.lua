@@ -153,6 +153,15 @@ end
 --- @return unknown unknown The function returns the collision response to use
 function Player:collisionResponse(other)
 	local tag <const> = other:getTag()
+
+	if tag == TAGS.Fragileblock then
+		if other.currentState == 'breaking' or other.currentState == 'broken' then
+			fragileBlockOverlap = true
+		else
+			fragileBlockOverlap = false
+		end
+	end
+
 	local overlapTags <const> = {
 		[TAGS.Hazard] = true,
 		[TAGS.Pickup] = true,
@@ -163,7 +172,8 @@ function Player:collisionResponse(other)
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
 		[TAGS.Bar] = true,
-		[TAGS.Bubble] = true
+		[TAGS.Bubble] = true,
+		[TAGS.Fragileblock] = fragileBlockOverlap
 	}
 
 	if overlapTags[tag] then
@@ -319,14 +329,16 @@ function Player:handleMovementAndCollisions()
 				self.hp = self.hp - collisionObject.damage
 				self:changeToHurtState("hurt")
 			end
-		elseif collisionTag == TAGS.Pickup then
-			collisionObject:pickUp(self)
+		elseif collisionTag == TAGS.Bubble then
+			collisionObject:bounce(self)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision(collisionObject)
+		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == 'solid' and collision.normal.y == -1 then
+			collisionObject:crack()
 		end
 
 		-- Check if we are colliding with the health bar
