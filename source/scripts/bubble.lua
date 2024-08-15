@@ -9,15 +9,9 @@ class('Bubble').extends(AnimatedSprite)
 --- @param y      integer The Y coordinate to spawn the Bubble pick-up
 --- @param entity table   The table of entities related to the Bubble
 function Bubble:init(x, y, entity)
-	-- If the Bubble has been picked up don't spawn it
-	-- self.fields = entity.fields
-	-- if self.fields.pickedUp then
-	-- 	return
-	-- end
-
 	Bubble.super.init(self, gfx.imagetable.new('images/abilities/doublejump-table-16-16'))
 
-	self:addState('wiggle', 1, 4, {ts = 4})
+	self:addState('wobble', 1, 4, {ts = 4})
 	self:playAnimation()
 
 	-- Sprite properties
@@ -41,10 +35,10 @@ function Bubble:bounce(player)
 			player:changeState("jump1")
 		end
 
-		self:setVisible(false)
-
 		pd.timer.performAfterDelay(3000, function()
 			self:setVisible(true)
 		end)
+		
+		self:setVisible(false)
 	end
 end

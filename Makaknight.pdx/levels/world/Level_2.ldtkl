@@ -413,6 +413,50 @@
 					],
 					"__worldX": 896,
 					"__worldY": -112
+				},
+				{
+					"__identifier": "Snake",
+					"__grid": [11,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "1d2da400-4ce0-11ef-a970-f5c76870bcf6",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [176,64],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
+						{ "__identifier": "fly", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3375, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
+					],
+					"__worldX": 976,
+					"__worldY": -176
+				},
+				{
+					"__identifier": "Lizard",
+					"__grid": [13,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "1f5c1cc0-4ce0-11ef-a970-fd47e85bf008",
+					"width": 16,
+					"height": 16,
+					"defUid": 2973,
+					"px": [208,64],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [] },
+						{ "__identifier": "fly", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3374, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3381, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
+					],
+					"__worldX": 1008,
+					"__worldY": -176
 				}
 			]
 		},

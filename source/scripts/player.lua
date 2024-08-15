@@ -93,6 +93,21 @@ function Player:init(x, y, world)
 	self.walkSpeed = 90
 	self.jumpSpeed = 115
 	self.drag = 120
+	
+	-- Collision attributes
+	self.overlapTags = {
+		[TAGS.Hazard] = true,
+		[TAGS.Pickup] = true,
+		[TAGS.Flag] = true,
+		[TAGS.Prop] = true,
+		[TAGS.Door] = true,
+		[TAGS.Animal] = true,
+		[TAGS.Hitbox] = true,
+		[TAGS.Crown] = true,
+		[TAGS.Bar] = true,
+		[TAGS.Bubble] = true,
+		[TAGS.Fragileblock] = true
+	}
 
 	-- Buffer
 	self.bufferAmount = 2
@@ -154,33 +169,17 @@ end
 function Player:collisionResponse(other)
 	local tag <const> = other:getTag()
 
-	if tag == TAGS.Fragileblock then
-		if other.currentState == 'breaking' or other.currentState == 'broken' then
-			fragileBlockOverlap = true
+	if self.overlapTags[tag] then
+		if tag == TAGS.Fragileblock then
+			if other.currentState == "breaking" or other.currentState == "broken" then
+				return gfx.sprite.kCollisionTypeOverlap
+			end
 		else
-			fragileBlockOverlap = false
+			return gfx.sprite.kCollisionTypeOverlap
 		end
 	end
 
-	local overlapTags <const> = {
-		[TAGS.Hazard] = true,
-		[TAGS.Pickup] = true,
-		[TAGS.Flag] = true,
-		[TAGS.Prop] = true,
-		[TAGS.Door] = true,
-		[TAGS.Animal] = true,
-		[TAGS.Hitbox] = true,
-		[TAGS.Crown] = true,
-		[TAGS.Bar] = true,
-		[TAGS.Bubble] = true,
-		[TAGS.Fragileblock] = fragileBlockOverlap
-	}
-
-	if overlapTags[tag] then
-		return gfx.sprite.kCollisionTypeOverlap
-	else
-		return gfx.sprite.kCollisionTypeSlide
-	end
+	return gfx.sprite.kCollisionTypeSlide
 end
 
 
