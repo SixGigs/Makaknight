@@ -9,10 +9,6 @@ import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/Game"
 import "scripts/libraries/LDtk"
 
--- Scenes
-import "scripts/scenes/Screen"
-import "scripts/scenes/World"
-
 -- Scripts
 import "scripts/Ability"
 import "scripts/Animal"
@@ -27,6 +23,16 @@ import "scripts/Player"
 import "scripts/Prop"
 import "scripts/Spike"
 import "scripts/Spikeball"
+
+-- Animal scripts
+import "scripts/animals/Butterfly"
+import "scripts/animals/Reptile"
+
+-- Scene scripts
+import "scripts/scenes/Screen"
+import "scripts/scenes/World"
+
+
 
 -- Constants
 local pd <const> = playdate

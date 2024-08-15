@@ -21,10 +21,9 @@ local doors <const> = {
 	["Door4"] = true
 }
 
-local animals <const> = {
+local reptiles <const> = {
 	["Lizard"] = true,
-	["Snake"] = true,
-	["Butterfly"] = true
+	["Snake"] = true
 }
 
 
@@ -166,8 +165,10 @@ function World:goToLevel(level)
 			Spike(entityX, entityY, entity)
 		elseif doors[entityName] then
 			Door(entityX, entityY, entity)
-		elseif animals[entityName] then
-			Animal(entityX, entityY + 8, entity)
+		elseif reptiles[entityName] then
+			Reptile(entityX, entityY + 8, entity)
+		elseif entityName == "Butterfly" then
+			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Bubble" then

@@ -13,16 +13,6 @@ function Animal:init(x, y, e)
 	-- Create the Animal state machine with the Animal tile set
 	Animal.super.init(self, gfx.imagetable.new("images/animals/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
 
-	-- Animal states, sprites, and animation speeds
-	if e.fields.fly then
-		self:addState("fly", 1, 4, {ts = 3})
-	else
-		self:addState("idle", 1, 1)
-		self:addState("blep", 2, 4, {ts = 3})
-		self:addState("walk", 5, 8, {ts = 3})
-	end
-	self:playAnimation()
-
 	-- Animal properties
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
@@ -34,17 +24,27 @@ function Animal:init(x, y, e)
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.speed = e.fields.speed
-	self.gravity = 1.0
-	self.drag = 0.1
-	self.minimumAirSpeed = 0.5
 
 	-- Animal attributes
 	self.globalFlip = tonumber(e.fields.facing)
 	self.timerActive = false
-	self.touchingGround = false
-	self.touchingWall = false
-	self.fly = e.fields.fly
 	self.dead = false
+	
+	-- Collision attributes
+	self.overlapTags = {
+		[TAGS.Hazard] = true,
+		[TAGS.Pickup] = true,
+		[TAGS.Flag] = true,
+		[TAGS.Prop] = true,
+		[TAGS.Door] = true,
+		[TAGS.Animal] = true,
+		[TAGS.Player] = true,
+		[TAGS.Hitbox] = true,
+		[TAGS.Crown] = true,
+		[TAGS.Bar] = true,
+		[TAGS.Bubble] = true,
+		[TAGS.Fragileblock] = true
+	}
 end
 
 
@@ -53,8 +53,15 @@ end
 --- @return unknown unknown The collision response for the object
 function Animal:collisionResponse(other)
 	local tag <const> = other:getTag()
-	if tag == TAGS.Hazard or tag == TAGS.Pickup or tag == TAGS.Flag or tag == TAGS.Prop or tag == TAGS.Door or tag == TAGS.Player or tag == TAGS.Animal or tag == TAGS.Hitbox or tag == TAGS.Crown or tag == TAGS.BAR or tag == TAGS.Bubble then
-		return gfx.sprite.kCollisionTypeOverlap
+
+	if self.overlapTags[tag] then
+		if tag == TAGS.Fragileblock then
+			if other.currentState == "breaking" or other.currentState == "broken" then
+				return gfx.sprite.kCollisionTypeOverlap
+			end
+		else
+			return gfx.sprite.kCollisionTypeOverlap
+		end
 	end
 
 	return gfx.sprite.kCollisionTypeSlide
@@ -69,34 +76,8 @@ function Animal:update()
 		self:remove()
 	end
 
-	if self.fly then self:handleFlight() else self:handleState() end
+	self:handleState()
 	self:handleMovementAndCollisions()
-end
-
-
---- Handles the changing states of the Animal
-function Animal:handleState()
-	self:applyGravity()
-	self:handleGroundInput()
-end
-
-
---- Handle the possible ground events for the Animal
-function Animal:handleFlight()
-	if self.timerActive then
-		return
-	end
-
-	if not self.timer then
-		self.timer = true
-		pd.timer.performAfterDelay(math.random(50, 150), function()
-			local xSpeed <const> = math.random(-self.speed, self.speed)
-			local ySpeed <const> = math.random(-self.speed, self.speed)			
-			self.xVelocity = xSpeed 
-			self.yVelocity = ySpeed
-			self.timer = false
-		end)
-	end
 end
 
 
@@ -149,63 +130,5 @@ function Animal:handleMovementAndCollisions()
 		self.dead = true
 	elseif self.y > 264 then
 		self.dead = true
-	end
-end
-
-
---- Handle the possible ground events for the Animal
-function Animal:handleGroundInput()
-	if self.timerActive then
-		return
-	end
-
-	self.timerActive = true
-	pd.timer.performAfterDelay(math.random(500, 2000), function()
-		local action <const> = math.random(1, 2)
-
-		if action == 1 then
-			self:changeToBlepState()
-		elseif action == 2 then
-			self:changeToWalkState(math.random(0, 1))
-		end
-
-		self.timerActive = false
-	end)
-end
-
-
---- Have the Animal flick its tongue
-function Animal:changeToBlepState()
-	self.xVelocity = 0
-	self:changeState("blep")
-	pd.timer.performAfterDelay(200, function()
-		self:changeState("idle")
-	end)
-end
-
-
---- Have the Animal walk in a given direction for a while
-function Animal:changeToWalkState(direction)
-	if direction == 0 then
-		self.xVelocity = -self.speed
-		self.globalFlip = 1
-	else
-		self.xVelocity = self.speed
-		self.globalFlip = 0
-	end
-
-	self:changeState("walk")
-	pd.timer.performAfterDelay(math.random(200, 600), function()
-		self.xVelocity = 0
-		self:changeState("idle")
-	end)
-end
-
-
---- Applies gravity to the Animal
-function Animal:applyGravity()
-	self.yVelocity = self.yVelocity + self.gravity
-	if self.touchingGround then
-		self.yVelocity = 0
 	end
 end
