@@ -21,8 +21,10 @@ import "scripts/Fragileblock"
 import "scripts/Hitbox"
 import "scripts/Player"
 import "scripts/Prop"
-import "scripts/Spike"
-import "scripts/Spikeball"
+
+-- Hazard scripts
+import "scripts/hazards/Spike"
+import "scripts/hazards/Spikeball"
 
 -- Animal scripts
 import "scripts/animals/Butterfly"
