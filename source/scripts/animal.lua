@@ -1,36 +1,29 @@
--- Create constants for the playdate and playdate.graphics
+-- Create Constants for the Playdate and Playdate Graphics
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
--- Create the Animal class
+-- Create the Animal Class
 class("Animal").extends(AnimatedSprite)
 
 
---- The Animal is initialised using this method
---- @param x integer The X coordinate to spawn the Animal
---- @param y integer The Y coordinate to spawn the Animal
+--- The Animal is Initialised Using This Method
+--- @param  x  integer  The X Coordinate to Spawn the Animal
+--- @param  y  integer  The Y Coordinate to Spawn the Animal
+--- @param  e  integer  The Entity Used to Create the Animal
 function Animal:init(x, y, e)
-	-- Create the Animal state machine with the Animal tile set
+	-- Create the Animal State Machine with the Animated Sprite Library
 	Animal.super.init(self, gfx.imagetable.new("images/animals/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
 
-	-- Animal properties
-	self:setCenter(0, 0)
-	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.Animal)
-	self:setTag(TAGS.Animal)
-	self:setCollideRect(0, 0, e.fields.tableWidth, e.fields.tableHeight)
-
-	-- Physics properties
+	-- Physics Properties
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.speed = e.fields.speed
 
-	-- Animal attributes
+	-- Animal Attributes
 	self.globalFlip = tonumber(e.fields.facing)
-	self.timerActive = false
 	self.dead = false
-	
-	-- Collision attributes
+
+	-- Collision Attribute Table
 	self.overlapTags = {
 		[TAGS.Hazard] = true,
 		[TAGS.Pickup] = true,
@@ -45,18 +38,24 @@ function Animal:init(x, y, e)
 		[TAGS.Bubble] = true,
 		[TAGS.Fragileblock] = true
 	}
+
+	-- Animal Properties
+	self:setCenter(0, 0)
+	self:moveTo(x, y)
+	self:setZIndex(Z_INDEXES.Animal)
+	self:setTag(TAGS.Animal)
 end
 
 
---- This method is used to handle the collisions the Animal has with the world
---- @param  other   table   Contains what the Animal has collided with
---- @return unknown unknown The collision response for the object
-function Animal:collisionResponse(other)
-	local tag <const> = other:getTag()
+--- This Method is Used to Return Collision Responses the Animal has with the World
+--- @param   e        table    The Entity the Animal has just Collided with
+--- @return  unknown  unknown  The Collision Response for the Entity
+function Animal:collisionResponse(e)
+	local tag <const> = e:getTag()
 
 	if self.overlapTags[tag] then
 		if tag == TAGS.Fragileblock then
-			if other.currentState == "breaking" or other.currentState == "broken" then
+			if e.currentState == "breaking" or e.currentState == "broken" then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
@@ -68,7 +67,7 @@ function Animal:collisionResponse(other)
 end
 
 
---- The Animal update method runs every game tick
+--- The Animal Update Method Runs Every Game Tick
 function Animal:update()
 	self:updateAnimation()
 
@@ -81,7 +80,7 @@ function Animal:update()
 end
 
 
---- Handles all Animal movement and any collisions it has
+--- Handles All Animal Movement and Any Collisions it has
 function Animal:handleMovementAndCollisions()
 	-- Get a list of collisions
 	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))

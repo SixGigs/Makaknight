@@ -6,35 +6,42 @@ local gfx <const> = playdate.graphics
 class("Reptile").extends(Animal)
 
 
+--- The Reptile Class Create a Reptile
+--- @param  x  integer  The X Coordinate to Create the Reptile at
+--- @param  y  integer  The Y Coordinate to Create the Reptile at
+--- @param  e  table    The Entity Data Being Passed into the Class
 function Reptile:init(x, y, e)
-	-- Super initialise the Reptile class
+	-- Initialise the Reptile Class
 	Reptile.super.init(self, x, y, e)
 
+	-- Reptile Animation Settings
 	self:addState("idle", 1, 1)
 	self:addState("blep", 2, 4, {ts = 3})
 	self:addState("walk", 5, 8, {ts = 3})
 	self:playAnimation()
-	
+
 	-- Physics properties
 	self.gravity = 900
-	self.touchingGround = false
+
+	-- Reptile properties
+	self:setCollideRect(3, 5, 10, 3)
 end
 
 
---- Handles the changing states of the Animal
+--- Handles the changing states of the Reptile
 function Reptile:handleState()
 	self:applyGravity()
 	self:handleGroundInput()
 end
 
 
---- Handle the possible ground events for the Animal
+--- Handle the possible ground events for the Reptile
 function Reptile:handleGroundInput()
-	if self.timerActive then
+	if self.timer then
 		return
 	end
 
-	self.timerActive = true
+	self.timer = true
 	pd.timer.performAfterDelay(math.random(500, 2000), function()
 		local action <const> = math.random(1, 2)
 
@@ -44,12 +51,12 @@ function Reptile:handleGroundInput()
 			self:changeToWalkState(math.random(0, 1))
 		end
 
-		self.timerActive = false
+		self.timer = false
 	end)
 end
 
 
---- Have the Animal flick its tongue
+--- Have the Reptile flick its tongue
 function Reptile:changeToBlepState()
 	self.xVelocity = 0
 	self:changeState("blep")
@@ -59,14 +66,15 @@ function Reptile:changeToBlepState()
 end
 
 
---- Have the Animal walk in a given direction for a while
+--- Have the Reptile Walk in a Given Direction for a While
+--- @param  direction  integer  Zero for Left and One for Right
 function Reptile:changeToWalkState(direction)
-	if direction == 0 then
-		self.xVelocity = -self.speed
-		self.globalFlip = 1
-	else
+	if direction == 1 then
 		self.xVelocity = self.speed
 		self.globalFlip = 0
+	else
+		self.xVelocity = -self.speed
+		self.globalFlip = 1
 	end
 
 	self:changeState("walk")
@@ -77,7 +85,7 @@ function Reptile:changeToWalkState(direction)
 end
 
 
---- Applies gravity to the Animal
+--- Applies Gravity to the Reptile
 function Reptile:applyGravity()
 	self.yVelocity = self.yVelocity + (self.gravity * dt)
 	if self.touchingGround then
