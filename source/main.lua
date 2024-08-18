@@ -1,3 +1,11 @@
+--------------------------------
+-- Working title; Makaknight  --
+--------------------------------
+-- Programming standards:     --
+-- > Use double quotes        --
+-- > Variables are camel case --
+--------------------------------
+
 -- PlayDate Core Libraries
 import "CoreLibs/object"
 import "CoreLibs/graphics"

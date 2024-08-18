@@ -319,7 +319,6 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -341,7 +340,6 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -363,7 +361,6 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -385,7 +382,6 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -407,12 +403,43 @@
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3372, "realEditorValues": [] },
-						{ "__identifier": "fly", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3373, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 896,
 					"__worldY": -112
+				},
+				{
+					"__identifier": "Crag",
+					"__grid": [17,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "f86dd5f0-4ce0-11ef-a970-a54a0617562c",
+					"width": 32,
+					"height": 16,
+					"defUid": 3348,
+					"px": [272,160],
+					"fieldInstances": [],
+					"__worldX": 1072,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Crag",
+					"__grid": [5,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3347, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "00046ea0-4ce0-11ef-a970-b31bdd2ddc16",
+					"width": 32,
+					"height": 16,
+					"defUid": 3348,
+					"px": [80,160],
+					"fieldInstances": [],
+					"__worldX": 880,
+					"__worldY": -80
 				}
 			]
 		},
