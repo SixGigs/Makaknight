@@ -337,10 +337,12 @@ function Player:handleMovementAndCollisions()
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision(collisionObject)
-		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == 'solid' and collision.normal.y == -1 then
+		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == "solid" and collision.normal.y == -1 then
 			collisionObject:crack()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
+		elseif collisionTag == TAGS.Firebox then
+			collisionObject:prime()
 		end
 
 		-- Check if we are colliding with the health bar
