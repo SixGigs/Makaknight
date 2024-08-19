@@ -443,7 +443,7 @@
 				},
 				{
 					"__identifier": "Lizard",
-					"__grid": [11,4],
+					"__grid": [11,6],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -452,7 +452,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 2973,
-					"px": [176,64],
+					"px": [176,96],
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [] },
@@ -460,11 +460,11 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
 					],
 					"__worldX": 976,
-					"__worldY": -176
+					"__worldY": -144
 				},
 				{
 					"__identifier": "Snake",
-					"__grid": [13,4],
+					"__grid": [13,6],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -473,7 +473,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 2975,
-					"px": [208,64],
+					"px": [208,96],
 					"fieldInstances": [
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
 						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
@@ -481,7 +481,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
 					],
 					"__worldX": 1008,
-					"__worldY": -176
+					"__worldY": -144
 				}
 			]
 		},

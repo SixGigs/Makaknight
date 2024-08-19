@@ -245,7 +245,7 @@
 							"id": "V_Bool",
 							"params": [ true ]
 						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
+						{ "__identifier": "respawn_time", "__type": "Float", "__value": null, "__tile": null, "defUid": 3651, "realEditorValues": [] }
 					],
 					"__worldX": 1376,
 					"__worldY": -128
@@ -267,7 +267,7 @@
 							"id": "V_Bool",
 							"params": [ true ]
 						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
+						{ "__identifier": "respawn_time", "__type": "Float", "__value": null, "__tile": null, "defUid": 3651, "realEditorValues": [] }
 					],
 					"__worldX": 1360,
 					"__worldY": -128
@@ -289,7 +289,7 @@
 							"id": "V_Bool",
 							"params": [ true ]
 						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
+						{ "__identifier": "respawn_time", "__type": "Float", "__value": null, "__tile": null, "defUid": 3651, "realEditorValues": [] }
 					],
 					"__worldX": 1344,
 					"__worldY": -128
