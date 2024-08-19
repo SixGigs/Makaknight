@@ -29,8 +29,10 @@ import "scripts/Fragileblock"
 import "scripts/Hitbox"
 import "scripts/Player"
 import "scripts/Prop"
+import "scripts/Wind"
 
 -- Hazard scripts
+import "scripts/hazards/Fan"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
 
