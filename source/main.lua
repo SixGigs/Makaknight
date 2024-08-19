@@ -6,39 +6,41 @@
 -- > Variables are camel case --
 --------------------------------
 
--- PlayDate Core Libraries
+-- Playdate Core Libraries
 import "CoreLibs/object"
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
--- Libraries from GitHub
-import "scripts/libraries/AnimatedSprite"
-import "scripts/libraries/Game"
-import "scripts/libraries/LDtk"
-
 -- Scripts
 import "scripts/Ability"
 import "scripts/Animal"
 import "scripts/Bar"
-import "scripts/Bubble"
-import "scripts/Crown"
-import "scripts/Door"
-import "scripts/Flag"
-import "scripts/Fragileblock"
 import "scripts/Hitbox"
 import "scripts/Player"
 import "scripts/Prop"
-import "scripts/Wind"
+
+-- Animal scripts
+import "scripts/animals/Butterfly"
+import "scripts/animals/Reptile"
+
+-- Entity scripts
+import "scripts/entities/Bubble"
+import "scripts/entities/Crown"
+import "scripts/entities/Wind"
+import "scripts/entities/Door"
+import "scripts/entities/Flag"
+import "scripts/entities/Fragileblock"
 
 -- Hazard scripts
 import "scripts/hazards/Fan"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
 
--- Animal scripts
-import "scripts/animals/Butterfly"
-import "scripts/animals/Reptile"
+-- Libraries from GitHub
+import "scripts/libraries/AnimatedSprite"
+import "scripts/libraries/Game"
+import "scripts/libraries/LDtk"
 
 -- Scene scripts
 import "scripts/scenes/Screen"
