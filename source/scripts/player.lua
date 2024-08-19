@@ -106,7 +106,8 @@ function Player:init(x, y, world)
 		[TAGS.Crown] = true,
 		[TAGS.Bar] = true,
 		[TAGS.Bubble] = true,
-		[TAGS.Fragileblock] = true
+		[TAGS.Fragileblock] = true,
+		[TAGS.Wind] = true
 	}
 
 	-- Buffer
@@ -338,6 +339,8 @@ function Player:handleMovementAndCollisions()
 			self:handleCrownCollision(collisionObject)
 		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == 'solid' and collision.normal.y == -1 then
 			collisionObject:crack()
+		elseif collisionTag == TAGS.Wind then
+			self.yVelocity = self.yVelocity - 45
 		end
 
 		-- Check if we are colliding with the health bar
