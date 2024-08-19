@@ -12,6 +12,11 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
+-- Libraries from GitHub
+import "scripts/libraries/AnimatedSprite"
+import "scripts/libraries/Game"
+import "scripts/libraries/LDtk"
+
 -- Scripts
 import "scripts/Ability"
 import "scripts/Animal"
@@ -34,13 +39,10 @@ import "scripts/entities/Fragileblock"
 
 -- Hazard scripts
 import "scripts/hazards/Fan"
+import "scripts/hazards/Fire"
+import "scripts/hazards/Firebox"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
-
--- Libraries from GitHub
-import "scripts/libraries/AnimatedSprite"
-import "scripts/libraries/Game"
-import "scripts/libraries/LDtk"
 
 -- Scene scripts
 import "scripts/scenes/Screen"
