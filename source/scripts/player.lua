@@ -340,7 +340,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == 'solid' and collision.normal.y == -1 then
 			collisionObject:crack()
 		elseif collisionTag == TAGS.Wind then
-			self.yVelocity = self.yVelocity - 45
+			self:handleWindCollision()
 		end
 
 		-- Check if we are colliding with the health bar
@@ -427,6 +427,17 @@ function Player:handleCrownCollision(obj)
 	-- If the crown contains level data, teleport to that level
 	if obj.level then
 		self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
+	end
+end
+
+
+--- If the Player Collides with a Wind Hit Box, Run This Function
+function Player:handleWindCollision()
+	if self.yVelocity >= -150 then
+		self.yVelocity = self.yVelocity - 60
+		if self.currentState == "idle" or self.currentState == "walk" or self.currentState == "run" then
+			self:changeState("midJump")
+		end
 	end
 end
 

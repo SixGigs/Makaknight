@@ -36,7 +36,8 @@ function Animal:init(x, y, e)
 		[TAGS.Crown] = true,
 		[TAGS.Bar] = true,
 		[TAGS.Bubble] = true,
-		[TAGS.Fragileblock] = true
+		[TAGS.Fragileblock] = true,
+		[TAGS.Wind] = true
 	}
 
 	-- Animal Properties
@@ -110,6 +111,8 @@ function Animal:handleMovementAndCollisions()
 		-- Process the collision based on the collision tag
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
 			self.dead = true
+		elseif collisionTag == TAGS.Wind then
+			self:handleWindCollision()
 		end
 	end
 
@@ -129,5 +132,13 @@ function Animal:handleMovementAndCollisions()
 		self.dead = true
 	elseif self.y > 264 then
 		self.dead = true
+	end
+end
+
+
+--- If the Player Collides with a Wind Hit Box, Run This Function
+function Animal:handleWindCollision()
+	if self.yVelocity >= -150 then
+		self.yVelocity = self.yVelocity - 60
 	end
 end
