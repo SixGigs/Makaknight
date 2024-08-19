@@ -227,48 +227,6 @@
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
 					"__worldX": 1568,
 					"__worldY": -208
-				},
-				{
-					"__identifier": "Lizard",
-					"__grid": [13,6],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "6d4b70c0-4ce0-11ef-822a-07c35aed46ee",
-					"width": 16,
-					"height": 16,
-					"defUid": 2973,
-					"px": [208,96],
-					"fieldInstances": [
-						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
-						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3370, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3381, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
-					],
-					"__worldX": 1408,
-					"__worldY": -144
-				},
-				{
-					"__identifier": "Snake",
-					"__grid": [17,6],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "6e9b9770-4ce0-11ef-822a-6fabbe91159f",
-					"width": 16,
-					"height": 16,
-					"defUid": 2975,
-					"px": [272,96],
-					"fieldInstances": [
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
-						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
-					],
-					"__worldX": 1472,
-					"__worldY": -144
 				}
 			]
 		},
