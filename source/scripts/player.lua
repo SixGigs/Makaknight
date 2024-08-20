@@ -342,7 +342,11 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
 		elseif collisionTag == TAGS.Firebox then
-			collisionObject:prime()
+			if collisionObject.currentState == "ready" then
+				collisionObject:prime()
+			elseif collisionObject.currentState == "primed" then
+				collisionObject:pressed()
+			end
 		end
 
 		-- Check if we are colliding with the health bar

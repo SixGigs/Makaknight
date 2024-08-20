@@ -15,19 +15,20 @@ function Firebox:init(x, y, e)
 
 	-- Fire Box Animation Settings
 	self:addState("ready", 1, 1)
-	self:addState("primed", 2, 2, {ts = 2, l = 1, na = "ignite"})
+	self:addState("primed", 2, 2)
 	self:addState("ignite", 3, 4, {ts = 2, l = 1, na = "burn"})
 	self:addState("burn", 5, 21, {ts = 4, l = 1, na = "refill"})
 	self:addState("refill", 22, 32, {ts = 1, l = 8, na = "ready"})
 	self:playAnimation()
 	
 	-- Create a Fire Object When the Fire Box Ignites
-	self.states["ignite"].onAnimationEndEvent = function(self)
-		Fire(x, y - 16)
-	end
+	self.states["ignite"].onAnimationEndEvent = function(self) Fire(x, y - 16) end
+	
+	-- Fire Box Attributes
+	self.pressTimer = 0
 
 	-- Fire Box Properties
-	self:setCollideRect(0, 16, 16, 16)
+	self:setCollideRect(0, 17, 16, 15)
 	self:setCenter(0, 0.5)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Firebox)
@@ -36,22 +37,25 @@ function Firebox:init(x, y, e)
 end
 
 
-function Firebox:prime()
-	if self.currentState == "ready" then
-		self:changeState("primed")
+function Firebox:update()
+	self:updateAnimation()
+
+	if self.pressTimer >= 1 then
+		self.pressTimer = self.pressTimer - 1
+	end
+
+	if self.pressTimer == 0 and self.currentState == "primed" then
+		self:changeState("ignite")
 	end
 end
 
 
-function Firebox:update()
-	self:updateAnimation()
+function Firebox:prime()
+	self:changeState("primed")
+	self.pressTimer = 4
+end
 
-	local collisions = self:allOverlappingSprites()
-	for i = 1, #collisions do
-		local collision <const> = collisions[i]
-		local collisionType <const> = collision.type
-		if collision.className == "Player" then
-			print("bruh")
-		end
-	end
+
+function Firebox:pressed()
+	self.pressTimer = 4
 end
