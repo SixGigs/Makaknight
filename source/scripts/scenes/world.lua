@@ -185,7 +185,7 @@ function World:goToLevel(level)
 			Crown(entityX, entityY, entity)
 		elseif entityName == "Fan" then
 			Fan(entityX, entityY, entity)
-			Wind(entityX, entityY - 80)
+			Wind(entityX - 8, entityY - 80)
 		elseif entityName == "Firebox" then
 			Firebox(entityX, entityY, entity)
 		else
