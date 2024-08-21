@@ -40,7 +40,7 @@ import "scripts/entities/Fragileblock"
 -- Hazard scripts
 import "scripts/hazards/Fan"
 import "scripts/hazards/Fire"
-import "scripts/hazards/Firebox"
+import "scripts/hazards/Roaster"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
 

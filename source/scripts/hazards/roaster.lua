@@ -1,15 +1,15 @@
 -- Creating the Playdate Graphics Module as a Constant
 local gfx <const> = playdate.graphics
 
--- Create the Firebox Class
-class("Firebox").extends(AnimatedSprite)
+-- Create the Roaster Class
+class("Roaster").extends(AnimatedSprite)
 
 
---- Initialise the Fire Box Entity Using the Data Given
---- @param  x  integer  The X coordinate to spawn the Fire Box
---- @param  y  integer  The Y coordinate to spawn the Fire Box
---- @param  e  table    The entity that come with the Fire Box
-function Firebox:init(x, y, e)
+--- Initialise the Roaster Entity
+--- @param  x  integer  The X coordinate to spawn the Roaster
+--- @param  y  integer  The Y coordinate to spawn the Roaster
+--- @param  e  table    The entity that come with the Roaster
+function Roaster:init(x, y, e)
 	-- Local Variables for Initialisation
 	local fillTicks <const> = 1.5
 	local fillLoops <const> = e.fields.refill * 2
@@ -17,7 +17,7 @@ function Firebox:init(x, y, e)
 	local burnTimer <const> = e.fields.fuel
 	
 	-- Initialise the Fire Box Class
-	Firebox.super.init(self, gfx.imagetable.new("images/hazards/fire-box-table-32-16"))
+	Roaster.super.init(self, gfx.imagetable.new("images/hazards/fire-box-table-32-16"))
 
 	-- Fire Box Animation Settings
 	self:addState("ready", 1, 1)
@@ -38,14 +38,14 @@ function Firebox:init(x, y, e)
 	self:setCollideRect(0, 17, 16, 15)
 	self:setCenter(0, 0.5)
 	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.Firebox)
-	self:setTag(TAGS.Firebox)
+	self:setZIndex(Z_INDEXES.Roaster)
+	self:setTag(TAGS.Roaster)
 	self:add()
 end
 
 
---- The Update Method Updates the Fire Box Every Tick
-function Firebox:update()
+--- The Update Method Updates the Roaster Every Tick
+function Roaster:update()
 	-- Update the Fire Box Animation
 	self:updateAnimation()
 
@@ -64,7 +64,7 @@ function Firebox:update()
 end
 
 
-function Firebox:handleCollision()
+function Roaster:handleCollision()
 	if self.currentState == "ready" then
 		self:prime()
 	elseif self.currentState == "primed" then
@@ -73,18 +73,18 @@ function Firebox:handleCollision()
 end
 
 
-function Firebox:prime()
+function Roaster:prime()
 	self:changeState("primed")
 	self.fuse = 4
 end
 
 
-function Firebox:pressed()
+function Roaster:pressed()
 	self.fuse = 4
 end
 
 
-function Firebox:ignite()
+function Roaster:ignite()
 	self:setCollideRect(0, 16, 16, 16)
 	self:changeState("ignite")
 end
