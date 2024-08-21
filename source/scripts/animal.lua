@@ -114,11 +114,7 @@ function Animal:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
 		elseif collisionTag == TAGS.Firebox then
-			if collisionObject.currentState == "ready" then
-				collisionObject:prime()
-			elseif collisionObject.currentState == "primed" then
-				collisionObject:pressed()
-			end
+			collisionObject:handleCollision()
 		end
 	end
 
