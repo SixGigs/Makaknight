@@ -113,7 +113,7 @@ function Animal:handleMovementAndCollisions()
 			self.dead = true
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
-		elseif collisionTag == TAGS.Firebox then
+		elseif collisionTag == TAGS.Roaster then
 			collisionObject:handleCollision()
 		end
 	end

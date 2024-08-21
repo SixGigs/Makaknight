@@ -11,7 +11,7 @@
 	"identifier": "Level_4",
 	"iid": "e544cc20-4ce0-11ef-822a-9fc907ef94e2",
 	"uid": 3656,
-	"worldX": 1600,
+	"worldX": 1920,
 	"worldY": -240,
 	"worldDepth": 0,
 	"pxWid": 400,
@@ -71,7 +71,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1840,
+					"__worldX": 2160,
 					"__worldY": -96
 				},
 				{
@@ -93,7 +93,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1856,
+					"__worldX": 2176,
 					"__worldY": -96
 				},
 				{
@@ -115,7 +115,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1872,
+					"__worldX": 2192,
 					"__worldY": -96
 				},
 				{
@@ -131,7 +131,7 @@
 					"defUid": 3654,
 					"px": [192,208],
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] }],
-					"__worldX": 1792,
+					"__worldX": 2112,
 					"__worldY": -32
 				},
 				{
@@ -147,7 +147,7 @@
 					"defUid": 1401,
 					"px": [16,96],
 					"fieldInstances": [],
-					"__worldX": 1616,
+					"__worldX": 1936,
 					"__worldY": -144
 				},
 				{
@@ -163,7 +163,7 @@
 					"defUid": 2099,
 					"px": [0,128],
 					"fieldInstances": [],
-					"__worldX": 1600,
+					"__worldX": 1920,
 					"__worldY": -112
 				},
 				{
@@ -179,7 +179,7 @@
 					"defUid": 2101,
 					"px": [16,96],
 					"fieldInstances": [],
-					"__worldX": 1616,
+					"__worldX": 1936,
 					"__worldY": -144
 				},
 				{
@@ -195,7 +195,7 @@
 					"defUid": 2101,
 					"px": [320,64],
 					"fieldInstances": [],
-					"__worldX": 1920,
+					"__worldX": 2240,
 					"__worldY": -176
 				},
 				{
@@ -211,11 +211,11 @@
 					"defUid": 2096,
 					"px": [336,96],
 					"fieldInstances": [],
-					"__worldX": 1936,
+					"__worldX": 2256,
 					"__worldY": -144
 				},
 				{
-					"__identifier": "Firebox",
+					"__identifier": "Roaster",
 					"__grid": [6,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -230,11 +230,11 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1696,
+					"__worldX": 2016,
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Firebox",
+					"__identifier": "Roaster",
 					"__grid": [7,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -249,11 +249,11 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1712,
+					"__worldX": 2032,
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Firebox",
+					"__identifier": "Roaster",
 					"__grid": [8,10],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -268,7 +268,7 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1728,
+					"__worldX": 2048,
 					"__worldY": -80
 				}
 			]
@@ -614,5 +614,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [{ "levelIid": "4cf22870-4ce0-11ef-822a-03464e5dae5b", "dir": "w" }]
+	"__neighbours": []
 }

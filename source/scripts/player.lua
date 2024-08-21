@@ -341,7 +341,7 @@ function Player:handleMovementAndCollisions()
 			collisionObject:crack()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
-		elseif collisionTag == TAGS.Firebox then
+		elseif collisionTag == TAGS.Roaster then
 			collisionObject:handleCollision()
 		end
 
@@ -353,6 +353,14 @@ function Player:handleMovementAndCollisions()
 			end)
 		end
 	end
+	
+	--- BEGINNING OF MOVING THE LEVEL WITH THE PLAYER OMG!!!
+	-- local allSprites = gfx.sprite.getAllSprites()
+	-- if not self.touchingWall then
+	-- 	for _, sprite in ipairs(allSprites) do
+	-- 		sprite:moveBy(-self.xVelocity * dt, 0)
+	-- 	end
+	-- end
 
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
@@ -436,7 +444,7 @@ end
 --- If the Player Collides with a Wind Hit Box, Run This Function
 function Player:handleWindCollision()
 	if self.yVelocity >= -150 then
-		self.yVelocity = self.yVelocity - 60
+		self.yVelocity = self.yVelocity - 70
 		if self.currentState == "idle" or self.currentState == "walk" or self.currentState == "run" then
 			self:changeState("midJump")
 		end
