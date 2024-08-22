@@ -17481,13 +17481,13 @@
 			"externalRelPath": "world/Level_3.ldtkl",
 			"fieldInstances": [],
 			"layerInstances": null,
-			"__neighbours": [{ "levelIid": "9d120de0-4ce0-11ef-8ffb-f1d9038c7960", "dir": "w" }]
+			"__neighbours": [ { "levelIid": "9d120de0-4ce0-11ef-8ffb-f1d9038c7960", "dir": "w" }, { "levelIid": "e544cc20-4ce0-11ef-822a-9fc907ef94e2", "dir": "e" } ]
 		},
 		{
 			"identifier": "Level_4",
 			"iid": "e544cc20-4ce0-11ef-822a-9fc907ef94e2",
 			"uid": 3656,
-			"worldX": 1920,
+			"worldX": 1808,
 			"worldY": -240,
 			"worldDepth": 0,
 			"pxWid": 400,
@@ -17504,7 +17504,7 @@
 			"externalRelPath": "world/Level_4.ldtkl",
 			"fieldInstances": [],
 			"layerInstances": null,
-			"__neighbours": []
+			"__neighbours": [{ "levelIid": "4cf22870-4ce0-11ef-822a-03464e5dae5b", "dir": "w" }]
 		}
 	],
 	"worlds": [],
