@@ -271,6 +271,10 @@ function LDtk.load_level( level_name )
 	
 	-- load level's background image
 	level.bgImage = level_data.bgRelPath
+	
+	-- load level's width and height
+	level.width = level_data.pxWid
+	level.height = level_data.pxHei
 
 	-- handle layers
 	level.layers = {}
@@ -438,6 +442,13 @@ end
 function LDtk.get_background( level_name )
 	local level = _levels[level_name] 
 	return level.bgImage
+end
+
+-- return the width and height of the level given
+-- @level_name is used to get the width and height
+function LDtk.get_size( level_name )
+	local level = _levels[level_name]
+	return { ["width"] = level.width, ["height"] = level.height }
 end
 
 -- return a tilemap for the level

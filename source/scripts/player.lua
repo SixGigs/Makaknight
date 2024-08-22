@@ -353,12 +353,18 @@ function Player:handleMovementAndCollisions()
 			end)
 		end
 	end
-	
+
 	--- BEGINNING OF MOVING THE LEVEL WITH THE PLAYER OMG!!!
-	-- local allSprites = gfx.sprite.getAllSprites()
-	-- if not self.touchingWall then
-	-- 	for _, sprite in ipairs(allSprites) do
-	-- 		sprite:moveBy(-self.xVelocity * dt, 0)
+	-- if self.world.width > 400 and self.x >= 200 and self.x + 200 < self.world.width then
+	-- 	local allSprites = gfx.sprite.getAllSprites()
+	-- 	if not self.touchingWall then
+	-- 		for _, sprite in ipairs(allSprites) do
+	-- 			if sprite:isa(Bar) then
+	-- 				return
+	-- 			end
+	-- 
+	-- 			sprite:moveBy(-self.xVelocity * dt, 0)
+	-- 		end
 	-- 	end
 	-- end
 

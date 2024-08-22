@@ -193,10 +193,16 @@ function World:goToLevel(level)
 		end
 	end
 
-	self:loadBackground(level) -- Load the background
-	self:loadHealthBar() -- Load the health bar
+	-- Save the Width and Height of the Level
+	local level_size <const> = LDtk.get_size(level)
+	self.width = level_size["width"]
+	self.height = level_size["height"]
 
-	playdate.resetElapsedTime() -- Reset time elapsed to stop player jumping when changing rooms
+	-- Load the Background and Health Bar
+	self:loadBackground(level)
+	self:loadHealthBar()
+
+	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end
 
 
