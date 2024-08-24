@@ -11,7 +11,7 @@
 	"identifier": "Level_4",
 	"iid": "e544cc20-4ce0-11ef-822a-9fc907ef94e2",
 	"uid": 3656,
-	"worldX": 1664,
+	"worldX": 2000,
 	"worldY": -240,
 	"worldDepth": 0,
 	"pxWid": 400,
@@ -71,7 +71,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1904,
+					"__worldX": 2240,
 					"__worldY": -96
 				},
 				{
@@ -93,7 +93,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1920,
+					"__worldX": 2256,
 					"__worldY": -96
 				},
 				{
@@ -115,7 +115,7 @@
 						}] },
 						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
 					],
-					"__worldX": 1936,
+					"__worldX": 2272,
 					"__worldY": -96
 				},
 				{
@@ -131,7 +131,7 @@
 					"defUid": 3654,
 					"px": [192,208],
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] }],
-					"__worldX": 1856,
+					"__worldX": 2192,
 					"__worldY": -32
 				},
 				{
@@ -147,7 +147,7 @@
 					"defUid": 1401,
 					"px": [16,96],
 					"fieldInstances": [],
-					"__worldX": 1680,
+					"__worldX": 2016,
 					"__worldY": -144
 				},
 				{
@@ -163,7 +163,7 @@
 					"defUid": 2099,
 					"px": [0,128],
 					"fieldInstances": [],
-					"__worldX": 1664,
+					"__worldX": 2000,
 					"__worldY": -112
 				},
 				{
@@ -179,7 +179,7 @@
 					"defUid": 2101,
 					"px": [16,96],
 					"fieldInstances": [],
-					"__worldX": 1680,
+					"__worldX": 2016,
 					"__worldY": -144
 				},
 				{
@@ -195,7 +195,7 @@
 					"defUid": 2101,
 					"px": [320,64],
 					"fieldInstances": [],
-					"__worldX": 1984,
+					"__worldX": 2320,
 					"__worldY": -176
 				},
 				{
@@ -211,7 +211,7 @@
 					"defUid": 2096,
 					"px": [336,96],
 					"fieldInstances": [],
-					"__worldX": 2000,
+					"__worldX": 2336,
 					"__worldY": -144
 				},
 				{
@@ -230,7 +230,7 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1760,
+					"__worldX": 2096,
 					"__worldY": -80
 				},
 				{
@@ -249,7 +249,7 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1776,
+					"__worldX": 2112,
 					"__worldY": -80
 				},
 				{
@@ -268,7 +268,7 @@
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
-					"__worldX": 1792,
+					"__worldX": 2128,
 					"__worldY": -80
 				}
 			]

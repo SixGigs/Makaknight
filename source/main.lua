@@ -56,6 +56,8 @@ local gfx <const> = playdate.graphics
 
 -- Globals
 g = Game()
+screenWidth = pd.display.getWidth()
+screenHeight = pd.display.getHeight()
 dt = 0
 
 --Screen("title") -- Create Title Screen

@@ -32,7 +32,7 @@ TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Bar = 11, Bubble = 12, Fragileblock = 13,
-	Wind = 14, Roaster = 15
+	Wind = 14, Roaster = 15, Background = 16
 }
 
 -- A global table of entity indexes
@@ -108,9 +108,25 @@ function World:enterRoom(direction)
 	elseif direction == 'west' then
 		x, y = 392, self.player.y
 	end
-
+	
 	-- Move the player to the new X and Y
 	self.player:moveTo(x, y)
+
+	if self.width > screenWidth then
+		if direction == 'west' then
+			self.x = self.width - screenWidth
+			self.player:moveBy(self.x, 0)
+			
+			local allSprites = gfx.sprite.getAllSprites()
+			for _, sprite in ipairs(allSprites) do
+				if sprite:isa(Bar) then
+					return
+				end
+
+				sprite:moveBy(-self.x, 0)
+			end
+		end
+	end
 end
 
 
@@ -198,11 +214,28 @@ function World:goToLevel(level)
 	self.width = level_size["width"]
 	self.height = level_size["height"]
 
+	-- Create level X and Y
+	self.x, self.y = 0
+
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
 	self:loadHealthBar()
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
+end
+
+
+function World:updateAllSprites()	
+	self.x = self.x + self.player.xVelocity * dt
+
+	local allSprites = gfx.sprite.getAllSprites()
+	for _, sprite in ipairs(allSprites) do
+		if sprite:isa(Bar) then
+			return
+		end
+
+		sprite:moveBy(-self.player.xVelocity * dt, 0)
+	end
 end
 
 
