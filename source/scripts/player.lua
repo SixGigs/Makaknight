@@ -91,7 +91,7 @@ function Player:init(x, y, world)
 	self.minimumAirSpeed = 15
 	self.maxSpeed = 150
 	self.walkSpeed = 90
-	self.jumpSpeed = 115
+	self.jumpSpeed = 112
 	self.drag = 120
 	
 	-- Collision attributes
@@ -342,7 +342,9 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision()
 		elseif collisionTag == TAGS.Roaster then
-			collisionObject:handleCollision()
+			if self.touchingGround then
+				collisionObject:handleCollision()
+			end
 		end
 
 		-- Check if we are colliding with the health bar
@@ -354,19 +356,10 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	--- BEGINNING OF MOVING THE LEVEL WITH THE PLAYER OMG!!!
-	-- if self.world.width > 400 and self.x >= 200 and self.x + 200 < self.world.width then
-	-- 	local allSprites = gfx.sprite.getAllSprites()
-	-- 	if not self.touchingWall then
-	-- 		for _, sprite in ipairs(allSprites) do
-	-- 			if sprite:isa(Bar) then
-	-- 				return
-	-- 			end
-	-- 
-	-- 			sprite:moveBy(-self.xVelocity * dt, 0)
-	-- 		end
-	-- 	end
-	-- end
+
+	if self.x + self.xVelocity > self.x and self.x >= 300 and self.world.x + 400 < self.world.width - 1 or self.x + self.xVelocity < self.x and self.x <= 100 and self.world.x > 1 then
+		self.world:updateAllSprites()
+	end
 
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then

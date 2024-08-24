@@ -27,10 +27,6 @@ function Roaster:init(x, y, e)
 	self:addState("refill", 22, 32, {ts = fillTicks, l = fillLoops, na = "ready"})
 	self:playAnimation()
 
-	-- Fire Box Animation End Events
-	self.states["ignite"].onAnimationEndEvent = function(self) Fire(x, y - 16, burnTimer) end -- Create a Fire Object When the Fire Box Ignites
-	self.states["refill"].onAnimationEndEvent = function(self) self:setCollideRect(0, 17, 16, 15) end -- Update the Fire Box Hit Box when Ready to Activate Again
-
 	-- Fire Box Attributes
 	self.fuse = 0
 
@@ -41,6 +37,10 @@ function Roaster:init(x, y, e)
 	self:setZIndex(Z_INDEXES.Roaster)
 	self:setTag(TAGS.Roaster)
 	self:add()
+	
+	-- Fire Box Animation End Events
+	self.states["ignite"].onAnimationEndEvent = function(self) Fire(self.x, self.y - 16, burnTimer) end -- Create a Fire Object When the Fire Box Ignites
+	self.states["refill"].onAnimationEndEvent = function(self) self:setCollideRect(0, 17, 16, 15) end -- Update the Fire Box Hit Box when Ready to Activate Again
 end
 
 
