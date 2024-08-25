@@ -108,7 +108,7 @@ function World:enterRoom(direction)
 	elseif direction == 'west' then
 		x, y = 392, self.player.y
 	end
-	
+
 	-- Move the player to the new X and Y
 	self.player:moveTo(x, y)
 
@@ -116,15 +116,7 @@ function World:enterRoom(direction)
 		if direction == 'west' then
 			self.x = self.width - screenWidth
 			self.player:moveBy(self.x, 0)
-			
-			local allSprites = gfx.sprite.getAllSprites()
-			for _, sprite in ipairs(allSprites) do
-				if sprite:isa(Bar) then
-					return
-				end
-
-				sprite:moveBy(-self.x, 0)
-			end
+			self:adjustLevel(self.x)
 		end
 	end
 end
@@ -159,13 +151,13 @@ function World:goToLevel(level)
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
 			local layerSprite <const> = gfx.sprite.new()
-	
+
 			layerSprite:setTilemap(tilemap)
 			layerSprite:setCenter(0, 0)
 			layerSprite:moveTo(0, 0)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
-	
+
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Solid', layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
@@ -225,20 +217,6 @@ function World:goToLevel(level)
 end
 
 
-function World:updateAllSprites()	
-	self.x = self.x + self.player.xVelocity * dt
-
-	local allSprites = gfx.sprite.getAllSprites()
-	for _, sprite in ipairs(allSprites) do
-		if sprite:isa(Bar) then
-			return
-		end
-
-		sprite:moveBy(-self.player.xVelocity * dt, 0)
-	end
-end
-
-
 --- Load the background for the level sent into the function
 --- @param level string The name of the 
 function World:loadBackground(level)
@@ -286,6 +264,38 @@ function World:resetPlayer()
 		self.player:changeToSpawnState()
 		self:updateHealthBar()
 	end
+end
+
+
+--- Adjust the level X value to keep the player on the screen
+--- @param  xAmount  integer  The amount to move the level by
+function World:adjustLevel(xAmount)
+	if self.x > self.width - screenWidth then
+		local xCorrection <const> = self.x - (self.width - screenWidth)
+		xAmount = xAmount - xCorrection
+		self.x = self.width - screenWidth
+	end
+	
+	if self.x < 0 then
+		local xCorrection <const> = xAmount - self.x
+		xAmount = xCorrection
+		self.x = 0
+	end
+
+	local allSprites = gfx.sprite.getAllSprites()
+	for _, sprite in ipairs(allSprites) do
+		if sprite:isa(Bar) then
+			return
+		end
+
+		sprite:moveBy(-xAmount, 0)
+	end
+end
+
+
+function World:updateAllSprites()	
+	self.x = self.x + self.player.xVelocity * dt
+	self:adjustLevel(self.player.xVelocity * dt)
 end
 
 
