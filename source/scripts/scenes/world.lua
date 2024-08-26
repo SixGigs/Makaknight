@@ -230,12 +230,6 @@ function World:loadBackground(level)
 end
 
 
-function World:updateHealthBar()
-	self:deleteHealthBar()
-	self:loadHealthBar()
-end
-
-
 --- Load the health bar for the player with their current hit points
 function World:loadHealthBar()
 	if self.player then
@@ -246,9 +240,10 @@ function World:loadHealthBar()
 end
 
 
---- Delete the health bar
-function World:deleteHealthBar()
+--- Update the Health Bar to Reflect Current Player Hit Points
+function World:updateHealthBar()
 	self.bar:remove()
+	self:loadHealthBar()
 end
 
 
@@ -267,20 +262,17 @@ function World:resetPlayer()
 end
 
 
+--- This Function is Called by the Player to Update the World X Coordinate
+function World:update()
+	self.x = self.x + self.player.xVelocity * dt
+	self:adjustLevel(self.player.xVelocity * dt)
+end
+
+
 --- Adjust the level X value to keep the player on the screen
 --- @param  xAmount  integer  The amount to move the level by
 function World:adjustLevel(xAmount)
-	if self.x > self.width - screenWidth then
-		local xCorrection <const> = self.x - (self.width - screenWidth)
-		xAmount = xAmount - xCorrection
-		self.x = self.width - screenWidth
-	end
-	
-	if self.x < 0 then
-		local xCorrection <const> = xAmount - self.x
-		xAmount = xCorrection
-		self.x = 0
-	end
+	xAmount = self:levelCorrection(xAmount)
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
@@ -293,9 +285,28 @@ function World:adjustLevel(xAmount)
 end
 
 
-function World:updateAllSprites()	
-	self.x = self.x + self.player.xVelocity * dt
-	self:adjustLevel(self.player.xVelocity * dt)
+--- Check if the Level X Amount needs Correction
+--- @param  xAmount  The Amount to Move the Level
+function World:levelCorrection(xAmount)
+	if self.x > self.width - screenWidth then
+		local xCorrection <const> = self.x - (self.width - screenWidth)
+		xAmount = xAmount - xCorrection
+		self.x = self.width - screenWidth
+	end
+
+	if self.x < 0 then
+		local xCorrection <const> = xAmount - self.x
+		xAmount = xCorrection
+		self.x = 0
+	end
+
+	return xAmount
+end
+
+
+--- Unsets menu items
+function World:unsetMenu()
+	menu:removeAllMenuItems()
 end
 
 
@@ -332,10 +343,4 @@ function World:save(quickSave)
 	}
 
 	pd.datastore.write(data)
-end
-
-
---- Unsets menu items
-function World:unsetMenu()
-	menu:removeAllMenuItems()
 end
