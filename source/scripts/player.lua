@@ -356,9 +356,14 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
+	-- If the world is wider than 400 pixels and the player is 250 or more pixels across the screen update the world
+	if self.x + self.xVelocity > self.x and self.x >= 250 and self.world.x + 400 < self.world.width - 1 then
+		self.world:update()
+	end
 
-	if self.x + self.xVelocity > self.x and self.x >= 300 and self.world.x + 400 < self.world.width - 1 or self.x + self.xVelocity < self.x and self.x <= 100 and self.world.x > 1 then
-		self.world:updateAllSprites()
+	-- If the world X value is greater than 0 and the player is 150 or less pixels across the screen update the world
+	if self.x + self.xVelocity < self.x and self.x <= 150 and self.world.x > 1 then
+		self.world:update()
 	end
 
 	-- Change to face the direction we are moving in
