@@ -18,7 +18,7 @@ function Fan:init(x, y, e)
 	self:playAnimation()
 
 	-- Fan Attributes
-	self.damage = e.fields.damage
+	self.damage = (e.fields.damage and e.fields.damage or e)
 
 	-- Fan Properties
 	self:setCollideRect(0, 8, 32, 8)

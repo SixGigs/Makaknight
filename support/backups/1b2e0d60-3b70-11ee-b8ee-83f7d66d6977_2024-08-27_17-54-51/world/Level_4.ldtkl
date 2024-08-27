@@ -270,6 +270,69 @@
 					],
 					"__worldX": 1856,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Snake",
+					"__grid": [12,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "f09f64d0-4ce0-11ef-8b2a-376b7a2a0128",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [192,64],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
+					],
+					"__worldX": 1920,
+					"__worldY": -176
+				},
+				{
+					"__identifier": "Snake",
+					"__grid": [13,1],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "f149d5a0-4ce0-11ef-8b2a-5b0629e0e1dd",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [208,16],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
+					],
+					"__worldX": 1936,
+					"__worldY": -224
+				},
+				{
+					"__identifier": "Snake",
+					"__grid": [13,7],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 2978, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B55088",
+					"iid": "f24aa3d0-4ce0-11ef-8b2a-1fa0a51852f3",
+					"width": 16,
+					"height": 16,
+					"defUid": 2975,
+					"px": [208,112],
+					"fieldInstances": [
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 2977, "realEditorValues": [] },
+						{ "__identifier": "facing", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3371, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3383, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3380, "realEditorValues": [] }
+					],
+					"__worldX": 1936,
+					"__worldY": -128
 				}
 			]
 		},

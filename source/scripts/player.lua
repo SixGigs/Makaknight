@@ -340,7 +340,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == "solid" and collision.normal.y == -1 then
 			collisionObject:crack()
 		elseif collisionTag == TAGS.Wind then
-			self:handleWindCollision()
+			self:handleWindCollision(collisionObject)
 		elseif collisionTag == TAGS.Roaster then
 			if self.touchingGround then
 				collisionObject:handleCollision()
@@ -446,10 +446,10 @@ end
 
 
 --- If the Player Collides with a Wind Hit Box, Run This Function
-function Player:handleWindCollision()
-	if self.yVelocity >= -150 then
-		self.yVelocity = self.yVelocity - 70
-		if self.currentState == "idle" or self.currentState == "walk" or self.currentState == "run" then
+function Player:handleWindCollision(obj)
+	obj:handleCollision(self)
+	if self.currentState ~= "midJump" then
+		if self.currentState ~= "hurt" and self.currentState ~= "dbJump" then
 			self:changeState("midJump")
 		end
 	end

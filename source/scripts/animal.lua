@@ -112,7 +112,7 @@ function Animal:handleMovementAndCollisions()
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
 			self.dead = true
 		elseif collisionTag == TAGS.Wind then
-			self:handleWindCollision()
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
 			collisionObject:handleCollision()
 		end
@@ -134,13 +134,5 @@ function Animal:handleMovementAndCollisions()
 		self.dead = true
 	elseif self.y > 264 then
 		self.dead = true
-	end
-end
-
-
---- If the Player Collides with a Wind Hit Box, Run This Function
-function Animal:handleWindCollision()
-	if self.yVelocity >= -150 then
-		self.yVelocity = self.yVelocity - 60
 	end
 end
