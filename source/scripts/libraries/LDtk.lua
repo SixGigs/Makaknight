@@ -271,6 +271,7 @@ function LDtk.load_level( level_name )
 	
 	-- load level's background image
 	level.bgImage = level_data.bgRelPath
+	level.bgPosition = level_data.bgPos
 	
 	-- load level's width and height
 	level.width = level_data.pxWid
@@ -443,6 +444,15 @@ function LDtk.get_background( level_name )
 	local level = _levels[level_name] 
 	return level.bgImage
 end
+
+
+-- return the background positioning used for the level
+-- @level_name is used to get the positioning
+function LDtk.get_background_position( level_name )
+	local level = _levels[level_name]
+	return level.bgPosition
+end
+
 
 -- return the width and height of the level given
 -- @level_name is used to get the width and height

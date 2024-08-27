@@ -1,8 +1,7 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-local ldtk <const> = LDtk
 local menu <const> = pd.getSystemMenu()
-
+local ldtk <const> = LDtk
 
 -- Entity type tables
 local hazards <const> = {
@@ -13,6 +12,7 @@ local hazards <const> = {
 	["Stalactite"] = true
 }
 
+-- Door type tables
 local doors <const> = {
 	["Door0"] = true,
 	["Door1"] = true,
@@ -21,26 +21,26 @@ local doors <const> = {
 	["Door4"] = true
 }
 
+-- Reptile type tables
 local reptiles <const> = {
 	["Lizard"] = true,
 	["Snake"] = true
 }
 
-
 -- A global table of entity tags
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, Bar = 11, Bubble = 12, Fragileblock = 13,
-	Wind = 14, Roaster = 15, Background = 16
+	Crown = 10, GUI = 11, Bubble = 12, Fragileblock = 13,
+	Wind = 14, Roaster = 15
 }
 
 -- A global table of entity indexes
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, Bar = 1000, Bubble = 50, Fragileblock = 100,
-	Wind = 500, Roaster = 100
+	Crown = 120, GUI = 1000, Bubble = 50, Fragileblock = 100,
+	Wind = 500, Roaster = 100, Background = -10
 }
 
 ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
@@ -59,12 +59,7 @@ function World:init()
 
 	menu:addCheckmarkMenuItem('50 FPS', fiftyHertz, function(status)
 		if status ~= nil then
-			if status then
-				self.fps = 50
-			else
-				self.fps = 30
-			end
-
+			self.fps = (status and 50 or 30)
 			pd.display.setRefreshRate(self.fps)
 		end
 	end)
@@ -109,8 +104,7 @@ function World:enterRoom(direction)
 		x, y = 392, self.player.y
 	end
 
-	-- Move the player to the new X and Y
-	self.player:moveTo(x, y)
+	self.player:moveTo(x, y) -- Move the player to the new X and Y
 
 	if self.width > screenWidth then
 		if direction == 'west' then
@@ -206,8 +200,7 @@ function World:goToLevel(level)
 	self.width = level_size["width"]
 	self.height = level_size["height"]
 
-	-- Create level X and Y
-	self.x, self.y = 0
+	self.x, self.y = 0 -- Create level X and Y
 
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
@@ -221,11 +214,22 @@ end
 --- @param level string The name of the 
 function World:loadBackground(level)
 	local bg <const> = LDtk.get_background(level)
+
 	if bg then
-		local background <const> = gfx.image.new("levels/"..bg)
-		gfx.sprite.setBackgroundDrawingCallback(function()
-			background:draw(0, 0)
-		end)
+		local pos <const> = LDtk.get_background_position(level)
+
+		if pos == "Repeat" then
+			local bgAmount = self.width / screenWidth
+			bgAmount = math.floor(bgAmount + 0.9)
+			local nextBackground = 0
+
+			for i = 1, bgAmount do
+				Background(nextBackground, 0, bg)
+				nextBackground = nextBackground + screenWidth
+			end
+		else
+			Background(0, 0, bg)
+		end
 	end
 end
 
