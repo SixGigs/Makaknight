@@ -34,7 +34,7 @@ function Animal:init(x, y, e)
 		[TAGS.Player] = true,
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
-		[TAGS.Bar] = true,
+		[TAGS.GUI] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragileblock] = true,
 		[TAGS.Wind] = true

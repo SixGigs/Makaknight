@@ -104,7 +104,7 @@ function Player:init(x, y, world)
 		[TAGS.Animal] = true,
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
-		[TAGS.Bar] = true,
+		[TAGS.GUI] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragileblock] = true,
 		[TAGS.Wind] = true
@@ -348,7 +348,7 @@ function Player:handleMovementAndCollisions()
 		end
 
 		-- Check if we are colliding with the health bar
-		if collisionTag == TAGS.Bar and self.world.bar:isVisible() then
+		if collisionTag == TAGS.GUI and self.world.bar:isVisible() then
 			self.world.bar:setVisible(false)
 			pd.timer.performAfterDelay(2000, function()
 				self.world.bar:setVisible(true)
