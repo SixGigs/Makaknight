@@ -14,14 +14,15 @@ function Spike:init(x, y, e)
 
 	if e.name == "Stalactite" or e.name == "Roofspike" then
 		self:setCollideRect(2, 0, 12, 2)
+		self:setTag(TAGS.Hazard)
 	else
 		self:setCollideRect(2, 14, 12, 2)
+		self:setTag(TAGS.Spike)
 	end
 
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Hazard)
-	self:setTag(TAGS.Hazard)
 	self:setImage(img)
 	self:add()
 end
