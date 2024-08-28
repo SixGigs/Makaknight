@@ -108,8 +108,8 @@
 				{ "value": 3, "identifier": "Cave_igneous", "color": "#3A4466", "tile": { "tilesetUid": 1, "x": 0, "y": 64, "w": 16, "h": 16 }, "groupUid": 1 },
 				{ "value": 5, "identifier": "Cave_half", "color": "#B55088", "tile": { "tilesetUid": 1, "x": 16, "y": 96, "w": 16, "h": 16 }, "groupUid": 1 },
 				{ "value": 6, "identifier": "Desert_tiles", "color": "#FEAE34", "tile": { "tilesetUid": 1, "x": 192, "y": 0, "w": 16, "h": 16 }, "groupUid": 2 },
-				{ "value": 8, "identifier": "Desert_half", "color": "#D77643", "tile": { "tilesetUid": 1, "x": 208, "y": 96, "w": 16, "h": 16 }, "groupUid": 2 },
-				{ "value": 14, "identifier": "Desert_back_half", "color": "#E4A672", "tile": { "tilesetUid": 1, "x": 256, "y": 144, "w": 16, "h": 16 }, "groupUid": 2 },
+				{ "value": 8, "identifier": "Desert_half", "color": "#E4A672", "tile": { "tilesetUid": 1, "x": 208, "y": 96, "w": 16, "h": 16 }, "groupUid": 2 },
+				{ "value": 14, "identifier": "Desert_back_half", "color": "#D77643", "tile": { "tilesetUid": 1, "x": 256, "y": 144, "w": 16, "h": 16 }, "groupUid": 2 },
 				{ "value": 9, "identifier": "Grass_tiles", "color": "#63C74D", "tile": { "tilesetUid": 1, "x": 0, "y": 208, "w": 16, "h": 16 }, "groupUid": 3 },
 				{ "value": 10, "identifier": "Grass_bridge", "color": "#3E8948", "tile": { "tilesetUid": 1, "x": 0, "y": 288, "w": 16, "h": 16 }, "groupUid": 3 },
 				{ "value": 11, "identifier": "Grass_half", "color": "#265C42", "tile": { "tilesetUid": 1, "x": 16, "y": 304, "w": 16, "h": 16 }, "groupUid": 3 },
@@ -14259,7 +14259,7 @@
 		{
 			"identifier": "Spearspike",
 			"uid": 68,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A spike the player can kill themselves on",
@@ -14625,7 +14625,7 @@
 		{
 			"identifier": "Stalactite",
 			"uid": 3601,
-			"tags": [],
+			"tags": ["Cave"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave ceiling spike",
@@ -14698,7 +14698,7 @@
 		{
 			"identifier": "Stalagmite",
 			"uid": 3597,
-			"tags": [],
+			"tags": ["Cave"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave floor spike",
@@ -15067,7 +15067,7 @@
 		{
 			"identifier": "Door0",
 			"uid": 3611,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark desert door",
@@ -15214,7 +15214,7 @@
 		{
 			"identifier": "Door1",
 			"uid": 3617,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light desert door",
@@ -15361,7 +15361,7 @@
 		{
 			"identifier": "Door2",
 			"uid": 3622,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A small dark desert door",
@@ -15508,7 +15508,7 @@
 		{
 			"identifier": "Door3",
 			"uid": 3628,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark grass land door",
@@ -15655,7 +15655,7 @@
 		{
 			"identifier": "Door4",
 			"uid": 3633,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light grass land door",
@@ -15837,7 +15837,7 @@
 		{
 			"identifier": "Stone",
 			"uid": 2096,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -15872,7 +15872,7 @@
 		{
 			"identifier": "Rock",
 			"uid": 2099,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -15907,7 +15907,7 @@
 		{
 			"identifier": "Snag",
 			"uid": 2101,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -15942,7 +15942,7 @@
 		{
 			"identifier": "Cacti",
 			"uid": 2103,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -15977,7 +15977,7 @@
 		{
 			"identifier": "Tree",
 			"uid": 3211,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -16012,7 +16012,7 @@
 		{
 			"identifier": "Stump",
 			"uid": 3346,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -16047,7 +16047,7 @@
 		{
 			"identifier": "Crag",
 			"uid": 3348,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -16082,7 +16082,7 @@
 		{
 			"identifier": "Lizard",
 			"uid": 2973,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -16266,7 +16266,7 @@
 		{
 			"identifier": "Snake",
 			"uid": 2975,
-			"tags": [],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -16450,7 +16450,7 @@
 		{
 			"identifier": "Butterfly",
 			"uid": 3213,
-			"tags": [],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
