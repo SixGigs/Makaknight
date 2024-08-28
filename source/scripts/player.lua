@@ -107,7 +107,8 @@ function Player:init(x, y, world)
 		[TAGS.GUI] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragileblock] = true,
-		[TAGS.Wind] = true
+		[TAGS.Wind] = true,
+		[TAGS.Spike] = true
 	}
 
 	-- Buffer
@@ -323,11 +324,20 @@ function Player:handleMovementAndCollisions()
 		end
 
 		if collisionTag == TAGS.Hazard and not self.hurt then
-			if self.hp - collisionObject.damage < 0 then
-				self.hp = self.hp - self.hp
+			self.hp = self.hp - collisionObject.damage
+			if self.hp < 0 then
+				self.hp = 0
 			else
+				self:changeToHurtState()
+			end
+		elseif collisionTag == TAGS.Spike and not self.hurt then
+			if self.yVelocity > 120 then
 				self.hp = self.hp - collisionObject.damage
-				self:changeToHurtState("hurt")
+				if self.hp < 0 then
+					self.hp = 0
+				else
+					self:changeToHurtState()
+				end
 			end
 		elseif collisionTag == TAGS.Bubble then
 			collisionObject:bounce(self)

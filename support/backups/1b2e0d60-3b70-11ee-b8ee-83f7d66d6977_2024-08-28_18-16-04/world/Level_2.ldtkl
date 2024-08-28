@@ -482,22 +482,6 @@
 					],
 					"__worldX": 1008,
 					"__worldY": -144
-				},
-				{
-					"__identifier": "Tree",
-					"__grid": [18,2],
-					"__pivot": [0,0],
-					"__tags": ["Grass"],
-					"__tile": { "tilesetUid": 3212, "x": 0, "y": 0, "w": 80, "h": 80 },
-					"__smartColor": "#3E8948",
-					"iid": "91af63a0-4ce0-11ef-8b2a-1165b2e0ed1b",
-					"width": 80,
-					"height": 80,
-					"defUid": 3211,
-					"px": [288,32],
-					"fieldInstances": [],
-					"__worldX": 1088,
-					"__worldY": -208
 				}
 			]
 		},

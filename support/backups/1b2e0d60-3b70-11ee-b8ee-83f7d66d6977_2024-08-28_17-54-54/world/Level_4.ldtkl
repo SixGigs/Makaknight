@@ -270,6 +270,22 @@
 					],
 					"__worldX": 1856,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Stalagmite",
+					"__grid": [5,8],
+					"__pivot": [0,0],
+					"__tags": ["Cave"],
+					"__tile": { "tilesetUid": 3598, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "391201a0-4ce0-11ef-8b2a-23746b327dc0",
+					"width": 16,
+					"height": 16,
+					"defUid": 3597,
+					"px": [80,128],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3599, "realEditorValues": [] }],
+					"__worldX": 1808,
+					"__worldY": -112
 				}
 			]
 		},

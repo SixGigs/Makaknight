@@ -270,6 +270,22 @@
 					],
 					"__worldX": 1856,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Spearspike",
+					"__grid": [5,8],
+					"__pivot": [0,0],
+					"__tags": ["Desert"],
+					"__tile": { "tilesetUid": 200, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "33cbc4c0-4ce0-11ef-8b2a-ffd7b9ea0175",
+					"width": 16,
+					"height": 16,
+					"defUid": 68,
+					"px": [80,128],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
+					"__worldX": 1808,
+					"__worldY": -112
 				}
 			]
 		},

@@ -32,7 +32,7 @@ TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, GUI = 11, Bubble = 12, Fragileblock = 13,
-	Wind = 14, Roaster = 15
+	Wind = 14, Roaster = 15, Spike = 16
 }
 
 -- A global table of entity indexes
