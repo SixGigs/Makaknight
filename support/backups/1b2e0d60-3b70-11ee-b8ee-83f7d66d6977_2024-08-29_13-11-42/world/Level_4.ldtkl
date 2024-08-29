@@ -227,8 +227,8 @@
 					"defUid": 3658,
 					"px": [96,160],
 					"fieldInstances": [
-						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
-						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [null] },
+						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [null] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [null] }
 					],
 					"__worldX": 1824,
