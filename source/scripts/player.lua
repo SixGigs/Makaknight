@@ -324,20 +324,10 @@ function Player:handleMovementAndCollisions()
 		end
 
 		if collisionTag == TAGS.Hazard and not self.hurt then
-			self.hp = self.hp - collisionObject.damage
-			if self.hp < 0 then
-				self.hp = 0
-			else
-				self:changeToHurtState()
-			end
+			self:handleDamageCollision(collisionObject)
 		elseif collisionTag == TAGS.Spike and not self.hurt then
 			if self.yVelocity > 120 then
-				self.hp = self.hp - collisionObject.damage
-				if self.hp < 0 then
-					self.hp = 0
-				else
-					self:changeToHurtState()
-				end
+				self:handleDamageCollision(collisionObject)
 			end
 		elseif collisionTag == TAGS.Bubble then
 			collisionObject:bounce(self)
@@ -413,6 +403,16 @@ function Player:handleMovementAndCollisions()
 end
 
 
+function Player:handleDamageCollision(obj)
+	self.hp = self.hp - obj.damage
+	if self.hp < 0 then
+		self.hp = 0
+	else
+		self:changeToHurtState()
+	end
+end
+
+
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
@@ -459,7 +459,7 @@ end
 function Player:handleWindCollision(obj)
 	obj:handleCollision(self)
 	if self.currentState ~= "midJump" then
-		if self.currentState ~= "hurt" and self.currentState ~= "dbJump" then
+		if self.currentState ~= "hurt" and self.currentState ~= "dbJump" and self.currentState ~= "dash" then
 			self:changeState("midJump")
 		end
 	end

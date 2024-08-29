@@ -2,9 +2,9 @@ local gfx <const> = playdate.graphics
 class('Spike').extends(gfx.sprite)
 
 --- Initialise the spike object using the data given
---- @param x integer The X coordinate to spawn the spike
---- @param y integer The Y coordinate to spawn the spike
---- @param e table   The entity that come with the spike
+--- @param  x  integer The X coordinate to spawn the spike
+--- @param  y  integer The Y coordinate to spawn the spike
+--- @param  e  table   The entity that come with the spike
 function Spike:init(x, y, e)
 	local img <const> = gfx.image.new("images/hazards/" .. e.name)
 
@@ -13,10 +13,10 @@ function Spike:init(x, y, e)
 	self.yVelocity = e.fields.yVelocity
 
 	if e.name == "Stalactite" or e.name == "Roofspike" then
-		self:setCollideRect(2, 0, 12, 2)
+		self:setCollideRect(0, 0, 16, 2)
 		self:setTag(TAGS.Hazard)
 	else
-		self:setCollideRect(2, 14, 12, 2)
+		self:setCollideRect(0, 14, 16, 2)
 		self:setTag(TAGS.Spike)
 	end
 

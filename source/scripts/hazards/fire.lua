@@ -2,42 +2,36 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
--- Create the Fan Class
+-- Create the Fire Class
 class("Fire").extends(AnimatedSprite)
 
 
---- Initialise the Fan Object Using the Data Given
---- @param  x  integer  The X coordinate to spawn the Fan
---- @param  y  integer  The Y coordinate to spawn the Fan
---- @param  e  table    The entity that come with the Fan
-function Fire:init(x, y, time)
-	-- Initialise the Fan Class
+--- Initialise the Fire Object Using the Data Given
+--- @param  x  integer  The X coordinate to spawn the Fire
+--- @param  y  integer  The Y coordinate to spawn the Fire
+--- @param  s  integer  The seconds the fire burns for
+--- @param  d  integer  The damage the fire deals
+function Fire:init(x, y, s, d)
+	-- Initialise the Fire Class
 	Fire.super.init(self, gfx.imagetable.new("images/hazards/fire-table-16-16"))
 
-	local seconds <const> = self:millisecondsToSeconds(time)
-
-	-- Fan Animation Settings
+	-- Fire Animation Settings
 	self:addState("burn", 1, 4)
 	self:playAnimation()
 
-	-- Fan Attributes
-	self.damage = 20
+	-- Fire Attributes
+	self.damage = d
 
-	-- Fan Properties
+	-- Delete the Fire After Set Amount of Time
+	pd.timer.performAfterDelay(s * 1000, function()
+		self:remove()
+	end)
+
+	-- Fire Properties
 	self:setCollideRect(0, 0, 16, 16)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setTag(TAGS.Hazard)
 	self:add()
-
-	-- Delete After Set Amount of Time
-	pd.timer.performAfterDelay(seconds, function()
-		self:remove()
-	end)
-end
-
-
-function Fire:millisecondsToSeconds(time)
-	return time * 1000
 end
