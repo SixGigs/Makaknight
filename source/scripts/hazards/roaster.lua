@@ -18,7 +18,7 @@ function Roaster:init(x, y, e)
 	local fireDamage <const> = e.fields.damage
 	
 	-- Initialise the Fire Box Class
-	Roaster.super.init(self, gfx.imagetable.new("images/hazards/fire-box-table-32-16"))
+	Roaster.super.init(self, gfx.imagetable.new("images/hazards/roaster-table-32-16"))
 
 	-- Fire Box Animation Settings
 	self:addState("ready", 1, 1)
