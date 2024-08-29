@@ -163,6 +163,7 @@
 					"defUid": 3658,
 					"px": [384,144],
 					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
 					],
@@ -182,6 +183,7 @@
 					"defUid": 3658,
 					"px": [400,144],
 					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
 					],
@@ -201,6 +203,7 @@
 					"defUid": 3658,
 					"px": [416,144],
 					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
 						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
 						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
 					],

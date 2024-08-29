@@ -14,7 +14,8 @@ function Roaster:init(x, y, e)
 	local fillTicks <const> = 1.5
 	local fillLoops <const> = e.fields.refill * 2
 	local burnTicks <const> = e.fields.fuel * 30 / 16
-	local burnTimer <const> = e.fields.fuel
+	local fireTimer <const> = e.fields.fuel
+	local fireDamage <const> = e.fields.damage
 	
 	-- Initialise the Fire Box Class
 	Roaster.super.init(self, gfx.imagetable.new("images/hazards/fire-box-table-32-16"))
@@ -37,9 +38,9 @@ function Roaster:init(x, y, e)
 	self:setZIndex(Z_INDEXES.Roaster)
 	self:setTag(TAGS.Roaster)
 	self:add()
-	
+
 	-- Fire Box Animation End Events
-	self.states["ignite"].onAnimationEndEvent = function(self) Fire(self.x, self.y - 16, burnTimer) end -- Create a Fire Object When the Fire Box Ignites
+	self.states["ignite"].onAnimationEndEvent = function(self) Fire(self.x, self.y - 16, fireTimer, fireDamage) end -- Create a Fire Object When the Fire Box Ignites
 	self.states["refill"].onAnimationEndEvent = function(self) self:setCollideRect(0, 17, 16, 15) end -- Update the Fire Box Hit Box when Ready to Activate Again
 end
 
