@@ -108,7 +108,8 @@ function Player:init(x, y, world)
 		[TAGS.Bubble] = true,
 		[TAGS.Fragileblock] = true,
 		[TAGS.Wind] = true,
-		[TAGS.Spike] = true
+		[TAGS.Spike] = true,
+		[TAGS.Halftile] = true
 	}
 
 	-- Buffer
@@ -174,6 +175,10 @@ function Player:collisionResponse(other)
 	if self.overlapTags[tag] then
 		if tag == TAGS.Fragileblock then
 			if other.currentState == "breaking" or other.currentState == "broken" then
+				return gfx.sprite.kCollisionTypeOverlap
+			end
+		elseif tag == TAGS.Halftile then
+			if self.y + 48 > other.y then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
@@ -337,7 +342,7 @@ function Player:handleMovementAndCollisions()
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision(collisionObject)
-		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == "solid" and collision.normal.y == -1 then
+		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == "solid" and self.touchingGround then
 			collisionObject:crack()
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision(collisionObject)
