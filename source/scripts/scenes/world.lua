@@ -32,7 +32,7 @@ TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, GUI = 11, Bubble = 12, Fragileblock = 13,
-	Wind = 14, Roaster = 15, Spike = 16
+	Wind = 14, Roaster = 15, Spike = 16, Halftile = 17
 }
 
 -- A global table of entity indexes
@@ -155,6 +155,24 @@ function World:goToLevel(level)
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Solid', layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
+			end
+
+			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Half', layer_name)
+			if emptyTiles then
+				halfTiles = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+				for _, tile in pairs(halfTiles) do
+					tile.x = tile.x * 16
+					tile.y = tile.y * 16
+					tile.w = tile.w * 16
+					tile.h = tile.h * 16
+
+					local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
+					halfTile:setTag(TAGS.Halftile)
+					halfTile:setZIndex(layer.zIndex)
+					halfTile:add()
+
+					printTable(halfTile)
+				end
 			end
 		end
 	end

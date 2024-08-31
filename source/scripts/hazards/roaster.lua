@@ -11,9 +11,9 @@ class("Roaster").extends(AnimatedSprite)
 --- @param  e  table    The entity that come with the Roaster
 function Roaster:init(x, y, e)
 	-- Local Variables for Initialisation
+	local burnTicks <const> = e.fields.fuel * 30 / 16
 	local fillTicks <const> = 1.5
 	local fillLoops <const> = e.fields.refill * 2
-	local burnTicks <const> = e.fields.fuel * 30 / 16
 	local fireTimer <const> = e.fields.fuel
 	local fireDamage <const> = e.fields.damage
 	
