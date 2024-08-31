@@ -3,7 +3,7 @@ local gfx <const> = playdate.graphics
 local menu <const> = pd.getSystemMenu()
 local ldtk <const> = LDtk
 
--- Entity type tables
+-- Entity Type Table
 local hazards <const> = {
 	["Floorspike"] = true,
 	["Roofspike"] = true,
@@ -12,7 +12,7 @@ local hazards <const> = {
 	["Stalactite"] = true
 }
 
--- Door type tables
+-- Door Type Table
 local doors <const> = {
 	["Door0"] = true,
 	["Door1"] = true,
@@ -21,13 +21,13 @@ local doors <const> = {
 	["Door4"] = true
 }
 
--- Reptile type tables
+-- Reptile Type Table
 local reptiles <const> = {
 	["Lizard"] = true,
 	["Snake"] = true
 }
 
--- A global table of entity tags
+-- A Global Table of Collision Tags
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
@@ -35,7 +35,7 @@ TAGS = {
 	Wind = 14, Roaster = 15, Spike = 16, Halftile = 17
 }
 
--- A global table of entity indexes
+-- A Global Table of Sprite Z Axises 
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
@@ -43,31 +43,17 @@ Z_INDEXES = {
 	Wind = 500, Roaster = 100, Background = -10
 }
 
-ldtk.load('levels/world.ldtk', false) -- Load the level used for the game
+
+ldtk.load("levels/world.ldtk", false) -- Load the World File Used for the World
+class("World").extends(gfx.sprite) --- The Initialising Method of the World Class
 
 
---- The initialising method of the game scene class
-class('World').extends(gfx.sprite)
-
---- Create the game class
+--- Initialise the World Class
 function World:init()
-	self:load() -- Load/Create the game
+	self:load() -- Load the World Save File
+	self:addWorldMenuItems() -- Add the World Menu Items
 
-	-- Add a FPS tick box to the pause menu
-	local fiftyHertz = false
-	if self.fps == 50 then fiftyHertz = true end
-
-	menu:addCheckmarkMenuItem('50 FPS', fiftyHertz, function(status)
-		if status ~= nil then
-			self.fps = (status and 50 or 30)
-			pd.display.setRefreshRate(self.fps)
-		end
-	end)
-
-	-- Add the Quick save option to the pause menu
-	menu:addMenuItem('Quick Save', function() self:save(true) end)
-
-	-- Go to the level specified from the load or create and create the player
+	-- Go to the Level Specified in the Save File and Create the Player
 	self:goToLevel(self.level)
 	self.player = Player(self.levelX, self.levelY, self)
 	pd.display.setRefreshRate(self.fps)
@@ -75,7 +61,7 @@ end
 
 
 --- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
---- @param direction string Contains in text form, the direction from the current level to load the next level piece
+--- @param  direction  string  Contains a Direction From the Current Level to Load the Next Level Piece
 function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
@@ -217,6 +203,21 @@ function World:goToLevel(level)
 end
 
 
+--- This Method Adds the Developer Defined World Menu Items to the Playdate Pause Menu 
+function World:addWorldMenuItems()
+	-- Add a FPS Tick Box to the Pause Menu to Turn 50FPS Off and On
+	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
+		if status ~= nil then
+			self.fps = (status and 50 or 30)
+			pd.display.setRefreshRate(self.fps)
+		end
+	end)
+
+	-- Add the Quick save option to the pause menu
+	menu:addMenuItem('Quick Save', function() self:save(true) end)
+end
+
+
 --- Load the background for the level sent into the function
 --- @param level string The name of the 
 function World:loadBackground(level)
@@ -258,7 +259,7 @@ function World:updateHealthBar()
 end
 
 
---- The reset player method moves the player back to the most recent spawn X & Y coordinates
+--- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
 	if self.level ~= self.spawn then
 		self:goToLevel(self.spawn)
@@ -273,7 +274,7 @@ function World:resetPlayer()
 end
 
 
---- This method is used to draw half wall sprites
+--- This Method is Used to Create Half Tile Hit Boxes for the Player to Interact With
 --- @param  layer       The Layer to Draw the Sprites onto
 --- @param  tilemap     The Map of Tiles Used to Create the Rects
 --- @param  emptyTiles  The Tiles That are not Half Tiles
@@ -351,13 +352,13 @@ function World:levelCorrection(xAmount)
 end
 
 
---- Unsets menu items
+--- Unset the Menu Items
 function World:unsetMenu()
 	menu:removeAllMenuItems()
 end
 
 
---- Load the game from the JSON save file and restore game attributes
+--- Load the JSON Save File and Restore the Game Attributes
 function World:load()
 	local gd <const> = pd.datastore.read()
 
