@@ -152,41 +152,16 @@ function World:goToLevel(level)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
 
+			-- Draw Solid Walls
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Solid', layer_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles)
 			end
 
+			-- Draw Half Walls
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Half', layer_name)
 			if emptyTiles then
-				halfTiles = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
-				for _, tile in pairs(halfTiles) do
-					if tile.h > 1 then
-						for i = tile.h, 1, -1 do
-							local x <const> = tile.x * 16
-							local y <const> = (tile.y + (i - 1)) * 16
-							local w <const> = tile.w * 16
-							local h <const> = 16
-
-							local halfRect = pd.geometry.rect.new(x, y, w, h)
-
-							local halfTile = gfx.sprite.addEmptyCollisionSprite(halfRect)
-							halfTile:setTag(TAGS.Halftile)
-							halfTile:setZIndex(layer.zIndex)
-							halfTile:add()
-						end
-					else
-						tile.x = tile.x * 16
-						tile.y = tile.y * 16
-						tile.w = tile.w * 16
-						tile.h = tile.h * 16
-
-						local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
-						halfTile:setTag(TAGS.Halftile)
-						halfTile:setZIndex(layer.zIndex)
-						halfTile:add()
-					end
-				end
+				self:addHalfWallSprites(layer, tilemap, emptyTiles)
 			end
 		end
 	end
@@ -294,6 +269,42 @@ function World:resetPlayer()
 		self.player:moveTo(self.spawnX, self.spawnY)
 		self.player:changeToSpawnState()
 		self:updateHealthBar()
+	end
+end
+
+
+--- This method is used to draw half wall sprites
+--- @param  layer       The Layer to Draw the Sprites onto
+--- @param  tilemap     The Map of Tiles Used to Create the Rects
+--- @param  emptyTiles  The Tiles That are not Half Tiles
+function World:addHalfWallSprites(layer, tilemap, emptyTiles)
+	halfTiles = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+	for _, tile in pairs(halfTiles) do
+		if tile.h > 1 then
+			for i = tile.h, 1, -1 do
+				local x <const> = tile.x * 16
+				local y <const> = (tile.y + (i - 1)) * 16
+				local w <const> = tile.w * 16
+				local h <const> = 16
+	
+				local halfRect = pd.geometry.rect.new(x, y, w, h)
+	
+				local halfTile = gfx.sprite.addEmptyCollisionSprite(halfRect)
+				halfTile:setTag(TAGS.Halftile)
+				halfTile:setZIndex(layer.zIndex)
+				halfTile:add()
+			end
+		else
+			tile.x = tile.x * 16
+			tile.y = tile.y * 16
+			tile.w = tile.w * 16
+			tile.h = tile.h * 16
+	
+			local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
+			halfTile:setTag(TAGS.Halftile)
+			halfTile:setZIndex(layer.zIndex)
+			halfTile:add()
+		end
 	end
 end
 
