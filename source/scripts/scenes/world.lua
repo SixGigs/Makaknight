@@ -161,17 +161,31 @@ function World:goToLevel(level)
 			if emptyTiles then
 				halfTiles = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
 				for _, tile in pairs(halfTiles) do
-					tile.x = tile.x * 16
-					tile.y = tile.y * 16
-					tile.w = tile.w * 16
-					tile.h = tile.h * 16
+					if tile.h > 1 then
+						for i = tile.h, 1, -1 do
+							local x <const> = tile.x * 16
+							local y <const> = (tile.y + (i - 1)) * 16
+							local w <const> = tile.w * 16
+							local h <const> = 16
 
-					local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
-					halfTile:setTag(TAGS.Halftile)
-					halfTile:setZIndex(layer.zIndex)
-					halfTile:add()
+							local halfRect = pd.geometry.rect.new(x, y, w, h)
 
-					printTable(halfTile)
+							local halfTile = gfx.sprite.addEmptyCollisionSprite(halfRect)
+							halfTile:setTag(TAGS.Halftile)
+							halfTile:setZIndex(layer.zIndex)
+							halfTile:add()
+						end
+					else
+						tile.x = tile.x * 16
+						tile.y = tile.y * 16
+						tile.w = tile.w * 16
+						tile.h = tile.h * 16
+
+						local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
+						halfTile:setTag(TAGS.Halftile)
+						halfTile:setZIndex(layer.zIndex)
+						halfTile:add()
+					end
 				end
 			end
 		end
