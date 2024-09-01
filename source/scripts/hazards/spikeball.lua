@@ -14,6 +14,10 @@ function Spikeball:init(x, y, e)
 	self.damage = e.fields.damage
 	self.xVelocity = e.fields.xVelocity * 30
 	self.yVelocity = e.fields.yVelocity * 30
+	self.overlapTags = {
+		[TAGS.Player] = true,
+		[TAGS.GUI] = true
+	}
 
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
@@ -28,7 +32,7 @@ end
 --- @param  e  table  The entity the Spike-ball collided with
 function Spikeball:collisionResponse(e)
 	local tag <const> = e:getTag()
-	if tag == TAGS.Player then
+	if self.overlapTags[tag] then
 		return gfx.sprite.kCollisionTypeOverlap
 	end
 end
@@ -44,7 +48,7 @@ function Spikeball:update()
 	-- Bounce off walls
 	for i = 1, length do
 		local collision = collisions[i]
-		if collision.other:getTag() ~= TAGS.Player then
+		if not self.overlapTags[collision.other:getTag()] then
 			self.xVelocity = self.xVelocity * -1
 			self.yVelocity = self.yVelocity * -1
 		end
