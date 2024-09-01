@@ -178,7 +178,7 @@ function Player:collisionResponse(other)
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		elseif tag == TAGS.Halftile then
-			if self.y + 48 > other.y then
+			if self.y + 48 > other.y or pd.buttonIsPressed(pd.kButtonDown) then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
