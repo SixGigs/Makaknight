@@ -28,7 +28,7 @@ function Flag:init(x, y, entity, world)
 
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
-	if self.id == world.flag then
+	if self.id == g.checkpoint then
 		self:changeState("up")
 	else
 		self:changeState("down")
@@ -52,15 +52,15 @@ function Flag:hoist(world, flip)
 	end
 
 	-- Update the world details
-	world.flag = self.id
-	world.spawn = world.level
-	world.spawnY = self.y + 8
+	g.checkpoint = self.id
+	g.spawn_level = g.player_level
+	g.player_spawn_y = self.y + 8
 
 	-- Set the X value of the spawn
 	if flip == 0 then
-		world.spawnX = self.x + 10
+		g.player_spawn_x = self.x + 10
 	else
-		world.spawnX = self.x + 54
+		g.player_spawn_x = self.x + 54
 	end
 end
 

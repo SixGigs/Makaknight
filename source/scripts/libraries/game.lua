@@ -1,6 +1,7 @@
 -- PlayDate shorthand constants
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+local menu <const> = pd.getSystemMenu()
 
 -- Game manager Class
 class("Game").extends()
@@ -8,8 +9,17 @@ class("Game").extends()
 
 -- Creates an instance of the Game manager
 function Game:init()
+	self:load()
+	
 	self.transitionTime = 1000
 	self.transitioning = false
+
+	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
+		if status ~= nil then
+			self.fps = (status and 50 or 30)
+			pd.display.setRefreshRate(self.fps)
+		end
+	end)
 end
 
 
@@ -137,4 +147,44 @@ function Game:createTransitionSprite()
 	transitionSprite:add()
 
 	return transitionSprite
+end
+
+
+--- Load the Save File if it Exists
+function Game:load()
+	local gd <const> = pd.datastore.read()
+
+	self.spawn_level = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
+	self.player_spawn_x = (gd and (gd.spawnX and gd.spawnX or 3 * 16 + 8) or 3 * 16 + 8)
+	self.player_spawn_y = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
+	self.player_level = (gd and (gd.level and gd.level or self.spawn_level) or self.spawn_level)
+	self.player_facing = (gd and (gd.face and gd.face or 0) or 0)
+	self.player_hp = (gd and (gd.hp and gd.hp or 100) or 100)
+	self.player_x = (gd and (gd.levelX and gd.levelX or self.player_spawn_x) or self.player_spawn_x)
+	self.player_y = (gd and (gd.levelY and gd.levelY or self.player_spawn_y) or self.player_spawn_y)
+	self.checkpoint = (gd and (gd.flag and gd.flag or 0) or 0)
+	self.world_x = (gd and (gd.worldX and gd.worldX or 0) or 0)
+	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
+
+	pd.display.setRefreshRate(self.fps)
+end
+
+
+--- Save the Game
+function Game:save()
+	local data <const> = {
+		spawn = self.spawn_level,
+		spawnX = self.player_spawn_x,
+		spawnY = self.player_spawn_y,
+		level = self.player_level,
+		levelX = self.player_x,
+		levelY = self.player_y,
+		flag = self.checkpoint,
+		face = self.player_facing,
+		fps = self.fps,
+		hp = self.player_hp,
+		worldX = self.world_x
+	}
+
+	pd.datastore.write(data)
 end
