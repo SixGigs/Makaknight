@@ -1,6 +1,5 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-local menu <const> = pd.getSystemMenu()
 local ldtk <const> = LDtk
 
 -- Entity Type Table
@@ -50,13 +49,10 @@ class("World").extends(gfx.sprite) --- The Initialising Method of the World Clas
 
 --- Initialise the World Class
 function World:init()
-	self:load() -- Load the World Save File
-	self:addWorldMenuItems() -- Add the World Menu Items
-
 	-- Go to the Level Specified in the Save File and Create the Player
-	self:goToLevel(self.level)
-	self.player = Player(self.levelX, self.levelY, self)
-	pd.display.setRefreshRate(self.fps)
+	self:goToLevel(g.player_level)
+	self:adjustLevel(g.world_x)
+	self.player = Player(self)
 end
 
 
@@ -64,19 +60,24 @@ end
 --- @param  direction  string  Contains a Direction From the Current Level to Load the Next Level Piece
 function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
-	local level <const> = ldtk.get_neighbours(self.level, direction)[1]
+	local level <const> = ldtk.get_neighbours(g.player_level, direction)[1]
 	if not level then
 		if direction == 'north' then return else return self.player:die() end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
-	local oldLevel <const> = self.level
+	local oldLevel <const> = g.player_level
 	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
 	ldtk.release_level(oldLevel)
 
 	-- Load the new level, remove the old level, and add the player
 	self:goToLevel(level)
 	self.player:add()
+
+	-- If Travelling East Reset the World X Attribute
+	if direction == 'east' then
+		g.world_x = 0
+	end
 
 	-- Create a local X and Y, and use them to spawn the player
 	local x, y
@@ -94,9 +95,9 @@ function World:enterRoom(direction)
 
 	if self.width > screenWidth then
 		if direction == 'west' then
-			self.x = self.width - screenWidth
-			self.player:moveBy(self.x, 0)
-			self:adjustLevel(self.x)
+			g.world_x = self.width - screenWidth
+			self.player:moveBy(g.world_x, 0)
+			self:adjustLevel(g.world_x)
 		end
 	end
 end
@@ -107,8 +108,8 @@ end
 --- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
-	if level ~= self.level then
-		local oldLevel <const> = self.level
+	if level ~= g.player_level then
+		local oldLevel <const> = g.player_level
 		ldtk.release_level(oldLevel)
 		self:goToLevel(level)
 		self.player:moveTo(x, y)
@@ -126,7 +127,7 @@ function World:goToLevel(level)
 	gfx.sprite.removeAll() -- Remove all playdate sprites
 
 	-- Update local level attribute and build the new tile map
-	self.level = level
+	g.player_level = level
 	for layer_name, layer in pairs(ldtk.get_layers(level)) do
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
@@ -193,7 +194,7 @@ function World:goToLevel(level)
 	self.width = level_size["width"]
 	self.height = level_size["height"]
 
-	self.x, self.y = 0 -- Create level X and Y
+	self.y = 0 -- Create level X and Y
 
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
@@ -206,15 +207,12 @@ end
 --- This Method Adds the Developer Defined World Menu Items to the Playdate Pause Menu 
 function World:addWorldMenuItems()
 	-- Add a FPS Tick Box to the Pause Menu to Turn 50FPS Off and On
-	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
+	menu:addCheckmarkMenuItem('50 FPS', (g.fps == 50 and true or false), function(status)
 		if status ~= nil then
-			self.fps = (status and 50 or 30)
-			pd.display.setRefreshRate(self.fps)
+			g.fps = (status and 50 or 30)
+			pd.display.setRefreshRate(g.fps)
 		end
 	end)
-
-	-- Add the Quick save option to the pause menu
-	menu:addMenuItem('Quick Save', function() self:save(true) end)
 end
 
 
@@ -244,11 +242,7 @@ end
 
 --- Load the health bar for the player with their current hit points
 function World:loadHealthBar()
-	if self.player then
-		self.bar = Bar(2, 2, self.player.hp)
-	else
-		self.bar = Bar(2, 2, self.hp)
-	end
+	self.bar = Bar(2, 2, g.player_hp)
 end
 
 
@@ -261,13 +255,14 @@ end
 
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
-	if self.level ~= self.spawn then
-		self:goToLevel(self.spawn)
+	print(g.spawn_level)
+	if g.player_level ~= g.spawn_level then
+		self:goToLevel(g.spawn_level)
 		self.player:add()
-		self.player:moveTo(self.spawnX, self.spawnY)
+		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
 		self.player:changeToSpawnState()
 	else
-		self.player:moveTo(self.spawnX, self.spawnY)
+		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
 		self.player:changeToSpawnState()
 		self:updateHealthBar()
 	end
@@ -312,7 +307,7 @@ end
 
 --- This Function is Called by the Player to Update the World X Coordinate
 function World:update()
-	self.x = self.x + self.player.xVelocity * dt
+	g.world_x = g.world_x + self.player.xVelocity * dt
 	self:adjustLevel(self.player.xVelocity * dt)
 end
 
@@ -336,59 +331,17 @@ end
 --- Check if the Level X Amount needs Correction
 --- @param  xAmount  The Amount to Move the Level
 function World:levelCorrection(xAmount)
-	if self.x > self.width - screenWidth then
-		local xCorrection <const> = self.x - (self.width - screenWidth)
+	if g.world_x > self.width - screenWidth then
+		local xCorrection <const> = g.world_x - (self.width - screenWidth)
 		xAmount = xAmount - xCorrection
-		self.x = self.width - screenWidth
+		g.world_x = self.width - screenWidth
 	end
 
-	if self.x < 0 then
-		local xCorrection <const> = xAmount - self.x
+	if g.world_x < 0 then
+		local xCorrection <const> = xAmount - g.world_x
 		xAmount = xCorrection
-		self.x = 0
+		g.world_x = 0
 	end
 
 	return xAmount
-end
-
-
---- Unset the Menu Items
-function World:unsetMenu()
-	menu:removeAllMenuItems()
-end
-
-
---- Load the JSON Save File and Restore the Game Attributes
-function World:load()
-	local gd <const> = pd.datastore.read()
-
-	self.spawn = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
-	self.spawnX = (gd and (gd.spawnX and gd.spawnX or 3 * 16 + 8) or 3 * 16 + 8)
-	self.spawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
-	self.level = (gd and (gd.level and gd.level or self.spawn) or self.spawn)
-	self.levelX = (gd and (gd.levelX and gd.levelX or self.spawnX) or self.spawnX)
-	self.levelY = (gd and (gd.levelY and gd.levelY or self.spawnY) or self.spawnY)
-	self.flag = (gd and (gd.flag and gd.flag or 0) or 0)
-	self.face = (gd and (gd.face and gd.face or 0) or 0)
-	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
-	self.hp = (gd and (gd.hp and gd.hp or 100) or 100)
-end
-
-
---- Save the current game data into the save file
-function World:save(quickSave)
-	local data <const> = {
-		spawn = self.spawn,
-		spawnX = self.spawnX,
-		spawnY = self.spawnY,
-		level = (quickSave and self.level or self.spawn),
-		levelX = (quickSave and self.player.x or self.spawnX),
-		levelY = (quickSave and self.player.y or self.spawnY),
-		flag = self.flag,
-		face = self.player.globalFlip,
-		fps = self.fps,
-		hp = self.player.hp
-	}
-
-	pd.datastore.write(data)
 end

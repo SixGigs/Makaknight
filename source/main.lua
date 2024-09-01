@@ -64,6 +64,16 @@ dt = 0
 Screen("title") -- Create Title Screen
 --World()
 
+
+-- These Functions are Used to Save the Game When Finished
+function pd.gameWillTerminate()
+	g:save()
+end
+
+function pd.gameWillSleep()
+	g:save()
+end
+
 -- Main Game Loop
 function pd.update()
 	dt = playdate.getElapsedTime()

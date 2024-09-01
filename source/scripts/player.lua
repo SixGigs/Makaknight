@@ -10,7 +10,7 @@ class("Player").extends(AnimatedSprite)
 --- @param x     integer The X coordinate to spawn the player
 --- @param y     integer The Y coordinate to spawn the player
 --- @param world table   The game manager is passed in to manage player on object interactions
-function Player:init(x, y, world)
+function Player:init(world)
 	-- Create the player state machine with the tile set
 	local playerImageTable <const> = gfx.imagetable.new("images/player/player-table-80-80")
 	Player.super.init(self, playerImageTable)
@@ -68,15 +68,14 @@ function Player:init(x, y, world)
 	end
 
 	-- Sprite properties
-	self:moveTo(x, y)
+	self:moveTo(g.player_x, g.player_y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setCollideRect(38, 44, 4, 36)
 
 	-- Attributes
-	self.hp = self.world.hp
 	self.hurt = false
-	self.globalFlip = self.world.face
+	self.globalFlip = g.player_facing
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -193,6 +192,9 @@ end
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	self:updateAnimation()
+	
+	g.player_x = self.x
+	g.player_y = self.y
 
 	if self.dead then return end
 	self:updateBuffers()
@@ -362,20 +364,22 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If the world is wider than 400 pixels and the player is 250 or more pixels across the screen update the world
-	if self.x + self.xVelocity > self.x and self.x >= 250 and self.world.x + 400 < self.world.width - 1 then
+	if self.x + self.xVelocity > self.x and self.x >= 250 and g.world_x + 400 < self.world.width - 1 then
 		self.world:update()
 	end
 
 	-- If the world X value is greater than 0 and the player is 150 or less pixels across the screen update the world
-	if self.x + self.xVelocity < self.x and self.x <= 150 and self.world.x > 1 then
+	if self.x + self.xVelocity < self.x and self.x <= 150 and g.world_x > 1 then
 		self.world:update()
 	end
 
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
+		g.player_facing = 1
 	elseif self.xVelocity > 0 then
 		self.globalFlip = 0
+		g.player_facing = 0
 	end
 
 	-- If touching the edge of the level, lets move into the next room
@@ -397,7 +401,7 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- Check if we are dead from no hit points
-	if self.hp <= 0 then
+	if g.player_hp <= 0 then
 		died = true
 	end
 
@@ -409,9 +413,9 @@ end
 
 
 function Player:handleDamageCollision(obj)
-	self.hp = self.hp - obj.damage
-	if self.hp < 0 then
-		self.hp = 0
+	g.player_hp = g.player_hp - obj.damage
+	if g.player_hp < 0 then
+		g.player_hp = 0
 	else
 		self:changeToHurtState()
 	end
@@ -438,9 +442,8 @@ function Player:handleFlagCollision(flag)
 	flag:hoist(self.world, self.globalFlip)
 
 	-- Top up the player health
-	self.hp = 100
+	g.player_hp = 100
 	self.world:updateHealthBar()
-	self.world:save()
 end
 
 
@@ -448,7 +451,6 @@ end
 function Player:handleCrownCollision(obj)
 	if obj.win and not self.win then
 		self.win = true
-		self.world:unsetMenu()
 		g:switchScene(Screen, "wipe", "win")
 		obj:setVisible(false)
 	end
@@ -473,7 +475,7 @@ end
 
 --- Variable jump height handler
 function Player:variableJump()
-	if self.jumpCounter >= (self.jumpCounterMax * self.world.fps) then
+	if self.jumpCounter >= (self.jumpCounterMax * g.fps) then
 		self.jumpCounter = 0
 		self.jumping = false
 	end
@@ -501,14 +503,14 @@ function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
-	self.hp = 0
+	g.player_hp = 0
 
 	self:changeState("die")
 	self.world:updateHealthBar() 
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(1000, function()
-		self.hp = 100
+		g.player_hp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
 		self.hurt = false
@@ -604,10 +606,8 @@ end
 function Player:changeToWalkState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.walkSpeed
-		self.globalFlip = 1
 	elseif direction == "right" then
 		self.xVelocity = self.walkSpeed
-		self.globalFlip = 0
 	end
 
 	self:changeState("walk")
@@ -634,10 +634,8 @@ end
 function Player:changeToRunState(direction)
 	if direction == "left" then
 		self.xVelocity = -self.maxSpeed
-		self.globalFlip = 1
 	elseif direction == "right" then
 		self.xVelocity = self.maxSpeed
-		self.globalFlip = 0
 	end
 
 	self:changeState("run")
@@ -693,10 +691,8 @@ function Player:changeToRollState(direction)
 
 	if direction == "left" then
 		self.xVelocity = -self.rollSpeed
-		self.globalFlip = 1
 	elseif direction == "right" then
 		self.xVelocity = self.rollSpeed
-		self.globalFlip = 0
 	end
 
 	pd.timer.performAfterDelay(490, function()
