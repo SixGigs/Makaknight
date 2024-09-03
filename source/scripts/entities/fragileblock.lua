@@ -22,6 +22,14 @@ function Fragileblock:init(x, y, entity)
 	self:addState('broken', 12, 12)
 	self:playAnimation()
 
+	self.states["breaking"].onAnimationEndEvent = function(self) 
+		if self.respawns then
+			pd.timer.performAfterDelay(self.respawn_time, function()
+				self:changeState('solid')
+			end)
+		end
+	end
+
 	-- Sprite properties
 	self:setCenter(0.25, 0)
 	self:moveTo(x, y)
@@ -34,10 +42,4 @@ end
 
 function Fragileblock:crack()
 	self:changeState('cracking')
-
-	if self.respawns then
-		pd.timer.performAfterDelay(self.respawn_time, function()
-			self:changeState('solid')
-		end)
-	end
 end

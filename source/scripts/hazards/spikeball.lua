@@ -8,7 +8,7 @@ class('Spikeball').extends(AnimatedSprite)
 function Spikeball:init(x, y, e)
 	Spikeball.super.init(self, gfx.imagetable.new('images/hazards/spikeball-table-23-23'))
 
-	self:addState('i', 1, 2, {ts = 20})
+	self:addState('i', 1, 2, {ts = 30})
 	self:playAnimation()
 
 	self.damage = e.fields.damage
