@@ -64,7 +64,7 @@
 					"height": 16,
 					"defUid": 3638,
 					"px": [176,160],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3692, "realEditorValues": [{ "id": "V_Int", "params": [1] }] }],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3692, "realEditorValues": [{ "id": "V_Int", "params": [2] }] }],
 					"__worldX": 176,
 					"__worldY": -80
 				},

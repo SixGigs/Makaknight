@@ -332,7 +332,7 @@ function Player:handleMovementAndCollisions()
 
 		if collisionTag == TAGS.Hazard and not self.hurt then
 			self:handleDamageCollision(collisionObject)
-		elseif collisionTag == TAGS.Spike and not self.hurt then
+		elseif collisionTag == TAGS.Spike then
 			if self.yVelocity > 120 then
 				self:handleDamageCollision(collisionObject)
 			end
@@ -344,8 +344,14 @@ function Player:handleMovementAndCollisions()
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision(collisionObject)
-		elseif collisionTag == TAGS.Fragileblock and collisionObject.currentState == "solid" and self.touchingGround then
-			collisionObject:crack()
+		elseif collisionTag == TAGS.Fragileblock then
+			if collisionObject.currentState == "solid" then
+				if self.touchingGround then
+					collisionObject:crack()
+				else
+					collisionObject:changeState('breaking')
+				end
+			end
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision(collisionObject)
 		elseif collisionTag == TAGS.Roaster then
@@ -425,10 +431,7 @@ end
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
 function Player:handleFlagCollision(flag)
-	-- If the flag is up do nothing
-	if flag.currentState == "up" then
-		return
-	end
+	if flag.currentState == "up" then return end -- If the Flag is Hoisted Do Nothing
 
 	-- Lower any other flag on screen
 	local allSprites = gfx.sprite.getAllSprites()
@@ -438,26 +441,19 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
-	-- Raise the touched flag
-	flag:hoist(self.world, self.globalFlip)
+	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
 
-	-- Top up the player health
-	g.player_hp = 100
+	g.player_hp = 100 -- Top up the player health
 	self.world:updateHealthBar()
 end
 
 
 --- If the player collides with a crown, run this function
 function Player:handleCrownCollision(obj)
-	if obj.win and not self.win then
+	if not self.win then
 		self.win = true
 		g:switchScene(Screen, "wipe", "win")
 		obj:setVisible(false)
-	end
-
-	-- If the crown contains level data, teleport to that level
-	if obj.level then
-		self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
 	end
 end
 
@@ -597,6 +593,7 @@ end
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
 	self.xVelocity = 0
+	self:setCollideRect(38, 44, 4, 36)
 	self:changeState("idle")
 end
 
@@ -614,6 +611,12 @@ function Player:changeToWalkState(direction)
 end
 
 
+function Player:changeToFallState()
+	self:setCollideRect(38, 44, 4, 36)
+	self:changeState("fall")
+end
+
+
 --- Change the player into the hurt state
 function Player:changeToHurtState()
 	if self.globalFlip == 1 then
@@ -621,7 +624,7 @@ function Player:changeToHurtState()
 	else
 		self.xVelocity = -self.walkSpeed
 	end
-	
+
 	self.yVelocity = -self.maxSpeed
 
 	self.hurt = true

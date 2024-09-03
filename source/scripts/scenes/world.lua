@@ -62,7 +62,7 @@ function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	local level <const> = ldtk.get_neighbours(g.player_level, direction)[1]
 	if not level then
-		if direction == 'north' then return else return self.player:die() end
+		if direction == 'north' then return else g.player_hp = 0 return end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
@@ -178,7 +178,7 @@ function World:goToLevel(level)
 		elseif entityName == "Fragileblock" then
 			Fragileblock(entityX, entityY, entity)
 		elseif entityName == "Crown" then
-			Crown(entityX, entityY, entity)
+			Crown(entityX, entityY)
 		elseif entityName == "Fan" then
 			Fan(entityX, entityY, entity)
 			Wind(entityX - 8, entityY - 80, 70)
@@ -255,7 +255,6 @@ end
 
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
-	print(g.spawn_level)
 	if g.player_level ~= g.spawn_level then
 		self:goToLevel(g.spawn_level)
 		self.player:add()
