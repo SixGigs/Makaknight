@@ -68,10 +68,8 @@ end
 function Reptile:changeToWalkState(direction)
 	if direction == 1 then
 		self.xVelocity = self.speed
-		self.globalFlip = 0
 	else
 		self.xVelocity = -self.speed
-		self.globalFlip = 1
 	end
 
 	self:changeState("walk")
