@@ -115,6 +115,9 @@ function Animal:handleMovementAndCollisions()
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
 			collisionObject:handleCollision()
+		elseif collisionTag == TAGS.Bubble then
+			self.touchingGround = false
+			collisionObject:pop(self)
 		end
 	end
 

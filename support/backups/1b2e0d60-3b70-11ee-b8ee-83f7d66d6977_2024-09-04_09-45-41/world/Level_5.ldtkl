@@ -163,6 +163,38 @@
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
 					"__worldX": 2320,
 					"__worldY": -208
+				},
+				{
+					"__identifier": "Bubble",
+					"__grid": [7,5],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3640, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#0099DB",
+					"iid": "46855f50-4ce0-11ef-bb3c-8df068c31b2a",
+					"width": 16,
+					"height": 16,
+					"defUid": 3638,
+					"px": [112,80],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 3, "__tile": null, "defUid": 3692, "realEditorValues": [] }],
+					"__worldX": 2240,
+					"__worldY": -160
+				},
+				{
+					"__identifier": "Bubble",
+					"__grid": [8,5],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3640, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#0099DB",
+					"iid": "4710fd80-4ce0-11ef-bb3c-c721e23b3d78",
+					"width": 16,
+					"height": 16,
+					"defUid": 3638,
+					"px": [128,80],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 3, "__tile": null, "defUid": 3692, "realEditorValues": [] }],
+					"__worldX": 2256,
+					"__worldY": -160
 				}
 			]
 		},

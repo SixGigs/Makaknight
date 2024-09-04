@@ -11,12 +11,9 @@ class("Player").extends(AnimatedSprite)
 --- @param y     integer The Y coordinate to spawn the player
 --- @param world table   The game manager is passed in to manage player on object interactions
 function Player:init(world)
-	-- Create the player state machine with the tile set
-	local playerImageTable <const> = gfx.imagetable.new("images/player/player-table-80-80")
-	Player.super.init(self, playerImageTable)
+	Player.super.init(self, gfx.imagetable.new("images/player/player-table-80-80"))
 
-	-- Game Manager
-	self.world = world
+	self.world = world -- Save the World Class as an Attribute
 
 	-- Player states, sprites, and animation speeds
 	self:addState("idle", 1, 16, {ts = 2})
@@ -49,15 +46,21 @@ function Player:init(world)
 	self:addState("duckPunch", 78, 81, {ts = 1})
 	self:playAnimation()
 
-	-- On frame change events
+	-- On Frame Change Events for State Changes
+	self.states["idle"].onFrameChangedEvent = function(self) if self.yVelocity < 0 then self:changeState("jump") end end
+	self.states["walk"].onFrameChangedEvent = function(self) if self.yVelocity < 0 then self:changeState("jump") end end
+	self.states["run"].onFrameChangedEvent = function(self) if self.yVelocity < 0 then self:changeState("jump") end end
+
+	-- On Frame Change Events for Managing Jumping and Jump Velocity States
 	self.states["jump"].onFrameChangedEvent = function(self) if self.yVelocity > -240 then self:changeState("jump1") end end
-	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -150 then self:changeState("jump2") end end
-	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -90 then self:changeState("jump3") end end
-	self.states["jump3"].onFrameChangedEvent = function(self) if self.yVelocity > -60 then self:changeState("midJump") end end
-	self.states["midJump"].onFrameChangedEvent = function(self) if self.yVelocity > -30 then self:changeState("fall") end end
-	self.states["fall"].onFrameChangedEvent = function(self) if self.yVelocity > 0 then self:changeState("fall1") end end
-	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 60 then self:changeState("fall2") end end
-	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 150 then self:changeState("fall3") end end
+	self.states["jump1"].onFrameChangedEvent = function(self) if self.yVelocity > -150 then self:changeState("jump2") elseif self.yVelocity < -240 then self:changeState("jump") end end
+	self.states["jump2"].onFrameChangedEvent = function(self) if self.yVelocity > -90 then self:changeState("jump3") elseif self.yVelocity < -150 then self:changeState("jump1") end end
+	self.states["jump3"].onFrameChangedEvent = function(self) if self.yVelocity > -60 then self:changeState("midJump") elseif self.yVelocity < -90 then self:changeState("jump2") end end
+	self.states["midJump"].onFrameChangedEvent = function(self) if self.yVelocity > -30 then self:changeState("fall") elseif self.yVelocity < -60 then self:changeState("jump3") end end
+	self.states["fall"].onFrameChangedEvent = function(self) if self.yVelocity > 0 then self:changeState("fall1") elseif self.yVelocity < -30 then self:changeState("midJump") end end
+	self.states["fall1"].onFrameChangedEvent = function(self) if self.yVelocity > 60 then self:changeState("fall2") elseif self.yVelocity < 0 then self:changeState("fall") end end
+	self.states["fall2"].onFrameChangedEvent = function(self) if self.yVelocity > 150 then self:changeState("fall3") elseif self.yVelocity < 60 then self:changeState("fall1") end end
+	self.states["fall3"].onFrameChangedEvent = function(self) if self.yVelocity < 150 then self:changeState("fall2") end end
 
 	-- Roll state finish process
 	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
@@ -337,7 +340,7 @@ function Player:handleMovementAndCollisions()
 				self:handleDamageCollision(collisionObject)
 			end
 		elseif collisionTag == TAGS.Bubble then
-			collisionObject:bounce(self)
+			self:handleBubbleCollision(collisionObject)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
@@ -425,6 +428,14 @@ function Player:handleDamageCollision(obj)
 	else
 		self:changeToHurtState()
 	end
+end
+
+
+--- Handle Colliding with the Bubble Object
+--- param  obj  object  The Bubble Object we'll be interacting with
+function Player:handleBubbleCollision(obj)
+	self.touchingGround = false
+	obj:pop(self)
 end
 
 
@@ -650,7 +661,7 @@ function Player:changeToJumpState()
 	self.jumping = true
 	self.jumpBuffer = 0
 	self.yVelocity = self.jumpVelocity
-	self:changeState("jump")
+	--self:changeState("jump")
 end
 
 
