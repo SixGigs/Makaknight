@@ -9,21 +9,18 @@ class("Reptile").extends(Animal)
 --- The Reptile Class Create a Reptile
 --- @param  x  integer  The X Coordinate to Create the Reptile at
 --- @param  y  integer  The Y Coordinate to Create the Reptile at
---- @param  e  table    The Entity Data Being Passed into the Class
+--- @param  e  object   The Entity Data Being Passed into the Class
 function Reptile:init(x, y, e)
-	-- Initialise the Reptile Class
 	Reptile.super.init(self, x, y, e)
 
-	-- Reptile Animation Settings
 	self:addState("idle", 1, 1)
 	self:addState("blep", 2, 4, {ts = 3})
 	self:addState("walk", 5, 8, {ts = 3})
 	self:playAnimation()
 
-	-- Physics properties
 	self.gravity = 900
+	self.weight = 2
 
-	-- Reptile properties
 	self:setCollideRect(3, 5, 10, 3)
 end
 
