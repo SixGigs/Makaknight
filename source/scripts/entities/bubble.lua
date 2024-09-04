@@ -1,6 +1,5 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-
 class('Bubble').extends(AnimatedSprite)
 
 
@@ -9,12 +8,14 @@ class('Bubble').extends(AnimatedSprite)
 --- @param  y  integer  The Y coordinate to spawn the Bubble pick-up
 --- @param  e  object   The table of entities related to the Bubble
 function Bubble:init(x, y, e)
-	Bubble.super.init(self, gfx.imagetable.new('images/abilities/doublejump-table-16-16'))
+	Bubble.super.init(self, gfx.imagetable.new('images/entities/bubble-table-16-16'))
 
 	self:addState('a', 1, 4, {ts = 4})
+	self:addState('pop', 5, 5, {ts = 2, l = 1})
 	self:playAnimation()
 
-	self.respawnTimer = e.fields.respawn * 1000
+	self.states['pop'].onAnimationEndEvent = function(self) self:setVisible(false) end
+	self.timer = e.fields.respawn * 1000
 
 	-- Sprite properties
 	self:setCenter(0, 0)
@@ -26,21 +27,17 @@ function Bubble:init(x, y, e)
 end
 
 
---- This method handles the Bubble being picked up by the player
---- @param player table The player is passed into this function to manage the pick-up
-function Bubble:bounce(player)
+--- This method handles the Bubble being picked up by the entity
+--- @param entity table The entity is passed into this function to manage the pick-up
+function Bubble:pop(e)
 	if self:isVisible() then
-		player.touchingGround = false
-		player.yVelocity = -270
+		e.yVelocity = -270
 
-		if player.currentState ~= 'dbJump' then
-			player:changeState('jump1')
-		end
-
-		pd.timer.performAfterDelay(self.respawnTimer, function()
+		pd.timer.performAfterDelay(self.timer, function()
+			self:changeState('a')
 			self:setVisible(true)
 		end)
 
-		self:setVisible(false)
+		self:changeState('pop')
 	end
 end

@@ -69,22 +69,6 @@
 					"__worldY": -160
 				},
 				{
-					"__identifier": "Stone",
-					"__grid": [6,6],
-					"__pivot": [0,0],
-					"__tags": ["Desert"],
-					"__tile": { "tilesetUid": 2097, "x": 0, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "96a5f500-4ce0-11ef-8b2a-a1078c69b78f",
-					"width": 32,
-					"height": 16,
-					"defUid": 2096,
-					"px": [96,96],
-					"fieldInstances": [],
-					"__worldX": 2224,
-					"__worldY": -144
-				},
-				{
 					"__identifier": "Crown",
 					"__grid": [21,1],
 					"__pivot": [0,0],
@@ -163,6 +147,22 @@
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
 					"__worldX": 2320,
 					"__worldY": -208
+				},
+				{
+					"__identifier": "Stone",
+					"__grid": [6,6],
+					"__pivot": [0,0],
+					"__tags": ["Desert"],
+					"__tile": { "tilesetUid": 2097, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "58176210-4ce0-11ef-bb3c-577c1575cab3",
+					"width": 32,
+					"height": 16,
+					"defUid": 2096,
+					"px": [96,96],
+					"fieldInstances": [],
+					"__worldX": 2224,
+					"__worldY": -144
 				}
 			]
 		},

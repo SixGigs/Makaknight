@@ -64,7 +64,7 @@
 					"height": 16,
 					"defUid": 3638,
 					"px": [176,160],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3692, "realEditorValues": [{ "id": "V_Int", "params": [1] }] }],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 3, "__tile": null, "defUid": 3692, "realEditorValues": [null] }],
 					"__worldX": 176,
 					"__worldY": -80
 				},
@@ -80,7 +80,7 @@
 					"height": 16,
 					"defUid": 3638,
 					"px": [240,160],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 1, "__tile": null, "defUid": 3692, "realEditorValues": [{ "id": "V_Int", "params": [1] }] }],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 3, "__tile": null, "defUid": 3692, "realEditorValues": [null] }],
 					"__worldX": 240,
 					"__worldY": -80
 				},

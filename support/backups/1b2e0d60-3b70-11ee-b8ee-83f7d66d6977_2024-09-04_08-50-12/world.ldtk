@@ -14687,7 +14687,7 @@
 			"fieldDefs": [
 				{
 					"identifier": "respawn",
-					"doc": null,
+					"doc": "How long the Bubble takes to respawn in seconds",
 					"__type": "Int",
 					"uid": 3692,
 					"type": "F_Int",
@@ -14712,7 +14712,7 @@
 					"max": null,
 					"regex": null,
 					"acceptFileTypes": null,
-					"defaultOverride": null,
+					"defaultOverride": { "id": "V_Int", "params": [3] },
 					"textLanguageMode": null,
 					"symmetricalRef": false,
 					"autoChainRef": true,
