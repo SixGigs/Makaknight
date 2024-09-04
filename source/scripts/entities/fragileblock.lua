@@ -35,14 +35,19 @@ end
 --- Handle Collisions with the FragileBlock
 --- @param  e  object  The entity colliding with the block
 function FragileBlock:handleCollision(e, collision)
-	if collision.normal.y == -1 then
-		if self.currentState == 'solid' and e.weight >= 50 then
-			local newState = e.weight >= 100 and 'breaking' or 'cracking'
-			self:changeState(newState)
-		end
-	else
-		if e.xVelocity >= 75 or e.xVelocity <= -75 then
-			self:changeState('breaking')
-		end
+	local stateChanged = false
+
+	if collision.normal.y == -1 and self.currentState == 'solid' and e.weight >= 50 then
+		local newState = e.weight >= 100 and 'breaking' or 'cracking'
+		self:changeState(newState)
+		stateChanged = true
+	elseif collision.normal.y == 1 and e.yVelocity <= -125 then
+		self:changeState('breaking')
+		stateChanged = true
+	elseif (collision.normal.x ~= 0 or collision.normal.y == 0) and (math.abs(e.xVelocity) >= 125) then
+		self:changeState('breaking')
+		stateChanged = true
 	end
+
+	return stateChanged
 end

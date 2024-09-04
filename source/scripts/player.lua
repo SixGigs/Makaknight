@@ -406,15 +406,8 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	-- Check if we are dead from no hit points
-	if g.player_hp <= 0 then
-		died = true
-	end
-
-	-- If the player is dead then run the die method
-	if died then
-		self:die()
-	end
+	if g.player_hp <= 0 then died = true end -- Check if we are dead from no hit points
+	if died then self:die() end -- If the player is dead then run the die method
 end
 
 
