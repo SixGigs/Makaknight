@@ -30,7 +30,7 @@ local reptiles <const> = {
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, GUI = 11, Bubble = 12, Fragileblock = 13,
+	Crown = 10, GUI = 11, Bubble = 12, Fragile = 13,
 	Wind = 14, Roaster = 15, Spike = 16, Halftile = 17
 }
 
@@ -38,7 +38,7 @@ TAGS = {
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, GUI = 1000, Bubble = 50, Fragileblock = 100,
+	Crown = 120, GUI = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10
 }
 
@@ -175,8 +175,8 @@ function World:goToLevel(level)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
-		elseif entityName == "Fragileblock" then
-			Fragileblock(entityX, entityY, entity)
+		elseif entityName == "FragileBlock" then
+			FragileBlock(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
 		elseif entityName == "Fan" then

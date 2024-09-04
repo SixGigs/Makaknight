@@ -11,7 +11,7 @@ function Bubble:init(x, y, e)
 	Bubble.super.init(self, gfx.imagetable.new('images/entities/bubble-table-16-16'))
 
 	self:addState('a', 1, 4, {ts = 4})
-	self:addState('pop', 5, 5, {ts = 2, l = 1})
+	self:addState('pop', 5, 5, {ts = 1, l = 1})
 	self:playAnimation()
 
 	self.states['pop'].onAnimationEndEvent = function(self) self:setVisible(false) end

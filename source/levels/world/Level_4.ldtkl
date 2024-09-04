@@ -53,29 +53,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Fragileblock",
-					"__grid": [15,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "0b5efa70-4ce0-11ef-822a-dfb88dae55ac",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [240,144],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [{
-							"id": "V_Bool",
-							"params": [ true ]
-						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
-					],
-					"__worldX": 1968,
-					"__worldY": -96
-				},
-				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [16,9],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -86,18 +64,12 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [256,144],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [{
-							"id": "V_Bool",
-							"params": [ true ]
-						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": 1984,
 					"__worldY": -96
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [17,9],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -108,13 +80,7 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [272,144],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [{
-							"id": "V_Bool",
-							"params": [ true ]
-						}] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [{ "id": "V_Float", "params": [4] }] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": 2000,
 					"__worldY": -96
 				},
@@ -275,36 +241,20 @@
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Spearspike",
-					"__grid": [5,8],
+					"__identifier": "FragileBlock",
+					"__grid": [15,9],
 					"__pivot": [0,0],
-					"__tags": ["Desert"],
-					"__tile": { "tilesetUid": 200, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "33cbc4c0-4ce0-11ef-8b2a-ffd7b9ea0175",
+					"__tags": [],
+					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#D77643",
+					"iid": "45477530-4ce0-11ef-bb3c-a3de4376d12c",
 					"width": 16,
 					"height": 16,
-					"defUid": 68,
-					"px": [80,128],
-					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
-					"__worldX": 1808,
-					"__worldY": -112
-				},
-				{
-					"__identifier": "Spearspike",
-					"__grid": [18,6],
-					"__pivot": [0,0],
-					"__tags": ["Desert"],
-					"__tile": { "tilesetUid": 200, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "f228f110-4ce0-11ef-8b2a-97b735948ac9",
-					"width": 16,
-					"height": 16,
-					"defUid": 68,
-					"px": [288,96],
-					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3595, "realEditorValues": [] }],
-					"__worldX": 2016,
-					"__worldY": -144
+					"defUid": 3649,
+					"px": [240,144],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"__worldX": 1968,
+					"__worldY": -96
 				}
 			]
 		},

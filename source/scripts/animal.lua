@@ -36,7 +36,7 @@ function Animal:init(x, y, e)
 		[TAGS.Crown] = true,
 		[TAGS.GUI] = true,
 		[TAGS.Bubble] = true,
-		[TAGS.Fragileblock] = true,
+		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true
 	}
 
@@ -55,7 +55,7 @@ function Animal:collisionResponse(e)
 	local tag <const> = e:getTag()
 
 	if self.overlapTags[tag] then
-		if tag == TAGS.Fragileblock then
+		if tag == TAGS.Fragile then
 			if e.currentState == "breaking" or e.currentState == "broken" then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
