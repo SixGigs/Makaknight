@@ -328,7 +328,7 @@
 					"__worldY": -384
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [21,7],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -339,15 +339,12 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [336,112],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [null] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [null] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": -64,
 					"__worldY": -400
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [22,7],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -358,15 +355,12 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [352,112],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": -48,
 					"__worldY": -400
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [23,7],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -377,15 +371,12 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [368,112],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": -32,
 					"__worldY": -400
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [24,7],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -396,15 +387,12 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [384,112],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": -16,
 					"__worldY": -400
 				},
 				{
-					"__identifier": "Fragileblock",
+					"__identifier": "FragileBlock",
 					"__grid": [25,7],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -415,10 +403,7 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [400,112],
-					"fieldInstances": [
-						{ "__identifier": "respawns", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3650, "realEditorValues": [] },
-						{ "__identifier": "respawn_time", "__type": "Float", "__value": 4, "__tile": null, "defUid": 3651, "realEditorValues": [] }
-					],
+					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": 0,
 					"__worldY": -400
 				},
