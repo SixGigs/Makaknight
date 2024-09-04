@@ -18,6 +18,8 @@ function Butterfly:init(x, y, e)
 	self:addState("a", 1, 4, {ts = 3})
 	self:playAnimation()
 
+	self.weight = 1
+
 	-- Butterfly Collision Box
 	self:setCollideRect(1, 1, 2, 2)
 end

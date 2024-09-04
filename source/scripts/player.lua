@@ -82,6 +82,7 @@ function Player:init(world)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	self.weight = 72
 	self.dead = false
 	self.win = false
 
@@ -349,11 +350,7 @@ function Player:handleMovementAndCollisions()
 			self:handleCrownCollision(collisionObject)
 		elseif collisionTag == TAGS.Fragile then
 			if collisionObject.currentState == "solid" then
-				if self.touchingGround then
-					collisionObject:crack()
-				else
-					collisionObject:changeState('breaking')
-				end
+				collisionObject:handleCollision(self, collision)
 			end
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision(collisionObject)

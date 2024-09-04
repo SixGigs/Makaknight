@@ -16,17 +16,13 @@ function FragileBlock:init(x, y, e)
 	self:addState('broken', 12, 12)
 	self:playAnimation()
 
-	self.states["breaking"].onAnimationEndEvent = function(self) 
-		if self.respawns then
-			pd.timer.performAfterDelay(self.timer, function()
-				self:changeState('solid')
-			end)
-		end
+	local timer <const> = e.fields.respawn * 1000
+	self.states['breaking'].onAnimationEndEvent = function(self) 
+		pd.timer.performAfterDelay(timer, function()
+			self:changeState('solid')
+		end)
 	end
 
-	self.timer = e.fields.respawn * 1000
-
-	-- Sprite properties
 	self:setCenter(0.25, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Fragile)
@@ -36,6 +32,17 @@ function FragileBlock:init(x, y, e)
 end
 
 
-function FragileBlock:crack()
-	self:changeState('cracking')
+--- Handle Collisions with the FragileBlock
+--- @param  e  object  The entity colliding with the block
+function FragileBlock:handleCollision(e, collision)
+	if collision.normal.y == -1 then
+		if self.currentState == 'solid' and e.weight >= 50 then
+			local newState = e.weight >= 100 and 'breaking' or 'cracking'
+			self:changeState(newState)
+		end
+	else
+		if e.xVelocity >= 75 or e.xVelocity <= -75 then
+			self:changeState('breaking')
+		end
+	end
 end
