@@ -170,18 +170,16 @@ end
 
 
 --- This function is used to handle the collisions the player has with the world
---- @param  other   table   This variable contains what the player has collided with
+--- @param  e   table   This variable contains what the player has collided with
 --- @return unknown unknown The function returns the collision response to use
-function Player:collisionResponse(other)
-	local tag <const> = other:getTag()
+function Player:collisionResponse(e)
+	local tag <const> = e:getTag()
 
 	if self.overlapTags[tag] then
 		if tag == TAGS.Fragile then
-			if other.currentState == "breaking" or other.currentState == "broken" then
-				return gfx.sprite.kCollisionTypeOverlap
-			end
+			return e:collision()
 		elseif tag == TAGS.Halftile then
-			if self.y + 48 > other.y or pd.buttonIsPressed(pd.kButtonDown) then
+			if self.y + 48 > e.y or pd.buttonIsPressed(pd.kButtonDown) then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
@@ -349,9 +347,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Crown then
 			self:handleCrownCollision(collisionObject)
 		elseif collisionTag == TAGS.Fragile then
-			if collisionObject.currentState == "solid" then
-				collisionObject:handleCollision(self, collision)
-			end
+			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Wind then
 			self:handleWindCollision(collisionObject)
 		elseif collisionTag == TAGS.Roaster then

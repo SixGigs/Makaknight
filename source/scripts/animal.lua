@@ -56,9 +56,7 @@ function Animal:collisionResponse(e)
 
 	if self.overlapTags[tag] then
 		if tag == TAGS.Fragile then
-			if e.currentState == "breaking" or e.currentState == "broken" then
-				return gfx.sprite.kCollisionTypeOverlap
-			end
+			return e:collision()
 		else
 			return gfx.sprite.kCollisionTypeOverlap
 		end
