@@ -521,7 +521,7 @@
 					"px": [416,176],
 					"fieldInstances": [
 						{ "__identifier": "wind", "__type": "String", "__value": "up", "__tile": null, "defUid": 3695, "realEditorValues": [] },
-						{ "__identifier": "strength", "__type": "Int", "__value": 70, "__tile": null, "defUid": 3696, "realEditorValues": [] },
+						{ "__identifier": "strength", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3696, "realEditorValues": [] },
 						{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] }
 					],
 					"__worldX": 16,

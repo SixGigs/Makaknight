@@ -54,6 +54,25 @@
 			"entityInstances": [
 				{
 					"__identifier": "Fan",
+					"__grid": [13,13],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3652, "x": 0, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "6a2a5ed0-4ce0-11ef-822a-b796a94067a3",
+					"width": 32,
+					"height": 16,
+					"defUid": 3654,
+					"px": [208,208],
+					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] },
+						{ "__identifier": "wind", "__type": "String", "__value": "up", "__tile": null, "defUid": 3695, "realEditorValues": [] }
+					],
+					"__worldX": 1408,
+					"__worldY": -32
+				},
+				{
+					"__identifier": "Fan",
 					"__grid": [17,11],
 					"__pivot": [0,0],
 					"__tags": [],
@@ -65,12 +84,8 @@
 					"defUid": 3654,
 					"px": [272,176],
 					"fieldInstances": [
-						{ "__identifier": "wind", "__type": "String", "__value": "left", "__tile": null, "defUid": 3695, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["left"]
-						}] },
-						{ "__identifier": "strength", "__type": "Int", "__value": 70, "__tile": null, "defUid": 3696, "realEditorValues": [null] },
-						{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] }
+						{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] },
+						{ "__identifier": "wind", "__type": "String", "__value": "up", "__tile": null, "defUid": 3695, "realEditorValues": [] }
 					],
 					"__worldX": 1472,
 					"__worldY": -64
