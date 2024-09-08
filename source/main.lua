@@ -61,8 +61,8 @@ screenWidth = pd.display.getWidth()
 screenHeight = pd.display.getHeight()
 dt = 0
 
-Screen("title") -- Create Title Screen
---World()
+--Screen("title") -- Create Title Screen
+World()
 
 
 -- These Functions are Used to Save the Game When Finished

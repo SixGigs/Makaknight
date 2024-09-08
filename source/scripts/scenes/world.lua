@@ -181,7 +181,7 @@ function World:goToLevel(level)
 			Crown(entityX, entityY)
 		elseif entityName == "Fan" then
 			Fan(entityX, entityY, entity)
-			Wind(entityX - 8, entityY - 80, 70)
+			Wind(entityX - 8, entityY - 80, entity.fields.strength, entity.fields.wind)
 		elseif entityName == "Roaster" then
 			Roaster(entityX, entityY, entity)
 		else
@@ -260,6 +260,7 @@ function World:resetPlayer()
 		self.player:add()
 		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
 		self.player:changeToSpawnState()
+		g.world_x = 0
 	else
 		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
 		self.player:changeToSpawnState()

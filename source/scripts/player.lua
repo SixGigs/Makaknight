@@ -35,7 +35,7 @@ function Player:init(world)
 	self:addState("roll", 43, 58, {ts = 1, l = 1})
 	self:addState("dbJump", 59, 74, {ts = 1, l = 1})
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
-	
+
 	-- The following are temporary sprites that will be animated later
 	self:addState("run", 17, 28, {ts = 1})
 	self:addState("dive", 40, 40, {ts = 1})
@@ -194,7 +194,7 @@ end
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	self:updateAnimation()
-	
+
 	g.player_x = self.x
 	g.player_y = self.y
 
@@ -265,12 +265,6 @@ function Player:handleState()
 	elseif self.currentState == "hurt" then
 		self:applyGravity()
 		self:applyDrag(self.drag)
-	elseif self.currentState == "roll" then
-		if self.yVelocity > 90 then
-			self:applyDrag(self.drag)
-		end
-
-		self:applyGravity()
 	elseif self.currentState == "dash" then
 		self:applyDrag(self.dashDrag)
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
@@ -295,7 +289,8 @@ function Player:handleState()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
 		self:applyGravity()
-		self:handleGroundInput()
+		if self.currentState ~= 'roll' then self:handleGroundInput() end
+
 		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
@@ -307,6 +302,7 @@ end
 function Player:handleMovementAndCollisions()
 	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
 
+	self.touchingWind = false
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -349,7 +345,8 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Wind then
-			self:handleWindCollision(collisionObject)
+			collisionObject:handleCollision(self)
+			self.touchingWind = true
 		elseif collisionTag == TAGS.Roaster then
 			if self.touchingGround then
 				collisionObject:handleCollision()
@@ -402,6 +399,11 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
+	-- If we're not touching wind, lets set our velocity to zero
+	if not self.touchingWind and self.touchingGround then
+		self.xVelocity = 0
+	end
+
 	if g.player_hp <= 0 then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
@@ -451,17 +453,6 @@ function Player:handleCrownCollision(obj)
 		self.win = true
 		g:switchScene(Screen, "wipe", "win")
 		obj:setVisible(false)
-	end
-end
-
-
---- If the Player Collides with a Wind Hit Box, Run This Function
-function Player:handleWindCollision(obj)
-	obj:handleCollision(self)
-	if self.currentState ~= "midJump" then
-		if self.currentState ~= "hurt" and self.currentState ~= "dbJump" and self.currentState ~= "dash" then
-			self:changeState("midJump")
-		end
 	end
 end
 
@@ -521,8 +512,6 @@ function Player:handleGroundInput()
 			self:changeToRunState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToRunState("right")
-		else
-			self:changeToIdleState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
@@ -531,9 +520,11 @@ function Player:handleGroundInput()
 			self:changeToWalkState("right")
 		elseif pd.buttonIsPressed(pd.kButtonDown) then
 			self:changeToDuckingState()
-		else
-			self:changeToIdleState()
 		end
+	end
+
+	if pd.buttonJustReleased(pd.kButtonLeft) or pd.buttonJustReleased(pd.kButtonRight) then
+		self:changeToIdleState()
 	end
 
 	if self.rollAvailable and self:playerRolled() then
@@ -598,10 +589,11 @@ end
 --- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
 --- @param direction string Contains the direction the player is moving in as a string
 function Player:changeToWalkState(direction)
+	self.xVelocity = 0
 	if direction == "left" then
-		self.xVelocity = -self.walkSpeed
+		self.xVelocity = self.xVelocity - self.walkSpeed
 	elseif direction == "right" then
-		self.xVelocity = self.walkSpeed
+		self.xVelocity = self.xVelocity + self.walkSpeed
 	end
 
 	self:changeState("walk")

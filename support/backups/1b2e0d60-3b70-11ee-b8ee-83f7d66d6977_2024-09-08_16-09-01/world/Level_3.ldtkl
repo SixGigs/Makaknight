@@ -69,7 +69,7 @@
 							"id": "V_String",
 							"params": ["left"]
 						}] },
-						{ "__identifier": "strength", "__type": "Int", "__value": 70, "__tile": null, "defUid": 3696, "realEditorValues": [null] },
+						{ "__identifier": "strength", "__type": "Int", "__value": 0, "__tile": null, "defUid": 3696, "realEditorValues": [] },
 						{ "__identifier": "damage", "__type": "Int", "__value": 35, "__tile": null, "defUid": 3655, "realEditorValues": [] }
 					],
 					"__worldX": 1472,

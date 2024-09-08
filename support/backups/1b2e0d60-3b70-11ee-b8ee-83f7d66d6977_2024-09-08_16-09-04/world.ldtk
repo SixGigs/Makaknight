@@ -15312,7 +15312,7 @@
 				},
 				{
 					"identifier": "strength",
-					"doc": "How strong the wind created by the fan is",
+					"doc": null,
 					"__type": "Int",
 					"uid": 3696,
 					"type": "F_Int",
