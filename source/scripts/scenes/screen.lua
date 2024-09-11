@@ -11,7 +11,7 @@ function Screen:init(scene)
 	self.scene = scene -- Save scene data locally
 
 	-- Set image for the scene
-	self:setImage(gfx.image.new("images/"..self.scene))
+	self:setImage(gfx.image.new("images/screens/"..self.scene))
 	self:moveTo(200, 120)
 	self:add()
 end
