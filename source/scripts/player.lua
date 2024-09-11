@@ -302,7 +302,6 @@ end
 function Player:handleMovementAndCollisions()
 	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
 
-	self.touchingWind = false
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -346,7 +345,6 @@ function Player:handleMovementAndCollisions()
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
-			self.touchingWind = true
 		elseif collisionTag == TAGS.Roaster then
 			if self.touchingGround then
 				collisionObject:handleCollision()
@@ -397,11 +395,6 @@ function Player:handleMovementAndCollisions()
 		if self.yVelocity > 1350 then
 			died = true
 		end
-	end
-
-	-- If we're not touching wind, lets set our velocity to zero
-	if not self.touchingWind and self.touchingGround then
-		self.xVelocity = 0
 	end
 
 	if g.player_hp <= 0 then died = true end -- Check if we are dead from no hit points
