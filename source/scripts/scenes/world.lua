@@ -179,9 +179,9 @@ function World:goToLevel(level)
 			FragileBlock(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
-		elseif entityName == "Fan" then
+		elseif entityName == "Fan" or entityName == 'FanLeft' then
 			Fan(entityX, entityY, entity)
-			Wind(entityX - 8, entityY - 80, entity.fields.strength, entity.fields.wind)
+			Wind(entityX - 8, entityY - 80, entity.fields.strength)
 		elseif entityName == "Roaster" then
 			Roaster(entityX, entityY, entity)
 		else
