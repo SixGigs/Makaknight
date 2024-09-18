@@ -13,7 +13,7 @@ class("Fire").extends(AnimatedSprite)
 --- @param  d  integer  The damage the fire deals
 function Fire:init(x, y, s, d)
 	-- Initialise the Fire Class
-	Fire.super.init(self, gfx.imagetable.new("images/hazards/fire-table-16-16"))
+	Fire.super.init(self, gfx.imagetable.new("images/hazards/animated/fire-table-16-16"))
 
 	-- Fire Animation Settings
 	self:addState("burn", 1, 4)

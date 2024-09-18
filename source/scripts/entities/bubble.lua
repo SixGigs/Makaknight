@@ -8,7 +8,7 @@ class('Bubble').extends(AnimatedSprite)
 --- @param  y  integer  The Y coordinate to spawn the Bubble pick-up
 --- @param  e  object   The table of entities related to the Bubble
 function Bubble:init(x, y, e)
-	Bubble.super.init(self, gfx.imagetable.new('images/entities/bubble-table-16-16'))
+	Bubble.super.init(self, gfx.imagetable.new('images/entities/animated/bubble-table-16-16'))
 
 	local respawnTicks <const> = e.fields.respawn * 30 / 8
 

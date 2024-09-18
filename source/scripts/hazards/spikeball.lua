@@ -6,9 +6,9 @@ class('Spikeball').extends(AnimatedSprite)
 --- @param  y  integer  The Y coordinate to spawn the Spike-ball
 --- @param  e  table    The entities that come with the Spike-ball
 function Spikeball:init(x, y, e)
-	Spikeball.super.init(self, gfx.imagetable.new('images/hazards/spikeball-table-23-23'))
+	Spikeball.super.init(self, gfx.imagetable.new('images/hazards/animated/spikeball-table-23-23'))
 
-	self:addState('i', 1, 2, {ts = 30})
+	self:addState('i', 1, 2, {ts = 60})
 	self:playAnimation()
 
 	self.damage = e.fields.damage

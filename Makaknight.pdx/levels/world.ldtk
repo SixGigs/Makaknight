@@ -17645,7 +17645,7 @@
 			"__cHei": 1,
 			"identifier": "Bubble",
 			"uid": 3640,
-			"relPath": "../images/abilities/bubble.png",
+			"relPath": "../images/icons/bubble.png",
 			"embedAtlas": null,
 			"pxWid": 16,
 			"pxHei": 16,
