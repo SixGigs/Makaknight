@@ -11,7 +11,7 @@ class("Fan").extends(AnimatedSprite)
 --- @param  e  table    The entity that come with the Fan
 function Fan:init(x, y, e)
 	-- Initialise the Fan Class
-	Fan.super.init(self, gfx.imagetable.new("images/hazards/fan-table-32-16"))
+	Fan.super.init(self, gfx.imagetable.new("images/hazards/animated/fan-table-32-16"))
 
 	-- Fan Animation Settings
 	self:addState("s", 1, 4, {ts = 1})

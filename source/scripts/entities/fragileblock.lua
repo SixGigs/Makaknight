@@ -8,7 +8,7 @@ class('FragileBlock').extends(AnimatedSprite)
 --- @param  y  integer  The Y coordinate to spawn the FragileBlock pick-up
 --- @param  e  object   The entity object related to the FragileBlock
 function FragileBlock:init(x, y, e)
-	FragileBlock.super.init(self, gfx.imagetable.new('images/hazards/fragileblock-table-32-32'))
+	FragileBlock.super.init(self, gfx.imagetable.new('images/entities/animated/fragileblock-table-32-32'))
 
 	local respawnTicks <const> = e.fields.respawn * 30 / 9
 

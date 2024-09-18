@@ -13,7 +13,7 @@ class("Flag").extends(AnimatedSprite)
 --- @param gameManager table The game manager passed into the object
 function Flag:init(x, y, entity, world)
 	-- Initialise the state machine using the flag sprite sheet
-	local img <const> = gfx.imagetable.new("images/entities/flag-table-64-48")
+	local img <const> = gfx.imagetable.new("images/entities/animated/flag-table-64-48")
 	Flag.super.init(self, img)
 
 	-- Set states in the state machine
