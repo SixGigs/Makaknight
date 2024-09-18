@@ -13,8 +13,9 @@ function Bubble:init(x, y, e)
 	local respawnTicks <const> = e.fields.respawn * 30 / 8
 
 	self:addState('wobble', 1, 4, {ts = 4})
-	self:addState('pop', 5, 7, {ts = 1, l = 1, na = 'respawn'})
-	self:addState('respawn', 8, 15, {ts = respawnTicks, l = 1, na = 'wobble'})
+	self:addState('pop', 5, 6, {ts = 1, l = 1, na = 'respawn'})
+	self:addState('respawn', 6, 15, {ts = respawnTicks, l = 1, na = 'refill'})
+	self:addState('refill', 16, 22, {ts = 1, l = 1, na = 'wobble'})
 	self:playAnimation()
 
 	self:setCenter(0, 0)
