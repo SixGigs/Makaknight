@@ -15,8 +15,9 @@ function FragileBlock:init(x, y, e)
 	self:addState('solid', 1, 1)
 	self:addState('cracking', 2, 6, {ts = 1, l = 1, na = 'breaking'})
 	self:addState('breaking', 7, 11, {ts = 2, l = 1, na = 'broken'})
-	self:addState('broken', 12, 21, {ts = respawnTicks, l = 1, na = 'block'})
-	self:addState('block', 22, 23, {ts = 2})
+	self:addState('broken', 12, 22, {ts = respawnTicks, l = 1, na = 'refill'})
+	self:addState('refill', 23, 26, {ts = 1, l = 1, na = 'block'})
+	self:addState('block', 27, 28, {ts = 2})
 	self:playAnimation()
 
 	self.states['block'].onFrameChangedEvent = function(self)
@@ -27,10 +28,10 @@ function FragileBlock:init(x, y, e)
 
 	self.obstructedBufferAmount = 3
 	self.obstructedBuffer = 0
-
 	self.overlapStates = {
 		['breaking'] = true,
 		['broken'] = true,
+		['refill'] = true,
 		['block'] = true
 	}
 
