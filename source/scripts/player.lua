@@ -131,7 +131,7 @@ function Player:init(world)
 	-- Jump attributes
 	self.jumping = false
 	self.jumpCounter = 0
-	self.jumpCounterMax = 0.2
+	self.jumpCounterMax = 0.1
 	self.jumpBufferAmount = 3
 	self.jumpBuffer = 0
 	self.jumpStates = {
@@ -149,7 +149,7 @@ function Player:init(world)
 
 	-- Double Jump
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -270
+	self.doubleJumpVelocity = -240
 
 	-- Dash
 	self.dashAvailable = true
