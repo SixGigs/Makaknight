@@ -25,6 +25,8 @@ import "scripts/Background"
 import "scripts/Hitbox"
 import "scripts/Player"
 import "scripts/Prop"
+import "scripts/Screen"
+import "scripts/World"
 
 -- Animal scripts
 import "scripts/animals/Butterfly"
@@ -44,10 +46,6 @@ import "scripts/hazards/Fire"
 import "scripts/hazards/Roaster"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
-
--- Scene scripts
-import "scripts/scenes/Screen"
-import "scripts/scenes/World"
 
 
 
