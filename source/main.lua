@@ -18,9 +18,7 @@ import "scripts/libraries/Game"
 import "scripts/libraries/LDtk"
 
 -- Scripts
-import "scripts/Ability"
 import "scripts/Animal"
-import "scripts/Bar"
 import "scripts/Background"
 import "scripts/Hitbox"
 import "scripts/Player"
@@ -33,6 +31,7 @@ import "scripts/animals/Butterfly"
 import "scripts/animals/Reptile"
 
 -- Entity scripts
+import "scripts/entities/Ability"
 import "scripts/entities/Bubble"
 import "scripts/entities/Crown"
 import "scripts/entities/Wind"
@@ -46,6 +45,9 @@ import "scripts/hazards/Fire"
 import "scripts/hazards/Roaster"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
+
+-- User interface scripts
+import "scripts/ui/Bar"
 
 
 
