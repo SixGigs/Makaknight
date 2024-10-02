@@ -132,6 +132,11 @@ function World:goToLevel(level)
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
 			local layerSprite <const> = gfx.sprite.new()
+			
+			print(layer_name)
+			if layer_name == 'Foreground' then
+				layer.zIndex = 150
+			end
 
 			layerSprite:setTilemap(tilemap)
 			layerSprite:setCenter(0, 0)
