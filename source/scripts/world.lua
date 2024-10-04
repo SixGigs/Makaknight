@@ -2,7 +2,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 
--- Entity Type Table
+-- Entity Groupings
 local hazards <const> = {
 	["Floorspike"] = true,
 	["Roofspike"] = true,
@@ -11,7 +11,6 @@ local hazards <const> = {
 	["Stalactite"] = true
 }
 
--- Door Type Table
 local doors <const> = {
 	["Door0"] = true,
 	["Door1"] = true,
@@ -20,13 +19,13 @@ local doors <const> = {
 	["Door4"] = true
 }
 
--- Reptile Type Table
 local reptiles <const> = {
 	["Lizard"] = true,
 	["Snake"] = true
 }
 
--- A Global Table of Collision Tags
+
+-- Collision Tags & Z Indexes
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
@@ -34,7 +33,6 @@ TAGS = {
 	Wind = 14, Roaster = 15, Spike = 16, Halftile = 17
 }
 
--- A Global Table of Sprite Z Axises 
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
@@ -132,8 +130,7 @@ function World:goToLevel(level)
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
 			local layerSprite <const> = gfx.sprite.new()
-			
-			print(layer_name)
+
 			if layer_name == 'Foreground' then
 				layer.zIndex = 150
 			end
