@@ -632,7 +632,6 @@ function Player:changeToJumpState()
 	self.jumping = true
 	self.jumpBuffer = 0
 	self.yVelocity = self.jumpVelocity
-	--self:changeState("jump")
 end
 
 
