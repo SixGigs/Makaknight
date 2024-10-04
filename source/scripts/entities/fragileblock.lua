@@ -69,15 +69,15 @@ function FragileBlock:handleCollision(e, collision)
 		self:changeState(newState)
 	elseif collision.normal.y == 1 and e.yVelocity <= -125 then
 		self:changeState('breaking')
-	elseif (collision.normal.x ~= 0 or collision.normal.y == 0) and (math.abs(e.xVelocity) >= 125) then
+	elseif (collision.normal.x ~= 0 or collision.normal.y == 0) then
 		self:changeState('breaking')
 	end
 end
 
 
 -- This Method is Used to Return a Collision Type
-function FragileBlock:collision()
-	if self.overlapStates[self.currentState] then
+function FragileBlock:collision(e)	
+	if self.overlapStates[self.currentState] or e.currentState == 'dash' or e.currentState == 'dive' then
 		return gfx.sprite.kCollisionTypeOverlap
 	else
 		return gfx.sprite.kCollisionTypeSlide

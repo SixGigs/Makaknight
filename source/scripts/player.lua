@@ -177,7 +177,7 @@ function Player:collisionResponse(e)
 
 	if self.overlapTags[tag] then
 		if tag == TAGS.Fragile then
-			return e:collision()
+			return e:collision(self)
 		elseif tag == TAGS.Halftile then
 			if self.y + 48 > e.y or self.currentState == 'duck' then
 				return gfx.sprite.kCollisionTypeOverlap
