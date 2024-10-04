@@ -244,7 +244,7 @@ end
 
 --- Load the health bar for the player with their current hit points
 function World:loadHealthBar()
-	self.bar = Bar(2, 2, g.player_hp)
+	self.bar = Bar(2, 2)
 end
 
 
