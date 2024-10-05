@@ -486,7 +486,7 @@ function Player:die()
 	self.world:updateHealthBar() 
 
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(1000, function()
+	pd.timer.performAfterDelay(2000, function()
 		g.player_hp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
