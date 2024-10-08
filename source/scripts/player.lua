@@ -32,7 +32,7 @@ function Player:init(world)
 	self:addState("fall2", 39, 39)
 	self:addState("fall3", 40, 40)
 	self:addState("contact", 41, 42, {ts = 2, l = 1, na = "idle"})
-	self:addState("roll", 43, 58, {ts = 1, l = 1})
+	self:addState("roll", 43, 58, {ts = 1, l = 1, na = "midJump"})
 	self:addState("dbJump", 59, 74, {ts = 1, l = 1})
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
 
@@ -63,7 +63,7 @@ function Player:init(world)
 	self.states["fall3"].onFrameChangedEvent = function(self) if self.yVelocity < 150 then self:changeState("fall2") end end
 
 	-- Roll state finish process
-	self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
+	-- self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
 	self.states["dbJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
 	self.states["hurt"].onAnimationEndEvent = function(self) 
 		self.hurt = false
@@ -195,6 +195,12 @@ end
 function Player:update()
 	self:updateAnimation()
 
+	if g.player_sp > 100 then
+		g.player_sp = 100
+	end
+
+	self.world:updateHealthBar()
+
 	g.player_x = self.x
 	g.player_y = self.y
 
@@ -271,6 +277,10 @@ function Player:handleState()
 			self:changeState("midJump")
 		end
 	elseif self.currentState == "duck" then
+		if g.player_sp < 100 then
+			g.player_sp = g.player_sp + 10 * dt
+		end
+
 		self.xVelocity = 0
 		self:applyGravity()
 		self:handleDuckInput()
@@ -288,6 +298,10 @@ function Player:handleState()
 		self:handleAirInput()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
+		if g.player_sp < 100 and self.currentState ~= 'walk' then
+			g.player_sp = g.player_sp + 5 * dt
+		end
+
 		self:applyGravity()
 		if self.currentState ~= 'roll' then self:handleGroundInput() end
 
@@ -436,7 +450,7 @@ function Player:handleFlagCollision(flag)
 	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
 
 	g.player_hp = 100 -- Top up the player health
-	self.world:updateHealthBar()
+	g.player_sp = 100
 end
 
 
@@ -481,13 +495,14 @@ function Player:die()
 	self.yVelocity = 0
 	self.dead = true
 	g.player_hp = 0
+	g.player_sp = 0
 
 	self:changeState("die")
-	self.world:updateHealthBar() 
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
 		g.player_hp = 100
+		g.player_sp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
 		self.hurt = false
@@ -502,9 +517,19 @@ function Player:handleGroundInput()
 		self:changeToJumpState()
 	elseif pd.buttonIsPressed(pd.kButtonB) then
 		if pd.buttonIsPressed(pd.kButtonLeft) then
-			self:changeToRunState("left")
+			if g.player_sp > 10 then
+				self:changeToRunState("left")
+				g.player_sp = g.player_sp - 15 * dt
+			else
+				self:changeToWalkState("left")
+			end
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
-			self:changeToRunState("right")
+			if g.player_sp > 10 then
+				self:changeToRunState("right")
+				g.player_sp = g.player_sp - 15 * dt
+			else
+				self:changeToWalkState("right")
+			end
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
@@ -610,7 +635,6 @@ function Player:changeToHurtState()
 	self.yVelocity = -self.maxSpeed
 
 	self.hurt = true
-	self.world:updateHealthBar()
 	self:changeState("hurt")
 end
 
@@ -629,9 +653,12 @@ end
 
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
-	self.jumping = true
-	self.jumpBuffer = 0
-	self.yVelocity = self.jumpVelocity
+	if g.player_sp > 10 then
+		self.jumping = true
+		self.jumpBuffer = 0
+		self.yVelocity = self.jumpVelocity
+		g.player_sp = g.player_sp - 10
+	end
 end
 
 
@@ -644,10 +671,13 @@ end
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
-	self.jumpBuffer = 0
-	self.doubleJumpAvailable = false
-	self.yVelocity = self.doubleJumpVelocity
-	self:changeState("dbJump")
+	if g.player_sp > 5 then
+		self.jumpBuffer = 0
+		self.doubleJumpAvailable = false
+		self.yVelocity = self.doubleJumpVelocity
+		self:changeState("dbJump")
+		g.player_sp = g.player_sp - 5
+	end
 end
 
 
@@ -661,31 +691,37 @@ end
 
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
-	self.xVelocity = 0
-	self:setCollideRect(38, 61, 4, 19)
-	self:changeState("duckDown")
+	if g.player_sp > 2 then
+		self.xVelocity = 0
+		self:setCollideRect(38, 61, 4, 19)
+		self:changeState("duckDown")
+		g.player_sp = g.player_sp - 2
+	end
 end
 
 
 --- Change the player into a roll state
 --- @param  direction  string  The direction to roll in
 function Player:changeToRollState(direction)
-	self.rollAvailable = false
-	self:setCollideRect(38, 61, 4, 19)
-
-	if direction == "left" then
-		self.xVelocity = -self.rollSpeed
-	elseif direction == "right" then
-		self.xVelocity = self.rollSpeed
-	end
-
-	pd.timer.performAfterDelay(490, function()
-		pd.timer.performAfterDelay(self.rollRecharge, function()
-			self.rollAvailable = true
+	if g.player_sp > 10 then
+		self.rollAvailable = false
+		self:setCollideRect(38, 61, 4, 19)
+	
+		if direction == "left" then
+			self.xVelocity = -self.rollSpeed
+		elseif direction == "right" then
+			self.xVelocity = self.rollSpeed
+		end
+	
+		pd.timer.performAfterDelay(490, function()
+			pd.timer.performAfterDelay(self.rollRecharge, function()
+				self.rollAvailable = true
+			end)
 		end)
-	end)
-
-	self:changeState("roll")
+	
+		self:changeState("roll")
+		g.player_sp = g.player_sp - 10
+	end
 end
 
 

@@ -184,6 +184,7 @@ function Game:save()
 		face = self.player_facing,
 		fps = self.fps,
 		hp = self.player_hp,
+		sp = self.player_sp,
 		worldX = self.world_x
 	}
 
