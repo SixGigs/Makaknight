@@ -258,6 +258,26 @@
 					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
 					"__worldX": 1968,
 					"__worldY": -96
+				},
+				{
+					"__identifier": "Spikeball",
+					"__grid": [8,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 201, "x": 0, "y": 0, "w": 32, "h": 32 },
+					"__smartColor": "#FF0000",
+					"iid": "ad835a30-73f0-11ef-b3b5-51eb1cabc4e1",
+					"width": 23,
+					"height": 23,
+					"defUid": 69,
+					"px": [128,64],
+					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3596, "realEditorValues": [] },
+						{ "__identifier": "xVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 70, "realEditorValues": [] },
+						{ "__identifier": "yVelocity", "__type": "Float", "__value": 0, "__tile": null, "defUid": 71, "realEditorValues": [] }
+					],
+					"__worldX": 1856,
+					"__worldY": -176
 				}
 			]
 		},
