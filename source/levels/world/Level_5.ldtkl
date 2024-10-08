@@ -99,6 +99,22 @@
 					"fieldInstances": [],
 					"__worldX": 2304,
 					"__worldY": -144
+				},
+				{
+					"__identifier": "Stalactite",
+					"__grid": [11,2],
+					"__pivot": [0,0],
+					"__tags": ["Cave"],
+					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "1ea011f0-73f0-11ef-b3b5-cdae414edbf4",
+					"width": 16,
+					"height": 16,
+					"defUid": 3601,
+					"px": [176,32],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
+					"__worldX": 2304,
+					"__worldY": -208
 				}
 			]
 		},

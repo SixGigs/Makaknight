@@ -118,9 +118,20 @@ function World:enterDoor(level, x, y)
 end
 
 
+function World:has_value(tab, val)
+	for index, value in ipairs(tab) do
+		if value == val then
+			return true
+		end
+	end
+	
+	return false
+end
+
+
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
 --- @param  level  string  Contains the name of the level to load as a string
-function World:goToLevel(level)
+function World:goToLevel(level)	
 	ldtk.load_level(level) -- Load the next level
 	gfx.sprite.removeAll() -- Remove all playdate sprites
 
@@ -159,6 +170,7 @@ function World:goToLevel(level)
 	for _, entity in ipairs(ldtk.get_entities(level)) do
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name
+		local entityTags = entity.tags
 
 		-- Match the entity name to a script
 		if hazards[entityName] then
@@ -177,8 +189,8 @@ function World:goToLevel(level)
 			Ability(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
-		elseif entityName == "FragileBlock" then
-			FragileBlock(entityX, entityY, entity)
+		elseif self:has_value(entityTags, 'Block') then
+			Block(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
 		elseif entityName == "Fan" or entityName == 'FanLeft' then

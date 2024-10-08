@@ -53,7 +53,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [16,9],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -64,12 +64,15 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [256,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 1984,
 					"__worldY": -96
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [17,9],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -80,7 +83,10 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [272,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 2000,
 					"__worldY": -96
 				},
@@ -244,7 +250,7 @@
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [15,9],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -255,7 +261,10 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [240,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 1968,
 					"__worldY": -96
 				}

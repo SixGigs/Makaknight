@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4169,
+	"nextUid": 4170,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -18289,9 +18289,9 @@
 			]
 		},
 		{
-			"identifier": "FragileBlock",
+			"identifier": "Fragile",
 			"uid": 3649,
-			"tags": [],
+			"tags": ["Block"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "The fragile block breaks quickly after stepped on, fast platforming is required to make use of them",

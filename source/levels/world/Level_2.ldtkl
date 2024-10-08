@@ -85,10 +85,10 @@
 					"__worldY": -112
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [10,11],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "675bd4e0-4ce0-11ef-8ffb-23870fb7645c",
@@ -101,10 +101,10 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [11,11],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "67a5af20-4ce0-11ef-8ffb-27d6eb7fe38d",
@@ -117,10 +117,10 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [12,11],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "67e06e30-4ce0-11ef-8ffb-6f153091ed3f",
@@ -133,10 +133,10 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [13,11],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "681560e0-4ce0-11ef-8ffb-5f98657128e8",
@@ -149,10 +149,10 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [14,11],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "685ca310-4ce0-11ef-8ffb-6d0d7d8004d2",
@@ -165,10 +165,10 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [10,7],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "e0b3c4b0-4ce0-11ef-8ffb-2d7a3602d98f",
@@ -181,10 +181,10 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [11,7],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "e0fd77e0-4ce0-11ef-8ffb-7dc8fbb43888",
@@ -197,10 +197,10 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [12,7],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "e13ccad0-4ce0-11ef-8ffb-479d62cf2822",
@@ -213,10 +213,10 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [13,7],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "e17a4900-4ce0-11ef-8ffb-e18e4350cb21",
@@ -229,10 +229,10 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "FragileBlock",
+					"__identifier": "Fragile",
 					"__grid": [14,7],
 					"__pivot": [0,0],
-					"__tags": [],
+					"__tags": ["Block"],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "e1b248f0-4ce0-11ef-8ffb-65bea89b0a21",

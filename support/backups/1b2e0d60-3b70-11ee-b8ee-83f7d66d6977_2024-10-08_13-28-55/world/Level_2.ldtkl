@@ -85,7 +85,7 @@
 					"__worldY": -112
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [10,11],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -104,7 +104,7 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [11,11],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -123,7 +123,7 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [12,11],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -142,7 +142,7 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [13,11],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -161,7 +161,7 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [14,11],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -180,7 +180,7 @@
 					"__worldY": -64
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [10,7],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -199,7 +199,7 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [11,7],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -218,7 +218,7 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [12,7],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -237,7 +237,7 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [13,7],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
@@ -256,7 +256,7 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [14,7],
 					"__pivot": [0,0],
 					"__tags": ["Block"],
