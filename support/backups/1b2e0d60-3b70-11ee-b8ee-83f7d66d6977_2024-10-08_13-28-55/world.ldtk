@@ -18289,7 +18289,7 @@
 			]
 		},
 		{
-			"identifier": "Fragile",
+			"identifier": "FragileBlock",
 			"uid": 3649,
 			"tags": ["Block"],
 			"exportToToc": false,

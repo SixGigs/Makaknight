@@ -53,10 +53,10 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [16,9],
 					"__pivot": [0,0],
-					"__tags": ["Block"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "0bde1580-4ce0-11ef-822a-c77915fef177",
@@ -64,15 +64,18 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [256,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 1984,
 					"__worldY": -96
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [17,9],
 					"__pivot": [0,0],
-					"__tags": ["Block"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "0e084880-4ce0-11ef-822a-2d3019521c38",
@@ -80,7 +83,10 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [272,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 2000,
 					"__worldY": -96
 				},
@@ -244,10 +250,10 @@
 					"__worldY": -80
 				},
 				{
-					"__identifier": "Fragile",
+					"__identifier": "FragileBlock",
 					"__grid": [15,9],
 					"__pivot": [0,0],
-					"__tags": ["Block"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#D77643",
 					"iid": "45477530-4ce0-11ef-bb3c-a3de4376d12c",
@@ -255,7 +261,10 @@
 					"height": 16,
 					"defUid": 3649,
 					"px": [240,144],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "type", "__type": "String", "__value": "fragile", "__tile": null, "defUid": 4169, "realEditorValues": [] },
+						{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }
+					],
 					"__worldX": 1968,
 					"__worldY": -96
 				}

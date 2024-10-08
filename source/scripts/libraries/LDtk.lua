@@ -380,7 +380,8 @@ function LDtk.load_level( level_name )
 					center = { x=entity_data.__pivot[1], y=entity_data.__pivot[2] },
 					size = { width=entity_data.width, height=entity_data.height },
 					zIndex = layer.zIndex,
-					fields = properties,
+					tags = entity_data.__tags,
+					fields = properties
 				})
 			end
 		end
@@ -416,6 +417,7 @@ end
 --	.center : alignment of the sprite around the position. can be used with sprite:setCenter()
 --	.size :  width and height of the entity
 --	.zIndex : layer index
+--  .tags : tags on the entity
 -- 	.fields : all the custom fields data entered in the LDtk editor
 function LDtk.get_entities( level_name, layer_name )
 	local level = _levels[level_name]

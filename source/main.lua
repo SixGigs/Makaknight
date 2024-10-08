@@ -37,7 +37,7 @@ import "scripts/entities/Crown"
 import "scripts/entities/Wind"
 import "scripts/entities/Door"
 import "scripts/entities/Flag"
-import "scripts/entities/FragileBlock"
+import "scripts/entities/Block"
 
 -- Hazard scripts
 import "scripts/hazards/Fan"
