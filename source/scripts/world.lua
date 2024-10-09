@@ -60,7 +60,7 @@ function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	local level <const> = ldtk.get_neighbours(g.player_level, direction)[1]
 	if not level then
-		if direction == 'north' then return else g.player_hp = 0 return end
+		if direction == 'north' then return else self.player.hp = 0 return end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it

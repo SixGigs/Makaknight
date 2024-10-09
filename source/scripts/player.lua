@@ -78,6 +78,7 @@ function Player:init(world)
 
 	-- Attributes
 	self.hurt = false
+	self.hp = g.player_hp
 	self.globalFlip = g.player_facing
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -201,6 +202,7 @@ function Player:update()
 
 	self.world:updateHealthBar()
 
+	g.player_hp = self.hp
 	g.player_x = self.x
 	g.player_y = self.y
 
@@ -411,15 +413,15 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	if g.player_hp <= 0 then died = true end -- Check if we are dead from no hit points
+	if self.hp <= 0 then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
 
 
 function Player:handleDamageCollision(obj)
-	g.player_hp = g.player_hp - obj.damage
-	if g.player_hp < 0 then
-		g.player_hp = 0
+	self.hp = self.hp - obj.damage
+	if self.hp < 0 then
+		self.hp = 0
 	else
 		self:changeToHurtState()
 	end
@@ -449,8 +451,7 @@ function Player:handleFlagCollision(flag)
 
 	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
 
-	g.player_hp = 100 -- Top up the player health
-	g.player_sp = 100
+	self.hp = 100 -- Top up the player health
 end
 
 
@@ -494,14 +495,14 @@ function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
-	g.player_hp = 0
+	self.hp = 0
 	g.player_sp = 0
 
 	self:changeState("die")
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
-		g.player_hp = 100
+		self.hp = 100
 		g.player_sp = 100
 		self:setCollisionsEnabled(true)
 		self.dead = false
