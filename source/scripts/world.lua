@@ -212,7 +212,8 @@ function World:goToLevel(level)
 
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
-	self:loadHealthBar()
+	Health(2, 2)
+	Stamina(2, 18)
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end
@@ -254,19 +255,6 @@ function World:loadBackground(level)
 end
 
 
---- Load the health bar for the player with their current hit points
-function World:loadHealthBar()
-	self.bar = Bar(2, 2)
-end
-
-
---- Update the Health Bar to Reflect Current Player Hit Points
-function World:updateHealthBar()
-	self.bar:remove()
-	self:loadHealthBar()
-end
-
-
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
 	if g.player_level ~= g.spawn_level then
@@ -278,7 +266,6 @@ function World:resetPlayer()
 	else
 		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
 		self.player:changeToSpawnState()
-		self:updateHealthBar()
 	end
 end
 

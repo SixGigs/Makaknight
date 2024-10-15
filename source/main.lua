@@ -47,7 +47,9 @@ import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
 
 -- User interface scripts
-import "scripts/ui/Bar"
+import "scripts/Bar"
+import "scripts/ui/Health"
+import "scripts/ui/Stamina"
 
 
 

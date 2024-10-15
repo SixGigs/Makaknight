@@ -201,8 +201,6 @@ function Player:update()
 		self.sp = 100
 	end
 
-	self.world:updateHealthBar()
-
 	g.player_hp = self.hp
 	g.player_sp = self.sp
 	g.player_x = self.x
@@ -367,14 +365,6 @@ function Player:handleMovementAndCollisions()
 			if self.touchingGround then
 				collisionObject:handleCollision()
 			end
-		end
-
-		-- Check if we are colliding with the health bar
-		if collisionTag == TAGS.GUI and self.world.bar:isVisible() then
-			self.world.bar:setVisible(false)
-			pd.timer.performAfterDelay(2000, function()
-				self.world.bar:setVisible(true)
-			end)
 		end
 	end
 
