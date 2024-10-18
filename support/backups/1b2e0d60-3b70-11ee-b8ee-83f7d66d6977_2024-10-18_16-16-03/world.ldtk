@@ -18381,7 +18381,7 @@
 					"value": 6,
 					"identifier": "Cobble_background",
 					"color": "#BE4A2F",
-					"tile": { "tilesetUid": 1, "x": 288, "y": 320, "w": 16, "h": 16 },
+					"tile": { "tilesetUid": 1, "x": 272, "y": 320, "w": 16, "h": 16 },
 					"groupUid": 1
 				}
 			],

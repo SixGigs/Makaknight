@@ -172,8 +172,8 @@ end
 
 
 --- This function is used to handle the collisions the player has with the world
---- @param  e   table   This variable contains what the player has collided with
---- @return unknown unknown The function returns the collision response to use
+--- @param   e        table    This variable contains what the player has collided with
+--- @return  unknown  unknown  The function returns the collision response to use
 function Player:collisionResponse(e)
 	local tag <const> = e:getTag()
 
@@ -280,12 +280,13 @@ function Player:handleState()
 		end
 	elseif self.currentState == "duck" then
 		if self.sp < 100 then
-			self.sp = self.sp + 10 * dt
+			self.sp = self.sp + 20 * dt
 		end
 
 		self.xVelocity = 0
 		self:applyGravity()
 		self:handleDuckInput()
+
 		if self.yVelocity > 90 then
 			self:changeState("fall")
 		end
@@ -301,7 +302,7 @@ function Player:handleState()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
 		if self.sp < 100 and self.currentState ~= 'walk' then
-			self.sp = self.sp + 5 * dt
+			self.sp = self.sp + 10 * dt
 		end
 
 		self:applyGravity()
