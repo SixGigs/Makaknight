@@ -689,7 +689,7 @@ function Player:changeToDuckingState()
 		self.xVelocity = 0
 		self:setCollideRect(38, 61, 4, 19)
 		self:changeState("duckDown")
-		self.sp = self.sp - 2
+		self.sp = self.sp - 1
 	end
 end
 
