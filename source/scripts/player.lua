@@ -301,7 +301,7 @@ function Player:handleState()
 		self:handleAirInput()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
-		if self.sp < 100 and self.currentState ~= 'walk' then
+		if self.sp < 100 then
 			self.sp = self.sp + 10 * dt
 		end
 
