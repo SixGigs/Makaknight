@@ -168,6 +168,10 @@ function Player:init(world)
 	self.leftBuffer = 0
 	self.rightBuffer = 0
 	self.upBuffer = 0
+	
+	-- Status Buffer
+	self.staminaBufferAmount = 60
+	self.staminaBuffer = 0
 end
 
 
@@ -221,6 +225,7 @@ function Player:updateBuffers()
 	self.punchBuffer = math.max(self.punchBuffer - (30 * dt), 0)
 	self.leftBuffer = math.max(self.leftBuffer - (30 * dt), 0)
 	self.rightBuffer = math.max(self.rightBuffer - (30 * dt), 0)
+	self.staminaBuffer = math.max(self.staminaBuffer - (30 * dt), 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -248,6 +253,10 @@ function Player:playerPressedRight() return self.rightBuffer > 0 end
 function Player:playerPressedLeft() return self.leftBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerRolled() return self.rollBuffer > 0 end
+function Player:staminaBlocked() return self.staminaBuffer > 0 end
+
+--- Set Status Bar Buffers
+function Player:setStaminaBuffer() self.staminaBuffer = self.staminaBufferAmount end
 
 
 --- The state handler changes the functions running on the player based on state
@@ -301,7 +310,7 @@ function Player:handleState()
 		self:handleAirInput()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
-		if self.sp < 100 then
+		if self.sp < 100 and not self:staminaBlocked() then
 			self.sp = self.sp + 10 * dt
 		end
 
@@ -514,6 +523,7 @@ function Player:handleGroundInput()
 			if self.sp > 10 then
 				self:changeToRunState("left")
 				self.sp = self.sp - 15 * dt
+				self:setStaminaBuffer()
 			else
 				self:changeToWalkState("left")
 			end
@@ -521,6 +531,7 @@ function Player:handleGroundInput()
 			if self.sp > 10 then
 				self:changeToRunState("right")
 				self.sp = self.sp - 15 * dt
+				self:setStaminaBuffer()
 			else
 				self:changeToWalkState("right")
 			end
@@ -641,6 +652,7 @@ function Player:changeToRunState(direction)
 		self.xVelocity = self.maxSpeed
 	end
 
+	self:setStaminaBuffer()
 	self:changeState("run")
 end
 
@@ -652,6 +664,7 @@ function Player:changeToJumpState()
 		self.jumpBuffer = 0
 		self.yVelocity = self.jumpVelocity
 		self.sp = self.sp - 10
+		self:setStaminaBuffer()
 	end
 end
 
@@ -671,6 +684,7 @@ function Player:changeToDoubleJumpState()
 		self.yVelocity = self.doubleJumpVelocity
 		self:changeState("dbJump")
 		self.sp = self.sp - 5
+		self:setStaminaBuffer()
 	end
 end
 
@@ -715,6 +729,7 @@ function Player:changeToRollState(direction)
 	
 		self:changeState("roll")
 		self.sp = self.sp - 10
+		self:setStaminaBuffer()
 	end
 end
 
