@@ -193,7 +193,7 @@ function World:goToLevel(level)
 			Block(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
-		elseif entityName == "Fan" or entityName == 'FanLeft' then
+		elseif entityName == "Fan" then
 			Fan(entityX, entityY, entity)
 			Wind(entityX - 8, entityY - 80, entity.fields.strength)
 		elseif entityName == "Roaster" then

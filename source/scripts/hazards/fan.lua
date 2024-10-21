@@ -2,7 +2,7 @@
 local gfx <const> = playdate.graphics
 
 -- Create the Fan Class
-class("Fan").extends(AnimatedSprite)
+class('Fan').extends(AnimatedSprite)
 
 
 --- Initialise the Fan Object Using the Data Given
@@ -11,10 +11,10 @@ class("Fan").extends(AnimatedSprite)
 --- @param  e  table    The entity that come with the Fan
 function Fan:init(x, y, e)
 	-- Initialise the Fan Class
-	Fan.super.init(self, gfx.imagetable.new("images/hazards/animated/fan-table-32-16"))
+	Fan.super.init(self, gfx.imagetable.new('images/hazards/animated/fan-table-32-10'))
 
 	-- Fan Animation Settings
-	self:addState("s", 1, 4, {ts = 1})
+	self:addState('s', 1, 4, {ts = 1})
 	self:playAnimation()
 
 	-- Fan Attributes
@@ -23,7 +23,7 @@ function Fan:init(x, y, e)
 	-- Fan Properties
 	self:setCollideRect(0, 8, 32, 8)
 	self:setCenter(0, 0)
-	self:moveTo(x, y)
+	self:moveTo(x, y + 6)
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setTag(TAGS.Hazard)
 	self:add()
