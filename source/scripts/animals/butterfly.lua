@@ -10,7 +10,7 @@ class("Butterfly").extends(Animal)
 function Butterfly:init(x, y, e)
 	Butterfly.super.init(self, x, y, e)
 
-	self:addState("a", 1, 4, {ts = 3})
+	self:addState(0, 1, 4, {ts = 3})
 	self:playAnimation()
 
 	self.weight = 1

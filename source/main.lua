@@ -46,6 +46,11 @@ import "scripts/hazards/Roaster"
 import "scripts/hazards/Spike"
 import "scripts/hazards/Spikeball"
 
+-- Game screen scripts
+import 'scripts/screens/credits'
+import 'scripts/screens/title'
+import 'scripts/screens/win'
+
 -- User interface scripts
 import "scripts/Bar"
 import "scripts/ui/Health"
@@ -63,8 +68,10 @@ screenWidth = pd.display.getWidth()
 screenHeight = pd.display.getHeight()
 dt = 0
 
--- Screen("title") -- Create Title Screen
-World()
+
+
+Title() -- Create Title Screen
+
 
 
 -- These Functions are Used to Save the Game When Finished
