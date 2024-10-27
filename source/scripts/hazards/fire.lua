@@ -16,7 +16,7 @@ function Fire:init(x, y, s, d)
 	Fire.super.init(self, gfx.imagetable.new("images/hazards/animated/fire-table-16-16"))
 
 	-- Fire Animation Settings
-	self:addState("burn", 1, 4)
+	self:addState(0, 1, 4)
 	self:playAnimation()
 
 	-- Fire Attributes

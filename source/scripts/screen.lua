@@ -12,18 +12,23 @@ function Screen:init(scene)
 
 	-- Set image for the scene
 	self:setImage(gfx.image.new("images/screens/"..self.scene))
-	self:moveTo(200, 120)
+	self:setCenter(0, 0)
+	self:moveTo(0, 0)
 	self:add()
 end
 
--- This method runs every frame when the screen is added to the sprite group
--- It listens for the A button press and moves over to the relevant scene
+
 function Screen:update()
+	self:handleInput()
+	self:handleMovement()
+end
+
+
+function Screen:handleInput()
 	if pd.buttonJustPressed(pd.kButtonA) then
-		if self.scene == "title" then
-			g:switchScene(World)
-		else
-			g:switchScene(Screen, "wipe", "title")
-		end
+		g:switchScene(self.nextScene)
 	end
 end
+
+
+function Screen:handleMovement() end

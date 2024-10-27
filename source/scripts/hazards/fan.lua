@@ -14,7 +14,7 @@ function Fan:init(x, y, e)
 	Fan.super.init(self, gfx.imagetable.new('images/hazards/animated/fan-table-32-10'))
 
 	-- Fan Animation Settings
-	self:addState('s', 1, 4, {ts = 1})
+	self:addState(0, 1, 4, {ts = 1})
 	self:playAnimation()
 
 	-- Fan Attributes
