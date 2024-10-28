@@ -74,11 +74,12 @@ Title() -- Create Title Screen
 
 
 
--- These Functions are Used to Save the Game When Finished
+-- Save the game when it closes
 function pd.gameWillTerminate()
 	g:save()
 end
 
+-- Save the game when the console goes to sleep
 function pd.gameWillSleep()
 	g:save()
 end
