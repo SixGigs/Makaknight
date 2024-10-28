@@ -185,7 +185,7 @@ function Player:collisionResponse(e)
 		if tag == TAGS.Fragile then
 			return e:collision(self)
 		elseif tag == TAGS.Halftile then
-			if self.y + 48 > e.y or self.currentState == 'duck' then
+			if self.y + 48 > e.y or self.currentState == 'duck' and pd.buttonIsPressed(pd.kButtonA) then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
@@ -261,6 +261,8 @@ function Player:setStaminaBuffer() self.staminaBuffer = self.staminaBufferAmount
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
+	self:regenerateStamina()
+	
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
@@ -310,10 +312,6 @@ function Player:handleState()
 		self:handleAirInput()
 	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
 	else
-		if self.sp < 100 and not self:staminaBlocked() then
-			self.sp = self.sp + 10 * dt
-		end
-
 		self:applyGravity()
 		if self.currentState ~= 'roll' then self:handleGroundInput() end
 
@@ -834,5 +832,12 @@ function Player:applyDrag(amount)
 
 	if math.abs(self.xVelocity) < self.minimumAirSpeed or self.touchingWall then
 		self.xVelocity = 0
+	end
+end
+
+
+function Player:regenerateStamina()
+	if self.sp < 100 and not self:staminaBlocked() then
+		self.sp = self.sp + 10 * dt
 	end
 end
