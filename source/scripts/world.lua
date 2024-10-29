@@ -30,7 +30,7 @@ TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, GUI = 11, Bubble = 12, Fragile = 13,
-	Wind = 14, Roaster = 15, Spike = 16, Halftile = 17
+	Wind = 14, Roaster = 15, Spike = 16, Half = 17
 }
 
 Z_INDEXES = {
@@ -275,8 +275,8 @@ end
 --- @param  tilemap     The Map of Tiles Used to Create the Rects
 --- @param  emptyTiles  The Tiles That are not Half Tiles
 function World:addHalfWallSprites(layer, tilemap, emptyTiles)
-	halfTiles = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
-	for _, tile in pairs(halfTiles) do
+	Halfs = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+	for _, tile in pairs(Halfs) do
 		if tile.h > 1 then
 			for i = tile.h, 1, -1 do
 				local x <const> = tile.x * 16
