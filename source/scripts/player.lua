@@ -185,7 +185,7 @@ function Player:collisionResponse(e)
 		if tag == TAGS.Fragile then
 			return e:collision(self)
 		elseif tag == TAGS.Halftile then
-			if self.y + 48 > e.y or self.currentState == 'duck' and pd.buttonIsPressed(pd.kButtonA) then
+			if self.y + 48 > e.y or self.currentState == 'duck' and pd.buttonIsPressed(pd.kButtonA) or self.yVelocity >= 750 then
 				return gfx.sprite.kCollisionTypeOverlap
 			end
 		else
