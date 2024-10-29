@@ -114,7 +114,7 @@ function Player:init(world)
 		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true,
 		[TAGS.Spike] = true,
-		[TAGS.Halftile] = true
+		[TAGS.Half] = true
 	}
 
 	-- Buffer
@@ -182,12 +182,8 @@ function Player:collisionResponse(e)
 	local tag <const> = e:getTag()
 
 	if self.overlapTags[tag] then
-		if tag == TAGS.Fragile then
+		if tag == TAGS.Fragile or tag == TAGS.Half then
 			return e:collision(self)
-		elseif tag == TAGS.Halftile then
-			if self.y + 40 > e.y or self.currentState == 'duck' and pd.buttonIsPressed(pd.kButtonA) or self.yVelocity >= 750 then
-				return gfx.sprite.kCollisionTypeOverlap
-			end
 		else
 			return gfx.sprite.kCollisionTypeOverlap
 		end
