@@ -581,7 +581,7 @@ end
 
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	if self:playerJumped() and self.doubleJumpAvailable then
+	if self:playerJumped() and self.doubleJumpAvailable and not pd.buttonIsPressed(pd.kButtonDown) then
 		self:changeToDoubleJumpState()
 	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable then
 		self:changeToDashState()
