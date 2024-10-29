@@ -37,6 +37,7 @@ import "scripts/entities/Bubble"
 import "scripts/entities/Crown"
 import "scripts/entities/Wind"
 import "scripts/entities/Door"
+import "scripts/entities/Half"
 import "scripts/entities/Flag"
 
 -- Hazard scripts

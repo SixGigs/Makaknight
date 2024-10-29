@@ -283,24 +283,16 @@ function World:addHalfWallSprites(layer, tilemap, emptyTiles)
 				local y <const> = (tile.y + (i - 1)) * 16
 				local w <const> = tile.w * 16
 				local h <const> = 16
-	
-				local halfRect = pd.geometry.rect.new(x, y, w, h)
-	
-				local halfTile = gfx.sprite.addEmptyCollisionSprite(halfRect)
-				halfTile:setTag(TAGS.Halftile)
-				halfTile:setZIndex(layer.zIndex)
-				halfTile:add()
+
+				Half(x, y, w, h)
 			end
 		else
 			tile.x = tile.x * 16
 			tile.y = tile.y * 16
 			tile.w = tile.w * 16
 			tile.h = tile.h * 16
-	
-			local halfTile = gfx.sprite.addEmptyCollisionSprite(tile)
-			halfTile:setTag(TAGS.Halftile)
-			halfTile:setZIndex(layer.zIndex)
-			halfTile:add()
+
+			Half(tile.x, tile.y, tile.w, tile.h)
 		end
 	end
 end
