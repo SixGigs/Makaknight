@@ -1,9 +1,6 @@
--- Create Constants for the Playdate and Playdate Graphics
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-
--- Create the Animal Class
-class("Animal").extends(AnimatedSprite)
+class('Animal').extends(AnimatedSprite)
 
 
 --- The Animal is Initialised Using This Method
@@ -12,7 +9,7 @@ class("Animal").extends(AnimatedSprite)
 --- @param  e  integer  The Entity Used to Create the Animal
 function Animal:init(x, y, e)
 	-- Create the Animal State Machine with the Animated Sprite Library
-	Animal.super.init(self, gfx.imagetable.new("images/animals/" .. string.lower(e.name) .. "-table-" .. e.fields.tableWidth .. "-" .. e.fields.tableHeight))
+	Animal.super.init(self, gfx.imagetable.new('images/animals/'.. string.lower(e.name) .. '-table-' .. e.fields.tableWidth .. '-' .. e.fields.tableHeight))
 
 	-- Physics Properties
 	self.xVelocity = 0
@@ -37,7 +34,8 @@ function Animal:init(x, y, e)
 		[TAGS.GUI] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragile] = true,
-		[TAGS.Wind] = true
+		[TAGS.Wind] = true,
+		[TAGS.Half] = true
 	}
 
 	-- Animal Properties

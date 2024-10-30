@@ -11,7 +11,7 @@ class("Player").extends(AnimatedSprite)
 --- @param y     integer The Y coordinate to spawn the player
 --- @param world table   The game manager is passed in to manage player on object interactions
 function Player:init(world)
-	Player.super.init(self, gfx.imagetable.new("images/player/player-table-80-80"))
+	Player.super.init(self, gfx.imagetable.new('images/player/player-table-80-80'))
 
 	self.world = world -- Save the World Class as an Attribute
 
