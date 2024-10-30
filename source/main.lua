@@ -51,6 +51,7 @@ import "scripts/hazards/Spikeball"
 import 'scripts/screens/credits'
 import 'scripts/screens/title'
 import 'scripts/screens/win'
+import 'scripts/screens/thanks'
 
 -- User interface scripts
 import "scripts/Bar"
