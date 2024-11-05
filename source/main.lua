@@ -7,63 +7,63 @@
 --------------------------------
 
 -- Playdate Core Libraries
-import "CoreLibs/object"
-import "CoreLibs/graphics"
-import "CoreLibs/sprites"
-import "CoreLibs/timer"
+import 'CoreLibs/object'
+import 'CoreLibs/graphics'
+import 'CoreLibs/sprites'
+import 'CoreLibs/timer'
 
 -- Libraries from GitHub
-import "scripts/libraries/AnimatedSprite"
-import "scripts/libraries/Game"
-import "scripts/libraries/LDtk"
+import 'scripts/libraries/AnimatedSprite'
+import 'scripts/libraries/Game'
+import 'scripts/libraries/LDtk'
 
 -- Scripts
-import "scripts/Animal"
-import "scripts/Background"
-import "scripts/Hitbox"
-import "scripts/Player"
-import "scripts/Prop"
-import "scripts/Screen"
-import "scripts/World"
+import 'scripts/Background'
+import 'scripts/fade'
+import 'scripts/Hitbox'
+import 'scripts/Player'
+import 'scripts/Prop'
 
 -- Animal scripts
-import "scripts/animals/Butterfly"
-import "scripts/animals/Reptile"
+import 'scripts/animals/animal'
+import 'scripts/animals/Butterfly'
+import 'scripts/animals/Reptile'
 
 -- Entity scripts
-import "scripts/entities/Ability"
-import "scripts/entities/Block"
-import "scripts/entities/Bubble"
-import "scripts/entities/Crown"
-import "scripts/entities/Wind"
-import "scripts/entities/Door"
-import "scripts/entities/Half"
-import "scripts/entities/Flag"
+import 'scripts/entities/Ability'
+import 'scripts/entities/Block'
+import 'scripts/entities/Bubble'
+import 'scripts/entities/Crown'
+import 'scripts/entities/Wind'
+import 'scripts/entities/Door'
+import 'scripts/entities/Half'
+import 'scripts/entities/Flag'
 
 -- Hazard scripts
-import "scripts/hazards/Fan"
-import "scripts/hazards/Fire"
-import "scripts/hazards/Roaster"
-import "scripts/hazards/Spike"
-import "scripts/hazards/Spikeball"
+import 'scripts/hazards/Fan'
+import 'scripts/hazards/Fire'
+import 'scripts/hazards/Roaster'
+import 'scripts/hazards/Spike'
+import 'scripts/hazards/Spikeball'
 
 -- Game screen scripts
+import 'scripts/screens/screen'
 import 'scripts/screens/credits'
 import 'scripts/screens/title'
+import 'scripts/screens/world'
 import 'scripts/screens/win'
 import 'scripts/screens/thanks'
 
 -- User interface scripts
-import "scripts/Bar"
-import "scripts/ui/Health"
-import "scripts/ui/Stamina"
-import 'scripts/ui/Fade'
-
-
+import 'scripts/ui/Bar'
+import 'scripts/ui/Health'
+import 'scripts/ui/Stamina'
 
 -- Constants
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+
+
 
 -- Globals
 g = Game()
@@ -72,9 +72,8 @@ screenHeight = pd.display.getHeight()
 dt = 0
 
 
-
-Title() -- Create Title Screen
-
+-- Create Title Screen
+Title()
 
 
 -- Save the game when it closes

@@ -1,8 +1,6 @@
 -- Playdate shorthand constants
 local pd <const> = playdate
 local gfx <const> = pd.graphics
-
--- Create the bar class
 class('Bar').extends(AnimatedSprite)
 
 
