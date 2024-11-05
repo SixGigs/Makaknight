@@ -5,5 +5,5 @@ bundleID=com.six.makaknight
 version=0.1.0
 buildNumber=0
 imagePath=images/launcher
-pdxversion=20500
-buildtime=783626821
+pdxversion=20600
+buildtime=783993488

@@ -5,6 +5,7 @@ class('Credits').extends(Screen)
 
 function Credits:init()
 	Credits.super.init(self, 'credits')
+	self.transition = 'fade'
 
 	self.width, self.height = self:getSize()
 	self.paused = false
@@ -52,7 +53,7 @@ function Credits:handleInput()
 			self.paused = true
 		end
 	elseif pd.buttonJustPressed(pd.kButtonB) then
-		g:switchScene(Thanks)
+		g:switchScene(Thanks, self.transition)
 	end
 end
 

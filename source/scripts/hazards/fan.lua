@@ -1,7 +1,4 @@
--- Creating the Playdate Graphics Module as a Constant
 local gfx <const> = playdate.graphics
-
--- Create the Fan Class
 class('Fan').extends(AnimatedSprite)
 
 

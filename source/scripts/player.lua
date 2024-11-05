@@ -455,7 +455,7 @@ end
 function Player:handleCrownCollision(obj)
 	if not self.win then
 		self.win = true
-		g:switchScene(Win)
+		g:switchScene(Win, 'fade')
 		obj:setVisible(false)
 	end
 end

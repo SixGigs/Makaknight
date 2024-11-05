@@ -57,6 +57,7 @@ import 'scripts/screens/thanks'
 import "scripts/Bar"
 import "scripts/ui/Health"
 import "scripts/ui/Stamina"
+import 'scripts/ui/Fade'
 
 
 
