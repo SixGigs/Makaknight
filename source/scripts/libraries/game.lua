@@ -1,16 +1,13 @@
--- PlayDate shorthand constants
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 local menu <const> = pd.getSystemMenu()
-
--- Game manager Class
-class("Game").extends()
+class('Game').extends()
 
 
--- Creates an instance of the Game manager
+
 function Game:init()
 	self:load()
-	
+
 	self.transitionTime = 1000
 	self.transitioning = false
 
@@ -21,6 +18,7 @@ function Game:init()
 		end
 	end)
 end
+
 
 
 --- Switch the scene by passing the next scene class and any arguments
@@ -36,12 +34,14 @@ function Game:switchScene(nextScene, transition, ...)
 end
 
 
+
 -- Starts and handles the transition
 function Game:startTransition(transition)
 	local transitionTimer
 
 	if transition == "fade" then
-		transitionTimer = self:fadeTransition(0, 1)
+		Fade('out')
+		transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 	else
 		transitionTimer = self:wipeTransition(0, 400)
 	end
@@ -50,7 +50,8 @@ function Game:startTransition(transition)
 		self:loadNewScene()
 
 		if transition == "fade" then
-			transitionTimer = self:fadeTransition(1, 0)
+			Fade('in')
+			transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 		else
 			transitionTimer = self:wipeTransition(400, -1)
 		end
@@ -62,6 +63,7 @@ function Game:startTransition(transition)
 end
 
 
+
 --- Clean up any old scene data & create a new instance of the next scene
 function Game:loadNewScene()
 	self:cleanupScene()
@@ -69,7 +71,8 @@ function Game:loadNewScene()
 end
 
 
---- Used by the class to delete all current sprites and timers
+
+--- Removes all timers and all sprites ready for the next scene
 function Game:cleanupScene()
 	self:removeAllTimers()
 	gfx.sprite.removeAll()
@@ -77,7 +80,8 @@ function Game:cleanupScene()
 end
 
 
---- Deletes all timers in the timers group
+
+--- Deletes all running timers
 function Game:removeAllTimers()
 	local allTimers = pd.timer.allTimers()
 
@@ -85,6 +89,7 @@ function Game:removeAllTimers()
 		timer:remove()
 	end
 end
+
 
 
 --- Does the "wipe" transition
@@ -104,36 +109,6 @@ function Game:wipeTransition(startValue, endValue)
 end
 
 
---- Does the "fade" transition
-function Game:fadeTransition(startValue, endValue)
-	local transitionSprite = self:createTransitionSprite()
-	transitionSprite:setImage(self:getFadedImage(startValue))
-
-	local transitionTimer = pd.timer.new(
-		self.transitionTime, startValue, endValue, pd.easingFunctions.inOutCubic
-	)
-
-	transitionTimer.updateCallback = function(timer)
-		transitionSprite:setImage(self:getFadedImage(timer.value))
-	end
-
-	return transitionTimer
-end
-
-
---- Used by the fade transition to optimise the performance
-function Game:getFadedImage(alpha)
-	local fadedImage = gfx.image.new(400, 240)
-
-	gfx.pushContext(fadedImage)
-	-- To change this for an image replace "gfx.kColorBlack" with the image
-	local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
-	filledRect:drawFaded(0, 0, alpha, gfx.image.kDitherTypeBayer8x8)
-	gfx.popContext()
-
-	return fadedImage
-end
-
 
 --- Creates a sprite to transition too and from for the scene change
 function Game:createTransitionSprite()
@@ -150,7 +125,8 @@ function Game:createTransitionSprite()
 end
 
 
---- Load the Save File if it Exists
+
+--- Load save file data if the save file (game data) exists
 function Game:load()
 	local gd <const> = pd.datastore.read()
 
@@ -171,7 +147,8 @@ function Game:load()
 end
 
 
---- Save the Game
+
+--- Save the game, this is global so it can execute on console exit or sleep
 function Game:save()
 	local data <const> = {
 		spawn = self.spawn_level,

@@ -37,7 +37,7 @@ Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, GUI = 1000, Bubble = 50, Fragile = 100,
-	Wind = 500, Roaster = 100, Background = -10
+	Wind = 500, Roaster = 100, Background = -10, Transition = 1500
 }
 
 

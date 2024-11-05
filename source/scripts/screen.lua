@@ -9,6 +9,7 @@ class("Screen").extends(gfx.sprite)
 --- @param  scene  string  The scene to use
 function Screen:init(scene)
 	self.scene = scene -- Save scene data locally
+	self.transition = 'wipe'
 
 	-- Set image for the scene
 	self:setImage(gfx.image.new("images/screens/"..self.scene))
@@ -26,7 +27,7 @@ end
 
 function Screen:handleInput()
 	if pd.buttonJustPressed(pd.kButtonA) then
-		g:switchScene(self.nextScene)
+		g:switchScene(self.nextScene, self.transition)
 	end
 end
 
