@@ -72,8 +72,9 @@ screenHeight = pd.display.getHeight()
 dt = 0
 
 
--- Create Title Screen
+
 Title()
+
 
 
 -- Save the game when it closes

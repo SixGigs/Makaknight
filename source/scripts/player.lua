@@ -203,6 +203,7 @@ function Player:update()
 
 	g.player_hp = self.hp
 	g.player_sp = self.sp
+	g.player_facing = self.globalFlip
 	g.player_x = self.x
 	g.player_y = self.y
 
@@ -385,16 +386,14 @@ function Player:handleMovementAndCollisions()
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
-		g.player_facing = 1
 	elseif self.xVelocity > 0 then
 		self.globalFlip = 0
-		g.player_facing = 0
 	end
 
 	-- If touching the edge of the level, lets move into the next room
-	if self.x < -2 then
+	if self.x < -12 then
 		self.world:enterRoom("west")
-	elseif self.x > 402 then
+	elseif self.x > 412 then
 		self.world:enterRoom("east")
 	elseif self.y < -32 then
 		self.world:enterRoom("north")

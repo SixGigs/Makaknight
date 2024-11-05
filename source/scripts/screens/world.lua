@@ -37,7 +37,8 @@ Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, GUI = 1000, Bubble = 50, Fragile = 100,
-	Wind = 500, Roaster = 100, Background = -10, Transition = 1500
+	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
+	Foreground = 150
 }
 
 
@@ -135,6 +136,12 @@ function World:goToLevel(level)
 	ldtk.load_level(level) -- Load the next level
 	gfx.sprite.removeAll() -- Remove all playdate sprites
 
+	-- Save the Width and Height of the Level
+	local level_size <const> = LDtk.get_size(level)
+	self.width = level_size["width"]
+	self.height = level_size["height"]
+	self.y = 0 -- Create level X and Y
+
 	-- Update local level attribute and build the new tile map
 	g.player_level = level
 	for layer_name, layer in pairs(ldtk.get_layers(level)) do
@@ -143,7 +150,7 @@ function World:goToLevel(level)
 			local layerSprite <const> = gfx.sprite.new()
 
 			if layer_name == 'Foreground' then
-				layer.zIndex = 150
+				layer.zIndex = Z_INDEXES.Foreground
 			end
 
 			layerSprite:setTilemap(tilemap)
@@ -155,13 +162,13 @@ function World:goToLevel(level)
 			-- Draw Solid Walls
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Solid', layer_name)
 			if emptyTiles then
-				gfx.sprite.addWallSprites(tilemap, emptyTiles)
+				self:addFullWallSprites(tilemap, emptyTiles)
 			end
 
 			-- Draw Half Walls
 			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Half', layer_name)
 			if emptyTiles then
-				self:addHalfWallSprites(layer, tilemap, emptyTiles)
+				self:addHalfWallSprites(tilemap, emptyTiles)
 			end
 		end
 	end
@@ -203,13 +210,6 @@ function World:goToLevel(level)
 		end
 	end
 
-	-- Save the Width and Height of the Level
-	local level_size <const> = LDtk.get_size(level)
-	self.width = level_size["width"]
-	self.height = level_size["height"]
-
-	self.y = 0 -- Create level X and Y
-
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
 	Health(2, 2)
@@ -217,6 +217,62 @@ function World:goToLevel(level)
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end
+
+
+
+function World:addFullWallSprites(tilemap, emptyTiles)
+	Fulls = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+	for _, tile in pairs(Fulls) do
+		tile.x = tile.x * 16
+		tile.y = tile.y * 16
+		tile.w = tile.w * 16
+		tile.h = tile.h * 16
+	
+		if tile.x == 0 then
+			tile.x = -16
+			tile.w = tile.w + 16
+		elseif tile.x + tile.w == self.width then
+			tile.w = tile.w + 16
+		end
+	
+		if tile.y == 0 then
+			tile.y = -64
+			tile.h = tile.h + 64
+		elseif tile.y + tile.h == 240 then
+			tile.h = tile.h + 16
+		end
+	
+		gfx.sprite.addEmptyCollisionSprite(tile.x, tile.y, tile.w, tile.h)
+	end
+end
+
+
+--- This Method is Used to Create Half Tile Hit Boxes for the Player to Interact With
+--- @param  tilemap     The Map of Tiles Used to Create the Rects
+--- @param  emptyTiles  The Tiles That are not Half Tiles
+function World:addHalfWallSprites(tilemap, emptyTiles)
+	Halfs = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+	for _, tile in pairs(Halfs) do
+		if tile.h > 1 then
+			for i = tile.h, 1, -1 do
+				local x <const> = tile.x * 16
+				local y <const> = (tile.y + (i - 1)) * 16
+				local w <const> = tile.w * 16
+				local h <const> = 16
+
+				Half(x, y, w, h)
+			end
+		else
+			tile.x = tile.x * 16
+			tile.y = tile.y * 16
+			tile.w = tile.w * 16
+			tile.h = tile.h * 16
+
+			Half(tile.x, tile.y, tile.w, tile.h)
+		end
+	end
+end
+
 
 
 --- This Method Adds the Developer Defined World Menu Items to the Playdate Pause Menu 
@@ -229,6 +285,7 @@ function World:addWorldMenuItems()
 		end
 	end)
 end
+
 
 
 --- Load the background for the level sent into the function
@@ -255,6 +312,7 @@ function World:loadBackground(level)
 end
 
 
+
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
 	if g.player_level ~= g.spawn_level then
@@ -269,33 +327,6 @@ function World:resetPlayer()
 	end
 end
 
-
---- This Method is Used to Create Half Tile Hit Boxes for the Player to Interact With
---- @param  layer       The Layer to Draw the Sprites onto
---- @param  tilemap     The Map of Tiles Used to Create the Rects
---- @param  emptyTiles  The Tiles That are not Half Tiles
-function World:addHalfWallSprites(layer, tilemap, emptyTiles)
-	Halfs = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
-	for _, tile in pairs(Halfs) do
-		if tile.h > 1 then
-			for i = tile.h, 1, -1 do
-				local x <const> = tile.x * 16
-				local y <const> = (tile.y + (i - 1)) * 16
-				local w <const> = tile.w * 16
-				local h <const> = 16
-
-				Half(x, y, w, h)
-			end
-		else
-			tile.x = tile.x * 16
-			tile.y = tile.y * 16
-			tile.w = tile.w * 16
-			tile.h = tile.h * 16
-
-			Half(tile.x, tile.y, tile.w, tile.h)
-		end
-	end
-end
 
 
 --- This Function is Called by the Player to Update the World X Coordinate
