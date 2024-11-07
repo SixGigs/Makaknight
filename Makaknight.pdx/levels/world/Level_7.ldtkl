@@ -53,22 +53,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Flag",
-					"__grid": [1,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 64, "h": 48 },
-					"__smartColor": "#BE4A2F",
-					"iid": "f80798c0-73f0-11ef-b3b5-257346a2efa5",
-					"width": 64,
-					"height": 48,
-					"defUid": 1401,
-					"px": [16,144],
-					"fieldInstances": [],
-					"__worldX": 2944,
-					"__worldY": -96
-				},
-				{
 					"__identifier": "Crown",
 					"__grid": [13,5],
 					"__pivot": [0,0],
