@@ -413,6 +413,16 @@ function Player:handleMovementAndCollisions()
 end
 
 
+function Player:reset()
+	self.hp = 100
+	self.sp = 100
+	self:setCollisionsEnabled(true)
+	self.dead = false
+	self.hurt = false
+	self.world:resetPlayer()
+end
+
+
 function Player:handleDamageCollision(obj)
 	self.hp = self.hp - obj.damage
 	if self.hp < 0 then
@@ -456,6 +466,13 @@ function Player:handleCrownCollision(obj)
 		self.win = true
 		g:switchScene(Win, 'fade')
 		obj:setVisible(false)
+
+		pd.timer.performAfterDelay(975, function()
+			self.hp = 100
+			self.sp = 100
+			g.player_level = g.spawn_level
+			self:moveTo(g.player_spawn_x, g.player_spawn_y)
+		end)
 	end
 end
 
@@ -497,12 +514,7 @@ function Player:die()
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
-		self.hp = 100
-		self.sp = 100
-		self:setCollisionsEnabled(true)
-		self.dead = false
-		self.hurt = false
-		self.world:resetPlayer()
+		self:reset()
 	end)
 end
 
