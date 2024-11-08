@@ -86,7 +86,6 @@ function Player:init(world)
 	self.touchingWall = false
 	self.weight = 72
 	self.dead = false
-	self.win = false
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -361,7 +360,8 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
 			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
 		elseif collisionTag == TAGS.Crown then
-			self:handleCrownCollision(collisionObject)
+			collisionObject:handleCollision(self)
+			-- self:handleCrownCollision(collisionObject)
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Wind then
@@ -457,23 +457,6 @@ function Player:handleFlagCollision(flag)
 	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
 
 	self.hp = 100 -- Top up the player health
-end
-
-
---- If the player collides with a crown, run this function
-function Player:handleCrownCollision(obj)
-	if not self.win then
-		self.win = true
-		g:switchScene(Win, 'fade')
-		obj:setVisible(false)
-
-		pd.timer.performAfterDelay(975, function()
-			self.hp = 100
-			self.sp = 100
-			g.player_level = g.spawn_level
-			self:moveTo(g.player_spawn_x, g.player_spawn_y)
-		end)
-	end
 end
 
 

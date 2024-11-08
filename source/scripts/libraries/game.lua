@@ -10,6 +10,7 @@ function Game:init()
 
 	self.transitionTime = 1000
 	self.transitioning = false
+	self.won = false
 
 	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
 		if status ~= nil then
@@ -48,6 +49,14 @@ function Game:startTransition(transition)
 
 	transitionTimer.timerEndedCallback = function()
 		self:loadNewScene()
+
+		if self.won then
+			g.player_hp = 100
+			g.player_sp = 100
+			g.player_level = g.spawn_level
+			g.player_x = g.player_spawn_x
+			g.player_y = g.player_spawn_y
+		end
 
 		if transition == "fade" then
 			Fade('in')
