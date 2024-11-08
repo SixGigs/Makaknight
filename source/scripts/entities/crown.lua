@@ -1,3 +1,4 @@
+local pd <const> = playdate
 local gfx <const> = playdate.graphics
 class('Crown').extends(AnimatedSprite)
 
@@ -9,7 +10,7 @@ function Crown:init(x, y)
 	Crown.super.init(self, gfx.imagetable.new('images/entities/animated/crown-table-48-48'))
 
 	-- Crown states, sprites, and animation speeds
-	self:addState("spin", 1, 32, {ts = 1})
+	self:addState(0, 1, 32, {ts = 1})
 	self:playAnimation()
 
 	-- Properties
@@ -19,4 +20,14 @@ function Crown:init(x, y)
 	self:setTag(TAGS.Crown)
 	self:setCollideRect(8, 8, 32, 32)
 	self:add()
+end
+
+
+
+function Crown:handleCollision(e)
+	if not g.won then
+		g.won = true
+		g:switchScene(Win, 'fade')
+		self:setVisible(false)
+	end
 end
