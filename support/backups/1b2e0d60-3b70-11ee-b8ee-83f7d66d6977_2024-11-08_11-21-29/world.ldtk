@@ -1779,9 +1779,9 @@
 				{ "value": 13, "identifier": "Grass_back_half", "color": "#193C3E", "tile": { "tilesetUid": 1, "x": 0, "y": 384, "w": 16, "h": 16 }, "groupUid": 3 },
 				{ "value": 15, "identifier": "Cave_bridge", "color": "#68386C", "tile": { "tilesetUid": 1, "x": 32, "y": 80, "w": 16, "h": 16 }, "groupUid": 4 },
 				{ "value": 10, "identifier": "Grass_bridge", "color": "#3E8948", "tile": { "tilesetUid": 1, "x": 32, "y": 288, "w": 16, "h": 16 }, "groupUid": 4 },
-				{ "value": 18, "identifier": "Dungeon_pillar", "color": "#68386C", "tile": { "tilesetUid": 1, "x": 208, "y": 320, "w": 16, "h": 16 }, "groupUid": 4 },
 				{ "value": 16, "identifier": "Dungeon_tiles", "color": "#BE4A2F", "tile": { "tilesetUid": 1, "x": 192, "y": 208, "w": 16, "h": 16 }, "groupUid": 5 },
 				{ "value": 17, "identifier": "Dungeon_half", "color": "#A22633", "tile": { "tilesetUid": 1, "x": 208, "y": 304, "w": 16, "h": 16 }, "groupUid": 5 },
+				{ "value": 18, "identifier": "Dungeon_pillar", "color": "#68386C", "tile": { "tilesetUid": 1, "x": 208, "y": 320, "w": 16, "h": 16 }, "groupUid": 5 },
 				{
 					"value": 19,
 					"identifier": "Dungeon_back_half",
@@ -1795,7 +1795,7 @@
 				{ "uid": 2, "identifier": "Desert", "color": null },
 				{ "uid": 3, "identifier": "Grass", "color": null },
 				{ "uid": 5, "identifier": "Dungeon", "color": null },
-				{ "uid": 4, "identifier": "Bridges_Pillars", "color": null }
+				{ "uid": 4, "identifier": "Bridges", "color": null }
 			],
 			"autoRuleGroups": [
 				{
@@ -25789,15 +25789,15 @@
 			"worldDepth": 0,
 			"pxWid": 400,
 			"pxHei": 240,
-			"__bgColor": "#000000",
-			"bgColor": "#000000",
+			"__bgColor": "#696A79",
+			"bgColor": null,
 			"useAutoIdentifier": true,
-			"bgRelPath": null,
-			"bgPos": null,
+			"bgRelPath": "dungeon-background-400-240.png",
+			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
-			"__smartColor": "#737373",
-			"__bgPos": null,
+			"__smartColor": "#ADADB5",
+			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_7.ldtkl",
 			"fieldInstances": [],
 			"layerInstances": null,
