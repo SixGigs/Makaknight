@@ -35,7 +35,7 @@ function Flag:init(x, y, entity, world)
 	end
 
 	-- Flag properties
-	self:setCenter(0, 0)
+	self:setCenter(0.375, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Flag)
 	self:setTag(TAGS.Flag)

@@ -229,10 +229,10 @@ function World:addFullWallSprites(tilemap, emptyTiles)
 		tile.h = tile.h * 16
 	
 		if tile.x == 0 then
-			tile.x = -16
-			tile.w = tile.w + 16
+			tile.x = -32
+			tile.w = tile.w + 32
 		elseif tile.x + tile.w == self.width then
-			tile.w = tile.w + 16
+			tile.w = tile.w + 32
 		end
 	
 		if tile.y == 0 then
@@ -255,10 +255,24 @@ function World:addHalfWallSprites(tilemap, emptyTiles)
 	for _, tile in pairs(Halfs) do
 		if tile.h > 1 then
 			for i = tile.h, 1, -1 do
-				local x <const> = tile.x * 16
-				local y <const> = (tile.y + (i - 1)) * 16
-				local w <const> = tile.w * 16
-				local h <const> = 16
+				local x = tile.x * 16
+				local y = (tile.y + (i - 1)) * 16
+				local w = tile.w * 16
+				local h = 16
+				
+				if x == 0 then
+					x = -32
+					w = w + 32
+				elseif x + w == self.width then
+					w = w + 32
+				end
+				
+				if y == 0 then
+					y = -64
+					h = h + 64
+				elseif y + h == 240 then
+					h = h + 16
+				end
 
 				Half(x, y, w, h)
 			end
@@ -267,6 +281,20 @@ function World:addHalfWallSprites(tilemap, emptyTiles)
 			tile.y = tile.y * 16
 			tile.w = tile.w * 16
 			tile.h = tile.h * 16
+			
+			if tile.x == 0 then
+				tile.x = -32
+				tile.w = tile.w + 32
+			elseif tile.x + tile.w == self.width then
+				tile.w = tile.w + 32
+			end
+			
+			if tile.y == 0 then
+				tile.y = -64
+				tile.h = tile.h + 64
+			elseif tile.y + tile.h == 240 then
+				tile.h = tile.h + 16
+			end
 
 			Half(tile.x, tile.y, tile.w, tile.h)
 		end
