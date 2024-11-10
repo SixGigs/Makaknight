@@ -22,7 +22,7 @@ function Bubble:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Bubble)
 	self:setTag(TAGS.Bubble)
-	self:setCollideRect(0, 4, 16, 16)
+	self:setCollideRect(0, 4, 16, 2)
 	self:add()
 end
 
@@ -31,7 +31,7 @@ end
 --- @param entity table The entity is passed into this function to manage the pick-up
 function Bubble:pop(e)
 	if self.currentState == 'wobble' then
-		e.yVelocity = -270
+		e.yVelocity = -330
 		self:changeState('pop')
 	end
 end

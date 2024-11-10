@@ -140,7 +140,7 @@ function Game:load()
 	local gd <const> = pd.datastore.read()
 
 	self.spawn_level = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
-	self.player_spawn_x = (gd and (gd.spawnX and gd.spawnX or 3 * 16 + 8) or 3 * 16 + 8)
+	self.player_spawn_x = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
 	self.player_spawn_y = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
 	self.player_level = (gd and (gd.level and gd.level or self.spawn_level) or self.spawn_level)
 	self.player_facing = (gd and (gd.face and gd.face or 0) or 0)
