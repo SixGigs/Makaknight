@@ -36,9 +36,9 @@ function Player:init(world)
 	self:addState("dbJump", 59, 74, {ts = 1, l = 1})
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
 	self:addState("run", 77, 88, {ts = 1})
+	self:addState("dive", 89, 89)
 
 	-- The following are temporary sprites that will be animated later
-	self:addState("dive", 40, 40, {ts = 1})
 	self:addState("die", 29, 29, {ts = 2, l = 1, na = "dead"})
 	self:addState("dead", 30, 30)
 	self:addState("spawn", 30, 31, {ts = 3, l = 1, na = "idle"})
@@ -128,7 +128,7 @@ function Player:init(world)
 	self.rollRecharge = 600
 
 	-- Dive
-	self.diveSpeed = 750
+	self.diveSpeed = 900
 	self.diveHorizontal = 160
 
 	-- Jump attributes
