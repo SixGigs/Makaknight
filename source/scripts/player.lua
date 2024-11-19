@@ -35,9 +35,9 @@ function Player:init(world)
 	self:addState("roll", 43, 58, {ts = 1, l = 1, na = "midJump"})
 	self:addState("dbJump", 59, 74, {ts = 1, l = 1})
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
+	self:addState("run", 77, 88, {ts = 1})
 
 	-- The following are temporary sprites that will be animated later
-	self:addState("run", 17, 28, {ts = 1})
 	self:addState("dive", 40, 40, {ts = 1})
 	self:addState("die", 29, 29, {ts = 2, l = 1, na = "dead"})
 	self:addState("dead", 30, 30)
@@ -78,6 +78,8 @@ function Player:init(world)
 
 	-- Attributes
 	self.hurt = false
+	self.holster = ''
+	self.hand = ''
 	self.hp = g.player_hp
 	self.sp = g.player_sp
 	self.globalFlip = g.player_facing
@@ -93,7 +95,7 @@ function Player:init(world)
 	self.gravity = 900
 	self.jumpVelocity = -220
 	self.minimumAirSpeed = 15
-	self.maxSpeed = 150
+	self.maxSpeed = 180
 	self.walkSpeed = 90
 	self.jumpSpeed = 112
 	self.drag = 120
