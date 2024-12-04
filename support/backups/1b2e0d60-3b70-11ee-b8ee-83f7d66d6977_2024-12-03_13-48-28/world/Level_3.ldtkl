@@ -220,6 +220,22 @@
 					],
 					"__worldX": 1584,
 					"__worldY": -112
+				},
+				{
+					"__identifier": "Flag",
+					"__grid": [16,9],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 16, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "135c9e40-9b00-11ef-a6a6-270c1a57a3c0",
+					"width": 16,
+					"height": 48,
+					"defUid": 1401,
+					"px": [256,144],
+					"fieldInstances": [],
+					"__worldX": 1520,
+					"__worldY": -96
 				}
 			]
 		},

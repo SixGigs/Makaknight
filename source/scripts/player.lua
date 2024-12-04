@@ -37,10 +37,10 @@ function Player:init(world)
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
 	self:addState("run", 77, 88, {ts = 1})
 	self:addState("dive", 89, 89)
+	self:addState("die", 90, 94, {ts = 2, l = 1, na = "dead"})
+	self:addState("dead", 95, 95)
 
 	-- The following are temporary sprites that will be animated later
-	self:addState("die", 29, 29, {ts = 2, l = 1, na = "dead"})
-	self:addState("dead", 30, 30)
 	self:addState("spawn", 30, 31, {ts = 3, l = 1, na = "idle"})
 	self:addState("punch", 74, 77, {ts = 1})
 	self:addState("duckPunch", 78, 81, {ts = 1})

@@ -58,9 +58,9 @@ function Flag:hoist(world, flip)
 
 	-- Set the X value of the spawn
 	if flip == 0 then
-		g.player_spawn_x = self.x + 10
+		g.player_spawn_x = self.x - 8
 	else
-		g.player_spawn_x = self.x + 54
+		g.player_spawn_x = self.x + 24
 	end
 end
 
