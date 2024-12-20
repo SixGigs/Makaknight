@@ -116,7 +116,7 @@ function Bar:init(x, y, i)
 	self:playAnimation()
 
 	-- Bar attributes
-	self.timerMax = 90
+	self.timerMax = 120
 	self.timer = 60
 
 	-- Bar properties

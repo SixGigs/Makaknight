@@ -285,7 +285,6 @@ function Player:handleState()
 			end
 		end
 
-		self:variableJump()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
@@ -468,27 +467,17 @@ function Player:handleFlagCollision(flag)
 end
 
 
---- Variable jump height handler
-function Player:variableJump()
-	if self.jumpCounter >= (self.jumpCounterMax * g.fps) then
-		self.jumpCounter = 0
-		self.jumping = false
-	end
-
-	if self.jumping then
-		self.jumpCounter = self.jumpCounter + 1
-	end
-end
-
-
 function Player:handleVariableJump()
-	if pd.buttonJustReleased(pd.kButtonA) then
-		self.jumpCounter = 0
-		self.jumping = false
+	if pd.buttonJustReleased(pd.kButtonA) or self.jumpCounter > (self.jumpCounterMax * g.fps) then
+		if self.jumping then
+			self.jumpCounter = 0
+			self.jumping = false
+		end
 	end
 
 	if self.jumping then
 		self.yVelocity = self.jumpVelocity
+		self.jumpCounter = self.jumpCounter + 1
 	end
 end
 
@@ -561,6 +550,8 @@ function Player:handleGroundInput()
 	-- 		self:changeToPunchState("punch")
 	-- 	end
 	-- end
+	
+	self:handleVariableJump()
 end
 
 
@@ -850,9 +841,9 @@ end
 function Player:regenerateStamina()
 	if self.sp < 100 and not self:staminaBlocked() then
 		if self.currentState ~= "duck" then
-			self.sp = self.sp + 20 * dt
+			self.sp = self.sp + 30 * dt
 		else
-			self.sp = self.sp + 40 * dt
+			self.sp = self.sp + 60 * dt
 		end
 	end
 end
