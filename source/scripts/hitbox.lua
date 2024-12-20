@@ -6,7 +6,10 @@ local gfx <const> = playdate.graphics
 class('Hitbox').extends(gfx.sprite)
 
 --- Initialise the hit box object using the data given
-function Hitbox:init(x, y, width, height, duration)		
+function Hitbox:init(x, y, width, height, damage, duration)		
+	-- Give the hit box damage
+	self.damage = damage
+	
 	-- Create the hit box sprite
 	self:moveTo(x, y)
 	self:setCollideRect(0, 0, width, height)

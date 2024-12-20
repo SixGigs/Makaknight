@@ -14,6 +14,7 @@ function Butterfly:init(x, y, e)
 	self:playAnimation()
 
 	self.weight = 1
+	self.hp = 1
 
 	self:setCollideRect(1, 1, 2, 2)
 end

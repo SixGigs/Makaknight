@@ -41,9 +41,9 @@ function Player:init(world)
 	self:addState("dead", 95, 95)
 	self:addState("spawn", 96, 101, {ts = 3, l = 1, na = "idle"})
 	self:addState("ready", 102, 111, {ts = 3})
+	self:addState("punch", 112, 115, {ts = 1, l = 1})
 
 	-- The following are temporary sprites that will be animated later
-	self:addState("punch", 74, 77, {ts = 1})
 	self:addState("duckPunch", 78, 81, {ts = 1})
 	self:playAnimation()
 
@@ -66,6 +66,7 @@ function Player:init(world)
 	-- Roll state finish process
 	-- self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
 	self.states["dbJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
+	self.states["contact"].onAnimationEndEvent = function(self) self:changeToIdleState() end
 	self.states["hurt"].onAnimationEndEvent = function(self) 
 		self.hurt = false
 		self.doubleJumpAvailable = false
@@ -96,7 +97,7 @@ function Player:init(world)
 	self.gravity = 900
 	self.jumpVelocity = -220
 	self.minimumAirSpeed = 15
-	self.maxSpeed = 180
+	self.maxSpeed = 195
 	self.walkSpeed = 90
 	self.jumpSpeed = 112
 	self.drag = 120
@@ -131,9 +132,6 @@ function Player:init(world)
 	self.rollBuffer = 0
 	self.rollRecharge = 600
 	self.rollStaminaCost = 20
-	
-	-- Duck
-	self.duckStaminaCost = 2
 
 	-- Dive
 	self.diveSpeed = 900
@@ -171,9 +169,13 @@ function Player:init(world)
 	self.dashDrag = 1134
 
 	-- Punch
-	self.punchAvailable = false
-	self.punchBufferAmount = 3
+	self.punchAvailable = true
+	self.punchStaminaCost = 5
+	self.punchFrameDuration = 30
+	self.punchBufferAmount = 5
 	self.punchBuffer = 0
+	self.punchRecharge = 270
+	self.punchDamage = 5
 
 	-- Left & Right buffers
 	self.leftBuffer = 0
@@ -317,10 +319,7 @@ function Player:handleState()
 	else
 		self:applyGravity()
 		if self.currentState ~= 'roll' then self:handleGroundInput() end
-
-		if self.yVelocity > 90 then
-			self:changeState("fall")
-		end
+		if self.yVelocity > 90 and self.currentState ~= 'roll' then self:changeState("fall") end
 	end
 end
 
@@ -545,12 +544,16 @@ function Player:handleGroundInput()
 		end
 	end
 
-	-- if self:playerPunched() then
-	-- 	if pd.buttonJustReleased(pd.kButtonB) and not self.punchAvailable then
-	-- 		self:changeToPunchState("punch")
-	-- 	end
-	-- end
-	
+	if self:playerPunched() then
+		if pd.buttonJustReleased(pd.kButtonB) then
+			self:changeToPunchState("punch")
+		end
+	end
+
+	if pd.buttonJustReleased(pd.kButtonLeft) or pd.buttonJustReleased(pd.kButtonRight) then
+		self.xVelocity = 0
+	end
+
 	self:handleVariableJump()
 end
 
@@ -700,12 +703,9 @@ end
 
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
-	if self.sp > self.duckStaminaCost then
-		self.xVelocity = 0
-		self:setCollideRect(38, 61, 4, 19)
-		self:changeState("duckDown")
-		self:deductStamina(self.duckStaminaCost)
-	end
+	self.xVelocity = 0
+	self:setCollideRect(38, 61, 4, 19)
+	self:changeState("duckDown")
 end
 
 
@@ -715,19 +715,19 @@ function Player:changeToRollState(direction)
 	if self.sp > self.rollStaminaCost then
 		self.rollAvailable = false
 		self:setCollideRect(38, 61, 4, 19)
-	
+
 		if direction == "left" then
 			self.xVelocity = -self.rollSpeed
 		elseif direction == "right" then
 			self.xVelocity = self.rollSpeed
 		end
-	
+
 		pd.timer.performAfterDelay(490, function()
 			pd.timer.performAfterDelay(self.rollRecharge, function()
 				self.rollAvailable = true
 			end)
 		end)
-	
+
 		self:changeState("roll")
 		self:deductStamina(self.rollStaminaCost)
 	end
@@ -743,32 +743,26 @@ end
 
 --- Changes the player to a punch state
 function Player:changeToPunchState(state)
-	self.punchAvailable = true
-	self.xVelocity = 0
+	if self.sp > self.punchStaminaCost then
+		if self.punchAvailable then
+			local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
+			local hitboxY = self.y + 9
+			if state == "punch" then
+				hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 24
+				hitboxY = self.y + 16
+			end
+	
+			Hitbox(hitboxX, hitboxY, 12, 7, self.punchDamage, self.punchFrameDuration)
 
-	pd.timer.performAfterDelay(75, function()
-		if pd.buttonIsPressed(pd.kButtonDown) then
-			self:changeToDuckingState()
-		else
-			self:setCollideRect(38, 44, 4, 36)
-			self:changeToIdleState()
+			self.punchAvailable = false
+			pd.timer.performAfterDelay(self.punchRecharge, function()
+				self.punchAvailable = true
+			end)
+	
+			self:changeState(state)
+			self:deductStamina(self.punchStaminaCost)
 		end
-	end)
-
-	pd.timer.performAfterDelay(60, function()
-		self.punchAvailable = false
-	end)
-
-	local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
-	local hitboxY = self.y + 7
-	if state == "punch" then
-		hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 20
-		hitboxY = self.y + 5
 	end
-
-	Hitbox(hitboxX, hitboxY, 8, 8, 50)
-
-	self:changeState(state)
 end
 
 
