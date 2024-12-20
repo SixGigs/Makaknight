@@ -13,10 +13,13 @@ end
 
 function Stamina:update()
 	self:updateVisibility()
+
 	if self.currentState ~= tostring(math.floor(g.player_sp)) then
-		if math.floor(g.player_sp) < tonumber(self.currentState) then			
-			self.timer = self.timerMax
-			self:setVisible(true)
+		if math.floor(g.player_sp) < tonumber(self.currentState) then
+			if g.player_sp < 30 then
+				self.timer = self.timerMax
+				self:setVisible(true)
+			end
 		end
 
 		self:changeState(tostring(math.floor(g.player_sp)))		

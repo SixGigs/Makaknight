@@ -40,6 +40,7 @@ function Player:init(world)
 	self:addState("die", 90, 94, {ts = 2, l = 1, na = "dead"})
 	self:addState("dead", 95, 95)
 	self:addState("spawn", 96, 101, {ts = 3, l = 1, na = "idle"})
+	self:addState("ready", 102, 111, {ts = 3})
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("punch", 74, 77, {ts = 1})
@@ -121,11 +122,18 @@ function Player:init(world)
 	-- Buffer
 	self.bufferAmount = 2
 
+	-- Run
+	self.runStaminaCost = 7.5
+
 	-- Roll
 	self.rollAvailable = true
 	self.rollSpeed = 120
 	self.rollBuffer = 0
 	self.rollRecharge = 600
+	self.rollStaminaCost = 20
+	
+	-- Duck
+	self.duckStaminaCost = 2
 
 	-- Dive
 	self.diveSpeed = 900
@@ -136,6 +144,7 @@ function Player:init(world)
 	self.jumpCounter = 0
 	self.jumpCounterMax = 0.1
 	self.jumpBufferAmount = 3
+	self.jumpStaminaCost = 5
 	self.jumpBuffer = 0
 	self.jumpStates = {
 		["jump"] = true,
@@ -151,6 +160,7 @@ function Player:init(world)
 	}
 
 	-- Double Jump
+	self.doubleJumpStaminaCost = 2.5
 	self.doubleJumpAvailable = true
 	self.doubleJumpVelocity = -240
 
@@ -288,10 +298,6 @@ function Player:handleState()
 			self:changeState("midJump")
 		end
 	elseif self.currentState == "duck" then
-		if self.sp < 100 then
-			self.sp = self.sp + 20 * dt
-		end
-
 		self.xVelocity = 0
 		self:applyGravity()
 		self:handleDuckInput()
@@ -510,34 +516,36 @@ function Player:handleGroundInput()
 		self:changeToJumpState()
 	elseif pd.buttonIsPressed(pd.kButtonB) then
 		if pd.buttonIsPressed(pd.kButtonLeft) then
-			if self.sp > 10 then
+			if self.sp > self.runStaminaCost then
 				self:changeToRunState("left")
-				self.sp = self.sp - 15 * dt
-				self:setStaminaBuffer()
+				self:deductStamina(self.runStaminaCost * dt)
 			else
 				self:changeToWalkState("left")
 			end
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
-			if self.sp > 10 then
+			if self.sp > self.runStaminaCost then
 				self:changeToRunState("right")
-				self.sp = self.sp - 15 * dt
-				self:setStaminaBuffer()
+				self:deductStamina(self.runStaminaCost * dt)
 			else
 				self:changeToWalkState("right")
 			end
+		else
+			self:changeToReadyState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:changeToWalkState("left")
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToWalkState("right")
-		elseif pd.buttonIsPressed(pd.kButtonDown) then
-			self:changeToDuckingState()
+		else
+			if self.currentState ~= "idle" then
+				self:changeToIdleState()
+			end
 		end
 	end
 
-	if pd.buttonJustReleased(pd.kButtonLeft) or pd.buttonJustReleased(pd.kButtonRight) then
-		self:changeToIdleState()
+	if pd.buttonIsPressed(pd.kButtonDown) then
+		self:changeToDuckingState()
 	end
 
 	if self.rollAvailable and self:playerRolled() then
@@ -593,23 +601,50 @@ end
 
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
-	self.xVelocity = 0
-	self:setCollideRect(38, 44, 4, 36)
-	self:changeState("idle")
+	if self.currentState ~= "idle" then
+		self.xVelocity = 0
+		self:setCollideRect(38, 44, 4, 36)
+		self:changeState("idle")
+	end
+end
+
+
+--- Change the player to a ready state
+function Player:changeToReadyState()
+	if self.currentState ~= "ready" then
+		self.xVelocity = 0
+		self:setCollideRect(38, 44, 4, 36)
+		self:changeState("ready")
+	end
 end
 
 
 --- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
 --- @param direction string Contains the direction the player is moving in as a string
 function Player:changeToWalkState(direction)
-	self.xVelocity = 0
 	if direction == "left" then
-		self.xVelocity = self.xVelocity - self.walkSpeed
+		self.xVelocity = -self.walkSpeed
 	elseif direction == "right" then
-		self.xVelocity = self.xVelocity + self.walkSpeed
+		self.xVelocity = self.walkSpeed
 	end
 
-	self:changeState("walk")
+	if self.currentState ~= "walk" then
+		self:changeState("walk")
+	end
+end
+
+
+--- Change the player into a running state
+function Player:changeToRunState(direction)
+	if direction == "left" then
+		self.xVelocity = -self.maxSpeed
+	elseif direction == "right" then
+		self.xVelocity = self.maxSpeed
+	end
+
+	if self.currentState ~= "run" then
+		self:changeState("run")
+	end
 end
 
 
@@ -634,27 +669,13 @@ function Player:changeToHurtState()
 end
 
 
---- Change the player into a running state
-function Player:changeToRunState(direction)
-	if direction == "left" then
-		self.xVelocity = -self.maxSpeed
-	elseif direction == "right" then
-		self.xVelocity = self.maxSpeed
-	end
-
-	self:setStaminaBuffer()
-	self:changeState("run")
-end
-
-
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
-	if self.sp > 10 then
+	if self.sp > self.jumpStaminaCost then
 		self.jumping = true
 		self.jumpBuffer = 0
 		self.yVelocity = self.jumpVelocity
-		self.sp = self.sp - 10
-		self:setStaminaBuffer()
+		self:deductStamina(self.jumpStaminaCost)
 	end
 end
 
@@ -668,13 +689,12 @@ end
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
-	if self.sp > 5 then
+	if self.sp > self.doubleJumpStaminaCost then
 		self.jumpBuffer = 0
 		self.doubleJumpAvailable = false
 		self.yVelocity = self.doubleJumpVelocity
 		self:changeState("dbJump")
-		self.sp = self.sp - 5
-		self:setStaminaBuffer()
+		self:deductStamina(self.doubleJumpStaminaCost)		
 	end
 end
 
@@ -689,11 +709,11 @@ end
 
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
-	if self.sp > 2 then
+	if self.sp > self.duckStaminaCost then
 		self.xVelocity = 0
 		self:setCollideRect(38, 61, 4, 19)
 		self:changeState("duckDown")
-		self.sp = self.sp - 1
+		self:deductStamina(self.duckStaminaCost)
 	end
 end
 
@@ -701,7 +721,7 @@ end
 --- Change the player into a roll state
 --- @param  direction  string  The direction to roll in
 function Player:changeToRollState(direction)
-	if self.sp > 10 then
+	if self.sp > self.rollStaminaCost then
 		self.rollAvailable = false
 		self:setCollideRect(38, 61, 4, 19)
 	
@@ -718,8 +738,7 @@ function Player:changeToRollState(direction)
 		end)
 	
 		self:changeState("roll")
-		self.sp = self.sp - 10
-		self:setStaminaBuffer()
+		self:deductStamina(self.rollStaminaCost)
 	end
 end
 
@@ -830,6 +849,16 @@ end
 
 function Player:regenerateStamina()
 	if self.sp < 100 and not self:staminaBlocked() then
-		self.sp = self.sp + 10 * dt
+		if self.currentState ~= "duck" then
+			self.sp = self.sp + 20 * dt
+		else
+			self.sp = self.sp + 40 * dt
+		end
 	end
+end
+
+
+function Player:deductStamina(amount)
+	self.sp = self.sp - amount
+	self:setStaminaBuffer()
 end
