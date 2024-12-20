@@ -18,7 +18,6 @@ function Animal:init(x, y, e)
 
 	-- Animal Attributes
 	self.globalFlip = tonumber(e.fields.facing)
-	self.dead = false
 
 	-- Collision Attribute Table
 	self.overlapTags = {
@@ -68,7 +67,7 @@ end
 function Animal:update()
 	self:updateAnimation()
 
-	if self.dead then
+	if self.hp <= 0 then
 		self:remove()
 	end
 
@@ -106,7 +105,7 @@ function Animal:handleMovementAndCollisions()
 
 		-- Process the collision based on the collision tag
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
-			self.dead = true
+			self:handleDamageCollision(collisionObject)
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
@@ -128,12 +127,20 @@ function Animal:handleMovementAndCollisions()
 
 	-- Let's delete the Animal if they travel off the screen
 	if self.x < -8 then
-		self.dead = true
+		self.hp = 0
 	elseif self.x > 408 then
-		self.dead = true
+		self.hp = 0
 	elseif self.y < -12 then
-		self.dead = true
+		self.hp = 0
 	elseif self.y > 264 then
-		self.dead = true
+		self.hp = 0
+	end
+end
+
+
+function Animal:handleDamageCollision(obj)
+	self.hp = self.hp - obj.damage
+	if self.hp < 0 then
+		self.hp = 0
 	end
 end

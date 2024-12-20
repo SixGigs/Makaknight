@@ -20,6 +20,7 @@ function Reptile:init(x, y, e)
 
 	self.gravity = 900
 	self.weight = 2
+	self.hp = 2
 
 	self:setCollideRect(3, 5, 10, 3)
 end

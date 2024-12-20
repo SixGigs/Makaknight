@@ -117,7 +117,7 @@ function Bar:init(x, y, i)
 
 	-- Bar attributes
 	self.timerMax = 120
-	self.timer = 60
+	self.timer = 45
 
 	-- Bar properties
 	self:setCenter(0, 0)

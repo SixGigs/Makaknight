@@ -18,7 +18,7 @@ function Fan:init(x, y, e)
 	self.damage = (e.fields.damage and e.fields.damage or e)
 
 	-- Fan Properties
-	self:setCollideRect(0, 8, 32, 8)
+	self:setCollideRect(0, 0, 32, 6)
 	self:setCenter(0, 0)
 	self:moveTo(x, y + 6)
 	self:setZIndex(Z_INDEXES.Hazard)
