@@ -167,6 +167,7 @@ function Player:init(world)
 	self.dashSpeed = 360
 	self.dashMinimumSpeed = 105
 	self.dashDrag = 1134
+	self.dashDamage = 20
 
 	-- Punch
 	self.punchAvailable = true

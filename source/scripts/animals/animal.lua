@@ -105,7 +105,11 @@ function Animal:handleMovementAndCollisions()
 
 		-- Process the collision based on the collision tag
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
-			self:handleDamageCollision(collisionObject)
+			self:handleDamageCollision(collisionObject.damage)
+		elseif collisionTag == TAGS.Player then
+			if collisionObject.currentState == 'dash' then
+				self:handleDamageCollision(collisionObject.dashDamage)
+			end
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
@@ -138,8 +142,8 @@ function Animal:handleMovementAndCollisions()
 end
 
 
-function Animal:handleDamageCollision(obj)
-	self.hp = self.hp - obj.damage
+function Animal:handleDamageCollision(damage)
+	self.hp = self.hp - damage
 	if self.hp < 0 then
 		self.hp = 0
 	end
