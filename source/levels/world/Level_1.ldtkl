@@ -99,6 +99,38 @@
 					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
 					"__worldX": 464,
 					"__worldY": -240
+				},
+				{
+					"__identifier": "Stalactite",
+					"__grid": [20,4],
+					"__pivot": [0,0],
+					"__tags": ["Cave"],
+					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "a1565460-c210-11ef-9d97-a9fd5b8e8861",
+					"width": 16,
+					"height": 16,
+					"defUid": 3601,
+					"px": [320,64],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
+					"__worldX": 720,
+					"__worldY": -176
+				},
+				{
+					"__identifier": "Stalactite",
+					"__grid": [15,0],
+					"__pivot": [0,0],
+					"__tags": ["Cave"],
+					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "a72c7860-c210-11ef-9d97-abe979da6c6d",
+					"width": 16,
+					"height": 16,
+					"defUid": 3601,
+					"px": [240,0],
+					"fieldInstances": [{ "__identifier": "damage", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3602, "realEditorValues": [] }],
+					"__worldX": 640,
+					"__worldY": -240
 				}
 			]
 		},
