@@ -41,7 +41,7 @@ function Player:init(world)
 	self:addState("dead", 95, 95)
 	self:addState("spawn", 96, 101, {ts = 3, l = 1, na = "idle"})
 	self:addState("ready", 102, 111, {ts = 3})
-	self:addState("punch", 112, 115, {ts = 1, l = 1})
+	self:addState("punch", 112, 114, {ts = 1, l = 1})
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -172,7 +172,7 @@ function Player:init(world)
 	self.punchAvailable = true
 	self.punchStaminaCost = 5
 	self.punchFrameDuration = 30
-	self.punchBufferAmount = 5
+	self.punchBufferAmount = 4
 	self.punchBuffer = 0
 	self.punchRecharge = 270
 	self.punchDamage = 5
