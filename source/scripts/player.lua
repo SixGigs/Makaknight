@@ -2,14 +2,19 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
+-- Create hit box constants
+local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
+local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
+
+
+
 -- Create the player class
 class("Player").extends(AnimatedSprite)
 
-
 --- The player is initialised with this method
---- @param x     integer The X coordinate to spawn the player
---- @param y     integer The Y coordinate to spawn the player
---- @param world table   The game manager is passed in to manage player on object interactions
+--- @param  x      integer  The X coordinate to spawn the player
+--- @param  y      integer  The Y coordinate to spawn the player
+--- @param  world  table    The game manager is passed in to manage player on object interactions
 function Player:init(world)
 	Player.super.init(self, gfx.imagetable.new('images/player/player-table-80-80'))
 
@@ -37,9 +42,9 @@ function Player:init(world)
 	self:addState("hurt", 75, 76, {ts = 1, l = 12, na = "fall"})
 	self:addState("run", 77, 88, {ts = 1})
 	self:addState("dive", 89, 89)
-	self:addState("die", 90, 94, {ts = 2, l = 1, na = "dead"})
+	self:addState("die", 90, 94, {ts = 3, l = 1, na = "dead"})
 	self:addState("dead", 95, 95)
-	self:addState("spawn", 96, 101, {ts = 3, l = 1, na = "idle"})
+	self:addState("spawn", 96, 101, {ts = 4, l = 1, na = "idle"})
 	self:addState("ready", 102, 111, {ts = 3})
 	self:addState("punch", 112, 114, {ts = 1, l = 1})
 
@@ -64,7 +69,6 @@ function Player:init(world)
 	self.states["fall3"].onFrameChangedEvent = function(self) if self.yVelocity < 150 then self:changeState("fall2") end end
 
 	-- Roll state finish process
-	-- self.states["roll"].onAnimationEndEvent = function(self) self:changeToMidJumpState() end
 	self.states["dbJump"].onAnimationEndEvent = function(self) self:changeState("midJump") end
 	self.states["contact"].onAnimationEndEvent = function(self) self:changeToIdleState() end
 	self.states["hurt"].onAnimationEndEvent = function(self) 
@@ -76,7 +80,7 @@ function Player:init(world)
 	self:moveTo(g.player_x, g.player_y)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
-	self:setCollideRect(38, 44, 4, 36)
+	self:setHitBox(standing)
 
 	-- Attributes
 	self.hurt = false
@@ -97,11 +101,11 @@ function Player:init(world)
 	self.gravity = 900
 	self.jumpVelocity = -220
 	self.minimumAirSpeed = 15
-	self.maxSpeed = 195
 	self.walkSpeed = 90
+	self.maxSpeed = 195
 	self.jumpSpeed = 112
 	self.drag = 120
-	
+
 	-- Collision attributes
 	self.overlapTags = {
 		[TAGS.Hazard] = true,
@@ -164,8 +168,8 @@ function Player:init(world)
 
 	-- Dash
 	self.dashAvailable = true
-	self.dashSpeed = 360
 	self.dashMinimumSpeed = 105
+	self.dashSpeed = 360
 	self.dashDrag = 1134
 	self.dashDamage = 20
 
@@ -174,8 +178,8 @@ function Player:init(world)
 	self.punchStaminaCost = 5
 	self.punchFrameDuration = 30
 	self.punchBufferAmount = 4
+	self.punchRecharge = 195
 	self.punchBuffer = 0
-	self.punchRecharge = 270
 	self.punchDamage = 5
 
 	-- Left & Right buffers
@@ -184,6 +188,7 @@ function Player:init(world)
 	self.upBuffer = 0
 	
 	-- Status Buffer
+	self.setStaminaBuffer = false
 	self.staminaBufferAmount = 60
 	self.staminaBuffer = 0
 end
@@ -210,10 +215,6 @@ end
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
 	self:updateAnimation()
-
-	if self.sp > 100 then
-		self.sp = 100
-	end
 
 	g.player_hp = self.hp
 	g.player_sp = self.sp
@@ -255,8 +256,12 @@ function Player:updateBuffers()
 	if pd.buttonJustPressed(pd.kButtonRight) then
 		self.rightBuffer = self.bufferAmount
 	end
+	
+	if self.setStaminaBuffer then
+		self.staminaBuffer = self.staminaBufferAmount
+		self.setStaminaBuffer = false
+	end
 end
-
 
 --- These methods return true if the buffer is greater than zero
 function Player:playerPunched() return self.punchBuffer > 0 end
@@ -265,9 +270,6 @@ function Player:playerPressedLeft() return self.leftBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerRolled() return self.rollBuffer > 0 end
 function Player:staminaBlocked() return self.staminaBuffer > 0 end
-
---- Set Status Bar Buffers
-function Player:setStaminaBuffer() self.staminaBuffer = self.staminaBufferAmount end
 
 
 --- The state handler changes the functions running on the player based on state
@@ -306,11 +308,12 @@ function Player:handleState()
 
 		if self.yVelocity > 90 then
 			self:changeState("fall")
+		elseif self.yVelocity < 0 then
+			self:changeState('jump')
 		end
 	elseif self.currentState == "dbJump" then
 		if self.touchingGround then
-			self:setCollideRect(38, 44, 4, 36)
-			self:changeToIdleState()
+			self:changeToDuckState()
 		end
 
 		self:applyGravity()
@@ -490,12 +493,12 @@ function Player:die()
 	self.hp = 0
 	self.sp = 0
 
-	self:changeState("die")
-
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
 		self:reset()
 	end)
+
+	self:changeState("die")
 end
 
 
@@ -561,8 +564,8 @@ end
 
 --- Handle input while the player is crouched
 function Player:handleDuckInput()
-	if pd.buttonJustReleased(pd.kButtonDown) then
-		self:setCollideRect(38, 44, 4, 36)
+	if not pd.buttonIsPressed(pd.kButtonDown) then
+		self:setHitBox(standing)
 		self:changeState("duckUp")
 	end
 
@@ -598,7 +601,7 @@ end
 function Player:changeToIdleState()
 	if self.currentState ~= "idle" then
 		self.xVelocity = 0
-		self:setCollideRect(38, 44, 4, 36)
+		self:setHitBox(standing)
 		self:changeState("idle")
 	end
 end
@@ -608,7 +611,7 @@ end
 function Player:changeToReadyState()
 	if self.currentState ~= "ready" then
 		self.xVelocity = 0
-		self:setCollideRect(38, 44, 4, 36)
+		self:setHitBox(standing)
 		self:changeState("ready")
 	end
 end
@@ -644,7 +647,7 @@ end
 
 
 function Player:changeToFallState()
-	self:setCollideRect(38, 44, 4, 36)
+	self:setHitBox(standing)
 	self:changeState("fall")
 end
 
@@ -677,7 +680,7 @@ end
 
 --- Changes the player sprite to the mid jump sprite
 function Player:changeToMidJumpState()
-	self:setCollideRect(38, 44, 4, 36)
+	self:setHitBox(standing)
 	self:changeState("midJump")
 end
 
@@ -697,7 +700,7 @@ end
 --- Changes the player to the duck state
 function Player:changeToDuckState()
 	self.xVelocity = 0
-	self:setCollideRect(38, 61, 4, 19)
+	self:setHitBox(crouching)
 	self:changeState("duck")
 end
 
@@ -705,7 +708,7 @@ end
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
 	self.xVelocity = 0
-	self:setCollideRect(38, 61, 4, 19)
+	self:setHitBox(crouching)
 	self:changeState("duckDown")
 end
 
@@ -715,7 +718,7 @@ end
 function Player:changeToRollState(direction)
 	if self.sp > self.rollStaminaCost then
 		self.rollAvailable = false
-		self:setCollideRect(38, 61, 4, 19)
+		self:setHitBox(crouching)
 
 		if direction == "left" then
 			self.xVelocity = -self.rollSpeed
@@ -729,8 +732,8 @@ function Player:changeToRollState(direction)
 			end)
 		end)
 
-		self:changeState("roll")
 		self:deductStamina(self.rollStaminaCost)
+		self:changeState("roll")
 	end
 end
 
@@ -752,16 +755,16 @@ function Player:changeToPunchState(state)
 				hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 24
 				hitboxY = self.y + 16
 			end
-	
+
 			Hitbox(hitboxX, hitboxY, 12, 7, self.punchDamage, self.punchFrameDuration)
 
 			self.punchAvailable = false
 			pd.timer.performAfterDelay(self.punchRecharge, function()
 				self.punchAvailable = true
 			end)
-	
-			self:changeState(state)
+
 			self:deductStamina(self.punchStaminaCost)
+			self:changeState(state)
 		end
 	end
 end
@@ -833,6 +836,7 @@ function Player:applyDrag(amount)
 end
 
 
+--- This method is used to calculate when to regenerate stamina and how quickly
 function Player:regenerateStamina()
 	if self.sp < 100 and not self:staminaBlocked() then
 		if self.currentState ~= "duck" then
@@ -841,10 +845,23 @@ function Player:regenerateStamina()
 			self.sp = self.sp + 60 * dt
 		end
 	end
+
+	if self.sp > 100 then
+		self.sp = 100
+	end
 end
 
 
+--- This method is used to deduct stamina from the player, and request a stamina buffer set
+--- @param  amount  integer  The amount of stamina to deduct from the player
 function Player:deductStamina(amount)
 	self.sp = self.sp - amount
-	self:setStaminaBuffer()
+	self.setStaminaBuffer = true
+end
+
+
+--- This method is used to set the player hit box dimensions and uses a table to do it
+--- @param  hitBox  table  a table containing an X, Y, Width, and Height for the collision rect
+function Player:setHitBox(hitBox)
+	self:setCollideRect(hitBox['x'], hitBox['y'], hitBox['w'], hitBox['h'])
 end
