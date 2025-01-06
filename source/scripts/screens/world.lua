@@ -125,7 +125,7 @@ function World:has_value(tab, val)
 			return true
 		end
 	end
-	
+
 	return false
 end
 
