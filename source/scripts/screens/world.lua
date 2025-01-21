@@ -113,8 +113,10 @@ function World:enterDoor(level, x, y)
 		self:goToLevel(level)
 		self.player:moveTo(x, y)
 		self.player:add()
+		self.player:changeState('exit')
 	else
 		self.player:moveTo(x, y)
+		self.player:changeState('exit')
 	end
 end
 
@@ -212,8 +214,8 @@ function World:goToLevel(level)
 
 	-- Load the Background and Health Bar
 	self:loadBackground(level)
-	Health(2, 2)
-	Stamina(2, 18)
+	self.health = Health(2, 2)
+	self.stamina = Stamina(2, 18)
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end
