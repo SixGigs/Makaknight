@@ -44,9 +44,12 @@ function Player:init(world)
 	self:addState("dive", 89, 89)
 	self:addState("die", 90, 94, {ts = 3, l = 1, na = "dead"})
 	self:addState("dead", 95, 95)
-	self:addState("spawn", 96, 101, {ts = 4, l = 1, na = "idle"})
+	self:addState("spawn", 96, 101, {ts = 3, l = 1, na = "idle"})
 	self:addState("ready", 102, 111, {ts = 3})
 	self:addState("punch", 112, 114, {ts = 1, l = 1})
+	self:addState("exit", 99, 101, {ts = 3, l = 1, na = "idle"})
+	self:addState("entering", 115, 116, {ts = 3, l = 1, na = "enter"})
+	self:addState("enter", 117, 117)
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -319,7 +322,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 		self:handleAirInput()
-	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" then
+	elseif self.currentState == "contact" or self.currentState == "spawn" or self.currentState == "punch" or self.currentState == "dead" or self.currentState == "die" or self.currentState == "duckPunch" or self.currentState == "duckUp" or self.currentState == "duckDown" or self.currentState == "exit" or self.currentState == "enter" or self.currentState == "entering" then
 	else
 		self:applyGravity()
 		if self.currentState ~= 'roll' then self:handleGroundInput() end
@@ -367,8 +370,8 @@ function Player:handleMovementAndCollisions()
 			self:handleBubbleCollision(collisionObject)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
-		elseif collisionTag == TAGS.Door and pd.buttonJustPressed(pd.kButtonUp) then
-			self.world:enterDoor(collisionObject.level, collisionObject.exitX, collisionObject.exitY)
+		elseif collisionTag == TAGS.Door then
+			self:handleDoorCollision(collisionObject)
 		elseif collisionTag == TAGS.Crown then
 			collisionObject:handleCollision(self)
 			-- self:handleCrownCollision(collisionObject)
@@ -466,8 +469,22 @@ function Player:handleFlagCollision(flag)
 
 	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
 
-	self.hp = 100 -- Top up the player health
+	-- Top up player properties
+	self.hp = 100
+	self.sp = 100
+	
+	self.world.health:show()
+	self.world.stamina:show()
 end
+
+
+
+function Player:handleDoorCollision(obj)
+	if pd.buttonJustPressed(pd.kButtonUp) then
+		self:changeToEnterState(obj)
+	end
+end
+
 
 
 function Player:handleVariableJump()
@@ -807,6 +824,17 @@ function Player:changeToDashState()
 
 	self:changeState("dash")
 end
+
+
+
+function Player:changeToEnterState(obj)
+	pd.timer.performAfterDelay(500, function()
+		self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
+	end)
+
+	self:changeState('entering')
+end
+
 
 
 --- Applies gravity to the player, used if the player is not touching a surface

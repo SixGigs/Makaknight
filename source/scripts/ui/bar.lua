@@ -128,6 +128,12 @@ function Bar:init(x, y, i)
 end
 
 
+function Bar:show()
+	self:setVisible(true)
+	self.timer = self.timerMax
+end
+
+
 function Bar:updateVisibility()
 	if self:isVisible() and self.timer > 1 then
 		self.timer = self.timer - 30 * dt
