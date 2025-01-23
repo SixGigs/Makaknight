@@ -224,6 +224,7 @@ function World:goToLevel(level)
 	self:loadBackground(level)
 	self.health = Health(2, 2)
 	self.stamina = Stamina(2, 18)
+	self.mana = Mana(2, 32)
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end
