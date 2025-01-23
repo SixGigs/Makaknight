@@ -14,15 +14,11 @@ import 'CoreLibs/timer'
 
 -- Libraries from GitHub
 import 'scripts/libraries/AnimatedSprite'
-import 'scripts/libraries/Game'
 import 'scripts/libraries/LDtk'
 
 -- Scripts
-import 'scripts/Background'
-import 'scripts/fade'
-import 'scripts/Hitbox'
+import 'scripts/Game'
 import 'scripts/Player'
-import 'scripts/Prop'
 
 -- Animal scripts
 import 'scripts/animals/animal'
@@ -34,10 +30,12 @@ import 'scripts/entities/Ability'
 import 'scripts/entities/Block'
 import 'scripts/entities/Bubble'
 import 'scripts/entities/Crown'
+import 'scripts/entities/Hitbox'
 import 'scripts/entities/Wind'
 import 'scripts/entities/Door'
 import 'scripts/entities/Half'
 import 'scripts/entities/Flag'
+import 'scripts/entities/Prop'
 
 -- Hazard scripts
 import 'scripts/hazards/Fan'
@@ -47,6 +45,8 @@ import 'scripts/hazards/Spike'
 import 'scripts/hazards/Spikeball'
 
 -- Game screen scripts
+import 'scripts/screens/Background'
+import 'scripts/screens/fade'
 import 'scripts/screens/screen'
 import 'scripts/screens/credits'
 import 'scripts/screens/title'

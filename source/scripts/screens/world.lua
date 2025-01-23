@@ -108,17 +108,25 @@ end
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
 	if level ~= g.player_level then
-		local oldLevel <const> = g.player_level
-		ldtk.release_level(oldLevel)
-		self:goToLevel(level)
-		self.player:moveTo(x, y)
-		self.player:add()
-		self.player:changeState('exit')
-	else
-		self.player:moveTo(x, y)
-		self.player:changeState('exit')
+		Fade('out')
+
+		pd.timer.performAfterDelay(500, function()
+			local oldLevel <const> = g.player_level
+			ldtk.release_level(oldLevel)
+			self:goToLevel(level)
+			self.player:add()
+
+			Fade('in')
+		end)
 	end
+
+	pd.timer.performAfterDelay(500, function()
+		self.player:moveTo(x, y)
+		self.player:changeState('exit')
+	end)
 end
+
+
 
 
 function World:has_value(tab, val)
@@ -349,11 +357,11 @@ function World:resetPlayer()
 		self:goToLevel(g.spawn_level)
 		self.player:add()
 		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
-		self.player:changeToSpawnState()
+		self.player:changeState('spawn')
 		g.world_x = 0
 	else
 		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
-		self.player:changeToSpawnState()
+		self.player:changeState('spawn')
 	end
 end
 

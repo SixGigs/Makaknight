@@ -117,7 +117,7 @@ function Bar:init(x, y, i)
 
 	-- Bar attributes
 	self.timerMax = 120
-	self.timer = 45
+	self.timer = 0
 
 	-- Bar properties
 	self:setCenter(0, 0)
@@ -129,15 +129,20 @@ end
 
 
 function Bar:show()
-	self:setVisible(true)
+	if not self:isVisible() then
+		self:setVisible(true)
+	end
+
 	self.timer = self.timerMax
 end
 
 
 function Bar:updateVisibility()
-	if self:isVisible() and self.timer > 1 then
-		self.timer = self.timer - 30 * dt
-	else
-		self:setVisible(false)
+	if self:isVisible() then
+		if self.timer > 1 then
+			self.timer = self.timer - 30 * dt
+		else
+			self:setVisible(false)
+		end
 	end
 end
