@@ -58,6 +58,7 @@ import 'scripts/screens/thanks'
 import 'scripts/ui/Bar'
 import 'scripts/ui/Health'
 import 'scripts/ui/Stamina'
+import 'scripts/ui/Mana'
 
 -- Constants
 local pd <const> = playdate

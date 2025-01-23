@@ -161,8 +161,10 @@ function Player:init(world)
 	-- General player class properties
 	self.hp = g.player_hp
 	self.sp = g.player_sp
+	self.mp = g.player_mp
 	self.max_hp = g.player_max_hp
 	self.max_sp = g.player_max_sp
+	self.max_mp = g.player_max_mp
 	self.globalFlip = g.player_facing
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -250,17 +252,18 @@ function Player:init(world)
 	self.doubleJumpVelocity = -240
 
 	-- Dash properties
+	self.dashManaCost = 10
 	self.dashAvailable = true
 	self.dashMinimumSpeed = 105
 	self.dashSpeed = 450
-	self.dashDrag = 1080
+	self.dashDrag = 630
 	self.dashDamage = 20
 
 	-- Punch properties
 	self.punchAvailable = true
 	self.punchStaminaCost = 5
 	self.punchFrameDuration = 30
-	self.punchBufferAmount = 4
+	self.punchBufferAmount = 3
 	self.punchRecharge = 195
 	self.punchBuffer = 0
 	self.punchDamage = 5
@@ -305,6 +308,7 @@ function Player:update()
 	-- Update globals so the game saves correct data when closed
 	g.player_hp = self.hp
 	g.player_sp = self.sp
+	g.player_mp = self.mp
 	g.player_facing = self.globalFlip
 	g.player_x = self.x
 	g.player_y = self.y
@@ -336,10 +340,7 @@ function Player:updateBuffers()
 
 	if pd.buttonJustPressed(pd.kButtonB) then
 		self.rollBuffer = self.bufferAmount
-
-		if not pd.buttonIsPressed(pd.kButtonLeft) and not pd.buttonIsPressed(pd.kButtonRight) then
-			self.punchBuffer = self.punchBufferAmount
-		end
+		self.punchBuffer = self.punchBufferAmount
 	end
 
 	if pd.buttonJustPressed(pd.kButtonLeft) then
@@ -608,9 +609,11 @@ function Player:handleFlagCollision(flag)
 	-- Top up player properties
 	self.hp = self.max_hp
 	self.sp = self.max_sp
+	self.mp = self.max_mp
 
 	self.world.health:show()
 	self.world.stamina:show()
+	self.world.mana:show()
 end
 
 
@@ -944,6 +947,9 @@ end
 --- Changes the player to a punch state
 function Player:changeToPunchState(state)
 	if self.sp > self.punchStaminaCost then
+		self.xVelocity = 0
+		self.yVelocity = 0
+
 		if self.punchAvailable then
 			local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
 			local hitboxY = self.y + 9
@@ -985,22 +991,25 @@ end
 
 --- This method make the player dash in the direction they face
 function Player:changeToDashState()
-	self.dashAvailable = false
-	self.yVelocity = -self.walkSpeed
-
-	if pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = -self.dashSpeed
-	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.dashSpeed
-	else
-		if self.globalFlip == 1 then
+	if self.mp > self.dashManaCost then
+		self.dashAvailable = false
+		self.yVelocity = -self.walkSpeed
+	
+		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self.xVelocity = -self.dashSpeed
-		else
+		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self.xVelocity = self.dashSpeed
+		else
+			if self.globalFlip == 1 then
+				self.xVelocity = -self.dashSpeed
+			else
+				self.xVelocity = self.dashSpeed
+			end
 		end
-	end
 
-	self:changeState('dash')
+		self:deductMana(self.dashManaCost)
+		self:changeState('dash')
+	end
 end
 
 
@@ -1069,6 +1078,13 @@ end
 function Player:deductStamina(amount)
 	self.sp = self.sp - amount
 	self.setStaminaBuffer = true
+end
+
+
+
+
+function Player:deductMana(amount)
+	self.mp = self.mp - amount
 end
 
 
