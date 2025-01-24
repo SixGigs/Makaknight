@@ -4,6 +4,7 @@ local gfx <const> = playdate.graphics
 
 -- Create hit box constants
 local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
+local dashing <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
 local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
 
 
@@ -60,10 +61,11 @@ function Player:init(world)
 
 	---[ AnimatedSprite library - On Frame Changed Event ]------------------------------------------------
 	-- If the yVelocity increases or decreases in these states then enter jumping or falling
-	self.states['idle'].onFrameChangedEvent = function(self) self:handleYVelocity() end
-	self.states['duck'].onFrameChangedEvent = function(self) self:handleYVelocity() end
-	self.states['walk'].onFrameChangedEvent = function(self) self:handleYVelocity() end
-	self.states['run'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
+	self.states['idle'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
+	self.states['ready'].onFrameChangedEvent = function(self) self:handleYVelocity() end
+	self.states['duck'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
+	self.states['walk'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
+	self.states['run'].onFrameChangedEvent   = function(self) self:handleYVelocity() end
 
 	-- If the players yVelocity is less than -240 pixels a second, change to the jump1 sprite
 	self.states["jump"].onFrameChangedEvent = function(self)
@@ -215,8 +217,7 @@ function Player:init(world)
 
 	-- Roll properties
 	self.rollAvailable = true
-	self.rollSpeed = 120
-	self.rollBuffer = 0
+	self.rollSpeed = 165
 	self.rollRecharge = 600
 	self.rollStaminaCost = 20
 
@@ -247,14 +248,14 @@ function Player:init(world)
 	}
 
 	-- Double Jump properties
-	self.doubleJumpStaminaCost = 2.5
+	self.doubleJumpManaCost = 5
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -240
+	self.doubleJumpVelocity = -300
 
 	-- Dash properties
 	self.dashManaCost = 10
 	self.dashAvailable = true
-	self.dashMinimumSpeed = 105
+	self.dashMinimumSpeed = 120
 	self.dashSpeed = 450
 	self.dashDrag = 630
 	self.dashDamage = 20
@@ -273,6 +274,7 @@ function Player:init(world)
 	self.leftBuffer = 0
 	self.rightBuffer = 0
 	self.upBuffer = 0
+	self.bBuffer = 0
 
 	-- Status bar buffer properties
 	self.setStaminaBuffer = false
@@ -327,10 +329,11 @@ end
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
 	self.jumpBuffer = math.max(self.jumpBuffer - (30 * dt), 0)
-	self.rollBuffer = math.max(self.rollBuffer - (30 * dt), 0)
+	self.bBuffer = math.max(self.bBuffer - (30 * dt), 0)
 	self.punchBuffer = math.max(self.punchBuffer - (30 * dt), 0)
 	self.leftBuffer = math.max(self.leftBuffer - (30 * dt), 0)
 	self.rightBuffer = math.max(self.rightBuffer - (30 * dt), 0)
+	self.upBuffer = math.max(self.upBuffer - (30 * dt), 0)
 	self.staminaBuffer = math.max(self.staminaBuffer - (30 * dt), 0)
 
 	-- Set the game buffers if each button is pressed
@@ -339,7 +342,7 @@ function Player:updateBuffers()
 	end
 
 	if pd.buttonJustPressed(pd.kButtonB) then
-		self.rollBuffer = self.bufferAmount
+		self.bBuffer = self.bufferAmount
 		self.punchBuffer = self.punchBufferAmount
 	end
 
@@ -349,6 +352,10 @@ function Player:updateBuffers()
 
 	if pd.buttonJustPressed(pd.kButtonRight) then
 		self.rightBuffer = self.bufferAmount
+	end
+
+	if pd.buttonJustPressed(pd.kButtonUp) then
+		self.upBuffer = self.bufferAmount
 	end
 
 	if self.setStaminaBuffer then
@@ -362,10 +369,11 @@ end
 
 --- These methods return true if the buffer is greater than zero
 function Player:playerPunched() return self.punchBuffer > 0 end
-function Player:playerPressedRight() return self.rightBuffer > 0 end
 function Player:playerPressedLeft() return self.leftBuffer > 0 end
+function Player:playerPressedRight() return self.rightBuffer > 0 end
+function Player:playerPressedUp() return self.upBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
-function Player:playerRolled() return self.rollBuffer > 0 end
+function Player:playerPressedB() return self.bBuffer > 0 end
 function Player:staminaBlocked() return self.staminaBuffer > 0 end
 
 
@@ -399,11 +407,18 @@ function Player:handleState()
 	elseif self.currentState == "hurt" then
 		self:applyGravity()
 		self:applyDrag(self.drag)
+
+		if self.touchingGround and self.hp == 0 then
+			self:die()
+		end
 	elseif self.currentState == "dash" then
 		self:applyGravity()
 		self:applyDrag(self.dashDrag)
+
 		if math.abs(self.xVelocity) <= self.dashMinimumSpeed then
-			self:changeState("midJump")
+			self:changeToMidJumpState()
+		elseif self.touchingGround then
+			self:changeToIdleState()
 		end
 	elseif self.currentState == "duck" then
 		self.xVelocity = 0
@@ -419,6 +434,7 @@ function Player:handleState()
 		self:handleAirInput()
 	elseif self.currentState == 'roll' then
 		self:applyGravity()
+		self:applyDrag(self.drag)
 	elseif self.noInputStates[self.currentState] then
 	else
 		self:applyGravity()
@@ -516,7 +532,7 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	if self.hp <= 0 then died = true end -- Check if we are dead from no hit points
+	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
 
@@ -526,9 +542,11 @@ end
 function Player:reset()
 	self.hp = self.max_hp
 	self.sp = self.max_sp
-	self:setCollisionsEnabled(true)
+	self.mp = self.max_mp
 	self.dead = false
 	self.hurt = false
+
+	self:setCollisionsEnabled(true)
 	self.world:resetPlayer()
 end
 
@@ -571,9 +589,9 @@ function Player:handleDamageCollision(obj, tag)
 			-- And if not below zero, put the player into a hurt state
 			if self.hp < 0 then
 				self.hp = 0
-			else
-				self:changeToHurtState()
 			end
+
+			self:changeToHurtState()
 		end
 	end
 end
@@ -636,10 +654,14 @@ function Player:handleVariableJump()
 		end
 	end
 
-	if self.jumping and self.sp > self.jumpStaminaCost then
-		self.yVelocity = self.jumpVelocity
-		self.jumpCounter = self.jumpCounter + 1
-		self:deductStamina(self.jumpStaminaCost)
+	if self.jumping then 
+		if self.sp > self.jumpStaminaCost then
+			self.yVelocity = self.jumpVelocity
+			self.jumpCounter = self.jumpCounter + 1
+			self:deductStamina(self.jumpStaminaCost)
+		end
+
+		self.setStaminaBuffer = true
 	end
 end
 
@@ -651,8 +673,6 @@ function Player:die()
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
-	self.hp = 0
-	self.sp = 0
 
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
@@ -677,6 +697,8 @@ function Player:handleGroundInput()
 			else
 				self:changeToWalkState('left')
 			end
+
+			self.setStaminaBuffer = true
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			if self.sp > self.runStaminaCost then
 				self:changeToRunState('right')
@@ -684,14 +706,18 @@ function Player:handleGroundInput()
 			else
 				self:changeToWalkState('right')
 			end
+
+			self.setStaminaBuffer = true
 		else
 			self:changeToReadyState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:changeToWalkState('left')
+			self.setStaminaBuffer = true
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToWalkState('right')
+			self.setStaminaBuffer = true
 		else
 			if self.currentState ~= 'idle' then
 				self:changeToIdleState()
@@ -703,7 +729,7 @@ function Player:handleGroundInput()
 		self:changeToDuckingState()
 	end
 
-	if self.rollAvailable and self:playerRolled() then
+	if self.rollAvailable and self:playerPressedB() then
 		if self:playerPressedLeft() then
 			self:changeToRollState('left')
 		elseif self:playerPressedRight() then
@@ -746,14 +772,26 @@ end
 
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	if self:playerJumped() and self.doubleJumpAvailable and not pd.buttonIsPressed(pd.kButtonDown) then
-		self:changeToDoubleJumpState()
-	elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable then
-		self:changeToDashState()
-	elseif pd.buttonIsPressed(pd.kButtonLeft) then
+	if pd.buttonIsPressed(pd.kButtonLeft) then
 		self.xVelocity = -self.jumpSpeed
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
 		self.xVelocity = self.jumpSpeed
+	end
+
+	if pd.buttonIsPressed(pd.kButtonUp) then
+		if pd.buttonIsPressed(pd.kButtonB) and not pd.buttonIsPressed(pd.kButtonDown) then
+			if self.doubleJumpAvailable then
+				self:changeToDoubleJumpState()
+			end
+		end
+	end
+
+	if pd.buttonIsPressed(pd.kButtonLeft) or pd.buttonIsPressed(pd.kButtonRight) then
+		if self:playerPressedB() then
+			if self.dashAvailable then
+				self:changeToDashState()
+			end
+		end
 	end
 
 	if pd.buttonJustPressed(pd.kButtonDown) then
@@ -854,6 +892,8 @@ function Player:changeToJumpState()
 		self.yVelocity = self.jumpVelocity
 		self:deductStamina(self.jumpStaminaCost)
 	end
+
+	self.setStaminaBuffer = true
 end
 
 
@@ -870,12 +910,12 @@ end
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
-	if self.sp > self.doubleJumpStaminaCost then
+	if self.mp > self.doubleJumpManaCost then
 		self.jumpBuffer = 0
 		self.doubleJumpAvailable = false
 		self.yVelocity = self.doubleJumpVelocity
 		self:changeState('dbJump')
-		self:deductStamina(self.doubleJumpStaminaCost)		
+		self:deductMana(self.doubleJumpManaCost)		
 	end
 end
 
@@ -928,6 +968,8 @@ function Player:changeToRollState(direction)
 		self:deductStamina(self.rollStaminaCost)
 		self:changeState('roll')
 	end
+
+	self.setStaminaBuffer = true
 end
 
 
@@ -969,6 +1011,8 @@ function Player:changeToPunchState(state)
 			self:changeState(state)
 		end
 	end
+
+	self.setStaminaBuffer = true
 end
 
 
@@ -1008,6 +1052,7 @@ function Player:changeToDashState()
 		end
 
 		self:deductMana(self.dashManaCost)
+		self:setHitBox(dashing)
 		self:changeState('dash')
 	end
 end
@@ -1077,7 +1122,6 @@ end
 --- @param  amount  integer  The amount of stamina to deduct from the player
 function Player:deductStamina(amount)
 	self.sp = self.sp - amount
-	self.setStaminaBuffer = true
 end
 
 
