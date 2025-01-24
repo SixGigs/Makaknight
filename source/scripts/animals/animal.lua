@@ -107,7 +107,7 @@ function Animal:handleMovementAndCollisions()
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
 			self:handleDamageCollision(collisionObject.damage)
 		elseif collisionTag == TAGS.Player then
-			if collisionObject.currentState == 'dash' then
+			if collisionObject.currentState == 'dash' or collisionObject.currentState == 'dive' then
 				self:handleDamageCollision(collisionObject.dashDamage)
 			end
 		elseif collisionTag == TAGS.Wind then

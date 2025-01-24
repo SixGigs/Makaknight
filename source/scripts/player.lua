@@ -6,6 +6,8 @@ local gfx <const> = playdate.graphics
 local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
 local dashing <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
 local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
+local diving <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
+
 
 
 
@@ -201,6 +203,7 @@ function Player:init(world)
 		['spawn'] = true,
 		['punch'] = true,
 		['dead'] = true,
+		['dive'] = true,
 		['die'] = true,
 		['punch'] = true,
 		['duckPunch'] = true,
@@ -222,6 +225,7 @@ function Player:init(world)
 	self.rollStaminaCost = 20
 
 	-- Dive properties
+	self.diveManaCost = 10
 	self.diveSpeed = 900
 	self.diveHorizontal = 160
 
@@ -795,7 +799,9 @@ function Player:handleAirInput()
 	end
 
 	if pd.buttonJustPressed(pd.kButtonDown) then
-		self:changeToDiveState()
+		if pd.buttonIsPressed(pd.kButtonB) then
+			self:changeToDiveState()
+		end
 	end
 
 	self:handleVariableJump()
@@ -1020,14 +1026,19 @@ end
 
 --- Changes the player to the dive state
 function Player:changeToDiveState()
-	self.yVelocity = self.diveSpeed
-	if self.globalFlip == 0 then
-		self.xVelocity = self.diveHorizontal
-	else
-		self.xVelocity = -self.diveHorizontal
-	end
+	if self.mp > self.diveManaCost then
+		self.yVelocity = self.diveSpeed
 
-	self:changeState('dive')
+		if self.globalFlip == 0 then
+			self.xVelocity = self.diveHorizontal
+		else
+			self.xVelocity = -self.diveHorizontal
+		end
+
+		self:deductMana(self.dashManaCost)
+		self:setHitBox(diving)
+		self:changeState('dive')
+	end
 end
 
 
@@ -1103,11 +1114,11 @@ end
 --- This method is used to calculate when to regenerate stamina and how quickly
 function Player:regenerateStamina()
 	if self.sp < self.max_sp and not self:staminaBlocked() then
-		if self.currentState ~= 'duck' then
+		if self.currentState == 'duck' then
 			self.sp = self.sp + 30 * dt
-		else
-			self.sp = self.sp + 60 * dt
 		end
+
+		self.sp = self.sp + 30 * dt
 	end
 
 	if self.sp > self.max_sp then
