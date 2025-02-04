@@ -26,7 +26,7 @@
 	"__smartColor": "#ADADB5",
 	"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 	"externalRelPath": null,
-	"fieldInstances": [],
+	"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
 	"layerInstances": [
 		{
 			"__identifier": "Entities",
@@ -632,5 +632,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "w" }, { "levelIid": "0f436480-c210-11ef-9d97-63d1f0d32ebc", "dir": "n" } ]
+	"__neighbours": [{ "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "w" }]
 }

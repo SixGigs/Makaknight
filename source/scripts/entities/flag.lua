@@ -55,12 +55,24 @@ function Flag:hoist(world, flip)
 	g.checkpoint = self.id
 	g.spawn_level = g.player_level
 	g.player_spawn_y = self.y + 8
+	g.picked_items = {}
 
-	-- Set the X value of the spawn
+	-- Set the players X spawn value
 	if flip == 0 then
 		g.player_spawn_x = self.x - 8
 	else
 		g.player_spawn_x = self.x + 24
+	end
+
+	-- Make all pickups visible
+	local allSprites = gfx.sprite.getAllSprites()
+	for _, sprite in ipairs(allSprites) do
+		if sprite:isa(Pickup) then
+			sprite:setVisible(true)
+		elseif sprite:isa(Animal) then
+			sprite.hp = sprite.max_hp
+			sprite:setVisible(true)
+		end
 	end
 end
 

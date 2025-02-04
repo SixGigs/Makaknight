@@ -262,13 +262,13 @@ function Player:init(world)
 	self.dashMinimumSpeed = 120
 	self.dashSpeed = 450
 	self.dashDrag = 630
-	self.dashDamage = 20
+	self.damage = 20
 
 	-- Punch properties
 	self.punchAvailable = true
 	self.punchStaminaCost = 5
 	self.punchFrameDuration = 30
-	self.punchBufferAmount = 3
+	self.punchBufferAmount = 4
 	self.punchRecharge = 195
 	self.punchBuffer = 0
 	self.punchDamage = 5
@@ -288,7 +288,7 @@ function Player:init(world)
 	-- Physics properties
 	self.xVelocity = 0
 	self.yVelocity = 0
-	self.gravity = 900
+	self.gravity = world.gravity
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
 	self.drag = 120
@@ -494,9 +494,15 @@ function Player:handleMovementAndCollisions()
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
+		elseif collisionTag == TAGS.Pickup then
+			collisionObject:pickUp(self)
 		elseif collisionTag == TAGS.Roaster then
 			if self.touchingGround then
 				collisionObject:handleCollision()
+			end
+		elseif collisionTag == TAGS.Animal then
+			if self.currentState == 'dash' or self.currentState == 'dive' then
+				collisionObject:handleCollision(self)
 			end
 		end
 	end
@@ -798,8 +804,8 @@ function Player:handleAirInput()
 		end
 	end
 
-	if pd.buttonJustPressed(pd.kButtonDown) then
-		if pd.buttonIsPressed(pd.kButtonB) then
+	if pd.buttonIsPressed(pd.kButtonDown) then
+		if pd.buttonJustPressed(pd.kButtonB) then
 			self:changeToDiveState()
 		end
 	end
@@ -1072,8 +1078,10 @@ end
 
 
 function Player:changeToEnterState(obj)
-	self:changeState('entering')
+	self.xVelocity = 0
+	self.yVelocity = 0
 
+	self:changeState('entering')
 	self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
 end
 

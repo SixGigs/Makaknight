@@ -11,13 +11,23 @@ function Animal:init(x, y, e)
 	-- Create the Animal State Machine with the Animated Sprite Library
 	Animal.super.init(self, gfx.imagetable.new('images/animals/'.. string.lower(e.name) .. '-table-' .. e.fields.tableWidth .. '-' .. e.fields.tableHeight))
 
+	self.id = e.iid
+	if g.picked_items[self.id] then
+		self:setVisible(false)
+	end
+
+	-- Animal properties
+	self.hp = e.fields.hp
+	self.max_hp = e.fields.hp
+	self.weight = e.fields.weight
+
+	-- Dynamic properties
+	if e.fields.heals then self.heals = e.fields.heals end
+
 	-- Physics Properties
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.speed = e.fields.speed
-
-	-- Animal Attributes
-	self.globalFlip = tonumber(e.fields.facing)
 
 	-- Collision Attribute Table
 	self.overlapTags = {
@@ -65,12 +75,16 @@ end
 
 --- The Animal Update Method Runs Every Game Tick
 function Animal:update()
-	self:updateAnimation()
-
-	if self.hp <= 0 then
-		self:remove()
+	if not self:isVisible() then
+		return
 	end
 
+	if self.hp <= 0 then
+		g.picked_items[self.id] = true
+		self:setVisible(false)
+	end
+
+	self:updateAnimation()
 	self:handleState()
 	self:handleMovementAndCollisions()
 end
@@ -105,11 +119,7 @@ function Animal:handleMovementAndCollisions()
 
 		-- Process the collision based on the collision tag
 		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
-			self:handleDamageCollision(collisionObject.damage)
-		elseif collisionTag == TAGS.Player then
-			if collisionObject.currentState == 'dash' or collisionObject.currentState == 'dive' then
-				self:handleDamageCollision(collisionObject.dashDamage)
-			end
+			self:handleCollision(collisionObject)
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
@@ -142,9 +152,17 @@ function Animal:handleMovementAndCollisions()
 end
 
 
-function Animal:handleDamageCollision(damage)
-	self.hp = self.hp - damage
+--- Handle collisions
+function Animal:handleCollision(obj)
+	self.hp = self.hp - obj.damage
 	if self.hp < 0 then
 		self.hp = 0
+	end
+
+	if self.heals then
+		obj.hp = obj.hp + self.heals
+		if obj.hp > 100 then
+			obj.hp = 100
+		end
 	end
 end
