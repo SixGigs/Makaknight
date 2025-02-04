@@ -120,6 +120,7 @@ function Bar:init(x, y, i)
 	self.timer = 0
 
 	-- Bar properties
+	self:setVisible(false)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.GUI)

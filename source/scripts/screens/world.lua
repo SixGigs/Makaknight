@@ -49,6 +49,8 @@ class("World").extends(gfx.sprite) --- The Initialising Method of the World Clas
 --- Initialise the World Class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
+	self.gravity = 900
+
 	self:goToLevel(g.player_level)
 	self:adjustLevel(g.world_x)
 	self.player = Player(self)
@@ -195,15 +197,17 @@ function World:goToLevel(level)
 		elseif doors[entityName] then
 			Door(entityX, entityY, entity)
 		elseif reptiles[entityName] then
-			Reptile(entityX, entityY + 8, entity)
+			Reptile(self, entityX, entityY + 8, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
+		elseif entityName == 'Firefly' then
+			Firefly(entityX, entityY + 4, entity)
 		elseif entityName == "Spikeball" then
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Bubble" then
 			Bubble(entityX, entityY, entity)
-		elseif entityName == "DoubleJump" then
-			Ability(entityX, entityY, entity)
+		elseif self:has_value(entityTags, 'Pickups') then
+			Pickup(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity, self)
 		elseif self:has_value(entityTags, 'Block') then
@@ -220,8 +224,12 @@ function World:goToLevel(level)
 		end
 	end
 
-	-- Load the Background and Health Bar
+	-- Load the Background
 	self:loadBackground(level)
+
+	-- REMEMBER: get_custom_data is a LDtk function!
+
+	-- Load the status bars
 	self.health = Health(2, 2)
 	self.stamina = Stamina(2, 18)
 	self.mana = Mana(2, 34)
