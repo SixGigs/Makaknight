@@ -209,7 +209,7 @@ function World:goToLevel(level)
 		elseif self:has_value(entityTags, 'Pickups') then
 			Pickup(entityX, entityY, entity)
 		elseif entityName == "Flag" then
-			Flag(entityX, entityY, entity, self)
+			Flag(entityX, entityY, entity)
 		elseif self:has_value(entityTags, 'Block') then
 			Block(entityX, entityY, entity)
 		elseif entityName == "Crown" then
@@ -365,13 +365,15 @@ function World:resetPlayer()
 	if g.player_level ~= g.spawn_level then
 		self:goToLevel(g.spawn_level)
 		self.player:add()
-		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
-		self.player:changeState('spawn')
 		g.world_x = 0
-	else
-		self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
-		self.player:changeState('spawn')
 	end
+
+	-- Reset no spawn list to empty
+	g:emptySpawnList()
+
+	-- Move player to the spawn coordinates and set them to the spawn state
+	self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
+	self.player:changeToSpawnState()
 end
 
 

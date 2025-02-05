@@ -35,3 +35,12 @@ function Fire:init(x, y, s, d)
 	self:setTag(TAGS.Hazard)
 	self:add()
 end
+
+
+
+function Fire:handleCollision(e)
+	e.hp = e.hp - self.damage
+	if e.hp < 0 then
+		e.hp = 0
+	end
+end

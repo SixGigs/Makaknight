@@ -25,3 +25,12 @@ function Fan:init(x, y, e)
 	self:setTag(TAGS.Hazard)
 	self:add()
 end
+
+
+
+function Fan:handleCollision(e)
+	e.hp = e.hp - self.damage
+	if e.hp < 0 then
+		e.hp = 0
+	end
+end

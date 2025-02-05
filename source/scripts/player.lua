@@ -6,7 +6,6 @@ local gfx <const> = playdate.graphics
 local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
 local dashing <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
 local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
-local diving <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
 
 
 
@@ -478,10 +477,10 @@ function Player:handleMovementAndCollisions()
 			end
 		end
 
-		if collisionTag == TAGS.Hazard then
-			self:handleDamageCollision(collisionObject, collisionTag)
-		elseif collisionTag == TAGS.Spike then
-			self:handleDamageCollision(collisionObject, collisionTag)
+		if collisionTag == TAGS.Spike or collisionTag == TAGS.Hazard then
+			if self.currentState ~= 'hurt' then
+				collisionObject:handleCollision(self)
+			end
 		elseif collisionTag == TAGS.Bubble then
 			self:handleBubbleCollision(collisionObject)
 		elseif collisionTag == TAGS.Flag then
@@ -542,6 +541,7 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
+	if self.hp < g.player_hp then self:changeToHurtState() end -- Check if we took damage and change to hurt state
 	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
@@ -572,24 +572,7 @@ function Player:handleDamageCollision(obj, tag)
 
 	-- If the player is not already in a hurt state, lets see if they can be hurt again
 	if not self.hurt then
-		-- Spikes calculate damage based on Y velocity
-		if tag == TAGS.Spike then
-			-- Deduct expected Y velocity value from the possible damage number
-			damage = self.yVelocity - 90
-
-			-- Divide the damage number by 10 if a damage number exists
-			if damage < 0 then
-				damage = 0
-			else
-				damage = damage / 10
-			end
-
-			-- Dividing the damage number can result in floats, make it a round number
-			damage = math.floor(damage)
-		else
-			-- All other hazards deal a flat damage number
-			damage = obj.damage
-		end
+		damage = obj.damage
 
 		-- If the damage number is not zero, deduct it from the player health
 		if damage ~= 0 then
@@ -600,8 +583,6 @@ function Player:handleDamageCollision(obj, tag)
 			if self.hp < 0 then
 				self.hp = 0
 			end
-
-			self:changeToHurtState()
 		end
 	end
 end
@@ -632,7 +613,7 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
-	flag:hoist(self.world, self.globalFlip) -- Raise the touched flag
+	flag:hoist(self.globalFlip) -- Raise the touched flag
 
 	-- Top up player properties
 	self.hp = self.max_hp
@@ -1042,7 +1023,6 @@ function Player:changeToDiveState()
 		end
 
 		self:deductMana(self.dashManaCost)
-		self:setHitBox(diving)
 		self:changeState('dive')
 	end
 end
@@ -1083,6 +1063,13 @@ function Player:changeToEnterState(obj)
 
 	self:changeState('entering')
 	self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
+end
+
+
+
+function Player:changeToSpawnState()
+	self:setHitBox(standing)
+	self:changeState('spawn')
 end
 
 

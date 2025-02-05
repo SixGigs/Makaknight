@@ -15,6 +15,7 @@ function Spikeball:init(x, y, e)
 	self.xVelocity = e.fields.xVelocity * 30
 	self.yVelocity = e.fields.yVelocity * 30
 	self.overlapTags = {
+		[TAGS.Animal] = true,
 		[TAGS.Player] = true,
 		[TAGS.GUI] = true
 	}
@@ -55,4 +56,12 @@ function Spikeball:update()
 	end
 
 	self:updateAnimation()
+end
+
+
+function Spikeball:handleCollision(e)
+	e.hp = e.hp - self.damage
+	if e.hp < 0 then
+		e.hp = 0
+	end
 end

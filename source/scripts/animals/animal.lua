@@ -11,15 +11,16 @@ function Animal:init(x, y, e)
 	-- Create the Animal State Machine with the Animated Sprite Library
 	Animal.super.init(self, gfx.imagetable.new('images/animals/'.. string.lower(e.name) .. '-table-' .. e.fields.tableWidth .. '-' .. e.fields.tableHeight))
 
-	self.id = e.iid
-	if g.picked_items[self.id] then
-		self:setVisible(false)
-	end
-
 	-- Animal properties
+	self.id = e.iid
 	self.hp = e.fields.hp
 	self.max_hp = e.fields.hp
 	self.weight = e.fields.weight
+	
+	-- If the animal ID is on the don't spawn list, hide the animal
+	if g.picked_items[self.id] then
+		self:setVisible(false)
+	end
 
 	-- Dynamic properties
 	if e.fields.heals then self.heals = e.fields.heals end
@@ -118,8 +119,8 @@ function Animal:handleMovementAndCollisions()
 		end
 
 		-- Process the collision based on the collision tag
-		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox then
-			self:handleCollision(collisionObject)
+		if collisionTag == TAGS.Hazard or collisionTag == TAGS.Hitbox or collisionTag == TAGS.Spike then
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
@@ -154,15 +155,21 @@ end
 
 --- Handle collisions
 function Animal:handleCollision(obj)
+	if not self:isVisible() then
+		return
+	end
+
 	self.hp = self.hp - obj.damage
 	if self.hp < 0 then
 		self.hp = 0
 	end
 
-	if self.heals then
-		obj.hp = obj.hp + self.heals
-		if obj.hp > 100 then
-			obj.hp = 100
+	if self.hp == 0 then
+		if self.heals then
+			obj.hp = obj.hp + self.heals
+			if obj.hp > obj.max_hp then
+				obj.hp = obj.max_hp
+			end
 		end
 	end
 end
