@@ -16,7 +16,9 @@ function Animal:init(x, y, e)
 	self.hp = e.fields.hp
 	self.max_hp = e.fields.hp
 	self.weight = e.fields.weight
-	
+	self.spawn_x = x
+	self.spawn_y = y
+
 	-- If the animal ID is on the don't spawn list, hide the animal
 	if g.picked_items[self.id] then
 		self:setVisible(false)

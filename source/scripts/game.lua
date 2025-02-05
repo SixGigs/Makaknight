@@ -197,8 +197,11 @@ function Game:emptySpawnList()
 		if sprite:isa(Pickup) then
 			sprite:setVisible(true)
 		elseif sprite:isa(Animal) then
-			sprite.hp = sprite.max_hp
-			sprite:setVisible(true)
+			if not sprite:isVisible() then
+				sprite.hp = sprite.max_hp
+				sprite:moveTo(sprite.spawn_x, sprite.spawn_y)
+				sprite:setVisible(true)
+			end
 		end
 	end
 end
