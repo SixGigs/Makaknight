@@ -22,3 +22,11 @@ function Hitbox:init(x, y, width, height, damage, duration)
 		self:remove()
 	end)
 end
+
+
+function Hitbox:handleCollision(e)
+	e.hp = e.hp - self.damage
+	if e.hp < 0 then
+		e.hp = 0
+	end
+end

@@ -186,3 +186,19 @@ function Game:save()
 
 	pd.datastore.write(data)
 end
+
+
+
+function Game:emptySpawnList()
+	self.picked_items = {}
+
+	local allSprites = gfx.sprite.getAllSprites()
+	for _, sprite in ipairs(allSprites) do
+		if sprite:isa(Pickup) then
+			sprite:setVisible(true)
+		elseif sprite:isa(Animal) then
+			sprite.hp = sprite.max_hp
+			sprite:setVisible(true)
+		end
+	end
+end

@@ -11,7 +11,7 @@ class("Flag").extends(AnimatedSprite)
 --- @param y      integer The Y coordinate to spawn the checkpoint
 --- @param entity table   The list of entities the checkpoint has
 --- @param gameManager table The game manager passed into the object
-function Flag:init(x, y, entity, world)
+function Flag:init(x, y, entity)
 	-- Initialise the state machine using the flag sprite sheet
 	local img <const> = gfx.imagetable.new("images/entities/animated/flag-table-64-48")
 	Flag.super.init(self, img)
@@ -45,34 +45,23 @@ end
 
 --- Hoist the flag. This method is called from the player when they collide with the flag
 --- TODO: Can we get this method called from this object using the update? If when updating the player collides with self?
-function Flag:hoist(world, flip)
+function Flag:hoist(flip)
 	-- Change the flag state to raise
 	if self.currentState == "down" then
 		self:changeState("raise")
 	end
 
-	-- Update the world details
+	-- Update the game properties
 	g.checkpoint = self.id
 	g.spawn_level = g.player_level
 	g.player_spawn_y = self.y + 8
-	g.picked_items = {}
+	g:emptySpawnList()
 
 	-- Set the players X spawn value
 	if flip == 0 then
 		g.player_spawn_x = self.x - 8
 	else
 		g.player_spawn_x = self.x + 24
-	end
-
-	-- Make all pickups visible
-	local allSprites = gfx.sprite.getAllSprites()
-	for _, sprite in ipairs(allSprites) do
-		if sprite:isa(Pickup) then
-			sprite:setVisible(true)
-		elseif sprite:isa(Animal) then
-			sprite.hp = sprite.max_hp
-			sprite:setVisible(true)
-		end
 	end
 end
 
