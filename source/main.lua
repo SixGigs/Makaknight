@@ -34,7 +34,7 @@ import 'scripts/entities/Door'
 import 'scripts/entities/Flag'
 import 'scripts/entities/Half'
 import 'scripts/entities/Hitbox'
-import 'scripts/entities/Pickup'
+import 'scripts/entities/Healthpotion'
 import 'scripts/entities/Prop'
 import 'scripts/entities/Wind'
 

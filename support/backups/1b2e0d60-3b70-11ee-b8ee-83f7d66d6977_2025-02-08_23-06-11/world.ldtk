@@ -25285,7 +25285,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Healthpotion",
+			"identifier": "HP",
 			"uid": 4521,
 			"tags": ["Pickups"],
 			"exportToToc": false,
@@ -25305,11 +25305,11 @@
 			"lineOpacity": 0,
 			"hollow": false,
 			"color": "#B994FF",
-			"renderMode": "Tile",
+			"renderMode": "Rectangle",
 			"showName": true,
-			"tilesetId": 4540,
+			"tilesetId": null,
 			"tileRenderMode": "FitInside",
-			"tileRect": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
+			"tileRect": { "tilesetUid": 4522, "x": 0, "y": 0, "w": 16, "h": 16 },
 			"uiTileRect": null,
 			"nineSliceBorders": [],
 			"maxCount": 0,
