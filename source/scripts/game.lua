@@ -51,11 +51,12 @@ function Game:startTransition(transition)
 		self:loadNewScene()
 
 		if self.won then
-			g.player_hp = g.player_max_hp
-			g.player_sp = g.player_max_sp
-			g.player_level = g.spawn_level
-			g.player_x = g.player_spawn_x
-			g.player_y = g.player_spawn_y
+			self.player_hp = self.player_max_hp
+			self.player_sp = self.player_max_sp
+			self.player_level = self.spawn_level
+			self.player_x = self.player_spawn_x
+			self.player_y = self.player_spawn_y
+			self.won = false
 		end
 
 		if transition == "fade" then

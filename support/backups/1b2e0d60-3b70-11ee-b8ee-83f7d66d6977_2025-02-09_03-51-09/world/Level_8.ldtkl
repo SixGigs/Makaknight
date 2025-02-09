@@ -117,38 +117,6 @@
 					"__worldY": -144
 				},
 				{
-					"__identifier": "Fragile",
-					"__grid": [3,5],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "b6b2a9c0-c210-11ef-9d97-275bf4269da7",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [48,80],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
-					"__worldX": 3312,
-					"__worldY": -160
-				},
-				{
-					"__identifier": "Fragile",
-					"__grid": [4,5],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "b6f9ebf0-c210-11ef-9d97-5bf607c6124b",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [64,80],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
-					"__worldX": 3328,
-					"__worldY": -160
-				},
-				{
 					"__identifier": "Fan",
 					"__grid": [3,12],
 					"__pivot": [0,0],
@@ -166,6 +134,38 @@
 					],
 					"__worldX": 3312,
 					"__worldY": -48
+				},
+				{
+					"__identifier": "Staminapotion",
+					"__grid": [12,4],
+					"__pivot": [0,0],
+					"__tags": ["Pickups"],
+					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B994FF",
+					"iid": "08e88b90-c210-11ef-9593-07c1f9a73a26",
+					"width": 16,
+					"height": 16,
+					"defUid": 4546,
+					"px": [192,64],
+					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
+					"__worldX": 3456,
+					"__worldY": -176
+				},
+				{
+					"__identifier": "Healthpotion",
+					"__grid": [2,4],
+					"__pivot": [0,0],
+					"__tags": ["Pickups"],
+					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B994FF",
+					"iid": "0b2c6110-c210-11ef-9593-47e301b1ccb5",
+					"width": 16,
+					"height": 16,
+					"defUid": 4521,
+					"px": [32,64],
+					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
+					"__worldX": 3296,
+					"__worldY": -176
 				}
 			]
 		},

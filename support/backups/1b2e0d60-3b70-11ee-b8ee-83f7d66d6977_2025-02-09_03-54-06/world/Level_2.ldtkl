@@ -257,6 +257,22 @@
 					"fieldInstances": [],
 					"__worldX": 1056,
 					"__worldY": -96
+				},
+				{
+					"__identifier": "Manapotion",
+					"__grid": [12,4],
+					"__pivot": [0,0],
+					"__tags": ["Pickups"],
+					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B994FF",
+					"iid": "14f28e80-c210-11ef-9593-993f643901b0",
+					"width": 16,
+					"height": 16,
+					"defUid": 4549,
+					"px": [192,64],
+					"fieldInstances": [{ "__identifier": "restore_mp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4550, "realEditorValues": [] }],
+					"__worldX": 1056,
+					"__worldY": -176
 				}
 			]
 		},
