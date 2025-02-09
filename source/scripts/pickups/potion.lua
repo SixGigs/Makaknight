@@ -23,7 +23,7 @@ function Potion:init(x, y, e)
 	end
 
 	-- Sprite properties
-	self:setCollideRect(4, 4, 8, 8)
+	self:setCollideRect(2, 12, 12, 4)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Pickup)

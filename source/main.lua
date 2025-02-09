@@ -39,6 +39,7 @@ import 'scripts/entities/Wind'
 
 -- Pickup scripts
 import 'scripts/pickups/Potion'
+import 'scripts/pickups/Manapotion'
 import 'scripts/pickups/Healthpotion'
 import 'scripts/pickups/Staminapotion'
 

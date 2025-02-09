@@ -191,6 +191,8 @@ function World:goToLevel(level)
 			Healthpotion(entityX, entityY, entity)
 		elseif entityName == 'Staminapotion' then
 			Staminapotion(entityX, entityY, entity)
+		elseif entityName == 'Manapotion' then
+			Manapotion(entityX, entityY, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == 'Firefly' then
