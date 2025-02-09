@@ -189,6 +189,8 @@ function World:goToLevel(level)
 			Reptile(self, entityX, entityY + 8, entity)
 		elseif entityName == 'Healthpotion' then
 			Healthpotion(entityX, entityY, entity)
+		elseif entityName == 'Staminapotion' then
+			Staminapotion(entityX, entityY, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == 'Firefly' then

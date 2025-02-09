@@ -3,6 +3,7 @@ local gfx <const> = playdate.graphics
 class('Animal').extends(AnimatedSprite)
 
 
+
 --- The Animal is Initialised Using This Method
 --- @param  x  integer  The X Coordinate to Spawn the Animal
 --- @param  y  integer  The Y Coordinate to Spawn the Animal

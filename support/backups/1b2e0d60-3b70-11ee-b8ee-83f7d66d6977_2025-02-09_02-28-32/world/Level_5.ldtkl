@@ -194,24 +194,8 @@
 					"height": 16,
 					"defUid": 4521,
 					"px": [304,112],
-					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
+					"fieldInstances": [{ "__identifier": "heals", "__type": "Int", "__value": 20, "__tile": null, "defUid": 4523, "realEditorValues": [] }],
 					"__worldX": 2368,
-					"__worldY": -128
-				},
-				{
-					"__identifier": "Staminapotion",
-					"__grid": [18,7],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "a5c26950-c210-11ef-9593-4953b102e318",
-					"width": 16,
-					"height": 16,
-					"defUid": 4546,
-					"px": [288,112],
-					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
-					"__worldX": 2352,
 					"__worldY": -128
 				}
 			]

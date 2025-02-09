@@ -21,7 +21,7 @@ import 'scripts/Game'
 import 'scripts/Player'
 
 -- Animal scripts
-import 'scripts/animals/animal'
+import 'scripts/animals/Animal'
 import 'scripts/animals/Butterfly'
 import 'scripts/animals/Firefly'
 import 'scripts/animals/Reptile'
@@ -34,9 +34,13 @@ import 'scripts/entities/Door'
 import 'scripts/entities/Flag'
 import 'scripts/entities/Half'
 import 'scripts/entities/Hitbox'
-import 'scripts/entities/Healthpotion'
 import 'scripts/entities/Prop'
 import 'scripts/entities/Wind'
+
+-- Pickup scripts
+import 'scripts/pickups/Potion'
+import 'scripts/pickups/Healthpotion'
+import 'scripts/pickups/Staminapotion'
 
 -- Hazard scripts
 import 'scripts/hazards/Fan'
