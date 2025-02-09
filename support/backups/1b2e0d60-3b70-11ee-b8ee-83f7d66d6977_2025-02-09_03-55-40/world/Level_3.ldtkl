@@ -225,6 +225,22 @@
 					],
 					"__worldX": 1584,
 					"__worldY": -112
+				},
+				{
+					"__identifier": "Healthpotion",
+					"__grid": [9,5],
+					"__pivot": [0,0],
+					"__tags": ["Pickups"],
+					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#B994FF",
+					"iid": "890d7500-c210-11ef-9593-b3fd6452999a",
+					"width": 16,
+					"height": 16,
+					"defUid": 4521,
+					"px": [144,80],
+					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
+					"__worldX": 1408,
+					"__worldY": -160
 				}
 			]
 		},
