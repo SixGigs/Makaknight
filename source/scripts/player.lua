@@ -279,10 +279,15 @@ function Player:init(world)
 	self.upBuffer = 0
 	self.bBuffer = 0
 
-	-- Status bar buffer properties
+	-- Status buffer properties
 	self.setStaminaBuffer = false
 	self.staminaBufferAmount = 60
 	self.staminaBuffer = 0
+
+	-- Mana buffer properties
+	self.setManaBuffer = false
+	self.manaBufferAmount = 60
+	self.manaBuffer = 0
 
 	-- Physics properties
 	self.xVelocity = 0
@@ -338,6 +343,7 @@ function Player:updateBuffers()
 	self.rightBuffer = math.max(self.rightBuffer - (30 * dt), 0)
 	self.upBuffer = math.max(self.upBuffer - (30 * dt), 0)
 	self.staminaBuffer = math.max(self.staminaBuffer - (30 * dt), 0)
+	self.manaBuffer = math.max(self.manaBuffer - (30 * dt), 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -365,6 +371,11 @@ function Player:updateBuffers()
 		self.staminaBuffer = self.staminaBufferAmount
 		self.setStaminaBuffer = false
 	end
+
+	if self.setManaBuffer then
+		self.manaBuffer = self.manaBufferAmount
+		self.setManaBuffer = false
+	end
 end
 
 
@@ -378,6 +389,7 @@ function Player:playerPressedUp() return self.upBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerPressedB() return self.bBuffer > 0 end
 function Player:staminaBlocked() return self.staminaBuffer > 0 end
+function Player:manaBlocked() return self.manaBuffer > 0 end
 
 
 
@@ -385,6 +397,7 @@ function Player:staminaBlocked() return self.staminaBuffer > 0 end
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
 	self:regenerateStamina()
+	self:regenerateMana()
 
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
@@ -910,6 +923,8 @@ function Player:changeToDoubleJumpState()
 		self:changeState('dbJump')
 		self:deductMana(self.doubleJumpManaCost)		
 	end
+
+	self.setManaBuffer = true
 end
 
 
@@ -1025,6 +1040,8 @@ function Player:changeToDiveState()
 		self:deductMana(self.dashManaCost)
 		self:changeState('dive')
 	end
+
+	self.setManaBuffer = true
 end
 
 
@@ -1052,6 +1069,8 @@ function Player:changeToDashState()
 		self:setHitBox(dashing)
 		self:changeState('dash')
 	end
+
+	self.setManaBuffer = true
 end
 
 
@@ -1118,6 +1137,20 @@ function Player:regenerateStamina()
 
 	if self.sp > self.max_sp then
 		self.sp = self.max_sp
+	end
+end
+
+
+
+
+--- This method is used to calculate when to regenerate mana
+function Player:regenerateMana()
+	if self.mp < self.max_mp and not self:manaBlocked() then
+		self.mp = self.mp + 1 * dt
+	end
+
+	if self.mp > self.max_mp then
+		self.mp = self.max_mp
 	end
 end
 

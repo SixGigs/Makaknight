@@ -53,6 +53,7 @@ function Game:startTransition(transition)
 		if self.won then
 			self.player_hp = self.player_max_hp
 			self.player_sp = self.player_max_sp
+			self.player_mp = self.player_max_mp
 			self.player_level = self.spawn_level
 			self.player_x = self.player_spawn_x
 			self.player_y = self.player_spawn_y
