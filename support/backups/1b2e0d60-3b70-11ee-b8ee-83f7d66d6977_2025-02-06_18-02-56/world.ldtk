@@ -23316,7 +23316,7 @@
 		{
 			"identifier": "Door0",
 			"uid": 3611,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark desert door",
@@ -23463,7 +23463,7 @@
 		{
 			"identifier": "Door1",
 			"uid": 3617,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light desert door",
@@ -23610,7 +23610,7 @@
 		{
 			"identifier": "Door2",
 			"uid": 3622,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A small dark desert door",
@@ -23757,7 +23757,7 @@
 		{
 			"identifier": "Door3",
 			"uid": 3628,
-			"tags": ["Grass"],
+			"tags": [ "Grass", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark grass land door",
@@ -23904,7 +23904,7 @@
 		{
 			"identifier": "Door4",
 			"uid": 3633,
-			"tags": ["Grass"],
+			"tags": [ "Grass", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light grass land door",
@@ -24810,7 +24810,7 @@
 		{
 			"identifier": "Lizard",
 			"uid": 2973,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -25031,7 +25031,7 @@
 		{
 			"identifier": "Snake",
 			"uid": 2975,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,

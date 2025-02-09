@@ -24810,7 +24810,7 @@
 		{
 			"identifier": "Lizard",
 			"uid": 2973,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -25031,7 +25031,7 @@
 		{
 			"identifier": "Snake",
 			"uid": 2975,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,

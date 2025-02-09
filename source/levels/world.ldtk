@@ -22664,7 +22664,7 @@
 		{
 			"identifier": "Spearspike",
 			"uid": 68,
-			"tags": ["Desert"],
+			"tags": ["Spike"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A spike the player can kill themselves on",
@@ -22699,7 +22699,7 @@
 		{
 			"identifier": "Roofspike",
 			"uid": 3608,
-			"tags": [],
+			"tags": ["Spike"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "Instant death if the player impales their head on them",
@@ -22734,7 +22734,7 @@
 		{
 			"identifier": "Floorspike",
 			"uid": 3604,
-			"tags": [],
+			"tags": ["Spike"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "Instant death if the player lands on them, but safe to walk past",
@@ -22916,7 +22916,7 @@
 		{
 			"identifier": "Stalactite",
 			"uid": 3601,
-			"tags": ["Cave"],
+			"tags": ["Spike"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave decoration that kills the player instantly if they bump their head on it",
@@ -22951,7 +22951,7 @@
 		{
 			"identifier": "Stalagmite",
 			"uid": 3597,
-			"tags": ["Cave"],
+			"tags": ["Spike"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave decoration that promises instant death if landed on but perfectly safe to walk past",
@@ -23316,7 +23316,7 @@
 		{
 			"identifier": "Door0",
 			"uid": 3611,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark desert door",
@@ -23463,7 +23463,7 @@
 		{
 			"identifier": "Door1",
 			"uid": 3617,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light desert door",
@@ -23610,7 +23610,7 @@
 		{
 			"identifier": "Door2",
 			"uid": 3622,
-			"tags": ["Desert"],
+			"tags": [ "Desert", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A small dark desert door",
@@ -23757,7 +23757,7 @@
 		{
 			"identifier": "Door3",
 			"uid": 3628,
-			"tags": ["Grass"],
+			"tags": [ "Grass", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark grass land door",
@@ -23904,7 +23904,7 @@
 		{
 			"identifier": "Door4",
 			"uid": 3633,
-			"tags": ["Grass"],
+			"tags": [ "Grass", "Door" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light grass land door",
@@ -24810,7 +24810,7 @@
 		{
 			"identifier": "Lizard",
 			"uid": 2973,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
@@ -25031,7 +25031,7 @@
 		{
 			"identifier": "Snake",
 			"uid": 2975,
-			"tags": [ "Desert", "Animal" ],
+			"tags": [ "Desert", "Reptile" ],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,

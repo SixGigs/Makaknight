@@ -51,46 +51,7 @@
 			"seed": 4929172,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Lizard",
-					"__grid": [20,6],
-					"__pivot": [0,0],
-					"__tags": [ "Desert", "Animal" ],
-					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "3501b2c0-c210-11ef-8486-9dc80d55dd6e",
-					"width": 16,
-					"height": 16,
-					"defUid": 2973,
-					"px": [320,96],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4531, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4537, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3381, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
-					],
-					"__worldX": 320,
-					"__worldY": -144
-				},
-				{
-					"__identifier": "Floorspike",
-					"__grid": [20,10],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3603, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "3b9b74e0-c210-11ef-8486-a74adf3a8561",
-					"width": 16,
-					"height": 16,
-					"defUid": 3604,
-					"px": [320,160],
-					"fieldInstances": [],
-					"__worldX": 320,
-					"__worldY": -80
-				}
-			]
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Foreground",

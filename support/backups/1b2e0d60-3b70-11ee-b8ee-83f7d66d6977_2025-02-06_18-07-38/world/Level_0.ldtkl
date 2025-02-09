@@ -51,56 +51,7 @@
 			"seed": 4929172,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Stalactite",
-					"__grid": [19,6],
-					"__pivot": [0,0],
-					"__tags": ["Cave"],
-					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "08b08d40-c210-11ef-8486-113d39581299",
-					"width": 16,
-					"height": 16,
-					"defUid": 3601,
-					"px": [304,96],
-					"fieldInstances": [],
-					"__worldX": 304,
-					"__worldY": -144
-				},
-				{
-					"__identifier": "Stalactite",
-					"__grid": [20,6],
-					"__pivot": [0,0],
-					"__tags": ["Cave"],
-					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "08ede460-c210-11ef-8486-835a1ba4b986",
-					"width": 16,
-					"height": 16,
-					"defUid": 3601,
-					"px": [320,96],
-					"fieldInstances": [],
-					"__worldX": 320,
-					"__worldY": -144
-				},
-				{
-					"__identifier": "Stalactite",
-					"__grid": [21,6],
-					"__pivot": [0,0],
-					"__tags": ["Cave"],
-					"__tile": { "tilesetUid": 3600, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "09193a20-c210-11ef-8486-4f7a42ead625",
-					"width": 16,
-					"height": 16,
-					"defUid": 3601,
-					"px": [336,96],
-					"fieldInstances": [],
-					"__worldX": 336,
-					"__worldY": -144
-				}
-			]
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Foreground",
