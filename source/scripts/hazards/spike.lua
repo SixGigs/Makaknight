@@ -21,7 +21,7 @@ function Spike:init(x, y, e)
 	
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
-	self:setTag(TAGS.Spike)
+	self:setTag(TAGS.Hazard)
 	self:setZIndex(Z_INDEXES.Hazard)
 	self:setImage(i)
 	self:add()

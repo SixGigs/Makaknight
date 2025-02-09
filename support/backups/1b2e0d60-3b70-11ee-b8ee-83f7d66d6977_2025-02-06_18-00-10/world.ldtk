@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4541,
+	"nextUid": 4540,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -22664,7 +22664,7 @@
 		{
 			"identifier": "Spearspike",
 			"uid": 68,
-			"tags": ["Spike"],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A spike the player can kill themselves on",
@@ -22699,7 +22699,7 @@
 		{
 			"identifier": "Roofspike",
 			"uid": 3608,
-			"tags": ["Spike"],
+			"tags": [],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "Instant death if the player impales their head on them",
@@ -22734,7 +22734,7 @@
 		{
 			"identifier": "Floorspike",
 			"uid": 3604,
-			"tags": ["Spike"],
+			"tags": [],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "Instant death if the player lands on them, but safe to walk past",
@@ -22916,7 +22916,7 @@
 		{
 			"identifier": "Stalactite",
 			"uid": 3601,
-			"tags": ["Spike"],
+			"tags": ["Cave"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave decoration that kills the player instantly if they bump their head on it",
@@ -22951,7 +22951,7 @@
 		{
 			"identifier": "Stalagmite",
 			"uid": 3597,
-			"tags": ["Spike"],
+			"tags": ["Cave"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A lethal cave decoration that promises instant death if landed on but perfectly safe to walk past",
@@ -23243,7 +23243,7 @@
 		{
 			"identifier": "Fragile",
 			"uid": 3649,
-			"tags": [],
+			"tags": ["Block"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "The fragile block breaks quickly after stepped on, fast platforming is required to make use of them",
@@ -23316,7 +23316,7 @@
 		{
 			"identifier": "Door0",
 			"uid": 3611,
-			"tags": [ "Desert", "Door" ],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark desert door",
@@ -23463,7 +23463,7 @@
 		{
 			"identifier": "Door1",
 			"uid": 3617,
-			"tags": [ "Desert", "Door" ],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light desert door",
@@ -23610,7 +23610,7 @@
 		{
 			"identifier": "Door2",
 			"uid": 3622,
-			"tags": [ "Desert", "Door" ],
+			"tags": ["Desert"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A small dark desert door",
@@ -23757,7 +23757,7 @@
 		{
 			"identifier": "Door3",
 			"uid": 3628,
-			"tags": [ "Grass", "Door" ],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A dark grass land door",
@@ -23904,7 +23904,7 @@
 		{
 			"identifier": "Door4",
 			"uid": 3633,
-			"tags": [ "Grass", "Door" ],
+			"tags": ["Grass"],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": "A light grass land door",
@@ -25285,7 +25285,7 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Healthpotion",
+			"identifier": "HP",
 			"uid": 4521,
 			"tags": ["Pickups"],
 			"exportToToc": false,
@@ -25307,9 +25307,9 @@
 			"color": "#B994FF",
 			"renderMode": "Tile",
 			"showName": true,
-			"tilesetId": 4540,
+			"tilesetId": 4522,
 			"tileRenderMode": "FitInside",
-			"tileRect": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
+			"tileRect": { "tilesetUid": 4522, "x": 0, "y": 0, "w": 16, "h": 16 },
 			"uiTileRect": null,
 			"nineSliceBorders": [],
 			"maxCount": 0,
@@ -25910,6 +25910,25 @@
 		{
 			"__cWid": 1,
 			"__cHei": 1,
+			"identifier": "Hp",
+			"uid": 4522,
+			"relPath": "../images/pickups/hp.png",
+			"embedAtlas": null,
+			"pxWid": 16,
+			"pxHei": 16,
+			"tileGridSize": 16,
+			"spacing": 0,
+			"padding": 0,
+			"tags": [],
+			"tagsSourceEnumUid": null,
+			"enumTags": [],
+			"customData": [],
+			"savedSelections": [],
+			"cachedPixelData": { "opaqueTiles": "0", "averageColors": "b998" }
+		},
+		{
+			"__cWid": 1,
+			"__cHei": 1,
 			"identifier": "Firefly",
 			"uid": 4529,
 			"relPath": "../images/icons/firefly.png",
@@ -25925,25 +25944,6 @@
 			"customData": [],
 			"savedSelections": [],
 			"cachedPixelData": { "opaqueTiles": "0", "averageColors": "5777" }
-		},
-		{
-			"__cWid": 1,
-			"__cHei": 1,
-			"identifier": "Healthpotion",
-			"uid": 4540,
-			"relPath": "../images/icons/healthpotion.png",
-			"embedAtlas": null,
-			"pxWid": 16,
-			"pxHei": 16,
-			"tileGridSize": 16,
-			"spacing": 0,
-			"padding": 0,
-			"tags": [],
-			"tagsSourceEnumUid": null,
-			"enumTags": [],
-			"customData": [],
-			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "0", "averageColors": "8887" }
 		}
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 2, "values": [ { "id": "Solid", "tileRect": null, "color": 12470831 }, { "id": "Half", "tileRect": null, "color": 16217634 } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": ["Level_Data"] },

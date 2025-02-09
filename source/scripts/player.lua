@@ -477,7 +477,7 @@ function Player:handleMovementAndCollisions()
 			end
 		end
 
-		if collisionTag == TAGS.Spike or collisionTag == TAGS.Hazard then
+		if collisionTag == TAGS.Hazard then
 			if self.currentState ~= 'hurt' then
 				collisionObject:handleCollision(self)
 			end

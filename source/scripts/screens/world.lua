@@ -11,18 +11,7 @@ local hazards <const> = {
 	["Stalactite"] = true
 }
 
-local doors <const> = {
-	["Door0"] = true,
-	["Door1"] = true,
-	["Door2"] = true,
-	["Door3"] = true,
-	["Door4"] = true
-}
 
-local reptiles <const> = {
-	["Lizard"] = true,
-	["Snake"] = true
-}
 
 
 -- Collision Tags & Z Indexes
@@ -192,12 +181,14 @@ function World:goToLevel(level)
 		local entityTags = entity.tags
 
 		-- Match the entity name to a script
-		if hazards[entityName] then
+		if self:has_value(entityTags, 'Spike') then
 			Spike(entityX, entityY, entity)
-		elseif doors[entityName] then
+		elseif self:has_value(entityTags, 'Door') then
 			Door(entityX, entityY, entity)
-		elseif reptiles[entityName] then
+		elseif self:has_value(entityTags, 'Reptile') then
 			Reptile(self, entityX, entityY + 8, entity)
+		elseif entityName == 'Healthpotion' then
+			Healthpotion(entityX, entityY, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == 'Firefly' then
@@ -206,11 +197,9 @@ function World:goToLevel(level)
 			Spikeball(entityX, entityY, entity)
 		elseif entityName == "Bubble" then
 			Bubble(entityX, entityY, entity)
-		elseif self:has_value(entityTags, 'Pickups') then
-			Pickup(entityX, entityY, entity)
 		elseif entityName == "Flag" then
 			Flag(entityX, entityY, entity)
-		elseif self:has_value(entityTags, 'Block') then
+		elseif entityName == 'Fragile' then
 			Block(entityX, entityY, entity)
 		elseif entityName == "Crown" then
 			Crown(entityX, entityY)
