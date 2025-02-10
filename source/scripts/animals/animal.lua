@@ -21,7 +21,7 @@ function Animal:init(x, y, e)
 	self.spawn_y = y
 
 	-- If the animal ID is on the don't spawn list, hide the animal
-	if g.picked_items[self.id] then
+	if g.depletedEntities[self.id] then
 		self:setVisible(false)
 	end
 
@@ -84,7 +84,7 @@ function Animal:update()
 	end
 
 	if self.hp <= 0 then
-		g.picked_items[self.id] = true
+		g.depletedEntities[self.id] = true
 		self:setVisible(false)
 	end
 

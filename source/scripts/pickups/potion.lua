@@ -18,7 +18,7 @@ function Potion:init(x, y, e)
 	self.restore_mp = e.fields.restore_mp and e.fields.restore_mp or 0
 
 	-- If the potion ID is on the don't spawn list, hide the potion
-	if g.picked_items[self.id] then
+	if g.depletedEntities[self.id] then
 		self:setVisible(false)
 	end
 
@@ -55,6 +55,6 @@ function Potion:pickUp(e)
 		e.mp = 100
 	end
 
-	g.picked_items[self.id] = true
+	g.depletedEntities[self.id] = true
 	self:setVisible(false)
 end
