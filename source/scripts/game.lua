@@ -57,6 +57,8 @@ function Game:startTransition(transition)
 			self.player_level = self.spawn_level
 			self.player_x = self.player_spawn_x
 			self.player_y = self.player_spawn_y
+
+			self.depletedEntities = {}
 			self.won = false
 		end
 
@@ -152,7 +154,7 @@ function Game:load()
 	self.player_max_hp = (gd and (gd.max_hp and gd.max_hp or 100) or 100)
 	self.player_max_sp = (gd and (gd.max_sp and gd.max_sp or 100) or 100)
 	self.player_max_mp = (gd and (gd.max_mp and gd.max_mp or 100) or 100)
-	self.picked_items = (gd and (gd.picked_items and gd.picked_items or {}) or {})
+	self.depletedEntities = (gd and (gd.depletedEntities and gd.depletedEntities or {}) or {})
 	self.player_x = (gd and (gd.levelX and gd.levelX or self.player_spawn_x) or self.player_spawn_x)
 	self.player_y = (gd and (gd.levelY and gd.levelY or self.player_spawn_y) or self.player_spawn_y)
 	self.checkpoint = (gd and (gd.flag and gd.flag or 0) or 0)
@@ -182,7 +184,7 @@ function Game:save()
 		max_hp = self.player_max_hp,
 		max_sp = self.player_max_sp,
 		max_mp = self.player_max_mp,
-		picked_items = self.picked_items,
+		picked_items = self.depletedEntities,
 		worldX = self.world_x
 	}
 
@@ -192,7 +194,7 @@ end
 
 
 function Game:emptySpawnList()
-	self.picked_items = {}
+	self.depletedEntities = {}
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
