@@ -51,7 +51,7 @@ function Player:init(world)
 	self:addState('punch', 112, 114, {ts = 1, l = 1})
 	self:addState('exit', 99, 101, {ts = 3, l = 1, na = 'idle'})
 	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'}) -- REMAKE LATER
-	self:addState('enter', 117, 117) -- REMAKE LATER
+	self:addState('enter', 117, 117)
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -162,13 +162,13 @@ function Player:init(world)
 
 	---[ Player class properties ]-------------------------------------------------------------------------
 	-- General player class properties
-	self.hp = g.player_hp
-	self.sp = g.player_sp
-	self.mp = g.player_mp
-	self.max_hp = g.player_max_hp
-	self.max_sp = g.player_max_sp
-	self.max_mp = g.player_max_mp
-	self.globalFlip = g.player_facing
+	self.hp = g.playerHP
+	self.sp = g.playerSP
+	self.mp = g.playerMP
+	self.maxHP = g.playerMaxHP
+	self.maxSP = g.playerMaxSP
+	self.maxMP = g.playerMaxMP
+	self.globalFlip = g.playerFacing
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -301,7 +301,7 @@ function Player:init(world)
 
 
 	---[ Playdate sprite settings ]------------------------------------------------------------------------
-	self:moveTo(g.player_x, g.player_y)
+	self:moveTo(g.playerX, g.playerY)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)
@@ -316,12 +316,12 @@ function Player:update()
 	self:updateAnimation()
 
 	-- Update globals so the game saves correct data when closed
-	g.player_hp = self.hp
-	g.player_sp = self.sp
-	g.player_mp = self.mp
-	g.player_facing = self.globalFlip
-	g.player_x = self.x
-	g.player_y = self.y
+	g.playerHP = self.hp
+	g.playerSP = self.sp
+	g.playerMP = self.mp
+	g.playerFacing = self.globalFlip
+	g.playerX = self.x
+	g.playerY = self.y
 
 	-- If not dead update player buffers, handle player states, and movement with collisions
 	if self.dead then return end
@@ -520,12 +520,12 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If the world is wider than 400 pixels and the player is 250 or more pixels across the screen update the world
-	if self.x + self.xVelocity > self.x and self.x >= 250 and g.world_x + screenWidth < self.world.width - 1 then
+	if self.x + self.xVelocity > self.x and self.x >= 250 and g.worldX + screenWidth < self.world.width - 1 then
 		self.world:update()
 	end
 
 	-- If the world X value is greater than 0 and the player is 150 or less pixels across the screen update the world
-	if self.x + self.xVelocity < self.x and self.x <= 150 and g.world_x > 1 then
+	if self.x + self.xVelocity < self.x and self.x <= 150 and g.worldX > 1 then
 		self.world:update()
 	end
 
@@ -554,7 +554,7 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	if self.hp < g.player_hp then self:changeToHurtState() end -- Check if we took damage and change to hurt state
+	if self.hp < g.playerHP then self:changeToHurtState() end -- Check if we took damage and change to hurt state
 	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
@@ -563,9 +563,9 @@ end
 
 
 function Player:reset()
-	self.hp = self.max_hp
-	self.sp = self.max_sp
-	self.mp = self.max_mp
+	self.hp = self.maxHP
+	self.sp = self.maxSP
+	self.mp = self.maxMP
 	self.dead = false
 	self.hurt = false
 
@@ -629,9 +629,9 @@ function Player:handleFlagCollision(flag)
 	flag:hoist(self.globalFlip) -- Raise the touched flag
 
 	-- Top up player properties
-	self.hp = self.max_hp
-	self.sp = self.max_sp
-	self.mp = self.max_mp
+	self.hp = self.maxHP
+	self.sp = self.maxSP
+	self.mp = self.maxMP
 
 	self.world.health:show()
 	self.world.stamina:show()
@@ -1127,7 +1127,7 @@ end
 
 --- This method is used to calculate when to regenerate stamina and how quickly
 function Player:regenerateStamina()
-	if self.sp < self.max_sp and not self:staminaBlocked() then
+	if self.sp < self.maxSP and not self:staminaBlocked() then
 		if self.currentState == 'duck' then
 			self.sp = self.sp + 30 * dt
 		end
@@ -1135,8 +1135,8 @@ function Player:regenerateStamina()
 		self.sp = self.sp + 30 * dt
 	end
 
-	if self.sp > self.max_sp then
-		self.sp = self.max_sp
+	if self.sp > self.maxSP then
+		self.sp = self.maxSP
 	end
 end
 
@@ -1145,12 +1145,12 @@ end
 
 --- This method is used to calculate when to regenerate mana
 function Player:regenerateMana()
-	if self.mp < self.max_mp and not self:manaBlocked() then
+	if self.mp < self.maxMP and not self:manaBlocked() then
 		self.mp = self.mp + 1 * dt
 	end
 
-	if self.mp > self.max_mp then
-		self.mp = self.max_mp
+	if self.mp > self.maxMP then
+		self.mp = self.maxMP
 	end
 end
 

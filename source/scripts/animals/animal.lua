@@ -15,7 +15,7 @@ function Animal:init(x, y, e)
 	-- Animal properties
 	self.id = e.iid
 	self.hp = e.fields.hp
-	self.max_hp = e.fields.hp
+	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
 	self.spawn_x = x
 	self.spawn_y = y
@@ -170,8 +170,8 @@ function Animal:handleCollision(obj)
 	if self.hp == 0 then
 		if self.heals then
 			obj.hp = obj.hp + self.heals
-			if obj.hp > obj.max_hp then
-				obj.hp = obj.max_hp
+			if obj.hp > obj.maxHP then
+				obj.hp = obj.maxHP
 			end
 		end
 	end

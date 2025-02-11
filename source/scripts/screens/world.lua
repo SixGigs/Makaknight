@@ -40,8 +40,8 @@ function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
 	self.gravity = 900
 
-	self:goToLevel(g.player_level)
-	self:adjustLevel(g.world_x)
+	self:goToLevel(g.playerLevel)
+	self:adjustLevel(g.worldX)
 	self.player = Player(self)
 end
 
@@ -50,13 +50,13 @@ end
 --- @param  direction  string  Contains a Direction From the Current Level to Load the Next Level Piece
 function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
-	local level <const> = ldtk.get_neighbours(g.player_level, direction)[1]
+	local level <const> = ldtk.get_neighbours(g.playerLevel, direction)[1]
 	if not level then
 		if direction == 'north' then return else self.player.hp = 0 return end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
-	local oldLevel <const> = g.player_level
+	local oldLevel <const> = g.playerLevel
 	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
 	ldtk.release_level(oldLevel)
 
@@ -66,7 +66,7 @@ function World:enterRoom(direction)
 
 	-- If Travelling East Reset the World X Attribute
 	if direction == 'east' then
-		g.world_x = 0
+		g.worldX = 0
 	end
 
 	-- Create a local X and Y, and use them to spawn the player
@@ -85,9 +85,9 @@ function World:enterRoom(direction)
 
 	if self.width > screenWidth then
 		if direction == 'west' then
-			g.world_x = self.width - screenWidth
-			self.player:moveBy(g.world_x, 0)
-			self:adjustLevel(g.world_x)
+			g.worldX = self.width - screenWidth
+			self.player:moveBy(g.worldX, 0)
+			self:adjustLevel(g.worldX)
 		end
 	end
 end
@@ -98,11 +98,11 @@ end
 --- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
-	if level ~= g.player_level then
+	if level ~= g.playerLevel then
 		Fade('out')
 
 		pd.timer.performAfterDelay(500, function()
-			local oldLevel <const> = g.player_level
+			local oldLevel <const> = g.playerLevel
 			ldtk.release_level(oldLevel)
 			self:goToLevel(level)
 			self.player:add()
@@ -144,7 +144,7 @@ function World:goToLevel(level)
 	self.y = 0 -- Create level X and Y
 
 	-- Update local level attribute and build the new tile map
-	g.player_level = level
+	g.playerLevel = level
 	for layer_name, layer in pairs(ldtk.get_layers(level)) do
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
@@ -355,17 +355,17 @@ end
 
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
-	if g.player_level ~= g.spawn_level then
-		self:goToLevel(g.spawn_level)
+	if g.playerLevel ~= g.playerSpawnLevel then
+		self:goToLevel(g.playerSpawnLevel)
 		self.player:add()
-		g.world_x = 0
+		g.worldX = 0
 	end
 
 	-- Reset no spawn list to empty
 	g:emptySpawnList()
 
 	-- Move player to the spawn coordinates and set them to the spawn state
-	self.player:moveTo(g.player_spawn_x, g.player_spawn_y)
+	self.player:moveTo(g.playerSpawnX, g.playerSpawnY)
 	self.player:changeToSpawnState()
 end
 
@@ -373,7 +373,7 @@ end
 
 --- This Function is Called by the Player to Update the World X Coordinate
 function World:update()
-	g.world_x = g.world_x + self.player.xVelocity * dt
+	g.worldX = g.worldX + self.player.xVelocity * dt
 	self:adjustLevel(self.player.xVelocity * dt)
 end
 
@@ -397,16 +397,16 @@ end
 --- Check if the Level X Amount needs Correction
 --- @param  xAmount  The Amount to Move the Level
 function World:levelCorrection(xAmount)
-	if g.world_x > self.width - screenWidth then
-		local xCorrection <const> = g.world_x - (self.width - screenWidth)
+	if g.worldX > self.width - screenWidth then
+		local xCorrection <const> = g.worldX - (self.width - screenWidth)
 		xAmount = xAmount - xCorrection
-		g.world_x = self.width - screenWidth
+		g.worldX = self.width - screenWidth
 	end
 
-	if g.world_x < 0 then
-		local xCorrection <const> = xAmount - g.world_x
+	if g.worldX < 0 then
+		local xCorrection <const> = xAmount - g.worldX
 		xAmount = xCorrection
-		g.world_x = 0
+		g.worldX = 0
 	end
 
 	return xAmount

@@ -51,12 +51,12 @@ function Game:startTransition(transition)
 		self:loadNewScene()
 
 		if self.won then
-			self.player_hp = self.player_max_hp
-			self.player_sp = self.player_max_sp
-			self.player_mp = self.player_max_mp
-			self.player_level = self.spawn_level
-			self.player_x = self.player_spawn_x
-			self.player_y = self.player_spawn_y
+			self.playerHP = self.playerMaxHP
+			self.playerSP = self.playerMaxSP
+			self.playerMP = self.playerMaxMP
+			self.playerLevel = self.playerSpawnLevel
+			self.playerX = self.playerSpawnX
+			self.playerY = self.playerSpawnY
 
 			self.depletedEntities = {}
 			self.won = false
@@ -143,22 +143,22 @@ end
 function Game:load()
 	local gd <const> = pd.datastore.read()
 
-	self.spawn_level = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
-	self.player_spawn_x = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
-	self.player_spawn_y = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
-	self.player_level = (gd and (gd.level and gd.level or self.spawn_level) or self.spawn_level)
-	self.player_facing = (gd and (gd.face and gd.face or 0) or 0)
-	self.player_hp = (gd and (gd.hp and gd.hp or 100) or 100)
-	self.player_sp = (gd and (gd.sp and gd.sp or 100) or 100)
-	self.player_mp = (gd and (gd.mp and gd.mp or 100) or 100)
-	self.player_max_hp = (gd and (gd.max_hp and gd.max_hp or 100) or 100)
-	self.player_max_sp = (gd and (gd.max_sp and gd.max_sp or 100) or 100)
-	self.player_max_mp = (gd and (gd.max_mp and gd.max_mp or 100) or 100)
+	self.playerSpawnLevel = (gd and (gd.spawn and gd.spawn or "Level_0") or "Level_0")
+	self.playerSpawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
+	self.playerSpawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
+	self.playerLevel = (gd and (gd.level and gd.level or self.playerSpawnLevel) or self.playerSpawnLevel)
+	self.playerFacing = (gd and (gd.face and gd.face or 0) or 0)
+	self.playerHP = (gd and (gd.hp and gd.hp or 100) or 100)
+	self.playerSP = (gd and (gd.sp and gd.sp or 100) or 100)
+	self.playerMP = (gd and (gd.mp and gd.mp or 100) or 100)
+	self.playerMaxHP = (gd and (gd.maxHP and gd.maxHP or 100) or 100)
+	self.playerMaxSP = (gd and (gd.maxSP and gd.maxSP or 100) or 100)
+	self.playerMaxMP = (gd and (gd.maxMP and gd.maxMP or 100) or 100)
 	self.depletedEntities = (gd and (gd.depletedEntities and gd.depletedEntities or {}) or {})
-	self.player_x = (gd and (gd.levelX and gd.levelX or self.player_spawn_x) or self.player_spawn_x)
-	self.player_y = (gd and (gd.levelY and gd.levelY or self.player_spawn_y) or self.player_spawn_y)
+	self.playerX = (gd and (gd.levelX and gd.levelX or self.playerSpawnX) or self.playerSpawnX)
+	self.playerY = (gd and (gd.levelY and gd.levelY or self.playerSpawnY) or self.playerSpawnY)
 	self.checkpoint = (gd and (gd.flag and gd.flag or 0) or 0)
-	self.world_x = (gd and (gd.worldX and gd.worldX or 0) or 0)
+	self.worldX = (gd and (gd.worldX and gd.worldX or 0) or 0)
 	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
 
 	pd.display.setRefreshRate(self.fps)
@@ -169,23 +169,23 @@ end
 --- Save the game, this is global so it can execute on console exit or sleep
 function Game:save()
 	local data <const> = {
-		spawn = self.spawn_level,
-		spawnX = self.player_spawn_x,
-		spawnY = self.player_spawn_y,
-		level = self.player_level,
-		levelX = self.player_x,
-		levelY = self.player_y,
+		spawn = self.playerSpawnLevel,
+		spawnX = self.playerSpawnX,
+		spawnY = self.playerSpawnY,
+		level = self.playerLevel,
+		levelX = self.playerX,
+		levelY = self.playerY,
 		flag = self.checkpoint,
-		face = self.player_facing,
+		face = self.playerFacing,
 		fps = self.fps,
-		hp = self.player_hp,
-		sp = self.player_sp,
-		mp = self.player_mp,
-		max_hp = self.player_max_hp,
-		max_sp = self.player_max_sp,
-		max_mp = self.player_max_mp,
-		picked_items = self.depletedEntities,
-		worldX = self.world_x
+		hp = self.playerHP,
+		sp = self.playerSP,
+		mp = self.playerMP,
+		maxHP = self.playerMaxHP,
+		maxSP = self.playerMaxSP,
+		maxMP = self.playerMaxMP,
+		deletedEntities = self.depletedEntities,
+		worldX = self.worldX
 	}
 
 	pd.datastore.write(data)
@@ -202,7 +202,7 @@ function Game:emptySpawnList()
 			sprite:setVisible(true)
 		elseif sprite:isa(Animal) then
 			if not sprite:isVisible() then
-				sprite.hp = sprite.max_hp
+				sprite.hp = sprite.maxHP
 				sprite:moveTo(sprite.spawn_x, sprite.spawn_y)
 				sprite:setVisible(true)
 			end
