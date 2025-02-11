@@ -53,15 +53,15 @@ function Flag:hoist(flip)
 
 	-- Update the game properties
 	g.checkpoint = self.id
-	g.spawn_level = g.player_level
-	g.player_spawn_y = self.y + 8
+	g.playerSpawnLevel = g.playerLevel
+	g.playerSpawnY = self.y + 8
 	g:emptySpawnList()
 
 	-- Set the players X spawn value
 	if flip == 0 then
-		g.player_spawn_x = self.x - 8
+		g.playerSpawnX = self.x - 8
 	else
-		g.player_spawn_x = self.x + 24
+		g.playerSpawnX = self.x + 24
 	end
 end
 

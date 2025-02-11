@@ -7,20 +7,20 @@ function Mana:init(x, y)
 	local i <const> = gfx.imagetable.new('images/ui/mana-table-122-16')
 	Mana.super.init(self, x, y, i)
 
-	self:changeState(tostring(math.floor(g.player_mp)))
+	self:changeState(tostring(math.floor(g.playerMP)))
 end	
 
 
 function Mana:update()
 	self:updateVisibility()
 
-	if g.player_mp < g.player_max_mp then
+	if g.playerMP < g.playerMaxMP then
 		self:show()
 	end
 
 	if self:isVisible() then
-		if self.currentState ~= tostring(math.floor(g.player_mp)) then
-			self:changeState(tostring(math.floor(g.player_mp)))
+		if self.currentState ~= tostring(math.floor(g.playerMP)) then
+			self:changeState(tostring(math.floor(g.playerMP)))
 		end
 	end
 end
