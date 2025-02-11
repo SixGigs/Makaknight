@@ -147,6 +147,9 @@ function Game:load()
 	self.playerSpawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
 	self.playerSpawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
 	self.playerLevel = (gd and (gd.level and gd.level or self.playerSpawnLevel) or self.playerSpawnLevel)
+	self.playerXVelocity = (gd and (gd.xVelocity and gd.xVelocity or 0) or 0)
+	self.playerYVelocity = (gd and (gd.yVelocity and gd.yVelocity or 0) or 0)
+	self.playerState = (gd and (gd.state and gd.state or 'idle') or 'idle')
 	self.playerFacing = (gd and (gd.face and gd.face or 0) or 0)
 	self.playerHP = (gd and (gd.hp and gd.hp or 100) or 100)
 	self.playerSP = (gd and (gd.sp and gd.sp or 100) or 100)
@@ -176,6 +179,9 @@ function Game:save()
 		level = self.playerLevel,
 		levelX = self.playerX,
 		levelY = self.playerY,
+		xVelocity = self.playerXVelocity,
+		yVelocity = self.playerYVelocity,
+		state = self.playerState,
 		flag = self.checkpoint,
 		face = self.playerFacing,
 		fps = self.fps,
