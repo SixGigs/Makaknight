@@ -59,7 +59,6 @@ function Player:init(world)
 
 
 
-
 	---[ AnimatedSprite library - On Frame Changed Event ]------------------------------------------------
 	-- If the yVelocity increases or decreases in these states then enter jumping or falling
 	self.states['idle'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
@@ -290,8 +289,8 @@ function Player:init(world)
 	self.manaBuffer = 0
 
 	-- Physics properties
-	self.xVelocity = 0
-	self.yVelocity = 0
+	self.xVelocity = g.playerXVelocity
+	self.yVelocity = g.playerYVelocity
 	self.gravity = world.gravity
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
@@ -301,6 +300,7 @@ function Player:init(world)
 
 
 	---[ Playdate sprite settings ]------------------------------------------------------------------------
+	self:changeState(g.playerState)
 	self:moveTo(g.playerX, g.playerY)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
@@ -322,6 +322,9 @@ function Player:update()
 	g.playerFacing = self.globalFlip
 	g.playerX = self.x
 	g.playerY = self.y
+	g.playerXVelocity = self.xVelocity
+	g.playerYVelocity = self.yVelocity
+	g.playerState = self.currentState
 
 	-- If not dead update player buffers, handle player states, and movement with collisions
 	if self.dead then return end
