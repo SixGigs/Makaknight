@@ -155,6 +155,7 @@ function Game:load()
 	self.playerMaxSP = (gd and (gd.maxSP and gd.maxSP or 100) or 100)
 	self.playerMaxMP = (gd and (gd.maxMP and gd.maxMP or 100) or 100)
 	self.depletedEntities = (gd and (gd.depletedEntities and gd.depletedEntities or {}) or {})
+	self.extinctEntities = (gd and (gd.extinctEntities and gd.extinctEntities or {}) or {})
 	self.playerX = (gd and (gd.levelX and gd.levelX or self.playerSpawnX) or self.playerSpawnX)
 	self.playerY = (gd and (gd.levelY and gd.levelY or self.playerSpawnY) or self.playerSpawnY)
 	self.checkpoint = (gd and (gd.flag and gd.flag or 0) or 0)
@@ -185,6 +186,7 @@ function Game:save()
 		maxSP = self.playerMaxSP,
 		maxMP = self.playerMaxMP,
 		deletedEntities = self.depletedEntities,
+		extinctEntities = self.extinctEntities,
 		worldX = self.worldX
 	}
 
