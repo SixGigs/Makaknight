@@ -27,7 +27,9 @@ end
 --- @param   nextScene   class     The class you would like to change to
 --- @param   ...         unknown   Any data you want that scene to have
 function Game:switchScene(nextScene, transition, ...)
-	if self.transitioning then return end
+	if self.transitioning then
+		return
+	end
 
 	self.newScene = nextScene
 	self.sceneArgs = ...
@@ -38,14 +40,13 @@ end
 
 -- Starts and handles the transition
 function Game:startTransition(transition)
-	local transitionTimer
-
 	if transition == "fade" then
 		Fade('out')
-		transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 	else
-		transitionTimer = self:wipeTransition(0, 400)
+		Wipe('out')
 	end
+
+	local transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 
 	transitionTimer.timerEndedCallback = function()
 		self:loadNewScene()
@@ -62,12 +63,13 @@ function Game:startTransition(transition)
 			self.won = false
 		end
 
-		if transition == "fade" then
+		if transition == 'fade' then
 			Fade('in')
-			transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 		else
-			transitionTimer = self:wipeTransition(400, -1)
+			Wipe('in')
 		end
+
+		transitionTimer = pd.timer.new(self.transitionTime, 0, 400)
 
 		transitionTimer.timerEndedCallback = function()
 			self.transitioning = false
@@ -101,40 +103,6 @@ function Game:removeAllTimers()
 	for _, timer in ipairs(allTimers) do
 		timer:remove()
 	end
-end
-
-
-
---- Does the "wipe" transition
-function Game:wipeTransition(startValue, endValue)
-	local transitionSprite = self:createTransitionSprite()
-	transitionSprite:setClipRect(0, 0, startValue, 240)
-
-	local transitionTimer = pd.timer.new(
-		self.transitionTime, startValue, endValue, pd.easingFunctions.inOutCubic
-	)
-
-	transitionTimer.updateCallback = function(timer)
-		transitionSprite:setClipRect(0, 0, timer.value, 240)
-	end
-
-	return transitionTimer
-end
-
-
-
---- Creates a sprite to transition too and from for the scene change
-function Game:createTransitionSprite()
-	-- To change this for an image replace "gfx.kColorBlack" with the image
-	local filledRect = gfx.image.new(400, 240, gfx.kColorBlack)
-	local transitionSprite = gfx.sprite.new(filledRect)
-
-	transitionSprite:moveTo(200, 120)
-	transitionSprite:setZIndex(32767)
-	transitionSprite:setIgnoresDrawOffset()
-	transitionSprite:add()
-
-	return transitionSprite
 end
 
 
@@ -191,7 +159,7 @@ function Game:save()
 		maxHP = self.playerMaxHP,
 		maxSP = self.playerMaxSP,
 		maxMP = self.playerMaxMP,
-		deletedEntities = self.depletedEntities,
+		depletedEntities = self.depletedEntities,
 		extinctEntities = self.extinctEntities,
 		worldX = self.worldX
 	}

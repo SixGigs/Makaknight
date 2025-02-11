@@ -52,13 +52,16 @@ import 'scripts/hazards/Spikeball'
 
 -- Game screen scripts
 import 'scripts/screens/Background'
-import 'scripts/screens/fade'
-import 'scripts/screens/screen'
-import 'scripts/screens/credits'
-import 'scripts/screens/title'
-import 'scripts/screens/world'
-import 'scripts/screens/win'
-import 'scripts/screens/thanks'
+import 'scripts/screens/Screen'
+import 'scripts/screens/Credits'
+import 'scripts/screens/Title'
+import 'scripts/screens/World'
+import 'scripts/screens/Win'
+import 'scripts/screens/Thanks'
+
+-- Transitions
+import 'scripts/transitions/Fade'
+import 'scripts/transitions/Wipe'
 
 -- User interface scripts
 import 'scripts/ui/Bar'
