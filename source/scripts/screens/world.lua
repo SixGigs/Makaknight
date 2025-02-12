@@ -239,21 +239,21 @@ function World:addFullWallSprites(tilemap, emptyTiles)
 		tile.y = tile.y * 16
 		tile.w = tile.w * 16
 		tile.h = tile.h * 16
-	
+
 		if tile.x == 0 then
 			tile.x = -32
 			tile.w = tile.w + 32
 		elseif tile.x + tile.w == self.width then
 			tile.w = tile.w + 32
 		end
-	
+
 		if tile.y == 0 then
 			tile.y = -64
 			tile.h = tile.h + 64
 		elseif tile.y + tile.h == 240 then
 			tile.h = tile.h + 16
 		end
-	
+
 		gfx.sprite.addEmptyCollisionSprite(tile.x, tile.y, tile.w, tile.h)
 	end
 end
@@ -361,12 +361,22 @@ function World:resetPlayer()
 		g.worldX = 0
 	end
 
+	-- Remove any transition sprites
+	local allSprites = gfx.sprite.getAllSprites()
+	for _, sprite in ipairs(allSprites) do
+		if sprite:isa(Fade) or sprite:isa(Wipe) then
+			sprite:remove()
+		end
+	end
+
 	-- Reset no spawn list to empty
 	g:emptySpawnList()
 
 	-- Move player to the spawn coordinates and set them to the spawn state
 	self.player:moveTo(g.playerSpawnX, g.playerSpawnY)
 	self.player:changeToSpawnState()
+
+	Fade('in')
 end
 
 

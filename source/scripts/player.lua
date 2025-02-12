@@ -682,8 +682,12 @@ function Player:die()
 	self.dead = true
 
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(2000, function()
-		self:reset()
+	pd.timer.performAfterDelay(1500, function()
+		Fade('out')
+
+		pd.timer.performAfterDelay(500, function()
+			self:reset()
+		end)
 	end)
 
 	self:changeState('die')
