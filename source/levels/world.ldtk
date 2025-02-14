@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4551,
+	"nextUid": 4552,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -26169,6 +26169,43 @@
 			"allowedRefsEntityUid": null,
 			"allowedRefTags": [],
 			"tilesetUid": null
+		},
+		{
+			"identifier": "name",
+			"doc": "No longer than 9 characters",
+			"__type": "String",
+			"uid": 4551,
+			"type": "F_String",
+			"isArray": false,
+			"canBeNull": true,
+			"arrayMinLength": null,
+			"arrayMaxLength": null,
+			"editorDisplayMode": "Hidden",
+			"editorDisplayScale": 1,
+			"editorDisplayPos": "Above",
+			"editorLinkStyle": "StraightArrow",
+			"editorDisplayColor": null,
+			"editorAlwaysShow": false,
+			"editorShowInWorld": true,
+			"editorCutLongValues": true,
+			"editorTextSuffix": null,
+			"editorTextPrefix": null,
+			"useForSmartColor": false,
+			"exportToToc": false,
+			"searchable": false,
+			"min": null,
+			"max": null,
+			"regex": null,
+			"acceptFileTypes": null,
+			"defaultOverride": null,
+			"textLanguageMode": null,
+			"symmetricalRef": false,
+			"autoChainRef": true,
+			"allowOutOfLevelRef": true,
+			"allowedRefs": "OnlySame",
+			"allowedRefsEntityUid": null,
+			"allowedRefTags": [],
+			"tilesetUid": null
 		}
 	] },
 	"levels": [
@@ -26191,7 +26228,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_0.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Tomb"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [{ "levelIid": "e07b6d20-4ce0-11ef-adb2-3b3522d4536f", "dir": "e" }]
 		},
@@ -26214,7 +26257,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [32,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_1.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Tomb"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "1b2e8290-3b70-11ee-b8ee-9181be436c18", "dir": "w" }, { "levelIid": "24f7b270-9b00-11ef-b44b-bba1b7be9655", "dir": "e" } ]
 		},
@@ -26237,7 +26286,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_2.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Plains"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "e07b6d20-4ce0-11ef-adb2-3b3522d4536f", "dir": "w" }, { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "e" } ]
 		},
@@ -26260,7 +26315,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_3.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Plains"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "24f7b270-9b00-11ef-b44b-bba1b7be9655", "dir": "w" }, { "levelIid": "eec43550-9b00-11ef-a6a6-e75f8a0d8dde", "dir": "e" } ]
 		},
@@ -26283,7 +26344,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_4.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Plains"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "w" }, { "levelIid": "9285b800-9b00-11ef-a6a6-0b6f01063ace", "dir": "e" } ]
 		},
@@ -26306,7 +26373,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_5.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Plains"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "eec43550-9b00-11ef-a6a6-e75f8a0d8dde", "dir": "w" }, { "levelIid": "c1cc1ad0-9b00-11ef-98f6-79b25cf575dd", "dir": "e" } ]
 		},
@@ -26329,7 +26402,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_6.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["The Plains"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "9285b800-9b00-11ef-a6a6-0b6f01063ace", "dir": "w" }, { "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "e" } ]
 		},
@@ -26352,7 +26431,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_7.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "Dark Cave", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Dark Cave"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "c1cc1ad0-9b00-11ef-98f6-79b25cf575dd", "dir": "w" }, { "levelIid": "57058f60-c210-11ef-9d97-415bd365b5a9", "dir": "e" } ]
 		},
@@ -26375,7 +26460,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 			"externalRelPath": "world/Level_8.ldtkl",
-			"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": "Dark Cave", "__tile": null, "defUid": 4551, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Dark Cave"]
+				}] }
+			],
 			"layerInstances": null,
 			"__neighbours": [{ "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "w" }]
 		}

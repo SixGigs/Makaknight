@@ -26,7 +26,13 @@
 	"__smartColor": "#ADADB5",
 	"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 	"externalRelPath": null,
-	"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+	"fieldInstances": [
+		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+		{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+			"id": "V_String",
+			"params": ["The Tomb"]
+		}] }
+	],
 	"layerInstances": [
 		{
 			"__identifier": "Entities",

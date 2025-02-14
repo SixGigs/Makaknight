@@ -1,10 +1,11 @@
---------------------------------
--- Working title; Makaknight  --
---------------------------------
--- Programming standards:     --
--- > Use double quotes        --
--- > Variables are camel case --
---------------------------------
+----------------------------------------
+-- Working title; Makaknight          --
+----------------------------------------
+-- Programming standards:             --
+-- > Strings use 'single quotes'      --
+-- > Variable names use camelCase     --
+-- > Class names use CapitalCase      --
+----------------------------------------
 
 -- Playdate Core Libraries
 import 'CoreLibs/object'
@@ -68,6 +69,7 @@ import 'scripts/ui/Bar'
 import 'scripts/ui/Health'
 import 'scripts/ui/Stamina'
 import 'scripts/ui/Mana'
+import 'scripts/ui/Text'
 
 -- Constants
 local pd <const> = playdate
@@ -94,6 +96,8 @@ end
 function pd.gameWillSleep()
 	g:save()
 end
+
+
 
 -- Main Game Loop
 function pd.update()

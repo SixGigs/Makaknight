@@ -58,7 +58,6 @@ function Game:startTransition(transition)
 			self.playerLevel = self.playerSpawnLevel
 			self.playerX = self.playerSpawnX
 			self.playerY = self.playerSpawnY
-
 			self.depletedEntities = {}
 			self.won = false
 		end
