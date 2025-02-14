@@ -1,15 +1,10 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
+class('World').extends(gfx.sprite)
 
--- Entity Groupings
-local hazards <const> = {
-	["Floorspike"] = true,
-	["Roofspike"] = true,
-	["Spearspike"] = true,
-	["Stalagmite"] = true,
-	["Stalactite"] = true
-}
+ -- Load the World File Used for the World
+ldtk.load('levels/world.ldtk', false)
 
 
 
@@ -19,7 +14,8 @@ TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, GUI = 11, Bubble = 12, Fragile = 13,
-	Wind = 14, Roaster = 15, Spike = 16, Half = 17
+	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
+	Text = 18
 }
 
 Z_INDEXES = {
@@ -27,18 +23,17 @@ Z_INDEXES = {
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, GUI = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Foreground = 150
+	Text = 1250, Foreground = 150
 }
 
 
-ldtk.load("levels/world.ldtk", false) -- Load the World File Used for the World
-class("World").extends(gfx.sprite) --- The Initialising Method of the World Class
 
 
 --- Initialise the World Class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
 	self.gravity = 900
+	self.oldLevelName = ''
 
 	self:goToLevel(g.playerLevel)
 	self:adjustLevel(g.worldX)
@@ -138,9 +133,9 @@ function World:goToLevel(level)
 	gfx.sprite.removeAll() -- Remove all playdate sprites
 
 	-- Save the Width and Height of the Level
-	local level_size <const> = LDtk.get_size(level)
-	self.width = level_size["width"]
-	self.height = level_size["height"]
+	local levelSize <const> = LDtk.get_size(level)
+	self.width = levelSize["width"]
+	self.height = levelSize["height"]
 	self.y = 0 -- Create level X and Y
 
 	-- Update local level attribute and build the new tile map
@@ -205,22 +200,21 @@ function World:goToLevel(level)
 			Flag(entityX, entityY, entity)
 		elseif entityName == 'Fragile' then
 			Block(entityX, entityY, entity)
-		elseif entityName == "Crown" then
+		elseif entityName == 'Crown' then
 			Crown(entityX, entityY)
-		elseif entityName == "Fan" then
+		elseif entityName == 'Fan' then
 			Fan(entityX, entityY, entity)
 			Wind(entityX - 8, entityY - 80, entity.fields.strength)
-		elseif entityName == "Roaster" then
+		elseif entityName == 'Roaster' then
 			Roaster(entityX, entityY, entity)
 		else
 			Prop(entityX, entityY, entityName)
 		end
 	end
 
-	-- Load the Background
+	-- Load the Background & Name
 	self:loadBackground(level)
-
-	-- REMEMBER: get_custom_data is a LDtk function!
+	self:loadName(level)
 
 	-- Load the status bars
 	self.health = Health(2, 2)
@@ -329,14 +323,14 @@ end
 
 
 --- Load the background for the level sent into the function
---- @param level string The name of the 
+--- @param  level  string  The ID of the level to load the background of
 function World:loadBackground(level)
 	local bg <const> = LDtk.get_background(level)
 
 	if bg then
 		local pos <const> = LDtk.get_background_position(level)
 
-		if pos == "Repeat" then
+		if pos == 'Repeat' then
 			local bgAmount = self.width / screenWidth
 			bgAmount = math.floor(bgAmount + 0.9)
 			local nextBackground = 0
@@ -348,6 +342,18 @@ function World:loadBackground(level)
 		else
 			Background(0, 0, bg)
 		end
+	end
+end
+
+
+
+--- Load the name for the level sent into the function
+--- @param  level  string  The ID of the level to load the name of
+function World:loadName(level)
+	local name = ldtk.get_custom_data(level, 'name')
+	if name and name ~= self.oldLevelName then
+		self.oldLevelName = name
+		Text(name, 2, 2)
 	end
 end
 
@@ -395,7 +401,7 @@ function World:adjustLevel(xAmount)
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
-		if sprite:isa(Bar) then
+		if sprite:isa(Bar) or sprite:isa(Text) then
 			return
 		end
 

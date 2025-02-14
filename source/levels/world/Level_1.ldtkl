@@ -26,7 +26,13 @@
 	"__smartColor": "#ADADB5",
 	"__bgPos": { "topLeftPx": [32,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 	"externalRelPath": null,
-	"fieldInstances": [{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] }],
+	"fieldInstances": [
+		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+		{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+			"id": "V_String",
+			"params": ["The Tomb"]
+		}] }
+	],
 	"layerInstances": [
 		{
 			"__identifier": "Entities",
@@ -51,70 +57,7 @@
 			"seed": 7105695,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Stalagmite",
-					"__grid": [8,10],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": { "tilesetUid": 3598, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "e7ef0850-c210-11ef-a206-3fa13513999b",
-					"width": 16,
-					"height": 16,
-					"defUid": 3597,
-					"px": [128,160],
-					"fieldInstances": [],
-					"__worldX": 528,
-					"__worldY": -80
-				},
-				{
-					"__identifier": "Firefly",
-					"__grid": [16,3],
-					"__pivot": [0,0],
-					"__tags": [ "Grass", "Animal" ],
-					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "5c7a2770-c210-11ef-8486-edfd0e64095d",
-					"width": 16,
-					"height": 16,
-					"defUid": 4524,
-					"px": [256,48],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
-					],
-					"__worldX": 656,
-					"__worldY": -192
-				},
-				{
-					"__identifier": "Firefly",
-					"__grid": [5,5],
-					"__pivot": [0,0],
-					"__tags": [ "Grass", "Animal" ],
-					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "5de8ab90-c210-11ef-8486-61620e4aaf9c",
-					"width": 16,
-					"height": 16,
-					"defUid": 4524,
-					"px": [80,80],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
-					],
-					"__worldX": 480,
-					"__worldY": -160
-				}
-			]
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Foreground",
