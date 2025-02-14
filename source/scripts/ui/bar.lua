@@ -7,8 +7,9 @@ class('Bar').extends(AnimatedSprite)
 --- Status bars are created using this method
 --- @param  x  integer  The X coordinate to spawn the status bar
 --- @param  y  integer  The Y coordinate to spawn the status bar
-function Bar:init(x, y, i)
+function Bar:init(name, x, y)
 	-- Initialise the state machine using a bar sprite sheet
+	local i <const> = gfx.imagetable.new('images/ui/' .. name .. '-table-122-16')
 	Bar.super.init(self, i)
 
 	-- Set all bar states in the state machine
@@ -115,11 +116,20 @@ function Bar:init(x, y, i)
 	self:addState('0', 1, 1)
 	self:playAnimation()
 
-	-- Bar attributes
+	-- Bar properties
+	self.name = name
 	self.timerMax = 120
 	self.timer = 0
 
-	-- Bar properties
+	-- Set bar states
+	if name == 'health' then
+		self:changeState(tostring(math.floor(g.playerHP)))
+	elseif name == 'stamina' then
+		self:changeState(tostring(math.floor(g.playerSP)))
+	else
+		self:changeState(tostring(math.floor(g.playerMP)))
+	end
+
 	self:setVisible(false)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
@@ -129,6 +139,45 @@ function Bar:init(x, y, i)
 end
 
 
+
+
+function Bar:update()
+	self:updateVisibility()
+
+	if not self:isVisible() then
+		if self.name == 'health' then
+			if g.playerHP < tonumber(self.currentState) then
+				self:show()
+			end
+		elseif self.name == 'stamina' then
+			if g.playerSP < tonumber(self.currentState) and g.playerSP < (g.playerMaxSP / 2) then
+				self:show()
+			end
+		else
+			if g.playerMP < tonumber(self.currentState) and g.playerMP < (g.playerMaxMP / 2) then
+				self:show()
+			end
+		end
+	end
+
+	if self.name == 'health' then
+		if self.currentState ~= tostring(math.floor(g.playerHP)) then
+			self:changeState(tostring(math.floor(g.playerHP)))
+		end
+	elseif self.name == 'stamina' then
+		if self.currentState ~= tostring(math.floor(g.playerSP)) then
+			self:changeState(tostring(math.floor(g.playerSP)))
+		end
+	else
+		if self.currentState ~= tostring(math.floor(g.playerMP)) then
+			self:changeState(tostring(math.floor(g.playerMP)))
+		end
+	end
+end
+
+
+
+
 function Bar:show()
 	if not self:isVisible() then
 		self:setVisible(true)
@@ -136,6 +185,8 @@ function Bar:show()
 
 	self.timer = self.timerMax
 end
+
+
 
 
 function Bar:updateVisibility()

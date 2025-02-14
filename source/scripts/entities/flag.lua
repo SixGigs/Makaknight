@@ -47,22 +47,18 @@ end
 --- TODO: Can we get this method called from this object using the update? If when updating the player collides with self?
 function Flag:hoist(flip)
 	-- Change the flag state to raise
-	if self.currentState == "down" then
-		self:changeState("raise")
+	if self.currentState == 'down' then
+		self:changeState('raise')
 	end
 
 	-- Update the game properties
 	g.checkpoint = self.id
 	g.playerSpawnLevel = g.playerLevel
 	g.playerSpawnY = self.y + 8
-	g:emptySpawnList()
+	g.playerSpawnX = (flip == 0 and self.x - 8 or self.x + 24)
 
-	-- Set the players X spawn value
-	if flip == 0 then
-		g.playerSpawnX = self.x - 8
-	else
-		g.playerSpawnX = self.x + 24
-	end
+	-- Respawn all depleted entities
+	g:emptySpawnList()	
 end
 
 
