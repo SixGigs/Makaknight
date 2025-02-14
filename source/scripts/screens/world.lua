@@ -28,7 +28,6 @@ Z_INDEXES = {
 
 
 
-
 --- Initialise the World Class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
@@ -39,6 +38,7 @@ function World:init()
 	self:adjustLevel(g.worldX)
 	self.player = Player(self)
 end
+
 
 
 --- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
@@ -88,6 +88,7 @@ function World:enterRoom(direction)
 end
 
 
+
 --- This function is called when the player enters a door, and is used to create the level they are travelling to
 --- @param  level  string   Contains the name of the level we want to travel to as a string
 --- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
@@ -114,7 +115,9 @@ end
 
 
 
-
+--- This method checks if a table contains a value
+--- @param  tab  table   The table which you wish to check for a value
+--- @param  val  string  The value you wish to query the table with
 function World:has_value(tab, val)
 	for index, value in ipairs(tab) do
 		if value == val then
@@ -126,6 +129,7 @@ function World:has_value(tab, val)
 end
 
 
+
 --- This function contains all the details on how to load a room, and spawning all the hazards/objects inside that room
 --- @param  level  string  Contains the name of the level to load as a string
 function World:goToLevel(level)	
@@ -134,8 +138,8 @@ function World:goToLevel(level)
 
 	-- Save the Width and Height of the Level
 	local levelSize <const> = LDtk.get_size(level)
-	self.width = levelSize["width"]
-	self.height = levelSize["height"]
+	self.width = levelSize['width']
+	self.height = levelSize['height']
 	self.y = 0 -- Create level X and Y
 
 	-- Update local level attribute and build the new tile map
@@ -217,9 +221,9 @@ function World:goToLevel(level)
 	self:loadName(level)
 
 	-- Load the status bars
-	self.health = Health(2, 2)
-	self.stamina = Stamina(2, 18)
-	self.mana = Mana(2, 34)
+	self.health = Bar('health', 2, 2)
+	self.stamina = Bar('stamina', 2, 18)
+	self.mana = Bar('mana', 2, 34)
 
 	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
 end

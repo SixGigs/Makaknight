@@ -66,9 +66,6 @@ import 'scripts/transitions/Wipe'
 
 -- User interface scripts
 import 'scripts/ui/Bar'
-import 'scripts/ui/Health'
-import 'scripts/ui/Stamina'
-import 'scripts/ui/Mana'
 import 'scripts/ui/Text'
 
 -- Constants

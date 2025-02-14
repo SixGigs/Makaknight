@@ -14,7 +14,7 @@ function Text:init(text, x, y)
 	end)
 
 	self:setCenter(0, 0)
-	self:setSize(220, 40)
+	self:setSize(128, 20)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Text)
 	self:setTag(TAGS.Text)
@@ -27,8 +27,8 @@ function Text:draw()
 	gfx.pushContext()
 
 	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(0, 0, 112, 20)
-	gfx.drawTextInRect(self.text, 4, 1, 200, 40)
+	gfx.fillRect(0, 0, 128, 20)
+	gfx.drawTextInRect(self.text, 4, 1, 128, 40)
 
 	gfx.popContext()
 end
