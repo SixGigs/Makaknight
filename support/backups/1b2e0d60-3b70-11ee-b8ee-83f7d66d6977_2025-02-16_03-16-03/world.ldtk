@@ -26491,10 +26491,7 @@
 			"externalRelPath": "world/Level_9.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Clearing", "__tile": null, "defUid": 4551, "realEditorValues": [{
-					"id": "V_String",
-					"params": ["Clearing"]
-				}] }
+				{ "__identifier": "name", "__type": "String", "__value": null, "__tile": null, "defUid": 4551, "realEditorValues": [] }
 			],
 			"layerInstances": null,
 			"__neighbours": []

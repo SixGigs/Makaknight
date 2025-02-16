@@ -158,7 +158,7 @@
 							"id": "V_String",
 							"params": ["Level_9"]
 						}] },
-						{ "__identifier": "exitX", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3619, "realEditorValues": [{ "id": "V_Int", "params": [16] }] },
+						{ "__identifier": "exitX", "__type": "Int", "__value": 19, "__tile": null, "defUid": 3619, "realEditorValues": [{ "id": "V_Int", "params": [19] }] },
 						{ "__identifier": "exitY", "__type": "Int", "__value": 6, "__tile": null, "defUid": 3620, "realEditorValues": [{ "id": "V_Int", "params": [6] }] }
 					],
 					"__worldX": 3568,
