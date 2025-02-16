@@ -47,7 +47,18 @@ function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
 	local level <const> = ldtk.get_neighbours(g.playerLevel, direction)[1]
 	if not level then
-		if direction == 'north' then return else self.player.hp = 0 return end
+		if direction == 'north' then
+			return
+		elseif direction == 'east' then
+			self.player:moveTo(0, self.player.y)
+			return
+		elseif direction == 'west' then
+			self.player:moveTo(400, self.player.y)
+			return
+		else
+			self.player.hp = 0
+			return
+		end
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
@@ -196,11 +207,11 @@ function World:goToLevel(level)
 			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == 'Firefly' then
 			Firefly(entityX, entityY + 4, entity)
-		elseif entityName == "Spikeball" then
+		elseif entityName == 'Spikeball' then
 			Spikeball(entityX, entityY, entity)
-		elseif entityName == "Bubble" then
+		elseif entityName == 'Bubble' then
 			Bubble(entityX, entityY, entity)
-		elseif entityName == "Flag" then
+		elseif entityName == 'Flag' then
 			Flag(entityX, entityY, entity)
 		elseif entityName == 'Fragile' then
 			Block(entityX, entityY, entity)
@@ -269,14 +280,14 @@ function World:addHalfWallSprites(tilemap, emptyTiles)
 				local y = (tile.y + (i - 1)) * 16
 				local w = tile.w * 16
 				local h = 16
-				
+
 				if x == 0 then
 					x = -32
 					w = w + 32
 				elseif x + w == self.width then
 					w = w + 32
 				end
-				
+
 				if y == 0 then
 					y = -64
 					h = h + 64
@@ -291,14 +302,14 @@ function World:addHalfWallSprites(tilemap, emptyTiles)
 			tile.y = tile.y * 16
 			tile.w = tile.w * 16
 			tile.h = tile.h * 16
-			
+
 			if tile.x == 0 then
 				tile.x = -32
 				tile.w = tile.w + 32
 			elseif tile.x + tile.w == self.width then
 				tile.w = tile.w + 32
 			end
-			
+
 			if tile.y == 0 then
 				tile.y = -64
 				tile.h = tile.h + 64
