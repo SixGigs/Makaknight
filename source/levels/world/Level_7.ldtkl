@@ -116,6 +116,52 @@
 					],
 					"__worldX": 3040,
 					"__worldY": -128
+				},
+				{
+					"__identifier": "Firefly",
+					"__grid": [5,2],
+					"__pivot": [0,0],
+					"__tags": [ "Grass", "Animal" ],
+					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
+					"__smartColor": "#B55088",
+					"iid": "9d3f8740-e920-11ef-8d6f-ad2379e8eb03",
+					"width": 16,
+					"height": 16,
+					"defUid": 4524,
+					"px": [80,32],
+					"fieldInstances": [
+						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
+						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
+						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
+					],
+					"__worldX": 2944,
+					"__worldY": -208
+				},
+				{
+					"__identifier": "Firefly",
+					"__grid": [9,1],
+					"__pivot": [0,0],
+					"__tags": [ "Grass", "Animal" ],
+					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
+					"__smartColor": "#B55088",
+					"iid": "9f890210-e920-11ef-8d6f-558b94dfd4f1",
+					"width": 16,
+					"height": 16,
+					"defUid": 4524,
+					"px": [144,16],
+					"fieldInstances": [
+						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
+						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
+						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
+						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
+						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
+					],
+					"__worldX": 3008,
+					"__worldY": -224
 				}
 			]
 		},

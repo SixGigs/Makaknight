@@ -130,6 +130,7 @@ function Game:load()
 	self.playerY = (gd and (gd.levelY and gd.levelY or self.playerSpawnY) or self.playerSpawnY)
 	self.checkpoint = (gd and (gd.flag and gd.flag or 0) or 0)
 	self.worldX = (gd and (gd.worldX and gd.worldX or 0) or 0)
+	self.worldY = (gd and (gd.worldY and gd.worldY or 0) or 0)
 	self.fps = (gd and (gd.fps and gd.fps or 30) or 30)
 
 	pd.display.setRefreshRate(self.fps)
@@ -160,7 +161,8 @@ function Game:save()
 		maxMP = self.playerMaxMP,
 		depletedEntities = self.depletedEntities,
 		extinctEntities = self.extinctEntities,
-		worldX = self.worldX
+		worldX = self.worldX,
+		worldY = self.worldY
 	}
 
 	pd.datastore.write(data)
