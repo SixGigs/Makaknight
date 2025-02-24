@@ -268,14 +268,18 @@ function LDtk.load_level( level_name )
 		level.custom_data = {}
 		level.custom_data[ field_data.__identifier ] = field_data.__value
 	end
-	
+
 	-- load level's background image
 	level.bgImage = level_data.bgRelPath
 	level.bgPosition = level_data.bgPos
-	
+
 	-- load level's width and height
 	level.width = level_data.pxWid
 	level.height = level_data.pxHei
+
+	-- get the level position in the world
+	level.worldX = level_data.worldX
+	level.worldY = level_data.worldY
 
 	-- handle layers
 	level.layers = {}
@@ -439,6 +443,15 @@ function LDtk.get_entities( level_name, layer_name )
 
 	return layer.entities or {}
 end
+
+
+-- return the worldX and worldY values
+-- @level_name is used to get coordinates
+function LDtk.get_world_coords( level_name )
+	local level = _levels[level_name]
+	return { ['worldX'] = level.worldX, ['worldY'] = level.worldY }
+end
+
 
 -- return the background used for the level given
 -- @level_name is used to get the background

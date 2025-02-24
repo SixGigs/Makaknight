@@ -532,6 +532,17 @@ function Player:handleMovementAndCollisions()
 		self.world:update()
 	end
 
+	-- If the world is taller than 240 pixels and the player is in the centre of the screen update the world
+	if self.world.height > 240 then
+		if self.y + self.yVelocity < self.y and self.y <= (screenHeight / 2) - (standing['h'] / 2) and g.worldY > 0 then 
+			self.world:update()
+		end
+
+		if (self.y + self.yVelocity) > self.y and self.y >= screenHeight / 2 + (standing['h'] / 4) and g.worldY + screenHeight < self.world.height then
+			self.world:update()
+		end
+	end
+
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
@@ -750,7 +761,9 @@ function Player:handleGroundInput()
 
 	if self:playerPunched() then
 		if pd.buttonJustReleased(pd.kButtonB) then
-			self:changeToPunchState('punch')
+			if not pd.buttonIsPressed(pd.kButtonLeft) and not pd.buttonIsPressed(pd.kButtonRight) then
+				self:changeToPunchState('punch')
+			end
 		end
 	end
 

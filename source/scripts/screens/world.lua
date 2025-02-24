@@ -8,8 +8,7 @@ ldtk.load('levels/world.ldtk', false)
 
 
 
-
--- Collision Tags & Z Indexes
+-- Global collision tag & z-index arrays
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
@@ -28,14 +27,15 @@ Z_INDEXES = {
 
 
 
---- Initialise the World Class
+--- Initialise the World class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
 	self.gravity = 900
 	self.oldLevelName = ''
+	self.oldWorldY = 0
 
 	self:goToLevel(g.playerLevel)
-	self:adjustLevel(g.worldX)
+	self:adjustLevel(g.worldX, g.worldY)
 	self.player = Player(self)
 end
 
@@ -70,7 +70,7 @@ function World:enterRoom(direction)
 	self:goToLevel(level)
 	self.player:add()
 
-	-- If Travelling East Reset the World X Attribute
+	-- Reset the Game World Coordinate Properties
 	if direction == 'east' then
 		g.worldX = 0
 	end
@@ -87,14 +87,24 @@ function World:enterRoom(direction)
 		x, y = 392, self.player.y
 	end
 
-	self.player:moveTo(x, y) -- Move the player to the new X and Y
+	-- Move the player to the new X and Y
+	self.player:moveTo(x, y)
 
 	if self.width > screenWidth then
 		if direction == 'west' then
 			g.worldX = self.width - screenWidth
 			self.player:moveBy(g.worldX, 0)
-			self:adjustLevel(g.worldX)
+			self:adjustLevel(g.worldX, 0)
 		end
+	end
+
+	if self.height > screenHeight then
+		local worldDiff <const> = self.oldWorldY - self.worldY
+		g.worldY = worldDiff
+		self.player:moveBy(0, g.worldY)
+		self:adjustLevel(0, g.worldY)
+	else
+		g.worldY = 0
 	end
 end
 
@@ -151,7 +161,11 @@ function World:goToLevel(level)
 	local levelSize <const> = LDtk.get_size(level)
 	self.width = levelSize['width']
 	self.height = levelSize['height']
-	self.y = 0 -- Create level X and Y
+
+	-- World coordinates
+	local worldCoords <const> = LDtk.get_world_coords(level)
+	self.oldWorldY = self.worldY
+	self.worldY = worldCoords['worldY']
 
 	-- Update local level attribute and build the new tile map
 	g.playerLevel = level
@@ -268,6 +282,7 @@ function World:addFullWallSprites(tilemap, emptyTiles)
 end
 
 
+
 --- This Method is Used to Create Half Tile Hit Boxes for the Player to Interact With
 --- @param  tilemap     The Map of Tiles Used to Create the Rects
 --- @param  emptyTiles  The Tiles That are not Half Tiles
@@ -346,13 +361,29 @@ function World:loadBackground(level)
 		local pos <const> = LDtk.get_background_position(level)
 
 		if pos == 'Repeat' then
-			local bgAmount = self.width / screenWidth
-			bgAmount = math.floor(bgAmount + 0.9)
+			local bgAmount = 0
 			local nextBackground = 0
 
-			for i = 1, bgAmount do
-				Background(nextBackground, 0, bg)
-				nextBackground = nextBackground + screenWidth
+			if self.width >= screenWidth then
+				bgAmount = self.width / screenWidth
+				bgAmount = math.floor(bgAmount + 0.9)
+				nextBackground = 0
+	
+				for i = 1, bgAmount do
+					Background(nextBackground, 0, bg)
+					nextBackground = nextBackground + screenWidth
+				end
+			end
+
+			if self.height >= screenHeight then
+				bgAmount = self.height / screenHeight
+				bgAmount = math.floor(bgAmount + 0.9)
+				nextBackground = 0
+
+				for i = 1, bgAmount do
+					Background(0, nextBackground, bg)
+					nextBackground = nextBackground + screenHeight
+				end
 			end
 		else
 			Background(0, 0, bg)
@@ -405,14 +436,16 @@ end
 --- This Function is Called by the Player to Update the World X Coordinate
 function World:update()
 	g.worldX = g.worldX + self.player.xVelocity * dt
-	self:adjustLevel(self.player.xVelocity * dt)
+	g.worldY = g.worldY + self.player.yVelocity * dt
+	self:adjustLevel(self.player.xVelocity * dt, self.player.yVelocity * dt)
 end
+
 
 
 --- Adjust the level X value to keep the player on the screen
 --- @param  xAmount  integer  The amount to move the level by
-function World:adjustLevel(xAmount)
-	xAmount = self:levelCorrection(xAmount)
+function World:adjustLevel(xAmount, yAmount)
+	xAmount, yAmount = self:levelCorrection(xAmount, yAmount)
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
@@ -420,14 +453,15 @@ function World:adjustLevel(xAmount)
 			return
 		end
 
-		sprite:moveBy(-xAmount, 0)
+		sprite:moveBy(-xAmount, -yAmount)
 	end
 end
 
 
+
 --- Check if the Level X Amount needs Correction
 --- @param  xAmount  The Amount to Move the Level
-function World:levelCorrection(xAmount)
+function World:levelCorrection(xAmount, yAmount)
 	if g.worldX > self.width - screenWidth then
 		local xCorrection <const> = g.worldX - (self.width - screenWidth)
 		xAmount = xAmount - xCorrection
@@ -440,5 +474,17 @@ function World:levelCorrection(xAmount)
 		g.worldX = 0
 	end
 
-	return xAmount
+	if g.worldY > self.height - screenHeight then
+		local yCorrection <const> = g.worldY - (self.height - screenHeight)
+		yAmount = yAmount - yCorrection
+		g.worldY = self.height - screenHeight
+	end
+
+	if g.worldY < 0 then
+		local yCorrection <const> = yAmount - g.worldY
+		yAmount = yCorrection
+		g.worldY = 0
+	end
+
+	return xAmount, yAmount
 end

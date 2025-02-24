@@ -166,7 +166,7 @@
 				},
 				{
 					"__identifier": "Firefly",
-					"__grid": [18,1],
+					"__grid": [18,0],
 					"__pivot": [0,0],
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -175,7 +175,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4524,
-					"px": [288,16],
+					"px": [288,0],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
@@ -185,11 +185,11 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
 					],
 					"__worldX": 3552,
-					"__worldY": -224
+					"__worldY": -240
 				},
 				{
 					"__identifier": "Firefly",
-					"__grid": [22,2],
+					"__grid": [22,1],
 					"__pivot": [0,0],
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -198,7 +198,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4524,
-					"px": [352,32],
+					"px": [352,16],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
@@ -208,7 +208,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
 					],
 					"__worldX": 3616,
-					"__worldY": -208
+					"__worldY": -224
 				}
 			]
 		},
