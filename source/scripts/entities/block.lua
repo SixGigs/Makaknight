@@ -61,7 +61,7 @@ end
 -- This method runs every tick updating the block animation and buffer
 function Block:update()
 	if self.currentState == 'blocked' then
-		self.buffer = math.max(self.buffer - (30 * dt), 0)
+		self.buffer = math.max(self.buffer - (30 * DELTA_TIME), 0)
 	end
 
 	self:updateAnimation()

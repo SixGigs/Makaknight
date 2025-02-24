@@ -12,7 +12,7 @@ ldtk.load('levels/world.ldtk', false)
 TAGS = {
 	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, GUI = 11, Bubble = 12, Fragile = 13,
+	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
 	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
 	Text = 18
 }
@@ -20,7 +20,7 @@ TAGS = {
 Z_INDEXES = {
 	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, GUI = 1000, Bubble = 50, Fragile = 100,
+	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
 	Text = 1250, Foreground = 150
 }
@@ -34,8 +34,8 @@ function World:init()
 	self.oldLevelName = ''
 	self.oldWorldY = 0
 
-	self:goToLevel(g.playerLevel)
-	self:adjustLevel(g.worldX, g.worldY)
+	self:goToLevel(GAME.playerLevel)
+	self:adjustLevel(GAME.worldX, GAME.worldY)
 	self.player = Player(self)
 end
 
@@ -45,7 +45,7 @@ end
 --- @param  direction  string  Contains a Direction From the Current Level to Load the Next Level Piece
 function World:enterRoom(direction)
 	-- If there is no neighbouring level die unless its north in which case just don't move
-	local level <const> = ldtk.get_neighbours(g.playerLevel, direction)[1]
+	local level <const> = ldtk.get_neighbours(GAME.playerLevel, direction)[1]
 	if not level then
 		if direction == 'north' then
 			return
@@ -62,7 +62,7 @@ function World:enterRoom(direction)
 	end
 
 	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
-	local oldLevel <const> = g.playerLevel
+	local oldLevel <const> = GAME.playerLevel
 	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
 	ldtk.release_level(oldLevel)
 
@@ -72,7 +72,7 @@ function World:enterRoom(direction)
 
 	-- Reset the Game World Coordinate Properties
 	if direction == 'east' then
-		g.worldX = 0
+		GAME.worldX = 0
 	end
 
 	-- Create a local X and Y, and use them to spawn the player
@@ -90,21 +90,21 @@ function World:enterRoom(direction)
 	-- Move the player to the new X and Y
 	self.player:moveTo(x, y)
 
-	if self.width > screenWidth then
+	if self.width > SCREEN['width'] then
 		if direction == 'west' then
-			g.worldX = self.width - screenWidth
-			self.player:moveBy(g.worldX, 0)
-			self:adjustLevel(g.worldX, 0)
+			GAME.worldX = self.width - SCREEN['width']
+			self.player:moveBy(GAME.worldX, 0)
+			self:adjustLevel(GAME.worldX, 0)
 		end
 	end
 
-	if self.height > screenHeight then
+	if self.height > SCREEN['height'] then
 		local worldDiff <const> = self.oldWorldY - self.worldY
-		g.worldY = worldDiff
-		self.player:moveBy(0, g.worldY)
-		self:adjustLevel(0, g.worldY)
+		GAME.worldY = worldDiff
+		self.player:moveBy(0, GAME.worldY)
+		self:adjustLevel(0, GAME.worldY)
 	else
-		g.worldY = 0
+		GAME.worldY = 0
 	end
 end
 
@@ -115,11 +115,11 @@ end
 --- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(level, x, y)
-	if level ~= g.playerLevel then
+	if level ~= GAME.playerLevel then
 		Fade('out')
 
 		pd.timer.performAfterDelay(500, function()
-			local oldLevel <const> = g.playerLevel
+			local oldLevel <const> = GAME.playerLevel
 			ldtk.release_level(oldLevel)
 			self:goToLevel(level)
 			self.player:add()
@@ -168,7 +168,7 @@ function World:goToLevel(level)
 	self.worldY = worldCoords['worldY']
 
 	-- Update local level attribute and build the new tile map
-	g.playerLevel = level
+	GAME.playerLevel = level
 	for layer_name, layer in pairs(ldtk.get_layers(level)) do
 		if layer.tiles then
 			local tilemap <const> = ldtk.create_tilemap(level, layer_name)
@@ -342,10 +342,10 @@ end
 --- This Method Adds the Developer Defined World Menu Items to the Playdate Pause Menu 
 function World:addWorldMenuItems()
 	-- Add a FPS Tick Box to the Pause Menu to Turn 50FPS Off and On
-	menu:addCheckmarkMenuItem('50 FPS', (g.fps == 50 and true or false), function(status)
+	menu:addCheckmarkMenuItem('50 FPS', (GAME.fps == 50 and true or false), function(status)
 		if status ~= nil then
-			g.fps = (status and 50 or 30)
-			pd.display.setRefreshRate(g.fps)
+			GAME.fps = (status and 50 or 30)
+			pd.display.setRefreshRate(GAME.fps)
 		end
 	end)
 end
@@ -364,25 +364,25 @@ function World:loadBackground(level)
 			local bgAmount = 0
 			local nextBackground = 0
 
-			if self.width >= screenWidth then
-				bgAmount = self.width / screenWidth
+			if self.width >= SCREEN['width'] then
+				bgAmount = self.width / SCREEN['width']
 				bgAmount = math.floor(bgAmount + 0.9)
 				nextBackground = 0
 	
 				for i = 1, bgAmount do
 					Background(nextBackground, 0, bg)
-					nextBackground = nextBackground + screenWidth
+					nextBackground = nextBackground + SCREEN['width']
 				end
 			end
 
-			if self.height >= screenHeight then
-				bgAmount = self.height / screenHeight
+			if self.height >= SCREEN['height'] then
+				bgAmount = self.height / SCREEN['height']
 				bgAmount = math.floor(bgAmount + 0.9)
 				nextBackground = 0
 
 				for i = 1, bgAmount do
 					Background(0, nextBackground, bg)
-					nextBackground = nextBackground + screenHeight
+					nextBackground = nextBackground + SCREEN['height']
 				end
 			end
 		else
@@ -407,10 +407,10 @@ end
 
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
-	if g.playerLevel ~= g.playerSpawnLevel then
-		self:goToLevel(g.playerSpawnLevel)
+	if GAME.playerLevel ~= GAME.playerSpawnLevel then
+		self:goToLevel(GAME.playerSpawnLevel)
 		self.player:add()
-		g.worldX = 0
+		GAME.worldX = 0
 	end
 
 	-- Remove any transition sprites
@@ -425,7 +425,7 @@ function World:resetPlayer()
 	g:emptySpawnList()
 
 	-- Move player to the spawn coordinates and set them to the spawn state
-	self.player:moveTo(g.playerSpawnX, g.playerSpawnY)
+	self.player:moveTo(GAME.playerSpawnX, GAME.playerSpawnY)
 	self.player:changeToSpawnState()
 
 	Fade('in')
@@ -435,9 +435,9 @@ end
 
 --- This Function is Called by the Player to Update the World X Coordinate
 function World:update()
-	g.worldX = g.worldX + self.player.xVelocity * dt
-	g.worldY = g.worldY + self.player.yVelocity * dt
-	self:adjustLevel(self.player.xVelocity * dt, self.player.yVelocity * dt)
+	GAME.worldX = GAME.worldX + self.player.xVelocity * DELTA_TIME
+	GAME.worldY = GAME.worldY + self.player.yVelocity * DELTA_TIME
+	self:adjustLevel(self.player.xVelocity * DELTA_TIME, self.player.yVelocity * DELTA_TIME)
 end
 
 
@@ -462,28 +462,28 @@ end
 --- Check if the Level X Amount needs Correction
 --- @param  xAmount  The Amount to Move the Level
 function World:levelCorrection(xAmount, yAmount)
-	if g.worldX > self.width - screenWidth then
-		local xCorrection <const> = g.worldX - (self.width - screenWidth)
+	if GAME.worldX > self.width - SCREEN['width'] then
+		local xCorrection <const> = GAME.worldX - (self.width - SCREEN['width'])
 		xAmount = xAmount - xCorrection
-		g.worldX = self.width - screenWidth
+		GAME.worldX = self.width - SCREEN['width']
 	end
 
-	if g.worldX < 0 then
-		local xCorrection <const> = xAmount - g.worldX
+	if GAME.worldX < 0 then
+		local xCorrection <const> = xAmount - GAME.worldX
 		xAmount = xCorrection
-		g.worldX = 0
+		GAME.worldX = 0
 	end
 
-	if g.worldY > self.height - screenHeight then
-		local yCorrection <const> = g.worldY - (self.height - screenHeight)
+	if GAME.worldY > self.height - SCREEN['height'] then
+		local yCorrection <const> = GAME.worldY - (self.height - SCREEN['height'])
 		yAmount = yAmount - yCorrection
-		g.worldY = self.height - screenHeight
+		GAME.worldY = self.height - SCREEN['height']
 	end
 
-	if g.worldY < 0 then
-		local yCorrection <const> = yAmount - g.worldY
+	if GAME.worldY < 0 then
+		local yCorrection <const> = yAmount - GAME.worldY
 		yAmount = yCorrection
-		g.worldY = 0
+		GAME.worldY = 0
 	end
 
 	return xAmount, yAmount

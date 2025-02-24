@@ -161,13 +161,13 @@ function Player:init(world)
 
 	---[ Player class properties ]-------------------------------------------------------------------------
 	-- General player class properties
-	self.hp = g.playerHP
-	self.sp = g.playerSP
-	self.mp = g.playerMP
-	self.maxHP = g.playerMaxHP
-	self.maxSP = g.playerMaxSP
-	self.maxMP = g.playerMaxMP
-	self.globalFlip = g.playerFacing
+	self.hp = GAME.playerHP
+	self.sp = GAME.playerSP
+	self.mp = GAME.playerMP
+	self.maxHP = GAME.playerMaxHP
+	self.maxSP = GAME.playerMaxSP
+	self.maxMP = GAME.playerMaxMP
+	self.globalFlip = GAME.playerFacing
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -187,7 +187,7 @@ function Player:init(world)
 		[TAGS.Animal] = true,
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
-		[TAGS.GUI] = true,
+		[TAGS.Gui] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true,
@@ -289,8 +289,8 @@ function Player:init(world)
 	self.manaBuffer = 0
 
 	-- Physics properties
-	self.xVelocity = g.playerXVelocity
-	self.yVelocity = g.playerYVelocity
+	self.xVelocity = GAME.playerXVelocity
+	self.yVelocity = GAME.playerYVelocity
 	self.gravity = world.gravity
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
@@ -300,8 +300,8 @@ function Player:init(world)
 
 
 	---[ Playdate sprite settings ]------------------------------------------------------------------------
-	self:changeState(g.playerState)
-	self:moveTo(g.playerX, g.playerY)
+	self:changeState(GAME.playerState)
+	self:moveTo(GAME.playerX, GAME.playerY)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)
@@ -316,15 +316,15 @@ function Player:update()
 	self:updateAnimation()
 
 	-- Update globals so the game saves correct data when closed
-	g.playerHP = self.hp
-	g.playerSP = self.sp
-	g.playerMP = self.mp
-	g.playerFacing = self.globalFlip
-	g.playerX = self.x
-	g.playerY = self.y
-	g.playerXVelocity = self.xVelocity
-	g.playerYVelocity = self.yVelocity
-	g.playerState = self.currentState
+	GAME.playerHP = self.hp
+	GAME.playerSP = self.sp
+	GAME.playerMP = self.mp
+	GAME.playerFacing = self.globalFlip
+	GAME.playerX = self.x
+	GAME.playerY = self.y
+	GAME.playerXVelocity = self.xVelocity
+	GAME.playerYVelocity = self.yVelocity
+	GAME.playerState = self.currentState
 
 	-- If not dead update player buffers, handle player states, and movement with collisions
 	if self.dead then return end
@@ -339,14 +339,14 @@ end
 --- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
-	self.jumpBuffer = math.max(self.jumpBuffer - (30 * dt), 0)
-	self.bBuffer = math.max(self.bBuffer - (30 * dt), 0)
-	self.punchBuffer = math.max(self.punchBuffer - (30 * dt), 0)
-	self.leftBuffer = math.max(self.leftBuffer - (30 * dt), 0)
-	self.rightBuffer = math.max(self.rightBuffer - (30 * dt), 0)
-	self.upBuffer = math.max(self.upBuffer - (30 * dt), 0)
-	self.staminaBuffer = math.max(self.staminaBuffer - (30 * dt), 0)
-	self.manaBuffer = math.max(self.manaBuffer - (30 * dt), 0)
+	self.jumpBuffer = math.max(self.jumpBuffer - (30 * DELTA_TIME), 0)
+	self.bBuffer = math.max(self.bBuffer - (30 * DELTA_TIME), 0)
+	self.punchBuffer = math.max(self.punchBuffer - (30 * DELTA_TIME), 0)
+	self.leftBuffer = math.max(self.leftBuffer - (30 * DELTA_TIME), 0)
+	self.rightBuffer = math.max(self.rightBuffer - (30 * DELTA_TIME), 0)
+	self.upBuffer = math.max(self.upBuffer - (30 * DELTA_TIME), 0)
+	self.staminaBuffer = math.max(self.staminaBuffer - (30 * DELTA_TIME), 0)
+	self.manaBuffer = math.max(self.manaBuffer - (30 * DELTA_TIME), 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -466,7 +466,7 @@ end
 
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
-	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * DELTA_TIME), self.y + (self.yVelocity * DELTA_TIME))
 
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -523,22 +523,22 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If the world is wider than 400 pixels and the player is 250 or more pixels across the screen update the world
-	if self.x + self.xVelocity > self.x and self.x >= 250 and g.worldX + screenWidth < self.world.width - 1 then
+	if self.x + self.xVelocity > self.x and self.x >= 250 and GAME.worldX + SCREEN['width'] < self.world.width - 1 then
 		self.world:update()
 	end
 
 	-- If the world X value is greater than 0 and the player is 150 or less pixels across the screen update the world
-	if self.x + self.xVelocity < self.x and self.x <= 150 and g.worldX > 1 then
+	if self.x + self.xVelocity < self.x and self.x <= 150 and GAME.worldX > 1 then
 		self.world:update()
 	end
 
 	-- If the world is taller than 240 pixels and the player is in the centre of the screen update the world
 	if self.world.height > 240 then
-		if self.y + self.yVelocity < self.y and self.y <= (screenHeight / 2) - (standing['h'] / 2) and g.worldY > 0 then 
+		if self.y + self.yVelocity < self.y and self.y <= (SCREEN['height'] / 2) - (standing['h'] / 2) and GAME.worldY > 0 then 
 			self.world:update()
 		end
 
-		if (self.y + self.yVelocity) > self.y and self.y >= screenHeight / 2 + (standing['h'] / 4) and g.worldY + screenHeight < self.world.height then
+		if (self.y + self.yVelocity) > self.y and self.y >= SCREEN['height'] / 2 + (standing['h'] / 4) and GAME.worldY + SCREEN['height'] < self.world.height then
 			self.world:update()
 		end
 	end
@@ -568,7 +568,7 @@ function Player:handleMovementAndCollisions()
 		end
 	end
 
-	if self.hp < g.playerHP then self:changeToHurtState() end -- Check if we took damage and change to hurt state
+	if self.hp < GAME.playerHP then self:changeToHurtState() end -- Check if we took damage and change to hurt state
 	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
 	if died then self:die() end -- If the player is dead then run the die method
 end
@@ -665,7 +665,7 @@ end
 
 
 function Player:handleVariableJump()
-	if pd.buttonJustReleased(pd.kButtonA) or self.jumpCounter > (self.jumpCounterMax * g.fps) then
+	if pd.buttonJustReleased(pd.kButtonA) or self.jumpCounter > (self.jumpCounterMax * GAME.fps) then
 		if self.jumping then
 			self.jumpCounter = 0
 			self.jumping = false
@@ -715,7 +715,7 @@ function Player:handleGroundInput()
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			if self.sp > self.runStaminaCost then
 				self:changeToRunState('left')
-				self:deductStamina(self.runStaminaCost * dt)
+				self:deductStamina(self.runStaminaCost * DELTA_TIME)
 			else
 				self:changeToWalkState('left')
 			end
@@ -724,7 +724,7 @@ function Player:handleGroundInput()
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			if self.sp > self.runStaminaCost then
 				self:changeToRunState('right')
-				self:deductStamina(self.runStaminaCost * dt)
+				self:deductStamina(self.runStaminaCost * DELTA_TIME)
 			else
 				self:changeToWalkState('right')
 			end
@@ -1117,7 +1117,7 @@ end
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + (self.gravity * dt)
+	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false
 		self.jumpCounter = 0
@@ -1132,9 +1132,9 @@ end
 --- @param  amount  integer  The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
-		self.xVelocity = self.xVelocity - (amount * dt)
+		self.xVelocity = self.xVelocity - (amount * DELTA_TIME)
 	elseif self.xVelocity < 0 then
-		self.xVelocity = self.xVelocity + (amount * dt)
+		self.xVelocity = self.xVelocity + (amount * DELTA_TIME)
 	end
 
 	if math.abs(self.xVelocity) < self.minimumAirSpeed or self.touchingWall then
@@ -1149,10 +1149,10 @@ end
 function Player:regenerateStamina()
 	if self.sp < self.maxSP and not self:staminaBlocked() then
 		if self.currentState == 'duck' then
-			self.sp = self.sp + 30 * dt
+			self.sp = self.sp + 30 * DELTA_TIME
 		end
 
-		self.sp = self.sp + 30 * dt
+		self.sp = self.sp + 30 * DELTA_TIME
 	end
 
 	if self.sp > self.maxSP then
@@ -1166,7 +1166,7 @@ end
 --- This method is used to calculate when to regenerate mana
 function Player:regenerateMana()
 	if self.mp < self.maxMP and not self:manaBlocked() then
-		self.mp = self.mp + 1 * dt
+		self.mp = self.mp + 1 * DELTA_TIME
 	end
 
 	if self.mp > self.maxMP then

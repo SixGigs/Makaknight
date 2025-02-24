@@ -21,7 +21,7 @@ function Animal:init(x, y, e)
 	self.spawn_y = y
 
 	-- If the animal ID is on the don't spawn list, hide the animal
-	if g.depletedEntities[self.id] then
+	if GAME.depletedEntities[self.id] then
 		self:setVisible(false)
 	end
 
@@ -44,7 +44,7 @@ function Animal:init(x, y, e)
 		[TAGS.Player] = true,
 		[TAGS.Hitbox] = true,
 		[TAGS.Crown] = true,
-		[TAGS.GUI] = true,
+		[TAGS.Gui] = true,
 		[TAGS.Bubble] = true,
 		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true,
@@ -84,7 +84,7 @@ function Animal:update()
 	end
 
 	if self.hp <= 0 then
-		g.depletedEntities[self.id] = true
+		GAME.depletedEntities[self.id] = true
 		self:setVisible(false)
 	end
 
@@ -97,7 +97,7 @@ end
 --- Handles All Animal Movement and Any Collisions it has
 function Animal:handleMovementAndCollisions()
 	-- Get a list of collisions
-	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * dt), self.y + (self.yVelocity * dt))
+	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * DELTA_TIME), self.y + (self.yVelocity * DELTA_TIME))
 
 	-- Reset the collision tracking attributes
 	self.touchingGround = false

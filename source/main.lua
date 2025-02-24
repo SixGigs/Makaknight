@@ -5,6 +5,8 @@
 -- > Strings use 'single quotes'      --
 -- > Variable names use camelCase     --
 -- > Class names use CapitalCase      --
+-- > Method names use snake_case      --
+-- > Global variables use ALL_CAPS    --
 ----------------------------------------
 
 -- Playdate Core Libraries
@@ -72,33 +74,33 @@ import 'scripts/ui/Text'
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
-
-
 -- Globals
-g = Game()
-screenWidth = pd.display.getWidth()
-screenHeight = pd.display.getHeight()
-dt = 0
-
+GAME = Game()
+DELTA_TIME = 0
+SCREEN = {
+	['width'] = pd.display.getWidth(),
+	['height'] = pd.display.getHeight()
+}
 
 Title()
 
 
+
 -- Save the game when it closes
 function pd.gameWillTerminate()
-	g:save()
+	GAME:save()
 end
 
 -- Save the game when the console goes to sleep
 function pd.gameWillSleep()
-	g:save()
+	GAME:save()
 end
 
 
 
 -- Main Game Loop
 function pd.update()
-	dt = playdate.getElapsedTime()
+	DELTA_TIME = playdate.getElapsedTime()
 	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
