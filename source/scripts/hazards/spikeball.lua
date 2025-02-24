@@ -17,7 +17,7 @@ function Spikeball:init(x, y, e)
 	self.overlapTags = {
 		[TAGS.Animal] = true,
 		[TAGS.Player] = true,
-		[TAGS.GUI] = true
+		[TAGS.Gui] = true
 	}
 
 	self:setCenter(0, 0)
@@ -42,8 +42,8 @@ end
 --- The update method for the Spike-ball, it will run every tick
 function Spikeball:update()
 	local _, _, collisions, length <const> = self:moveWithCollisions(
-		self.x + (self.xVelocity * dt), 
-		self.y + (self.yVelocity * dt)
+		self.x + (self.xVelocity * DELTA_TIME), 
+		self.y + (self.yVelocity * DELTA_TIME)
 	)
 
 	-- Bounce off walls

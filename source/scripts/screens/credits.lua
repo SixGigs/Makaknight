@@ -17,7 +17,7 @@ end
 function Credits:handleInput()
 	-- Input with & without pause
 	if not self.paused then
-		self.xVelocity = 15 * dt
+		self.xVelocity = 15 * DELTA_TIME
 	else
 		self.xVelocity = 0
 	end
@@ -26,22 +26,22 @@ function Credits:handleInput()
 	if not pd:isCrankDocked() then
 		local _, speed = pd.getCrankChange()
 		if speed then
-			self.xVelocity = self.xVelocity + (speed * 32) * dt
+			self.xVelocity = self.xVelocity + (speed * 32) * DELTA_TIME
 		end
 	end
 
 	-- D-pad inputs
 	if pd.buttonIsPressed(pd.kButtonUp) then
 		if self.paused then
-			self.xVelocity = self.xVelocity - 180 * dt
+			self.xVelocity = self.xVelocity - 180 * DELTA_TIME
 		else
-			self.xVelocity = self.xVelocity - 195 * dt
+			self.xVelocity = self.xVelocity - 195 * DELTA_TIME
 		end
 	elseif pd.buttonIsPressed(pd.kButtonDown) then
 		if self.paused then
-			self.xVelocity = self.xVelocity + 180 * dt
+			self.xVelocity = self.xVelocity + 180 * DELTA_TIME
 		else
-			self.xVelocity = self.xVelocity + 165 * dt
+			self.xVelocity = self.xVelocity + 165 * DELTA_TIME
 		end
 	end
 

@@ -1,9 +1,8 @@
 -- Create playdate and playdate.graphics as constant
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-
--- Create the checkpoint class
 class("Flag").extends(AnimatedSprite)
+
 
 
 --- Checkpoints are created using this method
@@ -13,8 +12,8 @@ class("Flag").extends(AnimatedSprite)
 --- @param gameManager table The game manager passed into the object
 function Flag:init(x, y, entity)
 	-- Initialise the state machine using the flag sprite sheet
-	local img <const> = gfx.imagetable.new("images/entities/animated/flag-table-64-48")
-	Flag.super.init(self, img)
+	local i <const> = gfx.imagetable.new("images/entities/animated/flag-table-64-48")
+	Flag.super.init(self, i)
 
 	-- Set states in the state machine
 	self:addState("down", 1, 1)
@@ -28,7 +27,7 @@ function Flag:init(x, y, entity)
 
 	-- If the ID of the checkpoint in the save file matches the flag ID,
 	-- The flag spawns up, if not then the flag spawns down
-	if self.id == g.checkpoint then
+	if self.id == GAME.checkpoint then
 		self:changeState("up")
 	else
 		self:changeState("down")
@@ -43,6 +42,7 @@ function Flag:init(x, y, entity)
 end
 
 
+
 --- Hoist the flag. This method is called from the player when they collide with the flag
 --- TODO: Can we get this method called from this object using the update? If when updating the player collides with self?
 function Flag:hoist(flip)
@@ -52,14 +52,15 @@ function Flag:hoist(flip)
 	end
 
 	-- Update the game properties
-	g.checkpoint = self.id
-	g.playerSpawnLevel = g.playerLevel
-	g.playerSpawnY = self.y + 8
-	g.playerSpawnX = (flip == 0 and self.x - 8 or self.x + 24)
+	GAME.checkpoint = self.id
+	GAME.playerSpawnLevel = GAME.playerLevel
+	GAME.playerSpawnY = self.y + 8
+	GAME.playerSpawnX = (flip == 0 and self.x - 8 or self.x + 24)
 
 	-- Respawn all depleted entities
-	g:emptySpawnList()	
+	GAME:emptySpawnList()	
 end
+
 
 
 --- Lower the flag. This method is called from the player when any collision is recorded against a flag

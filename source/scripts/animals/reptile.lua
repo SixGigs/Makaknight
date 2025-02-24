@@ -81,7 +81,7 @@ end
 
 --- Applies Gravity to the Reptile
 function Reptile:applyGravity()
-	self.yVelocity = self.yVelocity + (self.gravity * dt)
+	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
 	if self.touchingGround then
 		self.yVelocity = 0
 	end

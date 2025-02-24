@@ -25,9 +25,9 @@ end
 
 
 function Crown:handleCollision(e)
-	if not g.won then
-		g.won = true
-		g:switchScene(Win, 'fade')
+	if not GAME.won then
+		GAME.won = true
+		GAME:switchScene(Win, 'fade')
 		self:setVisible(false)
 	end
 end

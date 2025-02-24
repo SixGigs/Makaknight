@@ -123,18 +123,18 @@ function Bar:init(name, x, y)
 
 	-- Set bar states
 	if name == 'health' then
-		self:changeState(tostring(math.floor(g.playerHP)))
+		self:changeState(tostring(math.floor(GAME.playerHP)))
 	elseif name == 'stamina' then
-		self:changeState(tostring(math.floor(g.playerSP)))
+		self:changeState(tostring(math.floor(GAME.playerSP)))
 	else
-		self:changeState(tostring(math.floor(g.playerMP)))
+		self:changeState(tostring(math.floor(GAME.playerMP)))
 	end
 
 	self:setVisible(false)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.GUI)
-	self:setTag(TAGS.GUI)
+	self:setZIndex(Z_INDEXES.Gui)
+	self:setTag(TAGS.Gui)
 	self:add()
 end
 
@@ -146,31 +146,31 @@ function Bar:update()
 
 	if not self:isVisible() then
 		if self.name == 'health' then
-			if g.playerHP < tonumber(self.currentState) then
+			if GAME.playerHP < tonumber(self.currentState) then
 				self:show()
 			end
 		elseif self.name == 'stamina' then
-			if g.playerSP < tonumber(self.currentState) and g.playerSP < (g.playerMaxSP / 2) then
+			if GAME.playerSP < tonumber(self.currentState) and GAME.playerSP < (GAME.playerMaxSP / 2) then
 				self:show()
 			end
 		else
-			if g.playerMP < tonumber(self.currentState) and g.playerMP < (g.playerMaxMP / 2) then
+			if GAME.playerMP < tonumber(self.currentState) and GAME.playerMP < (GAME.playerMaxMP / 2) then
 				self:show()
 			end
 		end
 	end
 
 	if self.name == 'health' then
-		if self.currentState ~= tostring(math.floor(g.playerHP)) then
-			self:changeState(tostring(math.floor(g.playerHP)))
+		if self.currentState ~= tostring(math.floor(GAME.playerHP)) then
+			self:changeState(tostring(math.floor(GAME.playerHP)))
 		end
 	elseif self.name == 'stamina' then
-		if self.currentState ~= tostring(math.floor(g.playerSP)) then
-			self:changeState(tostring(math.floor(g.playerSP)))
+		if self.currentState ~= tostring(math.floor(GAME.playerSP)) then
+			self:changeState(tostring(math.floor(GAME.playerSP)))
 		end
 	else
-		if self.currentState ~= tostring(math.floor(g.playerMP)) then
-			self:changeState(tostring(math.floor(g.playerMP)))
+		if self.currentState ~= tostring(math.floor(GAME.playerMP)) then
+			self:changeState(tostring(math.floor(GAME.playerMP)))
 		end
 	end
 end
@@ -192,7 +192,7 @@ end
 function Bar:updateVisibility()
 	if self:isVisible() then
 		if self.timer > 1 then
-			self.timer = self.timer - 30 * dt
+			self.timer = self.timer - 30 * DELTA_TIME
 		else
 			self:setVisible(false)
 		end

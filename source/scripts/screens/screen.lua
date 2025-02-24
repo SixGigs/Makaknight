@@ -27,7 +27,7 @@ end
 
 function Screen:handleInput()
 	if pd.buttonJustPressed(pd.kButtonA) then
-		g:switchScene(self.nextScene, self.transition)
+		GAME:switchScene(self.nextScene, self.transition)
 	end
 end
 

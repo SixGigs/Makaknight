@@ -10,7 +10,7 @@ class("Door").extends(gfx.sprite)
 --- @param e table   The table of entity attributes in the door
 function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
-	local img = gfx.image.new("images/doors/" .. e.name)
+	local i <const> = gfx.image.new('images/doors/' .. e.name)
 
 	-- The level, X, & Y values the door leads to
 	self.level = e.fields.level
@@ -23,6 +23,6 @@ function Door:init(x, y, e)
 	self:setZIndex(Z_INDEXES.Door)
 	self:setTag(TAGS.Door)
 	self:setCollideRect(12, 32, 8, 16)
-	self:setImage(img)
+	self:setImage(i)
 	self:add()
 end
