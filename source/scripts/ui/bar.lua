@@ -1,7 +1,7 @@
--- Playdate shorthand constants
 local pd <const> = playdate
-local gfx <const> = pd.graphics
+local gfx <const> = playdate.graphics
 class('Bar').extends(AnimatedSprite)
+
 
 
 --- Status bars are created using this method
@@ -146,15 +146,15 @@ function Bar:update()
 
 	if not self:isVisible() then
 		if self.name == 'health' then
-			if GAME.playerHP < tonumber(self.currentState) then
+			if GAME.playerHP < tonumber(self.currentState) or GAME.playerHP > tonumber(self.currentState) + 5 then
 				self:show()
 			end
 		elseif self.name == 'stamina' then
-			if GAME.playerSP < tonumber(self.currentState) and GAME.playerSP < (GAME.playerMaxSP / 2) then
+			if GAME.playerSP < (GAME.playerMaxSP / 2) or GAME.playerSP > tonumber(self.currentState) + 5 then
 				self:show()
 			end
 		else
-			if GAME.playerMP < tonumber(self.currentState) and GAME.playerMP < (GAME.playerMaxMP / 2) then
+			if GAME.playerMP < tonumber(self.currentState) and GAME.playerMP < (GAME.playerMaxMP / 2) or GAME.playerMP > tonumber(self.currentState) + 5 then
 				self:show()
 			end
 		end

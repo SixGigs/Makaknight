@@ -640,16 +640,12 @@ function Player:handleFlagCollision(flag)
 		end
 	end
 
-	flag:hoist(self.globalFlip) -- Raise the touched flag
+	flag:hoist() -- Raise the touched flag
 
 	-- Top up player properties
 	self.hp = self.maxHP
 	self.sp = self.maxSP
 	self.mp = self.maxMP
-
-	self.world.health:show()
-	self.world.stamina:show()
-	self.world.mana:show()
 end
 
 
