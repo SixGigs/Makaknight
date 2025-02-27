@@ -50,10 +50,10 @@ function World:enterRoom(direction)
 		if direction == 'north' then
 			return
 		elseif direction == 'east' then
-			self.player:moveTo(0, self.player.y)
+			self.player:moveTo(0, self.player.y - 2)
 			return
 		elseif direction == 'west' then
-			self.player:moveTo(400, self.player.y)
+			self.player:moveTo(400, self.player.y - 2)
 			return
 		else
 			self.player.hp = 0
@@ -131,6 +131,23 @@ function World:enterDoor(level, x, y)
 	pd.timer.performAfterDelay(500, function()
 		self.player:moveTo(x, y)
 		self.player:changeState('exit')
+
+		if self.width > SCREEN['width'] then
+			if direction == 'west' then
+				GAME.worldX = self.width - SCREEN['width']
+				self.player:moveBy(GAME.worldX, 0)
+				self:adjustLevel(GAME.worldX, 0)
+			end
+		end
+
+		if self.height > SCREEN['height'] then
+			local worldDiff <const> = self.oldWorldY - self.worldY
+			GAME.worldY = worldDiff
+			self.player:moveBy(0, GAME.worldY)
+			self:adjustLevel(0, GAME.worldY)
+		else
+			GAME.worldY = 0
+		end
 	end)
 end
 
@@ -339,19 +356,6 @@ end
 
 
 
---- This Method Adds the Developer Defined World Menu Items to the Playdate Pause Menu 
-function World:addWorldMenuItems()
-	-- Add a FPS Tick Box to the Pause Menu to Turn 50FPS Off and On
-	menu:addCheckmarkMenuItem('50 FPS', (GAME.fps == 50 and true or false), function(status)
-		if status ~= nil then
-			GAME.fps = (status and 50 or 30)
-			pd.display.setRefreshRate(GAME.fps)
-		end
-	end)
-end
-
-
-
 --- Load the background for the level sent into the function
 --- @param  level  string  The ID of the level to load the background of
 function World:loadBackground(level)
@@ -422,7 +426,7 @@ function World:resetPlayer()
 	end
 
 	-- Reset no spawn list to empty
-	g:emptySpawnList()
+	GAME:emptySpawnList()
 
 	-- Move player to the spawn coordinates and set them to the spawn state
 	self.player:moveTo(GAME.playerSpawnX, GAME.playerSpawnY)
