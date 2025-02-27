@@ -18,7 +18,10 @@ class('Player').extends(AnimatedSprite)
 --- @param  y      integer  The Y coordinate to spawn the player
 --- @param  world  table    The game manager is passed in to manage player on object interactions
 function Player:init(world)
-	Player.super.init(self, gfx.imagetable.new('images/player/player-table-80-80'))
+	-- Load player image, add equipment & armour
+	local image = gfx.image.new('images/player/player')
+	local imagetable <const> = self:addArmour(image)
+	Player.super.init(self, imagetable)
 
 	self.world = world -- Save the World Class as a property
 
@@ -1205,6 +1208,52 @@ function Player:handleYVelocity()
 	elseif self.yVelocity > 90 then
 		self:changeState('fall')
 	end
+end
+
+
+
+
+function Player:addArmour(sheet)
+	-- Sprite sheet frame width & height
+	local width <const> = 80
+	local height <const> = 80
+
+	-- ADD ARMOUR/CUSTOMISING CODE HERE
+
+	-- local cacti = gfx.image.new('images/entities/cacti')
+	-- gfx.pushContext(sheet)
+	-- cacti:draw(0, 0)
+	-- gfx.popContext()
+
+	-- Calculate number of frames
+	local sheetWidth, sheetHeight <const> = sheet:getSize()
+	local columns = math.floor(sheetWidth / width)
+	local rows = math.floor(sheetHeight / height)
+
+	-- Create a new imagetable
+	local frames = {}
+	for row = 0, rows - 1 do
+		for col = 0, columns - 1 do
+			local frame = gfx.image.new(width, height)
+			gfx.pushContext(frame)
+			sheet:draw(-col * width, -row * height)
+			gfx.popContext()
+			table.insert(frames, frame)
+		end
+	end
+
+	-- Convert frames into an imagetable
+	local imagetable = {}
+	setmetatable(imagetable, {
+		__index = function(_, i)
+			return frames[i]
+		end,
+		__len = function()
+			return #frames
+		end
+	})
+
+	return imagetable
 end
 
 

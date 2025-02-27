@@ -283,14 +283,18 @@ function World:addFullWallSprites(tilemap, emptyTiles)
 		if tile.x == 0 then
 			tile.x = -32
 			tile.w = tile.w + 32
-		elseif tile.x + tile.w == self.width then
+		end
+
+		if tile.x + tile.w == self.width then
 			tile.w = tile.w + 32
 		end
 
 		if tile.y == 0 then
 			tile.y = -64
 			tile.h = tile.h + 64
-		elseif tile.y + tile.h == 240 then
+		end
+
+		if tile.y + tile.h == 240 then
 			tile.h = tile.h + 16
 		end
 
