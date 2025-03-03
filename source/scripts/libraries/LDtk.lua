@@ -180,14 +180,14 @@ function LDtk.load( ldtk_file, use_lua_levels )
 
 	-- we list the level names (the complete list needs to be ready before calling LDtk.load_level())
 	for level_index, level_data in ipairs(data.levels) do
-		_level_names[ level_data.iid ] = level_data.identifier
-		_level_rects[ level_data.identifier ] = { x=level_data.worldX, y=level_data.worldY, width=level_data.pxWid, height=level_data.pxHei }
+		_level_names[ level_data.iid ] = level_data.iid
+		_level_rects[ level_data.iid ] = { x=level_data.worldX, y=level_data.worldY, width=level_data.pxWid, height=level_data.pxHei }
 	end
 
 	-- we load the levels
 	for level_index, level_data in ipairs(data.levels) do
 		if level_data.externalRelPath then
-			_level_files[ level_data.identifier ] = _.convert_relative_folder( level_data.externalRelPath )
+			_level_files[ level_data.iid ] = _.convert_relative_folder( level_data.externalRelPath )
 		else
 			LDtk.load_level( level_data )
 			_.load_tileset( level_data.identifier )
@@ -233,7 +233,7 @@ end
 
 -- load the level in memory
 -- only necessary to call if the ldtk file is saved in multiple files
-function LDtk.load_level( level_name )
+function LDtk.load_level( level_name )	
 	if _levels[ level_name ] then
 		return
 	end
@@ -252,7 +252,7 @@ function LDtk.load_level( level_name )
 	end
 
 	local level = {}
-	_levels[ level_data.identifier ] = level
+	_levels[ level_data.iid ] = level
 
 	level.neighbours = { east = {}, west = {}, north = {}, south = {}}
 	local direction_table = { e = "east", w = "west", n = "north", s = "south" }
@@ -471,10 +471,11 @@ end
 
 -- return the width and height of the level given
 -- @level_name is used to get the width and height
-function LDtk.get_size( level_name )
-	local level = _levels[level_name]
+function LDtk.get_size( level_name )	
+	local level = _levels[ level_name ]
 	return { ["width"] = level.width, ["height"] = level.height }
 end
+
 
 -- return a tilemap for the level
 -- @layer_name is optional, if nil then will return the first layer with tiles
@@ -492,7 +493,7 @@ end
 -- return a table with all the adjacent levels
 -- @direction is optional: values can be "east", "west", "north", "south"
 function LDtk.get_neighbours( level_name, direction )
-	local level = _levels[level_name]
+	local level = _levels[ level_name ]
 	if not level then return end
 
 	if not direction then

@@ -260,14 +260,15 @@
 					"height": 48,
 					"defUid": 3611,
 					"px": [352,112],
-					"fieldInstances": [
-						{ "__identifier": "level", "__type": "String", "__value": "Level_11", "__tile": null, "defUid": 3613, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Level_11"]
-						}] },
-						{ "__identifier": "exitX", "__type": "Int", "__value": 22, "__tile": null, "defUid": 3614, "realEditorValues": [{ "id": "V_Int", "params": [22] }] },
-						{ "__identifier": "exitY", "__type": "Int", "__value": 7, "__tile": null, "defUid": 3615, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }
-					],
+					"fieldInstances": [{ "__identifier": "links", "__type": "EntityRef", "__value": {
+						"entityIid": "034a93d0-e920-11ef-91e3-6330c58e5c7a",
+						"layerIid": "efa6a421-e920-11ef-91e3-93adbafa10b9",
+						"levelIid": "efa6a420-e920-11ef-91e3-c9102b9c0a16",
+						"worldIid": "1b2e3470-3b70-11ee-b8ee-9757ae8d1300"
+					}, "__tile": null, "defUid": 4608, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["034a93d0-e920-11ef-91e3-6330c58e5c7a"]
+					}] }],
 					"__worldX": 4016,
 					"__worldY": -128
 				}
