@@ -12,10 +12,9 @@ function Door:init(x, y, e)
 	-- Use entity attribute 'doorSprite' to load the correct sprite
 	local i <const> = gfx.image.new('images/doors/' .. e.name)
 
-	-- The level, X, & Y values the door leads to
-	self.level = e.fields.level
-	self.exitX = e.fields.exitX * 16 + 16
-	self.exitY = e.fields.exitY * 16 + 8
+	-- The level & door IID to travel to
+	self.level = e.fields.links['levelIid']
+	self.exit = e.fields.links['entityIid']
 
 	-- Sprite properties
 	self:setCenter(0, 0)

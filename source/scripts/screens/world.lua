@@ -114,14 +114,14 @@ end
 --- @param  level  string   Contains the name of the level we want to travel to as a string
 --- @param  x      integer  Contains the X coordinate to spawn the player after moving to the new level
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
-function World:enterDoor(level, x, y)
-	if level ~= GAME.playerLevel then
+function World:enterDoor(door)
+	if door.level ~= GAME.playerLevel then
 		Fade('out')
 
 		pd.timer.performAfterDelay(500, function()
 			local oldLevel <const> = GAME.playerLevel
 			ldtk.release_level(oldLevel)
-			self:goToLevel(level)
+			self:goToLevel(door.level)
 			self.player:add()
 
 			Fade('in')
@@ -129,8 +129,15 @@ function World:enterDoor(level, x, y)
 	end
 
 	pd.timer.performAfterDelay(500, function()
-		self.player:moveTo(x, y)
-		self.player:changeState('exit')
+		-- Move player to the linked door X & Y
+		for _, entity in ipairs(ldtk.get_entities(door.level)) do
+			if entity.iid == door.exit then
+				local entityX, entityY = entity.position.x, entity.position.y
+
+				self.player:moveTo(entityX + 16, entityY + 8)
+				self.player:changeState('exit')
+			end
+		end
 
 		if self.width > SCREEN['width'] then
 			if direction == 'west' then
@@ -141,9 +148,7 @@ function World:enterDoor(level, x, y)
 		end
 
 		if self.height > SCREEN['height'] then
-			local worldDiff <const> = self.oldWorldY - self.worldY
-			GAME.worldY = worldDiff
-			self.player:moveBy(0, GAME.worldY)
+			GAME.worldY = self.player.y - SCREEN['height'] / 2
 			self:adjustLevel(0, GAME.worldY)
 		else
 			GAME.worldY = 0

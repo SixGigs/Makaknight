@@ -1100,7 +1100,7 @@ function Player:changeToEnterState(obj)
 	self.yVelocity = 0
 
 	self:changeState('entering')
-	self.world:enterDoor(obj.level, obj.exitX, obj.exitY)
+	self.world:enterDoor(obj)
 end
 
 
