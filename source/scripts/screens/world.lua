@@ -376,7 +376,7 @@ function World:loadBackground(level)
 				bgAmount = self.width / SCREEN['width']
 				bgAmount = math.floor(bgAmount + 0.9)
 				nextBackground = 0
-	
+
 				for i = 1, bgAmount do
 					Background(nextBackground, 0, bg)
 					nextBackground = nextBackground + SCREEN['width']
