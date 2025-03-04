@@ -78,7 +78,7 @@ function World:enterRoom(direction)
 	-- Create a local X and Y, and use them to spawn the player
 	local x, y
 	if direction == 'north' then
-		x, y = self.player.x, 200
+		x, y = self.player.x, 240 - 40
 	elseif direction == 'south' then
 		x, y = self.player.x, 24
 	elseif direction == 'east' then
@@ -99,10 +99,16 @@ function World:enterRoom(direction)
 	end
 
 	if self.height > SCREEN['height'] then
-		local worldDiff <const> = self.oldWorldY - self.worldY
-		GAME.worldY = worldDiff
-		self.player:moveBy(0, GAME.worldY)
-		self:adjustLevel(0, GAME.worldY)
+		if direction == 'east' or direction == 'west' then
+			local worldDiff <const> = self.oldWorldY - self.worldY
+			GAME.worldY = worldDiff
+			self.player:moveBy(0, GAME.worldY)
+			self:adjustLevel(0, GAME.worldY)
+		elseif direction == 'north' then
+			GAME.worldY = self.height - SCREEN['height']
+			self.player:moveBy(0, GAME.worldY)
+			self:adjustLevel(0, GAME.worldY)
+		end
 	else
 		GAME.worldY = 0
 	end
