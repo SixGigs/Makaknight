@@ -233,7 +233,7 @@ end
 
 -- load the level in memory
 -- only necessary to call if the ldtk file is saved in multiple files
-function LDtk.load_level( level_name )	
+function LDtk.load_level( level_name )
 	if _levels[ level_name ] then
 		return
 	end

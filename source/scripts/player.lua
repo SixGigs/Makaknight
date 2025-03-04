@@ -554,9 +554,9 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If touching the edge of the room, lets try moving into the next room
-	if self.x < -12 then
+	if self.x < -14 then
 		self.world:enterRoom("west")
-	elseif self.x > 412 then
+	elseif self.x > 414 then
 		self.world:enterRoom("east")
 	elseif self.y < -32 then
 		self.world:enterRoom("north")
