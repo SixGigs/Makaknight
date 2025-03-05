@@ -6578,7 +6578,7 @@
 								[572]
 							],
 							"alpha": 1,
-							"chance": 0.25,
+							"chance": 0.5,
 							"breakOnMatch": true,
 							"pattern": [0,0,0,0,-1000001,0,0,6000,0],
 							"flipX": false,
@@ -27092,7 +27092,7 @@
 			"__cHei": 1,
 			"identifier": "Candles1",
 			"uid": 4617,
-			"relPath": "../images/icons/candle1.png",
+			"relPath": "../images/icons/candles1.png",
 			"embedAtlas": null,
 			"pxWid": 16,
 			"pxHei": 16,

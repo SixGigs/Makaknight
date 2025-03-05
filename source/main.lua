@@ -32,6 +32,7 @@ import 'scripts/animals/Reptile'
 -- Entity scripts
 import 'scripts/entities/Block'
 import 'scripts/entities/Bubble'
+import 'scripts/entities/Candle'
 import 'scripts/entities/Crown'
 import 'scripts/entities/Door'
 import 'scripts/entities/Flag'

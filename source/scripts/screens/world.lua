@@ -264,6 +264,8 @@ function World:goToLevel(level)
 			Wind(entityX - 8, entityY - 80, entity.fields.strength)
 		elseif entityName == 'Roaster' then
 			Roaster(entityX, entityY, entity)
+		elseif entityName == 'Candle1' or entityName == 'Candle2' then
+			Candle(entityX, entityY, entityName)
 		else
 			Prop(entityX, entityY, entityName)
 		end
