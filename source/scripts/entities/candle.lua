@@ -5,15 +5,17 @@ class('Candle').extends(AnimatedSprite)
 --- @param  x  integer  The X coordinate to spawn the spike
 --- @param  y  integer  The Y coordinate to spawn the spike
 --- @param  n  string   The name of the Prop to create as a prop
-function Candle:init(x, y, n)
-	local i <const> = gfx.imagetable.new('images/entities/animated/' .. n .. '-table-16-8')
+function Candle:init(x, y, e)
+	local i <const> = gfx.imagetable.new('images/entities/animated/' .. string.lower(e.name) .. '-table-' .. e.fields.width .. '-' .. e.fields.height)
+	local l = i:getLength()
+
 	Candle.super.init(self, i)
 
-	self:addState(0, 1, 4, {ts = 4})
+	self:addState(0, 1, l, {ts = e.fields.tickSpeed})
 	self:playAnimation()
 
 	self:setCenter(0, 0)
-	self:moveTo(x, y + 8)
+	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Prop)
 	self:setTag(TAGS.Prop)
 	self:add()

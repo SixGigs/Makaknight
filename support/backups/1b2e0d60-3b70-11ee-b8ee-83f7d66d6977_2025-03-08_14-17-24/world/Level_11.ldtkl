@@ -375,6 +375,26 @@
 					"__worldY": -672
 				},
 				{
+					"__identifier": "SkullTorch",
+					"__grid": [15,36],
+					"__pivot": [0,0],
+					"__tags": ["Dungeon"],
+					"__tile": { "tilesetUid": 4632, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "38944420-e920-11ef-91e3-99335dd1d9f5",
+					"width": 16,
+					"height": 16,
+					"defUid": 4633,
+					"px": [240,576],
+					"fieldInstances": [
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4634, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4635, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4636, "realEditorValues": [] }
+					],
+					"__worldX": 4336,
+					"__worldY": -224
+				},
+				{
 					"__identifier": "BigTorch",
 					"__grid": [8,38],
 					"__pivot": [0,0],
@@ -436,103 +456,123 @@
 				},
 				{
 					"__identifier": "WallTorch",
-					"__grid": [13,39],
+					"__grid": [14,43],
 					"__pivot": [0,0],
 					"__tags": ["Dungeon"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "008bfb80-e920-11ef-a25d-9396968e76c9",
+					"iid": "b6c4f560-e920-11ef-a25d-c1242f62ce61",
 					"width": 16,
 					"height": 16,
 					"defUid": 4638,
-					"px": [208,624],
+					"px": [224,688],
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
 					],
-					"__worldX": 4304,
-					"__worldY": -176
+					"__worldX": 4320,
+					"__worldY": -112
 				},
 				{
 					"__identifier": "WallTorch",
-					"__grid": [10,39],
+					"__grid": [18,43],
 					"__pivot": [0,0],
 					"__tags": ["Dungeon"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "014168d0-e920-11ef-a25d-71129acb3b3d",
+					"iid": "b780f260-e920-11ef-a25d-1d7fbfab2767",
 					"width": 16,
 					"height": 16,
 					"defUid": 4638,
-					"px": [160,624],
+					"px": [288,688],
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
 					],
-					"__worldX": 4256,
+					"__worldX": 4384,
+					"__worldY": -112
+				},
+				{
+					"__identifier": "SkullTorch",
+					"__grid": [16,39],
+					"__pivot": [0,0],
+					"__tags": ["Dungeon"],
+					"__tile": { "tilesetUid": 4632, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "da567d00-e920-11ef-a25d-9d0dd1c56864",
+					"width": 16,
+					"height": 16,
+					"defUid": 4633,
+					"px": [256,624],
+					"fieldInstances": [
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4634, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4635, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4636, "realEditorValues": [] }
+					],
+					"__worldX": 4352,
 					"__worldY": -176
 				},
 				{
-					"__identifier": "BigTorch",
-					"__grid": [2,6],
+					"__identifier": "SkullTorch",
+					"__grid": [17,39],
 					"__pivot": [0,0],
 					"__tags": ["Dungeon"],
-					"__tile": { "tilesetUid": 4621, "x": 0, "y": 0, "w": 16, "h": 48 },
+					"__tile": { "tilesetUid": 4632, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "06d41b30-e920-11ef-a25d-dff30929061e",
-					"width": 16,
-					"height": 48,
-					"defUid": 4622,
-					"px": [32,96],
-					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4623, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 48, "__tile": null, "defUid": 4624, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] }
-					],
-					"__worldX": 4128,
-					"__worldY": -704
-				},
-				{
-					"__identifier": "Candle2",
-					"__grid": [15,36],
-					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
-					"__tile": { "tilesetUid": 4619, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#3E8948",
-					"iid": "10ec0790-e920-11ef-a25d-472cd35d087e",
+					"iid": "da9f45d0-e920-11ef-a25d-f9dd078113cb",
 					"width": 16,
 					"height": 16,
-					"defUid": 4620,
-					"px": [240,576],
+					"defUid": 4633,
+					"px": [272,624],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4627, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4628, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4630, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4634, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4635, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4636, "realEditorValues": [] }
 					],
-					"__worldX": 4336,
-					"__worldY": -224
+					"__worldX": 4368,
+					"__worldY": -176
 				},
 				{
-					"__identifier": "Candle1",
-					"__grid": [7,28],
+					"__identifier": "SkullTorch",
+					"__grid": [16,38],
 					"__pivot": [0,0],
 					"__tags": ["Dungeon"],
-					"__tile": { "tilesetUid": 4617, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__tile": { "tilesetUid": 4632, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "14757c70-e920-11ef-a25d-5b768a7585f1",
+					"iid": "db1befe0-e920-11ef-a25d-7f6b7ca035ac",
 					"width": 16,
 					"height": 16,
-					"defUid": 4618,
-					"px": [112,448],
+					"defUid": 4633,
+					"px": [256,608],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4625, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4626, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4629, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4634, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4635, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4636, "realEditorValues": [] }
 					],
-					"__worldX": 4208,
-					"__worldY": -352
+					"__worldX": 4352,
+					"__worldY": -192
+				},
+				{
+					"__identifier": "SkullTorch",
+					"__grid": [17,38],
+					"__pivot": [0,0],
+					"__tags": ["Dungeon"],
+					"__tile": { "tilesetUid": 4632, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "db775650-e920-11ef-a25d-6fed8c8bddc0",
+					"width": 16,
+					"height": 16,
+					"defUid": 4633,
+					"px": [272,608],
+					"fieldInstances": [
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4634, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4635, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4636, "realEditorValues": [] }
+					],
+					"__worldX": 4368,
+					"__worldY": -192
 				}
 			]
 		},
