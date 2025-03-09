@@ -83,54 +83,6 @@
 					"__worldY": -128
 				},
 				{
-					"__identifier": "Staminapotion",
-					"__grid": [12,24],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "e2c2f1b0-e920-11ef-91e3-31156e133a52",
-					"width": 16,
-					"height": 16,
-					"defUid": 4546,
-					"px": [192,384],
-					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
-					"__worldX": 4288,
-					"__worldY": -416
-				},
-				{
-					"__identifier": "Staminapotion",
-					"__grid": [14,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "e5c55c40-e920-11ef-91e3-350893b24832",
-					"width": 16,
-					"height": 16,
-					"defUid": 4546,
-					"px": [224,448],
-					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
-					"__worldX": 4320,
-					"__worldY": -352
-				},
-				{
-					"__identifier": "Staminapotion",
-					"__grid": [10,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "e9ec49a0-e920-11ef-91e3-c3b0573050fd",
-					"width": 16,
-					"height": 16,
-					"defUid": 4546,
-					"px": [160,448],
-					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
-					"__worldX": 4256,
-					"__worldY": -352
-				},
-				{
 					"__identifier": "Door1",
 					"__grid": [12,4],
 					"__pivot": [0,0],
@@ -219,106 +171,10 @@
 					"__worldY": -96
 				},
 				{
-					"__identifier": "Manapotion",
-					"__grid": [11,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "0465d8c0-e920-11ef-91e3-2f4494d88a5d",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [176,448],
-					"fieldInstances": [{ "__identifier": "restore_mp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4550, "realEditorValues": [] }],
-					"__worldX": 4272,
-					"__worldY": -352
-				},
-				{
-					"__identifier": "Manapotion",
-					"__grid": [13,24],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "055c46b0-e920-11ef-91e3-192d15af4e70",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [208,384],
-					"fieldInstances": [{ "__identifier": "restore_mp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4550, "realEditorValues": [] }],
-					"__worldX": 4304,
-					"__worldY": -416
-				},
-				{
-					"__identifier": "Manapotion",
-					"__grid": [15,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "065a7cd0-e920-11ef-91e3-756b36fe3c8e",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [240,448],
-					"fieldInstances": [{ "__identifier": "restore_mp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4550, "realEditorValues": [] }],
-					"__worldX": 4336,
-					"__worldY": -352
-				},
-				{
-					"__identifier": "Healthpotion",
-					"__grid": [14,24],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "082e7980-e920-11ef-91e3-716ac64e3afb",
-					"width": 16,
-					"height": 16,
-					"defUid": 4521,
-					"px": [224,384],
-					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
-					"__worldX": 4320,
-					"__worldY": -416
-				},
-				{
-					"__identifier": "Healthpotion",
-					"__grid": [12,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "08d17040-e920-11ef-91e3-a56db697a47f",
-					"width": 16,
-					"height": 16,
-					"defUid": 4521,
-					"px": [192,448],
-					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
-					"__worldX": 4288,
-					"__worldY": -352
-				},
-				{
-					"__identifier": "Healthpotion",
-					"__grid": [16,28],
-					"__pivot": [0,0],
-					"__tags": ["Pickups"],
-					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "09462b10-e920-11ef-91e3-8fa48bcee8b7",
-					"width": 16,
-					"height": 16,
-					"defUid": 4521,
-					"px": [256,448],
-					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
-					"__worldX": 4352,
-					"__worldY": -352
-				},
-				{
 					"__identifier": "Candle1",
 					"__grid": [17,10],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4617, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "a2863cd0-e920-11ef-91e3-d34357740f35",
@@ -327,9 +183,11 @@
 					"defUid": 4618,
 					"px": [272,160],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4625, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4626, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4629, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 12, "__tile": null, "defUid": 4625, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 6, "__tile": null, "defUid": 4626, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4629, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4642, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4643, "realEditorValues": [] }
 					],
 					"__worldX": 4368,
 					"__worldY": -640
@@ -338,7 +196,7 @@
 					"__identifier": "Candle2",
 					"__grid": [6,16],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4619, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "33252d80-e920-11ef-91e3-8bb8b759c71e",
@@ -347,9 +205,11 @@
 					"defUid": 4620,
 					"px": [96,256],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4627, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4628, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4630, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4627, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 6, "__tile": null, "defUid": 4628, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4630, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4644, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4645, "realEditorValues": [] }
 					],
 					"__worldX": 4192,
 					"__worldY": -544
@@ -358,7 +218,7 @@
 					"__identifier": "BigTorch",
 					"__grid": [16,8],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4621, "x": 0, "y": 0, "w": 16, "h": 48 },
 					"__smartColor": "#3E8948",
 					"iid": "a64b7370-e920-11ef-91e3-5bfe8ab71a8f",
@@ -367,9 +227,11 @@
 					"defUid": 4622,
 					"px": [256,128],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4623, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 48, "__tile": null, "defUid": 4624, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4623, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 43, "__tile": null, "defUid": 4624, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4646, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4647, "realEditorValues": [] }
 					],
 					"__worldX": 4352,
 					"__worldY": -672
@@ -378,7 +240,7 @@
 					"__identifier": "BigTorch",
 					"__grid": [8,38],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4621, "x": 0, "y": 0, "w": 16, "h": 48 },
 					"__smartColor": "#3E8948",
 					"iid": "ad4688a0-e920-11ef-91e3-4ff0b5851734",
@@ -387,9 +249,11 @@
 					"defUid": 4622,
 					"px": [128,608],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4623, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 48, "__tile": null, "defUid": 4624, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4623, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 43, "__tile": null, "defUid": 4624, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4646, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4647, "realEditorValues": [] }
 					],
 					"__worldX": 4224,
 					"__worldY": -192
@@ -398,7 +262,7 @@
 					"__identifier": "WallTorch",
 					"__grid": [12,27],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "b56a2050-e920-11ef-a25d-9d56fc7c50de",
@@ -409,7 +273,9 @@
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 4288,
 					"__worldY": -368
@@ -418,7 +284,7 @@
 					"__identifier": "WallTorch",
 					"__grid": [15,27],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "b608aa40-e920-11ef-a25d-f9be875b5d0c",
@@ -429,7 +295,9 @@
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 4336,
 					"__worldY": -368
@@ -438,7 +306,7 @@
 					"__identifier": "WallTorch",
 					"__grid": [13,39],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "008bfb80-e920-11ef-a25d-9396968e76c9",
@@ -449,7 +317,9 @@
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 4304,
 					"__worldY": -176
@@ -458,7 +328,7 @@
 					"__identifier": "WallTorch",
 					"__grid": [10,39],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "014168d0-e920-11ef-a25d-71129acb3b3d",
@@ -469,7 +339,9 @@
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] }
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 4256,
 					"__worldY": -176
@@ -478,7 +350,7 @@
 					"__identifier": "BigTorch",
 					"__grid": [2,6],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4621, "x": 0, "y": 0, "w": 16, "h": 48 },
 					"__smartColor": "#3E8948",
 					"iid": "06d41b30-e920-11ef-a25d-dff30929061e",
@@ -487,9 +359,11 @@
 					"defUid": 4622,
 					"px": [32,96],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4623, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 48, "__tile": null, "defUid": 4624, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4623, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 43, "__tile": null, "defUid": 4624, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4631, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4646, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4647, "realEditorValues": [] }
 					],
 					"__worldX": 4128,
 					"__worldY": -704
@@ -498,7 +372,7 @@
 					"__identifier": "Candle2",
 					"__grid": [15,36],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4619, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
 					"iid": "10ec0790-e920-11ef-a25d-472cd35d087e",
@@ -507,9 +381,11 @@
 					"defUid": 4620,
 					"px": [240,576],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4627, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4628, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4630, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4627, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 6, "__tile": null, "defUid": 4628, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4630, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4644, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4645, "realEditorValues": [] }
 					],
 					"__worldX": 4336,
 					"__worldY": -224
@@ -518,18 +394,20 @@
 					"__identifier": "Candle1",
 					"__grid": [7,28],
 					"__pivot": [0,0],
-					"__tags": ["Dungeon"],
+					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4617, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#3E8948",
-					"iid": "14757c70-e920-11ef-a25d-5b768a7585f1",
+					"iid": "4695dc80-e920-11ef-a25d-a38e04e13335",
 					"width": 16,
 					"height": 16,
 					"defUid": 4618,
 					"px": [112,448],
 					"fieldInstances": [
-						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4625, "realEditorValues": [] },
-						{ "__identifier": "height", "__type": "Int", "__value": 8, "__tile": null, "defUid": 4626, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4629, "realEditorValues": [] }
+						{ "__identifier": "width", "__type": "Int", "__value": 12, "__tile": null, "defUid": 4625, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 6, "__tile": null, "defUid": 4626, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4629, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4642, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4643, "realEditorValues": [] }
 					],
 					"__worldX": 4208,
 					"__worldY": -352
