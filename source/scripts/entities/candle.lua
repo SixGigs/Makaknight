@@ -5,9 +5,11 @@ class('Candle').extends(AnimatedSprite)
 --- @param  x  integer  The X coordinate to spawn the spike
 --- @param  y  integer  The Y coordinate to spawn the spike
 --- @param  n  string   The name of the Prop to create as a prop
-function Candle:init(x, y, e)
+function Candle:init(e)	
 	local i <const> = gfx.imagetable.new('images/entities/animated/' .. string.lower(e.name) .. '-table-' .. e.fields.width .. '-' .. e.fields.height)
-	local l = i:getLength()
+	local x <const> = e.position.x + e.fields.xOffset
+	local y <const> = e.position.y + e.fields.yOffset
+	local l <const> = i:getLength()
 
 	Candle.super.init(self, i)
 
