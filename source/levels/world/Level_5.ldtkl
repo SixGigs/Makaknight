@@ -28,9 +28,9 @@
 	"externalRelPath": null,
 	"fieldInstances": [
 		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-		{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+		{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 			"id": "V_String",
-			"params": ["The Plains"]
+			"params": ["- The Plains -"]
 		}] }
 	],
 	"layerInstances": [

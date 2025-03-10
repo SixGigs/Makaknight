@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4652,
+	"nextUid": 4655,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -27338,7 +27338,44 @@
 					"max": 200,
 					"regex": null,
 					"acceptFileTypes": null,
-					"defaultOverride": { "id": "V_Int", "params": [25] },
+					"defaultOverride": { "id": "V_Int", "params": [50] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "tickSpeed",
+					"doc": null,
+					"__type": "Int",
+					"uid": 4652,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [2] },
 					"textLanguageMode": null,
 					"symmetricalRef": false,
 					"autoChainRef": true,
@@ -27411,7 +27448,44 @@
 					"max": 200,
 					"regex": null,
 					"acceptFileTypes": null,
-					"defaultOverride": { "id": "V_Int", "params": [25] },
+					"defaultOverride": { "id": "V_Int", "params": [50] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "tickSpeed",
+					"doc": null,
+					"__type": "Int",
+					"uid": 4654,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [3] },
 					"textLanguageMode": null,
 					"symmetricalRef": false,
 					"autoChainRef": true,
@@ -27484,7 +27558,44 @@
 					"max": 200,
 					"regex": null,
 					"acceptFileTypes": null,
-					"defaultOverride": { "id": "V_Int", "params": [25] },
+					"defaultOverride": { "id": "V_Int", "params": [50] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "tickSpeed",
+					"doc": null,
+					"__type": "Int",
+					"uid": 4653,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [4] },
 					"textLanguageMode": null,
 					"symmetricalRef": false,
 					"autoChainRef": true,
@@ -28318,9 +28429,9 @@
 			"externalRelPath": "world/Level_0.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Tomb -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Tomb"]
+					"params": ["- The Tomb -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28347,9 +28458,9 @@
 			"externalRelPath": "world/Level_1.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Tomb", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Tomb -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Tomb"]
+					"params": ["- The Tomb -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28376,9 +28487,9 @@
 			"externalRelPath": "world/Level_2.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Plains"]
+					"params": ["- The Plains -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28405,9 +28516,9 @@
 			"externalRelPath": "world/Level_3.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Plains"]
+					"params": ["- The Plains -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28434,9 +28545,9 @@
 			"externalRelPath": "world/Level_4.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Plains"]
+					"params": ["- The Plains -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28463,9 +28574,9 @@
 			"externalRelPath": "world/Level_5.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Plains"]
+					"params": ["- The Plains -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28492,9 +28603,9 @@
 			"externalRelPath": "world/Level_6.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Plains", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Plains -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Plains"]
+					"params": ["- The Plains -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28521,9 +28632,9 @@
 			"externalRelPath": "world/Level_7.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Dark Cave", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- Dark Cave -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["Dark Cave"]
+					"params": ["- Dark Cave -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28550,9 +28661,9 @@
 			"externalRelPath": "world/Level_8.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Dark Cave", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- Dark Cave -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["Dark Cave"]
+					"params": ["- Dark Cave -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28579,9 +28690,9 @@
 			"externalRelPath": "world/Level_9.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Clearing", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- Clearing -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["Clearing"]
+					"params": ["- Clearing -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28608,9 +28719,9 @@
 			"externalRelPath": "world/Level_10.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Cave Exit", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- Cave Exit -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["Cave Exit"]
+					"params": ["- Cave Exit -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28637,9 +28748,9 @@
 			"externalRelPath": "world/Level_11.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "The Spire", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- The Spire -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["The Spire"]
+					"params": ["- The Spire -"]
 				}] }
 			],
 			"layerInstances": null,
@@ -28666,9 +28777,9 @@
 			"externalRelPath": "world/Level_12.ldtkl",
 			"fieldInstances": [
 				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-				{ "__identifier": "name", "__type": "String", "__value": "Ramparts", "__tile": null, "defUid": 4551, "realEditorValues": [{
+				{ "__identifier": "name", "__type": "String", "__value": "- Ramparts -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 					"id": "V_String",
-					"params": ["Ramparts"]
+					"params": ["- Ramparts -"]
 				}] }
 			],
 			"layerInstances": null,

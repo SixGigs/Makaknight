@@ -28,9 +28,9 @@
 	"externalRelPath": null,
 	"fieldInstances": [
 		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
-		{ "__identifier": "name", "__type": "String", "__value": "Clearing", "__tile": null, "defUid": 4551, "realEditorValues": [{
+		{ "__identifier": "name", "__type": "String", "__value": "- Clearing -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 			"id": "V_String",
-			"params": ["Clearing"]
+			"params": ["- Clearing -"]
 		}] }
 	],
 	"layerInstances": [
@@ -252,7 +252,10 @@
 					"height": 16,
 					"defUid": 4521,
 					"px": [176,64],
-					"fieldInstances": [{ "__identifier": "restore_hp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4544, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "restore_hp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4544, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4652, "realEditorValues": [] }
+					],
 					"__worldX": 3440,
 					"__worldY": -656
 				},
@@ -268,7 +271,10 @@
 					"height": 16,
 					"defUid": 4546,
 					"px": [192,64],
-					"fieldInstances": [{ "__identifier": "restore_sp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4547, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "restore_sp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4547, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4654, "realEditorValues": [] }
+					],
 					"__worldX": 3456,
 					"__worldY": -656
 				},
@@ -284,7 +290,10 @@
 					"height": 16,
 					"defUid": 4549,
 					"px": [208,64],
-					"fieldInstances": [{ "__identifier": "restore_mp", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4550, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "restore_mp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4550, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4653, "realEditorValues": [] }
+					],
 					"__worldX": 3472,
 					"__worldY": -656
 				}
