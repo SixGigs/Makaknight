@@ -12,6 +12,12 @@ function Game:init()
 	self.transitioning = false
 	self.won = false
 
+	if DEBUG then
+		menu:addMenuItem('Reset', function()
+			self:reset()
+		end)
+	end
+
 	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
 		if status ~= nil then
 			self.fps = (status and 50 or 30)
@@ -185,4 +191,13 @@ function Game:emptySpawnList()
 			end
 		end
 	end
+end
+
+
+
+function Game:reset()
+	local data <const> = {}
+	pd.datastore.write(data)
+
+	self:switchScene(World, 'fade')
 end

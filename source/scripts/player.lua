@@ -62,7 +62,7 @@ function Player:init(world)
 
 
 
-	---[ AnimatedSprite library - On Frame Changed Event ]------------------------------------------------
+
 	-- If the yVelocity increases or decreases in these states then enter jumping or falling
 	self.states['idle'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
 	self.states['ready'].onFrameChangedEvent = function(self) self:handleYVelocity() end
@@ -144,7 +144,6 @@ function Player:init(world)
 
 
 
-	---[ AnimatedSprite library - On Animation End Event ]------------------------------------------------
 	-- If the double jump animation ends, change to the mid jump state
 	self.states["dbJump"].onAnimationEndEvent = function(self)
 		self:changeState("midJump")
@@ -162,7 +161,6 @@ function Player:init(world)
 
 
 
-	---[ Player class properties ]-------------------------------------------------------------------------
 	-- General player class properties
 	self.hp = GAME.playerHP
 	self.sp = GAME.playerSP
@@ -302,9 +300,8 @@ function Player:init(world)
 
 
 
-	---[ Playdate sprite settings ]------------------------------------------------------------------------
 	self:changeState(GAME.playerState)
-	self:moveTo(GAME.playerX, GAME.playerY)
+	self:moveTo(GAME.playerX, GAME.playerY - 1) -- Do -1 here to stop the player slipping through half tiles
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)
