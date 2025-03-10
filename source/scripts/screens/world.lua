@@ -34,6 +34,8 @@ function World:init()
 	self.oldLevelName = ''
 	self.oldWorldY = 0
 
+	GAME:load()
+
 	self:goToLevel(GAME.playerLevel)
 	self:adjustLevel(GAME.worldX, GAME.worldY)
 	self.player = Player(self)

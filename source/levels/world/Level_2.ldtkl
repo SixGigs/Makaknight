@@ -266,7 +266,7 @@
 				},
 				{
 					"__identifier": "WallTorch",
-					"__grid": [10,10],
+					"__grid": [10,9],
 					"__pivot": [0,0],
 					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -275,7 +275,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4638,
-					"px": [160,160],
+					"px": [160,144],
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
@@ -284,11 +284,11 @@
 						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 1024,
-					"__worldY": -80
+					"__worldY": -96
 				},
 				{
 					"__identifier": "WallTorch",
-					"__grid": [14,10],
+					"__grid": [14,9],
 					"__pivot": [0,0],
 					"__tags": ["Light"],
 					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -297,7 +297,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4638,
-					"px": [224,160],
+					"px": [224,144],
 					"fieldInstances": [
 						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
 						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
@@ -306,7 +306,7 @@
 						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
 					],
 					"__worldX": 1088,
-					"__worldY": -80
+					"__worldY": -96
 				}
 			]
 		},

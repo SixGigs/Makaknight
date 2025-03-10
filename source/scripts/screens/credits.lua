@@ -53,7 +53,7 @@ function Credits:handleInput()
 			self.paused = true
 		end
 	elseif pd.buttonJustPressed(pd.kButtonB) then
-		g:switchScene(Thanks, self.transition)
+		GAME:switchScene(Thanks, self.transition)
 	end
 end
 

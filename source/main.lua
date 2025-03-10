@@ -76,6 +76,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Globals
+DEBUG = false
 GAME = Game()
 DELTA_TIME = 0
 SCREEN = {
@@ -105,5 +106,8 @@ function pd.update()
 	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	pd.drawFPS(383, 2)
+	
+	if DEBUG then
+		pd.drawFPS(383, 2)
+	end
 end

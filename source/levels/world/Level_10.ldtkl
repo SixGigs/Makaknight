@@ -271,6 +271,50 @@
 					}] }],
 					"__worldX": 4016,
 					"__worldY": -128
+				},
+				{
+					"__identifier": "WallTorch",
+					"__grid": [10,7],
+					"__pivot": [0,0],
+					"__tags": ["Light"],
+					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "18faa2d0-e920-11ef-b34e-016dc4483fee",
+					"width": 16,
+					"height": 16,
+					"defUid": 4638,
+					"px": [160,112],
+					"fieldInstances": [
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
+					],
+					"__worldX": 3824,
+					"__worldY": -128
+				},
+				{
+					"__identifier": "WallTorch",
+					"__grid": [14,7],
+					"__pivot": [0,0],
+					"__tags": ["Light"],
+					"__tile": { "tilesetUid": 4637, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#3E8948",
+					"iid": "1995aa50-e920-11ef-b34e-07a7b856d182",
+					"width": 16,
+					"height": 16,
+					"defUid": 4638,
+					"px": [224,112],
+					"fieldInstances": [
+						{ "__identifier": "width", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4639, "realEditorValues": [] },
+						{ "__identifier": "height", "__type": "Int", "__value": 16, "__tile": null, "defUid": 4640, "realEditorValues": [] },
+						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4641, "realEditorValues": [] },
+						{ "__identifier": "xOffset", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4650, "realEditorValues": [] },
+						{ "__identifier": "yOffset", "__type": "Int", "__value": 0, "__tile": null, "defUid": 4651, "realEditorValues": [] }
+					],
+					"__worldX": 3888,
+					"__worldY": -128
 				}
 			]
 		},
