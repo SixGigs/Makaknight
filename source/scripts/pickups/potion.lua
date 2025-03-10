@@ -8,8 +8,15 @@ class('Potion').extends(AnimatedSprite)
 --- @param  y  integer  The Y coordinate to spawn the ability pick-up
 --- @param  e  object   The table of entities related to the ability
 function Potion:init(x, y, e)
+	local i <const> = gfx.imagetable.new('images/pickups/' .. string.lower(e.name) .. '-table-16-16')
+	local l <const> i:getLength()
+
 	-- Initialise the class
-	Potion.super.init(self, gfx.imagetable.new('images/pickups/' .. string.lower(e.name) .. '-table-16-16'))
+	Potion.super.init(self, i)
+
+	-- Animation settings
+	self:addState(0, 1, l, {ts = e.fields.tickSpeed})
+	self:playAnimation()
 
 	-- Potion properties
 	self.id = e.iid
@@ -23,7 +30,7 @@ function Potion:init(x, y, e)
 	end
 
 	-- Sprite properties
-	self:setCollideRect(2, 12, 12, 4)
+	self:setCollideRect(4, 8, 8, 8)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Pickup)

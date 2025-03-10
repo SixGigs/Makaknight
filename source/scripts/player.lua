@@ -327,7 +327,7 @@ function Player:update()
 	GAME.playerState = self.currentState
 
 	-- If not dead update player buffers, handle player states, and movement with collisions
-	if self.dead then return end
+	if self.dead then return end	
 	self:updateBuffers()
 	self:handleState()
 	self:handleMovementAndCollisions()
@@ -466,7 +466,9 @@ end
 
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
-	local _, _, collisions, length = self:moveWithCollisions(self.x + (self.xVelocity * DELTA_TIME), self.y + (self.yVelocity * DELTA_TIME))
+	local xMovement = self.x + (self.xVelocity * DELTA_TIME)
+	local yMovement  = self.y + (self.yVelocity * DELTA_TIME)
+	local _, _, collisions, length = self:moveWithCollisions(xMovement, yMovement)
 
 	self.touchingGround = false
 	self.touchingCeiling = false
