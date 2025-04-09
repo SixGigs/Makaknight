@@ -1219,10 +1219,10 @@ function Player:addArmour(sheet)
 
 	-- ADD ARMOUR/CUSTOMISING CODE HERE
 
-	-- local cacti = gfx.image.new('images/entities/cacti')
-	-- gfx.pushContext(sheet)
-	-- cacti:draw(0, 0)
-	-- gfx.popContext()
+	local helmet = gfx.image.new('images/player/roman-helmet')
+	gfx.pushContext(sheet)
+	helmet:draw(0, 0)
+	gfx.popContext()
 
 	-- Calculate number of frames
 	local sheetWidth, sheetHeight <const> = sheet:getSize()
