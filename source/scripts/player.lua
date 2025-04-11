@@ -26,35 +26,35 @@ function Player:init(world)
 	self.world = world -- Save the World Class as a property
 
 	---[ AnimatedSprite library - States, loops, and animations ] ----------------------------------------
-	self:addState('idle', 1, 16, {ts = 2})
-	self:addState('walk', 17, 28, {ts = 1.3})
-	self:addState('duckDown', 29, 29, {ts = 1, l = 1, na = 'duck'})
-	self:addState('duck', 30, 30)
-	self:addState('duckUp', 31, 31, {ts = 1, l = 1, na = 'idle'})
-	self:addState('jump', 32, 32)
-	self:addState('jump1', 33, 33)
-	self:addState('jump2', 34, 34)
-	self:addState('jump3', 35, 35)
-	self:addState('midJump', 36, 36)
-	self:addState('dash', 36, 36) -- REMAKE LATER
-	self:addState('fall', 37, 37)
-	self:addState('fall1', 38, 38)
-	self:addState('fall2', 39, 39)
-	self:addState('fall3', 40, 40)
-	self:addState('contact', 41, 42, {ts = 2, l = 1, na = 'idle'})
-	self:addState('roll', 43, 58, {ts = 1, l = 1, na = 'midJump'})
-	self:addState('dbJump', 59, 74, {ts = 1, l = 1})
-	self:addState('hurt', 75, 76, {ts = 1, l = 12, na = 'fall'})
-	self:addState('run', 77, 88, {ts = 1})
-	self:addState('dive', 89, 89)
-	self:addState('die', 90, 94, {ts = 3, l = 1, na = 'dead'})
-	self:addState('dead', 95, 95)
-	self:addState('spawn', 96, 101, {ts = 3, l = 1, na = 'idle'})
-	self:addState('ready', 102, 111, {ts = 3})
-	self:addState('punch', 112, 114, {ts = 1, l = 1})
-	self:addState('exit', 99, 101, {ts = 3, l = 1, na = 'idle'})
-	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'}) -- REMAKE LATER
-	self:addState('enter', 117, 117)
+	self:addState('idle',     1, 16,    {ts = 2})
+	self:addState('walk',     17, 28,   {ts = 1.3})
+	self:addState('duckDown', 29, 29,   {ts = 1, l = 1, na = 'duck'})
+	self:addState('duck',     30, 30)
+	self:addState('duckUp',   31, 31,   {ts = 1, l = 1, na = 'idle'})
+	self:addState('jump',     32, 32)
+	self:addState('jump1',    33, 33)
+	self:addState('jump2',    34, 34)
+	self:addState('jump3',    35, 35)
+	self:addState('midJump',  36, 36)
+	self:addState('dash',     36, 36)   -- REMAKE LATER
+	self:addState('fall',     37, 37)
+	self:addState('fall1',    38, 38)
+	self:addState('fall2',    39, 39)
+	self:addState('fall3',    40, 40)
+	self:addState('contact',  41, 42,   {ts = 2, l = 1, na = 'idle'})
+	self:addState('roll',     43, 58,   {ts = 1, l = 1, na = 'midJump'})
+	self:addState('dbJump',   59, 74,   {ts = 1, l = 1})
+	self:addState('hurt',     75, 76,   {ts = 1, l = 12, na = 'fall'})
+	self:addState('run',      77, 88,   {ts = 1})
+	self:addState('dive',     89, 89)
+	self:addState('die',      90, 94,   {ts = 3, l = 1, na = 'dead'})
+	self:addState('dead',     95, 95)
+	self:addState('spawn',    96, 101,  {ts = 3, l = 1, na = 'idle'})
+	self:addState('ready',    102, 111, {ts = 3})
+	self:addState('punch',    112, 114, {ts = 1, l = 1})
+	self:addState('exit',     99, 101,  {ts = 3, l = 1, na = 'idle'})
+	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'})
+	self:addState('enter',    117, 117)
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -504,7 +504,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
-			self:handleDoorCollision(collisionObject)
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Crown then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Fragile then
@@ -648,15 +648,6 @@ function Player:handleFlagCollision(flag)
 	self.hp = self.maxHP
 	self.sp = self.maxSP
 	self.mp = self.maxMP
-end
-
-
-
-
-function Player:handleDoorCollision(obj)
-	if pd.buttonJustPressed(pd.kButtonUp) then
-		self:changeToEnterState(obj)
-	end
 end
 
 
@@ -1089,17 +1080,6 @@ function Player:changeToDashState()
 	end
 
 	self.setManaBuffer = true
-end
-
-
-
-
-function Player:changeToEnterState(obj)
-	self.xVelocity = 0
-	self.yVelocity = 0
-
-	self:changeState('entering')
-	self.world:enterDoor(obj)
 end
 
 
