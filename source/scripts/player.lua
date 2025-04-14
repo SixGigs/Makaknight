@@ -55,6 +55,7 @@ function Player:init(world)
 	self:addState('exit',     99, 101,  {ts = 3, l = 1, na = 'idle'})
 	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'})
 	self:addState('enter',    117, 117)
+	self:addState('runTurn',  118, 118, {ts = 6, l = 1, na = 'idle'})
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -158,6 +159,15 @@ function Player:init(world)
 		self.doubleJumpAvailable = false
 	end
 
+	self.states['runTurn'].onAnimationEndEvent = function(self)
+		if self.globalFlip == 0 then
+			self.globalFlip = 1
+		else
+			self.globalFlip = 0
+		end
+		
+		self.xVelocity = 0
+	end
 
 
 
@@ -289,6 +299,11 @@ function Player:init(world)
 	self.manaBufferAmount = 60
 	self.manaBuffer = 0
 
+	-- Run buffer properties
+	self.runBufferAmount = 4
+	self.runLeftBuffer = 0
+	self.runRightBuffer = 0
+
 	-- Physics properties
 	self.xVelocity = GAME.playerXVelocity
 	self.yVelocity = GAME.playerYVelocity
@@ -347,6 +362,8 @@ function Player:updateBuffers()
 	self.upBuffer = math.max(self.upBuffer - (30 * DELTA_TIME), 0)
 	self.staminaBuffer = math.max(self.staminaBuffer - (30 * DELTA_TIME), 0)
 	self.manaBuffer = math.max(self.manaBuffer - (30 * DELTA_TIME), 0)
+	self.runLeftBuffer = math.max(self.runLeftBuffer - (30 * DELTA_TIME), 0)
+	self.runRightBuffer = math.max(self.runRightBuffer - (30 * DELTA_TIME), 0)
 
 	-- Set the game buffers if each button is pressed
 	if pd.buttonJustPressed(pd.kButtonA) then
@@ -370,11 +387,21 @@ function Player:updateBuffers()
 		self.upBuffer = self.bufferAmount
 	end
 
+	if pd.buttonIsPressed(pd.kButtonB) then
+		if pd.buttonIsPressed(pd.kButtonLeft) then
+			self.runLeftBuffer = self.runBufferAmount
+		elseif pd.buttonIsPressed(pd.kButtonRight) then
+			self.runRightBuffer = self.runBufferAmount
+		end
+	end
+
+	-- Set the stamina buffer if requested
 	if self.setStaminaBuffer then
 		self.staminaBuffer = self.staminaBufferAmount
 		self.setStaminaBuffer = false
 	end
 
+	-- Set the mana buffer if requested
 	if self.setManaBuffer then
 		self.manaBuffer = self.manaBufferAmount
 		self.setManaBuffer = false
@@ -454,6 +481,14 @@ function Player:handleState()
 	elseif self.currentState == 'roll' then
 		self:applyGravity()
 		self:applyDrag(self.drag)
+	elseif self.currentState == 'runTurn' then
+		if self.globalFlip == 1 then
+			self.xVelocity = -self.walkSpeed
+		else
+			self.xVelocity = self.walkSpeed
+		end
+
+		self:applyGravity()
 	elseif self.noInputStates[self.currentState] then
 	else
 		self:applyGravity()
@@ -703,8 +738,12 @@ function Player:handleGroundInput()
 	elseif pd.buttonIsPressed(pd.kButtonB) then
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			if self.sp > self.runStaminaCost then
-				self:changeToRunState('left')
-				self:deductStamina(self.runStaminaCost * DELTA_TIME)
+				if self.runRightBuffer > 0 then
+					self:changeState('runTurn')
+				else
+					self:changeToRunState('left')
+					self:deductStamina(self.runStaminaCost * DELTA_TIME)
+				end
 			else
 				self:changeToWalkState('left')
 			end
@@ -712,8 +751,12 @@ function Player:handleGroundInput()
 			self.setStaminaBuffer = true
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			if self.sp > self.runStaminaCost then
-				self:changeToRunState('right')
-				self:deductStamina(self.runStaminaCost * DELTA_TIME)
+				if self.runLeftBuffer > 0 then
+					self:changeState('runTurn')
+				else
+					self:changeToRunState('right')
+					self:deductStamina(self.runStaminaCost * DELTA_TIME)
+				end
 			else
 				self:changeToWalkState('right')
 			end
