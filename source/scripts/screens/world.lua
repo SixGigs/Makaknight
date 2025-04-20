@@ -14,7 +14,7 @@ TAGS = {
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
 	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
-	Text = 18
+	Text = 18, Coin = 19
 }
 
 Z_INDEXES = {
@@ -22,7 +22,7 @@ Z_INDEXES = {
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Text = 1250, Foreground = 150
+	Text = 1250, Foreground = 150, Coin = 155
 }
 
 
@@ -58,7 +58,7 @@ function World:enterRoom(direction)
 			self.player:moveTo(400, self.player.y - 2)
 			return
 		else
-			self.player.hp = 0
+			self.player:die()
 			return
 		end
 	end
@@ -278,7 +278,8 @@ function World:goToLevel(level)
 	self.stamina = Bar('stamina', 2, 18)
 	self.mana = Bar('mana', 2, 34)
 
-	pd.resetElapsedTime() -- Reset time elapsed to stop player accelerating when changing rooms
+	-- Reset time elapsed to stop player accelerating when changing rooms
+	pd.resetElapsedTime()
 end
 
 

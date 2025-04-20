@@ -34,6 +34,7 @@ import 'scripts/entities/Block'
 import 'scripts/entities/Bubble'
 import 'scripts/entities/Candle'
 import 'scripts/entities/Crown'
+import 'scripts/entities/Coin'
 import 'scripts/entities/Door'
 import 'scripts/entities/Flag'
 import 'scripts/entities/Half'
@@ -103,8 +104,8 @@ function pd.update()
 	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	
+
 	if DEBUG then
-		pd.drawFPS(383, 2)
+		pd.drawFPS(383, 24)
 	end
 end

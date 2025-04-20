@@ -35,7 +35,7 @@ function Flag:init(x, y, entity)
 
 	-- Flag properties
 	self:setCenter(0.375, 0)
-	self:setCollideRect(29, 21, 5, 27)
+	self:setCollideRect(29, 15, 5, 33)
 	self:setZIndex(Z_INDEXES.Flag)
 	self:setTag(TAGS.Flag)
 	self:moveTo(x, y)

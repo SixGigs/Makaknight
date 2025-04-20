@@ -130,6 +130,7 @@ function Game:load()
 	self.playerMaxHP = (gd and (gd.maxHP and gd.maxHP or 100) or 100)
 	self.playerMaxSP = (gd and (gd.maxSP and gd.maxSP or 100) or 100)
 	self.playerMaxMP = (gd and (gd.maxMP and gd.maxMP or 100) or 100)
+	self.playerCoins = (gd and (gd.coins and gd.coins or 0) or 0)
 	self.depletedEntities = (gd and (gd.depletedEntities and gd.depletedEntities or {}) or {})
 	self.extinctEntities = (gd and (gd.extinctEntities and gd.extinctEntities or {}) or {})
 	self.playerX = (gd and (gd.levelX and gd.levelX or self.playerSpawnX) or self.playerSpawnX)
@@ -165,6 +166,7 @@ function Game:save()
 		maxHP = self.playerMaxHP,
 		maxSP = self.playerMaxSP,
 		maxMP = self.playerMaxMP,
+		coins = self.playerCoins,
 		depletedEntities = self.depletedEntities,
 		extinctEntities = self.extinctEntities,
 		worldX = self.worldX,

@@ -55,7 +55,7 @@ function Player:init(world)
 	self:addState('exit',     99, 101,  {ts = 3, l = 1, na = 'idle'})
 	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'})
 	self:addState('enter',    117, 117)
-	self:addState('runTurn',  118, 118, {ts = 6, l = 1, na = 'idle'})
+	self:addState('runTurn',  118, 118, {ts = 5, l = 1, na = 'idle'})
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -203,7 +203,8 @@ function Player:init(world)
 		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true,
 		[TAGS.Spike] = true,
-		[TAGS.Half] = true
+		[TAGS.Half] = true,
+		[TAGS.Coin] = true
 	}
 
 	-- Array of all the player states which have no input hooks or gravity
@@ -454,7 +455,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 
-		if self.touchingGround and self.hp == 0 then
+		if self.touchingGround and self.hp == 0 and not self.dead then
 			self:die()
 		end
 	elseif self.currentState == "dash" then
@@ -540,6 +541,8 @@ function Player:handleMovementAndCollisions()
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			collisionObject:handleCollision(self)
+		elseif collisionTag == TAGS.Coin then
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Crown then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Fragile then
@@ -607,7 +610,7 @@ function Player:handleMovementAndCollisions()
 
 	if self.hp < GAME.playerHP then self:changeToHurtState() end -- Check if we took damage and change to hurt state
 	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
-	if died then self:die() end -- If the player is dead then run the die method
+	if died and not self.dead then self:die() end -- If the player is dead then run the die method
 end
 
 
@@ -724,6 +727,26 @@ function Player:die()
 			self:reset()
 		end)
 	end)
+
+	-- Deduct coins
+	if GAME.playerCoins >= 4 then
+		local xCoin = self.x
+		local yCoin = 0
+
+		if self.y > 240 then
+			yCoin = 236
+		else
+			yCoin = self.y
+		end
+
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+
+		GAME.playerCoins = GAME.playerCoins - 4
+		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
+	end
 
 	self:changeState('die')
 end

@@ -103,7 +103,7 @@ end
 
 -- This Method is Used to Return a Collision Type
 function Block:collision(e)
-	if self.overlapStates[self.currentState] or e.xVelocity >= 200 or e.xVelocity <= -200 or e.yVelocity >= 400 then
+	if self.overlapStates[self.currentState] or e.xVelocity >= 200 or e.xVelocity <= -200 or e.yVelocity >= 400 and e.weight > 40 then
 		return gfx.sprite.kCollisionTypeOverlap
 	else
 		return gfx.sprite.kCollisionTypeSlide

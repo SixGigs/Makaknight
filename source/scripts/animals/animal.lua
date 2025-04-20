@@ -83,9 +83,10 @@ function Animal:update()
 		return
 	end
 
-	if self.hp <= 0 then
+	if self.hp <= 0 and self:isVisible() then
 		GAME.depletedEntities[self.id] = true
 		self:setVisible(false)
+		Coin(900, self.x, self.y)
 	end
 
 	self:updateAnimation()
