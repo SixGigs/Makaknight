@@ -204,7 +204,8 @@ function Player:init(world)
 		[TAGS.Wind] = true,
 		[TAGS.Spike] = true,
 		[TAGS.Half] = true,
-		[TAGS.Coin] = true
+		[TAGS.Coin] = true,
+		[TAGS.Effect] = true
 	}
 
 	-- Array of all the player states which have no input hooks or gravity
@@ -317,7 +318,8 @@ function Player:init(world)
 
 
 	self:changeState(GAME.playerState)
-	self:moveTo(GAME.playerX, GAME.playerY - 1) -- Do -1 here to stop the player slipping through half tiles
+	-- Do -1 here to stop the player slipping through half tiles
+	self:moveTo(GAME.playerX, GAME.playerY -1)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)
@@ -503,7 +505,7 @@ end
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
 	local xMovement = self.x + (self.xVelocity * DELTA_TIME)
-	local yMovement  = self.y + (self.yVelocity * DELTA_TIME)
+	local yMovement = self.y + (self.yVelocity * DELTA_TIME)
 	local _, _, collisions, length = self:moveWithCollisions(xMovement, yMovement)
 
 	self.touchingGround = false
@@ -720,7 +722,7 @@ function Player:die()
 	self.dead = true
 
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(1500, function()
+	pd.timer.performAfterDelay(2000, function()
 		Fade('out')
 
 		pd.timer.performAfterDelay(500, function()

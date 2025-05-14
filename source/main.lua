@@ -29,6 +29,9 @@ import 'scripts/animals/Butterfly'
 import 'scripts/animals/Firefly'
 import 'scripts/animals/Reptile'
 
+-- Effect scripts
+import 'scripts/effects/Effect'
+
 -- Entity scripts
 import 'scripts/entities/Block'
 import 'scripts/entities/Bubble'

@@ -106,6 +106,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -128,6 +129,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -150,6 +152,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -188,6 +191,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -210,6 +214,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
@@ -372,7 +377,7 @@
 				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,18,0,0,0,0,0,0,0,0,0,16,0,0,
 				0,0,0,0,0,0,0,0,0,0,18,0,18,0,0,0,0,0,0,0,0,16,16,16,0,0,0,0,0,0,0,0,0,0,0,
 				18,0,18,0,0,0,0,0,0,0,16,16,0,16,16,0,0,0,0,0,0,0,0,0,0,18,0,18,0,0,0,0,0,0,16,
-				16,0,0,0,16,16,0,0,0,0,0,0,0,0,0,16,16,1,0,0,0,0,0,0,0,18,0,0,0,18,0,0,0,0,0,
+				16,21,0,0,16,16,0,0,0,0,0,0,0,0,0,16,16,1,0,0,0,0,0,0,0,18,21,0,0,18,0,0,0,0,0,
 				0,0,0,0,0,16,1,1,1,0,0,0,0,0,0,18,0,0,0,18,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,
 				0,0,0,0,0,18,0,0,0,18,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,9,9,9,16,16,16,16,16,16,
 				16,9,9,9,9,9,9,9,9,9,1,1,1,1,1,1,9,9,9,16,16,16,16,16,16,16,9,9,9,9,9,9,9,9,9,
@@ -528,7 +533,9 @@
 				{ "px": [224,176], "src": [208,368], "f": 0, "t": 565, "d": [4499,289], "a": 1 },
 				{ "px": [32,80], "src": [256,384], "f": 0, "t": 592, "d": [4498,127], "a": 1 },
 				{ "px": [160,144], "src": [256,384], "f": 0, "t": 592, "d": [4498,235], "a": 1 },
-				{ "px": [224,144], "src": [256,384], "f": 0, "t": 592, "d": [4498,239], "a": 1 }
+				{ "px": [224,144], "src": [256,384], "f": 0, "t": 592, "d": [4498,239], "a": 1 },
+				{ "px": [176,128], "src": [304,304], "f": 0, "t": 475, "d": [4595,211], "a": 1 },
+				{ "px": [176,144], "src": [304,352], "f": 0, "t": 547, "d": [4593,236], "a": 1 }
 			],
 			"seed": 6274193,
 			"overrideTilesetUid": null,

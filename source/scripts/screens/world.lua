@@ -14,7 +14,7 @@ TAGS = {
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
 	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
-	Text = 18, Coin = 19
+	Text = 18, Coin = 19, Effect = 20
 }
 
 Z_INDEXES = {
@@ -22,7 +22,7 @@ Z_INDEXES = {
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Text = 1250, Foreground = 150, Coin = 155
+	Text = 1250, Foreground = 150, Coin = 155, Effect = 500
 }
 
 
@@ -433,10 +433,18 @@ function World:resetPlayer()
 		GAME.worldX = 0
 	end
 
-	-- Remove any transition sprites
+	-- Remove any transition, coin, or effect sprites
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
 		if sprite:isa(Fade) or sprite:isa(Wipe) then
+			sprite:remove()
+		end
+
+		if sprite:isa(Coin) then
+			sprite:remove()
+		end
+
+		if sprite:isa(Effect) then
 			sprite:remove()
 		end
 	end
