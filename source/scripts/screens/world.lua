@@ -8,25 +8,6 @@ ldtk.load('levels/world.ldtk', false)
 
 
 
--- Global collision tag & z-index arrays
-TAGS = {
-	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
-	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
-	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
-	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
-	Text = 18, Coin = 19, Effect = 20
-}
-
-Z_INDEXES = {
-	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
-	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
-	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
-	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Text = 1250, Foreground = 150, Coin = 155, Effect = 500
-}
-
-
-
 --- Initialise the World class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player

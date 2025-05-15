@@ -1164,6 +1164,7 @@ end
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
+
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false
 		self.jumpCounter = 0

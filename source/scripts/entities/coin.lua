@@ -1,11 +1,38 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+
+-- An array of tags the coin hit box can overlap with
+local overlapTags <const> = {
+	[TAGS.Animal] = true,
+	[TAGS.Door] = true,
+	[TAGS.Hitbox] = true,
+	[TAGS.Gui] = true,
+	[TAGS.Wind] = true,
+	[TAGS.Coin] = true,
+	[TAGS.Player] = true,
+	[TAGS.Fragile] = true,
+	[TAGS.Half] = true
+}
+
+-- An array of spinning coin states
+local spinStates <const> = {
+	[1] = true,
+	[2] = true,
+	[3] = true,
+	[4] = true,
+	[5] = true
+}
+
 class('Coin').extends(AnimatedSprite)
 
 
-
+--- This class is used to create a coin for the player to collect
+--- @param  g  integer  The value of gravity in the current room
+--- @param  x  integer  The X coordinate to spawn the coin at
+--- @param  y  integer  The Y coordinate to spawn the coin at
 function Coin:init(g, x, y)
-	local animation <const> = math.random(1, 5)
+	-- Choose a random animation & spawn jump height
+	local spin <const> = math.random(1, 5)
 	local jump <const> = math.random(180, 240)
 
 	-- Initialise the AnimatedSprite library
@@ -17,11 +44,11 @@ function Coin:init(g, x, y)
 	self:addState(3, 17, 24, {ts = 1})
 	self:addState(4, 25, 32, {ts = 1})
 	self:addState(5, 33, 40, {ts = 1})
-	self:addState('roll', 41, 48, {ts = 1})
 	self:addState('flat', 6, 6)
-	self:changeState(animation)
+	self:changeState(spin)
 	self:playAnimation()
 
+	-- Generalised coin class properties
 	self.timer = false
 	self.ticker = 0
 	self.speed = 60
@@ -33,25 +60,8 @@ function Coin:init(g, x, y)
 	self.touchingCeiling = false
 	self.yVelocity = -jump
 	self.weight = 1
-	self.overlapTags = {
-		[TAGS.Animal] = true,
-		[TAGS.Door] = true,
-		[TAGS.Hitbox] = true,
-		[TAGS.Gui] = true,
-		[TAGS.Wind] = true,
-		[TAGS.Coin] = true,
-		[TAGS.Player] = true,
-		[TAGS.Fragile] = true,
-		[TAGS.Half] = true
-	}
-	self.spinStates = {
-		[1] = true,
-		[2] = true,
-		[3] = true,
-		[4] = true,
-		[5] = true
-	}
 
+	-- Playdate sprite details
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Coin)
 	self:setTag(TAGS.Coin)
@@ -60,10 +70,11 @@ end
 
 
 
+--- This method handles collision responses
 function Coin:collisionResponse(e)
 	local tag <const> = e:getTag()
 
-	if self.overlapTags[tag] then
+	if overlapTags[tag] then
 		if tag == TAGS.Fragile or tag == TAGS.Half then
 			return e:collision(self)
 		else
@@ -76,6 +87,7 @@ end
 
 
 
+--- This function runs every game tick and handles coin behaviour
 function Coin:update()
 	self:updateAnimation()
 	self:handleState()
@@ -84,52 +96,19 @@ end
 
 
 
+--- This method handles coin behaviour for each state
 function Coin:handleState()
-	if self.spinStates[self.currentState] then
-		if self.touchingGround then
-			if self.yVelocity > 90 then
-				local low <const> = math.floor(self.yVelocity / 2, 0.5)
-				local high <const> = math.floor(self.yVelocity, 0.5)
-
-				self.yVelocity = -math.random(low, high)
-				self.xVelocity = math.random(-self.speed, self.speed)
-
-				local n <const> = math.random(0, 1)
-				if n == 1 then
-					Effect(self.x, self.y)
-				end
-
-				self:changeState(math.random(1, 5))
-			else
-				if self.currentState ~= 'flat' then
-					self.xVelocity = 0
-					self:changeState('flat')
-				end
-
-				self.yVelocity = 0
-			end
-		end
-
+	if spinStates[self.currentState] then
+		self:handleSpinState()
 		self:applyGravity()
 	else
-		if self.timer then
-			if self.ticker > 0 then
-				self.ticker = self.ticker - (30 * DELTA_TIME)
-			else
-				Effect(self.x, self.y)
-				self.timer = false
-			end
-
-			return
-		end
-
-		self.timer = true
-		self.ticker = math.random(GAME.fps * 2, GAME.fps * 3)
+		self:handleFlatState()
 	end
 end
 
 
 
+--- This method handles coin collisions
 function Coin:handleMovementAndCollisions()
 	local xMovement <const> = self.x + (self.xVelocity * DELTA_TIME)
 	local yMovement <const> = self.y + (self.yVelocity * DELTA_TIME)
@@ -138,7 +117,6 @@ function Coin:handleMovementAndCollisions()
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
-	local depleted = false
 
 	for i = 1, length do
 		local collision <const> = collisions[i]
@@ -174,33 +152,77 @@ function Coin:handleMovementAndCollisions()
 
 	-- Delete the coin if it bounces off screen
 	if self.x < -6 then
-		depleted = true
+		self:remove()
 	elseif self.x > 406 then
-		depleted = true
+		self:remove()
 	elseif self.y < -10 then
-		depleted = true
+		self:remove()
 	elseif self.y > 262 then
-		depleted = true
+		self:remove()
 	end
-
-	-- If the coin is removed then remove
-	if depleted then self:remove() end
 end
 
 
 
+--- This method handles coin bouncing until the coin lands flat
+function Coin:handleSpinState()
+	if self.touchingGround then
+		if self.yVelocity > 90 then
+			local low <const> = math.floor(self.yVelocity / 2, 0.5)
+			local high <const> = math.floor((self.yVelocity / 4) * 3, 0.5)
+
+			self.yVelocity = -math.random(low, high)
+			self.xVelocity = math.random(-self.speed, self.speed)
+
+			local n <const> = math.random(0, 1)
+			if n == 1 then
+				Effect(self.x, self.y)
+			end
+
+			self:changeState(math.random(1, 5))
+		else
+			self.xVelocity = 0
+			self.yVelocity = 0
+			self:changeState('flat')
+		end
+	end
+end
+
+
+
+--- This method handles the coin when it's flat to see if if sparkles
+function Coin:handleFlatState()
+	if not self.timer then
+		self.timer = true
+		self.ticker = math.random(GAME.fps * 2, GAME.fps * 3)
+		return
+	end
+
+	self.ticker = self.ticker - (30 * DELTA_TIME)
+
+	if self.ticker <= 0 then
+		Effect(self.x, self.y)
+		self.timer = false
+	end
+end
+
+
+
+--- This method is called by an entity when it collides with the coin
 function Coin:handleCollision(e)
 	local collisionTag <const> = e:getTag()
 
+	-- Collect the coin if the entity is a player
 	if collisionTag == TAGS.Player then
 		if not e.dead then
 			if e.currentState ~= 'dash' and e.currentState ~= 'dive' then
 				GAME.playerCoins = GAME.playerCoins + 1
 
 				local text <const> = '$ ' .. tostring(GAME.playerCoins)
-				Text(text, 'right', 0)
 
+				Text(text, 'right', 0)
 				Effect(self.x, self.y)
+
 				self:remove()
 			end
 		end
@@ -209,7 +231,12 @@ end
 
 
 
+--- Applies gravity to the coin
 function Coin:applyGravity()
+	if self.currentState == 'flat' then
+		return
+	end
+
 	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
 
 	if self.touchingCeiling then
