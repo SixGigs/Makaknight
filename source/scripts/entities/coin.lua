@@ -194,7 +194,7 @@ end
 function Coin:handleFlatState()
 	if not self.timer then
 		self.timer = true
-		self.ticker = math.random(GAME.fps * 2, GAME.fps * 3)
+		self.ticker = math.random(GAME.fps, GAME.fps * 3)
 		return
 	end
 
