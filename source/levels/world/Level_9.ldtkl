@@ -12,7 +12,7 @@
 	"iid": "28097360-e920-11ef-8d6f-b1fe00bc695e",
 	"uid": 4553,
 	"worldX": 3264,
-	"worldY": -720,
+	"worldY": -960,
 	"worldDepth": 0,
 	"pxWid": 400,
 	"pxHei": 240,
@@ -72,7 +72,7 @@
 					"px": [96,16],
 					"fieldInstances": [],
 					"__worldX": 3360,
-					"__worldY": -704
+					"__worldY": -944
 				},
 				{
 					"__identifier": "Tree",
@@ -88,7 +88,7 @@
 					"px": [272,64],
 					"fieldInstances": [],
 					"__worldX": 3536,
-					"__worldY": -656
+					"__worldY": -896
 				},
 				{
 					"__identifier": "Stump",
@@ -104,7 +104,7 @@
 					"px": [80,128],
 					"fieldInstances": [],
 					"__worldX": 3344,
-					"__worldY": -592
+					"__worldY": -832
 				},
 				{
 					"__identifier": "Butterfly",
@@ -122,11 +122,12 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3552,
-					"__worldY": -608
+					"__worldY": -848
 				},
 				{
 					"__identifier": "Butterfly",
@@ -144,11 +145,12 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3568,
-					"__worldY": -624
+					"__worldY": -864
 				},
 				{
 					"__identifier": "Butterfly",
@@ -166,11 +168,12 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -656
+					"__worldY": -896
 				},
 				{
 					"__identifier": "Butterfly",
@@ -188,11 +191,12 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -672
+					"__worldY": -912
 				},
 				{
 					"__identifier": "Butterfly",
@@ -210,11 +214,12 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
 						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3408,
-					"__worldY": -672
+					"__worldY": -912
 				},
 				{
 					"__identifier": "Door3",
@@ -238,7 +243,7 @@
 						"params": ["fccfedf0-e920-11ef-8d6f-6d8d8692a4e8"]
 					}] }],
 					"__worldX": 3520,
-					"__worldY": -624
+					"__worldY": -864
 				},
 				{
 					"__identifier": "Healthpotion",
@@ -257,7 +262,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4652, "realEditorValues": [] }
 					],
 					"__worldX": 3440,
-					"__worldY": -656
+					"__worldY": -896
 				},
 				{
 					"__identifier": "Staminapotion",
@@ -276,7 +281,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4654, "realEditorValues": [] }
 					],
 					"__worldX": 3456,
-					"__worldY": -656
+					"__worldY": -896
 				},
 				{
 					"__identifier": "Manapotion",
@@ -295,7 +300,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4653, "realEditorValues": [] }
 					],
 					"__worldX": 3472,
-					"__worldY": -656
+					"__worldY": -896
 				}
 			]
 		},
@@ -798,5 +803,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [{ "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "e" }]
+	"__neighbours": [{ "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "se" }]
 }

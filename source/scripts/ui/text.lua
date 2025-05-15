@@ -14,6 +14,8 @@ function Text:init(text, x, y)
 
 	if x == 'center' then
 		x = (SCREEN['width'] / 2) - (self.width / 2)
+	elseif x == 'right' then
+		x = SCREEN['width'] - self.width
 	end
 
 	gfx.setFont(self.font)

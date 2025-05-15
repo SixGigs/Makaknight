@@ -17,6 +17,7 @@ function Animal:init(x, y, e)
 	self.hp = e.fields.hp
 	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
+	self.drops = e.fields.drops
 	self.spawn_x = x
 	self.spawn_y = y
 
@@ -83,9 +84,13 @@ function Animal:update()
 		return
 	end
 
-	if self.hp <= 0 then
+	if self.hp <= 0 and self:isVisible() then
 		GAME.depletedEntities[self.id] = true
 		self:setVisible(false)
+
+		if self.drops == 'Coin' then
+			Coin(900, self.x, self.y)
+		end
 	end
 
 	self:updateAnimation()

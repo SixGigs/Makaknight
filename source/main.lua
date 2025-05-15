@@ -9,6 +9,25 @@
 -- > Global variables use ALL_CAPS    --
 ----------------------------------------
 
+
+
+-- Global collision tag & z-index arrays
+TAGS = {
+	Player = 1, Hazard = 2, Pickup = 3, Flag = 4,
+	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
+	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
+	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
+	Text = 18, Coin = 19, Effect = 20
+}
+
+Z_INDEXES = {
+	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
+	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
+	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
+	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
+	Text = 1250, Foreground = 150, Coin = 155, Effect = 500
+}
+
 -- Playdate Core Libraries
 import 'CoreLibs/object'
 import 'CoreLibs/graphics'
@@ -29,11 +48,15 @@ import 'scripts/animals/Butterfly'
 import 'scripts/animals/Firefly'
 import 'scripts/animals/Reptile'
 
+-- Effect scripts
+import 'scripts/effects/Effect'
+
 -- Entity scripts
 import 'scripts/entities/Block'
 import 'scripts/entities/Bubble'
 import 'scripts/entities/Candle'
 import 'scripts/entities/Crown'
+import 'scripts/entities/Coin'
 import 'scripts/entities/Door'
 import 'scripts/entities/Flag'
 import 'scripts/entities/Half'
@@ -74,8 +97,8 @@ local gfx <const> = playdate.graphics
 
 -- Globals
 DEBUG = true
-GAME = Game()
 DELTA_TIME = 0
+GAME = Game()
 SCREEN = {
 	['width'] = pd.display.getWidth(),
 	['height'] = pd.display.getHeight()
@@ -103,8 +126,8 @@ function pd.update()
 	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
-	
+
 	if DEBUG then
-		pd.drawFPS(383, 2)
+		pd.drawFPS(383, 24)
 	end
 end

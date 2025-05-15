@@ -55,7 +55,7 @@ function Player:init(world)
 	self:addState('exit',     99, 101,  {ts = 3, l = 1, na = 'idle'})
 	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'})
 	self:addState('enter',    117, 117)
-	self:addState('runTurn',  118, 118, {ts = 6, l = 1, na = 'idle'})
+	self:addState('runTurn',  118, 118, {ts = 5, l = 1, na = 'idle'})
 
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
@@ -203,7 +203,9 @@ function Player:init(world)
 		[TAGS.Fragile] = true,
 		[TAGS.Wind] = true,
 		[TAGS.Spike] = true,
-		[TAGS.Half] = true
+		[TAGS.Half] = true,
+		[TAGS.Coin] = true,
+		[TAGS.Effect] = true
 	}
 
 	-- Array of all the player states which have no input hooks or gravity
@@ -316,7 +318,8 @@ function Player:init(world)
 
 
 	self:changeState(GAME.playerState)
-	self:moveTo(GAME.playerX, GAME.playerY - 1) -- Do -1 here to stop the player slipping through half tiles
+	-- Do -1 here to stop the player slipping through half tiles
+	self:moveTo(GAME.playerX, GAME.playerY -1)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)
@@ -454,7 +457,7 @@ function Player:handleState()
 		self:applyGravity()
 		self:applyDrag(self.drag)
 
-		if self.touchingGround and self.hp == 0 then
+		if self.touchingGround and self.hp == 0 and not self.dead then
 			self:die()
 		end
 	elseif self.currentState == "dash" then
@@ -502,7 +505,7 @@ end
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
 	local xMovement = self.x + (self.xVelocity * DELTA_TIME)
-	local yMovement  = self.y + (self.yVelocity * DELTA_TIME)
+	local yMovement = self.y + (self.yVelocity * DELTA_TIME)
 	local _, _, collisions, length = self:moveWithCollisions(xMovement, yMovement)
 
 	self.touchingGround = false
@@ -539,6 +542,8 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
+			collisionObject:handleCollision(self)
+		elseif collisionTag == TAGS.Coin then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Crown then
 			collisionObject:handleCollision(self)
@@ -607,7 +612,7 @@ function Player:handleMovementAndCollisions()
 
 	if self.hp < GAME.playerHP then self:changeToHurtState() end -- Check if we took damage and change to hurt state
 	if self.hp <= 0 and self.currentState ~= 'hurt' then died = true end -- Check if we are dead from no hit points
-	if died then self:die() end -- If the player is dead then run the die method
+	if died and not self.dead then self:die() end -- If the player is dead then run the die method
 end
 
 
@@ -717,13 +722,33 @@ function Player:die()
 	self.dead = true
 
 	self:setCollisionsEnabled(false)
-	pd.timer.performAfterDelay(1500, function()
+	pd.timer.performAfterDelay(2000, function()
 		Fade('out')
 
 		pd.timer.performAfterDelay(500, function()
 			self:reset()
 		end)
 	end)
+
+	-- Deduct coins
+	if GAME.playerCoins >= 4 then
+		local xCoin = self.x
+		local yCoin = 0
+
+		if self.y > 240 then
+			yCoin = 236
+		else
+			yCoin = self.y
+		end
+
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+		Coin(self.gravity, xCoin, yCoin)
+
+		GAME.playerCoins = GAME.playerCoins - 4
+		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
+	end
 
 	self:changeState('die')
 end
@@ -1139,6 +1164,7 @@ end
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
 	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
+
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false
 		self.jumpCounter = 0
