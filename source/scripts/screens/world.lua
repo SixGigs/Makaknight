@@ -425,7 +425,7 @@ function World:resetPlayer()
 			sprite:remove()
 		end
 
-		if sprite:isa(Effect) then
+		if sprite:isa(Sparkle) then
 			sprite:remove()
 		end
 	end

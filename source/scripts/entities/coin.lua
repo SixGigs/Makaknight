@@ -176,7 +176,7 @@ function Coin:handleSpinState()
 
 			local n <const> = math.random(0, 1)
 			if n == 1 then
-				Effect(self.x, self.y)
+				Sparkle(self.x, self.y)
 			end
 
 			self:changeState(math.random(1, 5))
@@ -201,7 +201,7 @@ function Coin:handleFlatState()
 	self.ticker = self.ticker - (30 * DELTA_TIME)
 
 	if self.ticker <= 0 then
-		Effect(self.x, self.y)
+		Sparkle(self.x, self.y)
 		self.timer = false
 	end
 end
@@ -221,7 +221,7 @@ function Coin:handleCollision(e)
 				local text <const> = '$ ' .. tostring(GAME.playerCoins)
 
 				Text(text, 'right', 0)
-				Effect(self.x, self.y)
+				Sparkle(self.x, self.y)
 
 				self:remove()
 			end
