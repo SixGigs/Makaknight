@@ -49,7 +49,7 @@ import 'scripts/animals/Firefly'
 import 'scripts/animals/Reptile'
 
 -- Effect scripts
-import 'scripts/effects/Effect'
+import 'scripts/effects/Sparkle'
 
 -- Entity scripts
 import 'scripts/entities/Block'
