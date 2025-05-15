@@ -20,6 +20,8 @@ function Potion:init(x, y, e)
 
 	-- Potion properties
 	self.id = e.iid
+	self.ticker = 0
+	self.timer = false
 	self.restore_hp = e.fields.restore_hp and e.fields.restore_hp or 0
 	self.restore_sp = e.fields.restore_sp and e.fields.restore_sp or 0
 	self.restore_mp = e.fields.restore_mp and e.fields.restore_mp or 0
@@ -36,6 +38,35 @@ function Potion:init(x, y, e)
 	self:setZIndex(Z_INDEXES.Pickup)
 	self:setTag(TAGS.Pickup)
 	self:add()
+end
+
+
+
+--- This function runs every game tick and handles potion bottle behaviour
+function Potion:update()
+	self:updateAnimation()
+	
+	if self:isVisible() then
+		self:handleState()
+	end
+end
+
+
+
+--- This method handles potion behaviour if the potion is visible
+function Potion:handleState()	
+	if not self.timer then
+		self.timer = true
+		self.ticker = math.random(GAME.fps, GAME.fps * 3)
+		return
+	end
+	
+	self.ticker = self.ticker - (30 * DELTA_TIME)
+	
+	if self.ticker <= 0 then
+		Sparkle(self.x + 8, self.y + 8)
+		self.timer = false
+	end
 end
 
 
@@ -62,6 +93,7 @@ function Potion:pickUp(e)
 		e.mp = 100
 	end
 
+	Sparkle(self.x + 8, self.y + 8)
 	GAME.depletedEntities[self.id] = true
 	self:setVisible(false)
 end

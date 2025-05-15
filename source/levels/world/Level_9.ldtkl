@@ -12,7 +12,7 @@
 	"iid": "28097360-e920-11ef-8d6f-b1fe00bc695e",
 	"uid": 4553,
 	"worldX": 3264,
-	"worldY": -960,
+	"worldY": -480,
 	"worldDepth": 0,
 	"pxWid": 400,
 	"pxHei": 240,
@@ -72,7 +72,7 @@
 					"px": [96,16],
 					"fieldInstances": [],
 					"__worldX": 3360,
-					"__worldY": -944
+					"__worldY": -464
 				},
 				{
 					"__identifier": "Tree",
@@ -88,7 +88,7 @@
 					"px": [272,64],
 					"fieldInstances": [],
 					"__worldX": 3536,
-					"__worldY": -896
+					"__worldY": -416
 				},
 				{
 					"__identifier": "Stump",
@@ -104,7 +104,7 @@
 					"px": [80,128],
 					"fieldInstances": [],
 					"__worldX": 3344,
-					"__worldY": -832
+					"__worldY": -352
 				},
 				{
 					"__identifier": "Butterfly",
@@ -127,7 +127,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3552,
-					"__worldY": -848
+					"__worldY": -368
 				},
 				{
 					"__identifier": "Butterfly",
@@ -150,7 +150,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3568,
-					"__worldY": -864
+					"__worldY": -384
 				},
 				{
 					"__identifier": "Butterfly",
@@ -173,7 +173,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -896
+					"__worldY": -416
 				},
 				{
 					"__identifier": "Butterfly",
@@ -196,7 +196,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -912
+					"__worldY": -432
 				},
 				{
 					"__identifier": "Butterfly",
@@ -219,7 +219,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3408,
-					"__worldY": -912
+					"__worldY": -432
 				},
 				{
 					"__identifier": "Door3",
@@ -243,7 +243,7 @@
 						"params": ["fccfedf0-e920-11ef-8d6f-6d8d8692a4e8"]
 					}] }],
 					"__worldX": 3520,
-					"__worldY": -864
+					"__worldY": -384
 				},
 				{
 					"__identifier": "Healthpotion",
@@ -262,7 +262,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4652, "realEditorValues": [] }
 					],
 					"__worldX": 3440,
-					"__worldY": -896
+					"__worldY": -416
 				},
 				{
 					"__identifier": "Staminapotion",
@@ -281,7 +281,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4654, "realEditorValues": [] }
 					],
 					"__worldX": 3456,
-					"__worldY": -896
+					"__worldY": -416
 				},
 				{
 					"__identifier": "Manapotion",
@@ -300,7 +300,7 @@
 						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4653, "realEditorValues": [] }
 					],
 					"__worldX": 3472,
-					"__worldY": -896
+					"__worldY": -416
 				}
 			]
 		},
@@ -669,8 +669,8 @@
 				3,0,0,0,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
 				3,3,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 				0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,
-				3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0
+				3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 			],
 			"autoLayerTiles": [
 				{ "px": [112,64], "src": [32,352], "f": 0, "t": 530, "d": [3210,107], "a": 1 },
@@ -781,21 +781,7 @@
 				{ "px": [240,80], "src": [0,320], "f": 0, "t": 480, "d": [3198,140], "a": 1 },
 				{ "px": [320,80], "src": [0,320], "f": 0, "t": 480, "d": [3198,145], "a": 1 },
 				{ "px": [64,112], "src": [0,320], "f": 0, "t": 480, "d": [3198,179], "a": 1 },
-				{ "px": [224,128], "src": [0,320], "f": 0, "t": 480, "d": [3198,214], "a": 1 },
-				{ "px": [160,224], "src": [32,272], "f": 0, "t": 410, "d": [3294,360], "a": 1 },
-				{ "px": [176,224], "src": [32,272], "f": 0, "t": 410, "d": [3294,361], "a": 1 },
-				{ "px": [192,224], "src": [32,272], "f": 0, "t": 410, "d": [3294,362], "a": 1 },
-				{ "px": [208,224], "src": [32,272], "f": 0, "t": 410, "d": [3294,363], "a": 1 },
-				{ "px": [224,224], "src": [32,272], "f": 0, "t": 410, "d": [3294,364], "a": 1 },
-				{ "px": [144,224], "src": [32,272], "f": 0, "t": 410, "d": [3289,359], "a": 1 },
-				{ "px": [240,224], "src": [32,272], "f": 0, "t": 410, "d": [3287,365], "a": 1 },
-				{ "px": [160,208], "src": [96,304], "f": 0, "t": 462, "d": [3286,335], "a": 1 },
-				{ "px": [176,208], "src": [64,304], "f": 0, "t": 460, "d": [3286,336], "a": 1 },
-				{ "px": [192,208], "src": [64,304], "f": 0, "t": 460, "d": [3286,337], "a": 1 },
-				{ "px": [208,208], "src": [64,304], "f": 0, "t": 460, "d": [3286,338], "a": 1 },
-				{ "px": [224,208], "src": [80,304], "f": 0, "t": 461, "d": [3286,339], "a": 1 },
-				{ "px": [240,208], "src": [80,304], "f": 0, "t": 461, "d": [3283,340], "a": 1 },
-				{ "px": [144,208], "src": [80,304], "f": 0, "t": 461, "d": [3282,334], "a": 1 }
+				{ "px": [224,128], "src": [0,320], "f": 0, "t": 480, "d": [3198,214], "a": 1 }
 			],
 			"seed": 7164138,
 			"overrideTilesetUid": null,
@@ -803,5 +789,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [{ "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "se" }]
+	"__neighbours": [ { "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "sw" }, { "levelIid": "57058f60-c210-11ef-9d97-415bd365b5a9", "dir": "s" }, { "levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0", "dir": "se" }, { "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "e" } ]
 }

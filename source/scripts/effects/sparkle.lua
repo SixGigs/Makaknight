@@ -24,7 +24,7 @@ function Sparkle:init(x, y)
 
 	-- Initialise the sparkle effect with the AnimatedSprite library
 	Sparkle.super.init(self, path .. sparkle[n]) 
-	
+
 	-- Make the sparkle effect animation state & play it
 	self:addState(1, 1, 7, {ts = 1, l = 1})
 	self:playAnimation()
