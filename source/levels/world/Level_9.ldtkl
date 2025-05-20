@@ -249,7 +249,7 @@
 					"__identifier": "Healthpotion",
 					"__grid": [11,4],
 					"__pivot": [0,0],
-					"__tags": ["Pickups"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#B994FF",
 					"iid": "dd095430-e920-11ef-8d6f-53acff26ea92",
@@ -257,10 +257,7 @@
 					"height": 16,
 					"defUid": 4521,
 					"px": [176,64],
-					"fieldInstances": [
-						{ "__identifier": "restore_hp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4544, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4652, "realEditorValues": [] }
-					],
+					"fieldInstances": [],
 					"__worldX": 3440,
 					"__worldY": -416
 				},
@@ -268,7 +265,7 @@
 					"__identifier": "Staminapotion",
 					"__grid": [12,4],
 					"__pivot": [0,0],
-					"__tags": ["Pickups"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#B994FF",
 					"iid": "de7bf700-e920-11ef-8d6f-5d61a4e0d589",
@@ -276,10 +273,7 @@
 					"height": 16,
 					"defUid": 4546,
 					"px": [192,64],
-					"fieldInstances": [
-						{ "__identifier": "restore_sp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4547, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 3, "__tile": null, "defUid": 4654, "realEditorValues": [] }
-					],
+					"fieldInstances": [],
 					"__worldX": 3456,
 					"__worldY": -416
 				},
@@ -287,7 +281,7 @@
 					"__identifier": "Manapotion",
 					"__grid": [13,4],
 					"__pivot": [0,0],
-					"__tags": ["Pickups"],
+					"__tags": [],
 					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#B994FF",
 					"iid": "dfc1e480-e920-11ef-8d6f-5b065cab94ae",
@@ -295,10 +289,7 @@
 					"height": 16,
 					"defUid": 4549,
 					"px": [208,64],
-					"fieldInstances": [
-						{ "__identifier": "restore_mp", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4550, "realEditorValues": [] },
-						{ "__identifier": "tickSpeed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 4653, "realEditorValues": [] }
-					],
+					"fieldInstances": [],
 					"__worldX": 3472,
 					"__worldY": -416
 				}

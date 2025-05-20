@@ -62,10 +62,11 @@ function Coin:init(g, x, y)
 	self.weight = 1
 
 	-- Playdate sprite details
+	self:setCollideRect(1, 1, 4, 4)
+	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Coin)
 	self:setTag(TAGS.Coin)
-	self:setCollideRect(1, 1, 4, 4)
 end
 
 

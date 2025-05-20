@@ -1,5 +1,12 @@
+local pd <const> = playdate
 local gfx <const> = playdate.graphics
 class('Potion').extends(AnimatedSprite)
+
+-- An array of tags potions can overlap
+local overlapTags <const> = {
+	[TAGS.Animal] = true,
+	[TAGS.Door] = true,
+}
 
 
 
@@ -15,11 +22,12 @@ function Potion:init(x, y, e)
 	Potion.super.init(self, i)
 
 	-- Animation settings
-	self:addState(0, 1, l, {ts = e.fields.tickSpeed})
+	self:addState(0, 1, l, {ts = 3})
 	self:playAnimation()
 
 	-- Potion properties
 	self.id = e.iid
+	self.name = e.name
 	self.ticker = 0
 	self.timer = false
 	self.restore_hp = e.fields.restore_hp and e.fields.restore_hp or 0
@@ -37,7 +45,6 @@ function Potion:init(x, y, e)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Pickup)
 	self:setTag(TAGS.Pickup)
-	self:add()
 end
 
 
@@ -45,7 +52,7 @@ end
 --- This function runs every game tick and handles potion bottle behaviour
 function Potion:update()
 	self:updateAnimation()
-	
+
 	if self:isVisible() then
 		self:handleState()
 	end
@@ -60,9 +67,9 @@ function Potion:handleState()
 		self.ticker = math.random(GAME.fps, GAME.fps * 3)
 		return
 	end
-	
+
 	self.ticker = self.ticker - (30 * DELTA_TIME)
-	
+
 	if self.ticker <= 0 then
 		Sparkle(self.x + 8, self.y + 8)
 		self.timer = false
@@ -78,19 +85,12 @@ function Potion:pickUp(e)
 		return
 	end
 
-	e.hp = e.hp + self.restore_hp
-	if e.hp > 100 then
-		e.hp = 100
-	end
-
-	e.sp = e.sp + self.restore_sp
-	if e.sp > 100 then
-		e.sp = 100
-	end
-
-	e.mp = e.mp + self.restore_mp
-	if e.mp > 100 then
-		e.mp = 100
+	if self.name == 'Healthpotion' then
+		e.hp = e.maxHP
+	elseif self.name == 'Staminapotion' then
+		e.sp = e.maxSP
+	else
+		e.mp = e.maxMP
 	end
 
 	Sparkle(self.x + 8, self.y + 8)
