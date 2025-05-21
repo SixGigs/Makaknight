@@ -11,7 +11,8 @@ local overlapTags <const> = {
 	[TAGS.Coin] = true,
 	[TAGS.Player] = true,
 	[TAGS.Fragile] = true,
-	[TAGS.Half] = true
+	[TAGS.Half] = true,
+	[TAGS.Pickup] = true
 }
 
 -- An array of spinning coin states
@@ -27,10 +28,9 @@ class('Coin').extends(AnimatedSprite)
 
 
 --- This class is used to create a coin for the player to collect
---- @param  g  integer  The value of gravity in the current room
 --- @param  x  integer  The X coordinate to spawn the coin at
 --- @param  y  integer  The Y coordinate to spawn the coin at
-function Coin:init(g, x, y)
+function Coin:init(x, y)
 	-- Choose a random animation & spawn jump height
 	local spin <const> = math.random(1, 5)
 	local jump <const> = math.random(180, 240)
@@ -52,7 +52,6 @@ function Coin:init(g, x, y)
 	self.timer = false
 	self.ticker = 0
 	self.speed = 60
-	self.gravity = g
 	self.xVelocity = math.random(-self.speed, self.speed)
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -238,7 +237,7 @@ function Coin:applyGravity()
 		return
 	end
 
-	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
+	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
 
 	if self.touchingCeiling then
 		self.yVelocity = 0

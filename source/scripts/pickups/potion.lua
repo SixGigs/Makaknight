@@ -16,7 +16,7 @@ local overlapTags <const> = {
 --- @param  e  object   The table of entities related to the ability
 function Potion:init(x, y, e)
 	local i <const> = gfx.imagetable.new('images/pickups/' .. string.lower(e.name) .. '-table-16-16')
-	local l <const> i:getLength()
+	local l <const> = i:getLength()
 
 	-- Initialise the class
 	Potion.super.init(self, i)
@@ -30,9 +30,6 @@ function Potion:init(x, y, e)
 	self.name = e.name
 	self.ticker = 0
 	self.timer = false
-	self.restore_hp = e.fields.restore_hp and e.fields.restore_hp or 0
-	self.restore_sp = e.fields.restore_sp and e.fields.restore_sp or 0
-	self.restore_mp = e.fields.restore_mp and e.fields.restore_mp or 0
 
 	-- If the potion ID is on the don't spawn list, hide the potion
 	if GAME.depletedEntities[self.id] then

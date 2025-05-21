@@ -309,7 +309,6 @@ function Player:init(world)
 	-- Physics properties
 	self.xVelocity = GAME.playerXVelocity
 	self.yVelocity = GAME.playerYVelocity
-	self.gravity = world.gravity
 	self.minimumAirSpeed = 15
 	self.walkSpeed = 90
 	self.drag = 120
@@ -741,10 +740,10 @@ function Player:die()
 			yCoin = self.y
 		end
 
-		Coin(self.gravity, xCoin, yCoin)
-		Coin(self.gravity, xCoin, yCoin)
-		Coin(self.gravity, xCoin, yCoin)
-		Coin(self.gravity, xCoin, yCoin)
+		Coin(xCoin, yCoin)
+		Coin(xCoin, yCoin)
+		Coin(xCoin, yCoin)
+		Coin(xCoin, yCoin)
 
 		GAME.playerCoins = GAME.playerCoins - 4
 		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
@@ -1163,7 +1162,7 @@ end
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
+	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
 
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false
