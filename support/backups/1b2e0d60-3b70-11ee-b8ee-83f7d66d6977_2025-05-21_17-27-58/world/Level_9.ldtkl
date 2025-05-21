@@ -27,7 +27,7 @@
 	"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 	"externalRelPath": null,
 	"fieldInstances": [
-		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [null] },
+		{ "__identifier": "gravity", "__type": "Int", "__value": 225, "__tile": null, "defUid": 4539, "realEditorValues": [{ "id": "V_Int", "params": [225] }] },
 		{ "__identifier": "name", "__type": "String", "__value": "- Clearing -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 			"id": "V_String",
 			"params": ["- Clearing -"]
