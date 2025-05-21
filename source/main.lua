@@ -25,7 +25,7 @@ Z_INDEXES = {
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Text = 1250, Foreground = 150, Coin = 155, Effect = 500
+	Text = 1250, Foreground = 105, Coin = 155, Effect = 500
 }
 
 -- Playdate Core Libraries

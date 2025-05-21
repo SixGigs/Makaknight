@@ -89,7 +89,7 @@ function Animal:update()
 		self:setVisible(false)
 
 		if self.drops == 'Coin' then
-			Coin(900, self.x, self.y)
+			Coin(self.x, self.y)
 		end
 	end
 

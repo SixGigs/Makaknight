@@ -3,6 +3,9 @@ local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 class('World').extends(gfx.sprite)
 
+-- Pre-emptively create the gravity global
+GRAVITY = 0
+
  -- Load the World File Used for the World
 ldtk.load('levels/world.ldtk', false)
 
@@ -11,7 +14,6 @@ ldtk.load('levels/world.ldtk', false)
 --- Initialise the World class
 function World:init()
 	-- Go to the Level Specified in the Save File and Create the Player
-	self.gravity = 900
 	self.oldLevelName = ''
 	self.oldWorldY = 0
 
@@ -167,6 +169,9 @@ end
 function World:goToLevel(level)	
 	ldtk.load_level(level) -- Load the next level
 	gfx.sprite.removeAll() -- Remove all playdate sprites
+
+	-- Set the gravity variable
+	GRAVITY = ldtk.get_custom_data(level, 'gravity')
 
 	-- Save the Width and Height of the Level
 	local levelSize <const> = LDtk.get_size(level)
@@ -397,7 +402,8 @@ end
 --- Load the name for the level sent into the function
 --- @param  level  string  The ID of the level to load the name of
 function World:loadName(level)
-	local name = ldtk.get_custom_data(level, 'name')
+	local name <const> = ldtk.get_custom_data(level, 'name')
+
 	if name and name ~= self.oldLevelName then
 		self.oldLevelName = name
 		Text(name, 'center', 15)
@@ -426,6 +432,10 @@ function World:resetPlayer()
 		end
 
 		if sprite:isa(Sparkle) then
+			sprite:remove()
+		end
+
+		if sprite:isa(Text) then
 			sprite:remove()
 		end
 	end

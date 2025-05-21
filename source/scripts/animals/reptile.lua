@@ -18,8 +18,6 @@ function Reptile:init(w, x, y, e)
 	self:addState("walk", 5, 8, {ts = 3})
 	self:playAnimation()
 
-	self.gravity = w.gravity
-
 	self:setCollideRect(3, 5, 10, 3)
 end
 
@@ -81,7 +79,7 @@ end
 
 --- Applies Gravity to the Reptile
 function Reptile:applyGravity()
-	self.yVelocity = self.yVelocity + (self.gravity * DELTA_TIME)
+	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
 	if self.touchingGround then
 		self.yVelocity = 0
 	end
