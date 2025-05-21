@@ -141,6 +141,8 @@ function Potion:handleMovementAndCollisions()
 		-- Process the collision based on the collision tag
 		if collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
+		elseif collisionTag == TAGS.Fragile then
+			collisionObject:handleCollision(self, collision)
 		end
 	end
 

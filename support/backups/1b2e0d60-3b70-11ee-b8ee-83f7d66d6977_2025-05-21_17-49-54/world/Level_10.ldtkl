@@ -368,22 +368,6 @@
 					"fieldInstances": [],
 					"__worldX": 3984,
 					"__worldY": -224
-				},
-				{
-					"__identifier": "Flag",
-					"__grid": [9,3],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 1402, "x": 0, "y": 0, "w": 16, "h": 48 },
-					"__smartColor": "#BE4A2F",
-					"iid": "9e23bd90-1030-11f0-bc88-d1daa66bb70f",
-					"width": 16,
-					"height": 48,
-					"defUid": 1401,
-					"px": [144,48],
-					"fieldInstances": [],
-					"__worldX": 3808,
-					"__worldY": -192
 				}
 			]
 		},

@@ -90,7 +90,7 @@ function Block:handleCollision(e, collision)
 	if self.currentState ~= 'solid' then return end
 
 	-- Calculate if the block breaks and how
-	if collision.normal.y == -1 and (e.weight >= 50 or e.yVelocity >= 400) then
+	if collision.normal.y == -1 and (e.weight >= 10 or e.yVelocity >= 400) then
 		local newState = (e.weight >= 100 or e.yVelocity >= 400) and 'breaking' or 'cracking'
 		self:changeState(newState)
 	elseif collision.normal.y == 1 and e.yVelocity <= -1 or (collision.normal.x ~= 0 or collision.normal.y == 0) then
