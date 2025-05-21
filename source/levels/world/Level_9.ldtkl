@@ -12,7 +12,7 @@
 	"iid": "28097360-e920-11ef-8d6f-b1fe00bc695e",
 	"uid": 4553,
 	"worldX": 3264,
-	"worldY": -480,
+	"worldY": -720,
 	"worldDepth": 0,
 	"pxWid": 400,
 	"pxHei": 240,
@@ -27,7 +27,7 @@
 	"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
 	"externalRelPath": null,
 	"fieldInstances": [
-		{ "__identifier": "gravity", "__type": "Int", "__value": 450, "__tile": null, "defUid": 4539, "realEditorValues": [{ "id": "V_Int", "params": [450] }] },
+		{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [null] },
 		{ "__identifier": "name", "__type": "String", "__value": "- Clearing -", "__tile": null, "defUid": 4551, "realEditorValues": [{
 			"id": "V_String",
 			"params": ["- Clearing -"]
@@ -72,7 +72,7 @@
 					"px": [96,16],
 					"fieldInstances": [],
 					"__worldX": 3360,
-					"__worldY": -464
+					"__worldY": -704
 				},
 				{
 					"__identifier": "Tree",
@@ -88,7 +88,7 @@
 					"px": [272,64],
 					"fieldInstances": [],
 					"__worldX": 3536,
-					"__worldY": -416
+					"__worldY": -656
 				},
 				{
 					"__identifier": "Stump",
@@ -104,7 +104,7 @@
 					"px": [80,128],
 					"fieldInstances": [],
 					"__worldX": 3344,
-					"__worldY": -352
+					"__worldY": -592
 				},
 				{
 					"__identifier": "Butterfly",
@@ -127,7 +127,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3552,
-					"__worldY": -368
+					"__worldY": -608
 				},
 				{
 					"__identifier": "Butterfly",
@@ -150,7 +150,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3568,
-					"__worldY": -384
+					"__worldY": -624
 				},
 				{
 					"__identifier": "Butterfly",
@@ -173,7 +173,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -416
+					"__worldY": -656
 				},
 				{
 					"__identifier": "Butterfly",
@@ -196,7 +196,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3392,
-					"__worldY": -432
+					"__worldY": -672
 				},
 				{
 					"__identifier": "Butterfly",
@@ -219,7 +219,7 @@
 						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
 					],
 					"__worldX": 3408,
-					"__worldY": -432
+					"__worldY": -672
 				},
 				{
 					"__identifier": "Door3",
@@ -243,11 +243,11 @@
 						"params": ["fccfedf0-e920-11ef-8d6f-6d8d8692a4e8"]
 					}] }],
 					"__worldX": 3520,
-					"__worldY": -384
+					"__worldY": -624
 				},
 				{
 					"__identifier": "Healthpotion",
-					"__grid": [11,4],
+					"__grid": [10,1],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -256,14 +256,14 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4521,
-					"px": [176,64],
+					"px": [160,16],
 					"fieldInstances": [],
-					"__worldX": 3440,
-					"__worldY": -416
+					"__worldX": 3424,
+					"__worldY": -704
 				},
 				{
 					"__identifier": "Staminapotion",
-					"__grid": [12,4],
+					"__grid": [12,2],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -272,14 +272,14 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4546,
-					"px": [192,64],
+					"px": [192,32],
 					"fieldInstances": [],
 					"__worldX": 3456,
-					"__worldY": -416
+					"__worldY": -688
 				},
 				{
 					"__identifier": "Manapotion",
-					"__grid": [13,4],
+					"__grid": [14,3],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
@@ -288,54 +288,10 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 4549,
-					"px": [208,64],
+					"px": [224,48],
 					"fieldInstances": [],
-					"__worldX": 3472,
-					"__worldY": -416
-				},
-				{
-					"__identifier": "Lizard",
-					"__grid": [14,2],
-					"__pivot": [0,0],
-					"__tags": [ "Desert", "Reptile" ],
-					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "0d8bb380-1030-11f0-85fd-fb9608c642fb",
-					"width": 16,
-					"height": 16,
-					"defUid": 2973,
-					"px": [224,32],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4531, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4537, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3381, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
-					],
 					"__worldX": 3488,
-					"__worldY": -448
-				},
-				{
-					"__identifier": "Lizard",
-					"__grid": [15,3],
-					"__pivot": [0,0],
-					"__tags": [ "Desert", "Reptile" ],
-					"__tile": { "tilesetUid": 2974, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B55088",
-					"iid": "106c1720-1030-11f0-85fd-09a2dce7e82a",
-					"width": 16,
-					"height": 16,
-					"defUid": 2973,
-					"px": [240,48],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4531, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 60, "__tile": null, "defUid": 2976, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4537, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 16, "__tile": null, "defUid": 3381, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 8, "__tile": null, "defUid": 3382, "realEditorValues": [] }
-					],
-					"__worldX": 3504,
-					"__worldY": -432
+					"__worldY": -672
 				}
 			]
 		},
@@ -824,5 +780,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "6dc100b0-9b00-11ef-98f6-55300c89a7f2", "dir": "sw" }, { "levelIid": "57058f60-c210-11ef-9d97-415bd365b5a9", "dir": "s" }, { "levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0", "dir": "se" }, { "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "e" } ]
+	"__neighbours": [{ "levelIid": "163babe0-e920-11ef-91e3-476269e4232e", "dir": "e" }]
 }

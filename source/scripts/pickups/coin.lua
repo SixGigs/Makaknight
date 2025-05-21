@@ -1,18 +1,18 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+class('Coin').extends(AnimatedSprite)
 
 -- An array of tags the coin hit box can overlap with
 local overlapTags <const> = {
 	[TAGS.Animal] = true,
 	[TAGS.Door] = true,
-	[TAGS.Hitbox] = true,
-	[TAGS.Gui] = true,
-	[TAGS.Wind] = true,
-	[TAGS.Coin] = true,
-	[TAGS.Player] = true,
 	[TAGS.Fragile] = true,
+	[TAGS.Gui] = true,
 	[TAGS.Half] = true,
-	[TAGS.Pickup] = true
+	[TAGS.Hitbox] = true,
+	[TAGS.Pickup] = true,
+	[TAGS.Player] = true,
+	[TAGS.Wind] = true
 }
 
 -- An array of spinning coin states
@@ -24,7 +24,6 @@ local spinStates <const> = {
 	[5] = true
 }
 
-class('Coin').extends(AnimatedSprite)
 
 
 --- This class is used to create a coin for the player to collect
@@ -52,11 +51,10 @@ function Coin:init(x, y)
 	self.timer = false
 	self.ticker = 0
 	self.speed = 60
-	self.xVelocity = math.random(-self.speed, self.speed)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
-	self.touchingCeiling = false
+	self.xVelocity = math.random(-self.speed, self.speed)
 	self.yVelocity = -jump
 	self.weight = 1
 
@@ -64,8 +62,8 @@ function Coin:init(x, y)
 	self:setCollideRect(1, 1, 4, 4)
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.Coin)
-	self:setTag(TAGS.Coin)
+	self:setZIndex(Z_INDEXES.Pickup)
+	self:setTag(TAGS.Pickup)
 end
 
 
@@ -108,7 +106,7 @@ end
 
 
 
---- This method handles coin collisions
+--- This method handles coin movement and collisions
 function Coin:handleMovementAndCollisions()
 	local xMovement <const> = self.x + (self.xVelocity * DELTA_TIME)
 	local yMovement <const> = self.y + (self.yVelocity * DELTA_TIME)
@@ -233,13 +231,9 @@ end
 
 --- Applies gravity to the coin
 function Coin:applyGravity()
-	if self.currentState == 'flat' then
-		return
-	end
-
 	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
 
-	if self.touchingCeiling then
+	if self.touchingCeiling or self.touchingGround then
 		self.yVelocity = 0
 	end
 end
