@@ -204,7 +204,6 @@ function Player:init(world)
 		[TAGS.Wind] = true,
 		[TAGS.Spike] = true,
 		[TAGS.Half] = true,
-		[TAGS.Coin] = true,
 		[TAGS.Effect] = true
 	}
 
@@ -542,8 +541,6 @@ function Player:handleMovementAndCollisions()
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
 			collisionObject:handleCollision(self)
-		elseif collisionTag == TAGS.Coin then
-			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Crown then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Fragile then
@@ -551,7 +548,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Pickup then
-			collisionObject:pickUp(self)
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
 			if self.touchingGround then
 				collisionObject:handleCollision()

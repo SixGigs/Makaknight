@@ -1,5 +1,5 @@
 ----------------------------------------
--- Working title; Makaknight          --
+-- Working title; MakaKnight          --
 ----------------------------------------
 -- Programming standards:             --
 -- > Strings use 'single quotes'      --
@@ -17,15 +17,15 @@ TAGS = {
 	Prop = 6, Door = 7, Animal = 8, Hitbox = 9,
 	Crown = 10, Gui = 11, Bubble = 12, Fragile = 13,
 	Wind = 14, Roaster = 15, Spike = 16, Half = 17,
-	Text = 18, Coin = 19, Effect = 20
+	Text = 18, Effect = 19
 }
 
 Z_INDEXES = {
-	Hazard = 20, Door = 30, Prop = 40, Pickup = 50,
+	Hazard = 20, Door = 30, Prop = 40, Pickup = 115,
 	Flag = 70, Animal = 110, Player = 100, Hitbox = 1000,
 	Crown = 120, Gui = 1000, Bubble = 50, Fragile = 100,
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
-	Text = 1250, Foreground = 105, Coin = 155, Effect = 500
+	Text = 1250, Foreground = 105, Effect = 500
 }
 
 -- Playdate Core Libraries
