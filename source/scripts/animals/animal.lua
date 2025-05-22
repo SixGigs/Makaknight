@@ -18,8 +18,8 @@ function Animal:init(x, y, e)
 	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
 	self.drops = e.fields.drops
-	self.spawn_x = x
-	self.spawn_y = y
+	self.spawnX = x
+	self.spawnY = y
 
 	-- If the animal ID is on the don't spawn list, hide the animal
 	if GAME.depletedEntities[self.id] then
@@ -159,6 +159,16 @@ function Animal:handleMovementAndCollisions()
 		self.hp = 0
 	end
 end
+
+
+
+--- This method is called to reset animals
+function Animal:reset()
+	self.hp = self.maxHP
+	self:moveTo(self.spawnX, self.spawnY)
+	self:setVisible(true)
+end
+
 
 
 --- Handle collisions

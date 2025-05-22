@@ -44,6 +44,8 @@ function Potion:init(x, y, e)
 	self.touchingWall = false
 	self.xVelocity = 0
 	self.yVelocity = 0
+	self.spawnX = x
+	self.spawnY = y
 	self.weight = 20
 
 	-- If the potion ID is on the don't spawn list, hide the potion
@@ -189,6 +191,14 @@ function Potion:handleCollision(e)
 	Sparkle(self.x + 8, self.y + 8)
 	GAME.depletedEntities[self.id] = true
 	self:setVisible(false)
+end
+
+
+
+--- This method is called to reset potions
+function Potion:reset()
+	self:moveTo(self.spawnX, self.spawnY)
+	self:setVisible(true)
 end
 
 
