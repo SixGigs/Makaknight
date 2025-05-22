@@ -24844,7 +24844,7 @@
 					"editorDisplayMode": "RefLinkBetweenCenters",
 					"editorDisplayScale": 1,
 					"editorDisplayPos": "Above",
-					"editorLinkStyle": "ArrowsLine",
+					"editorLinkStyle": "CurvedArrow",
 					"editorDisplayColor": "#FF00EE",
 					"editorAlwaysShow": false,
 					"editorShowInWorld": true,

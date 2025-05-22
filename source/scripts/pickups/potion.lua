@@ -15,10 +15,10 @@ function Potion:init(x, y, e)
 	local l <const> = t:getLength()
 
 	-- Initialise the potion using the pickup class
-	Potion.super.init(self, x, y, i)
+	Potion.super.init(self, x, y, t)
 
 	-- Add the potion animation state & start playing
-	self:addState(0, 1, nil, {ts = 3, animationStartingFrame = math.random(1, l)})
+	self:addState(0, 1, nil, {ts = 3, asf = math.random(1, l)})
 	self:playAnimation()
 
 	-- Potion properties

@@ -549,9 +549,7 @@ function Player:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Pickup then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
-			if self.touchingGround then
-				collisionObject:handleCollision()
-			end
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Animal then
 			if self.currentState == 'dash' or self.currentState == 'dive' then
 				collisionObject:handleCollision(self)

@@ -23,12 +23,11 @@ local overlapTags <const> = {
 --- @param  i  string   The pickup image table path
 function Pickup:init(x, y, i)
 	-- Initialise the AnimatedSprite library
-	Pickup.super.init(self, gfx.imagetable.new(i))
+	Pickup.super.init(self, i)
 
 	-- Pickup class properties
-	self.ticker = 0
-	self.timer = false
-	self.pickedUp = false
+	self.sparkleTick = 0
+	self.sparkleTimer = false
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -46,11 +45,6 @@ end
 function Pickup:update()
 	if not self:isVisible() then
 		return
-	end
-
-	if self.pickedUp and self:isVisible() then
-		GAME.depletedEntities[self.id] = true
-		self:setVisible(false)
 	end
 
 	self:updateAnimation()
@@ -80,9 +74,9 @@ end
 
 --- This method handles pickup movement and collisions
 function Pickup:handleMovementAndCollisions()
-	local xMovement <const> = self.x + (self.xVelocity * DELTA_TIME)
-	local yMovement <const> = self.y + (self.yVelocity * DELTA_TIME)
-	local _, _, collisions, length <const> = self:moveWithCollisions(xMovement, yMovement)
+	local xMov <const> = self.x + (self.xVelocity * DELTA_TIME)
+	local yMov <const> = self.y + (self.yVelocity * DELTA_TIME)
+	local _, _, collisions, length <const> = self:moveWithCollisions(xMov, yMov)
 
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -113,9 +107,7 @@ function Pickup:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Roaster then
-			if self.touchingGround then
-				collisionObject:handleCollision(self)
-			end
+			collisionObject:handleCollision(self)
 		end
 	end
 
@@ -128,13 +120,13 @@ function Pickup:handleMovementAndCollisions()
 
 	-- Hide the pickup if it bounces off screen
 	if self.x < -6 then
-		self.pickedUp = true
+		self:setVisible(false)
 	elseif self.x > 406 then
-		self.pickedUp = true
+		self:setVisible(false)
 	elseif self.y < -10 then
-		self.pickedUp = true
+		self:setVisible(false)
 	elseif self.y > 262 then
-		self.pickedUp = true
+		self:setVisible(false)
 	end
 end
 
@@ -142,17 +134,20 @@ end
 
 --- This method creates sparkles for active pickups
 function Pickup:handleSparkle()
-	if not self.timer then
-		self.timer = true
-		self.ticker = math.random(GAME.fps, GAME.fps * 3)
+	-- Initialise the timer if it doesn't exist
+	if not self.sparkleTimer then
+		self.sparkleTimer = true
+		self.sparkleTick = math.random(GAME.fps, GAME.fps * 3)
 		return
 	end
-	
-	self.ticker = self.ticker - (30 * DELTA_TIME)
-	
-	if self.ticker <= 0 then
+
+	-- Countdown the timer
+	self.sparkleTick = self.sparkleTick - (30 * DELTA_TIME)
+
+	-- Trigger sparkle and reset timer if countdown ends
+	if self.sparkleTick <= 0 then
 		Sparkle(self.x, self.y)
-		self.timer = false
+		self.sparkleTimer = false
 	end
 end
 

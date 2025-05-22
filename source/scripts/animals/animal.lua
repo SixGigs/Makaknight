@@ -132,7 +132,7 @@ function Animal:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Wind then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Roaster then
-			collisionObject:handleCollision()
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Bubble then
 			self.touchingGround = false
 			collisionObject:pop(self)
@@ -150,13 +150,13 @@ function Animal:handleMovementAndCollisions()
 
 	-- Let's delete the Animal if they travel off the screen
 	if self.x < -8 then
-		self.hp = 0
+		self:setVisible(false)
 	elseif self.x > 408 then
-		self.hp = 0
+		self:setVisible(false)
 	elseif self.y < -12 then
-		self.hp = 0
+		self:setVisible(false)
 	elseif self.y > 264 then
-		self.hp = 0
+		self:setVisible(false)
 	end
 end
 

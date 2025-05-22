@@ -2,9 +2,10 @@
 --                : WARNING :                --
 -----------------------------------------------
 -- I HAVE MADE AMENDMENTS TO THIS LIBRARY    --
--- o - tickStep      -> ts                   --
--- o - loop          -> l                    --
--- o - nextAnimation -> na                   --
+-- o - tickStep               -> ts          --
+-- o - loop                   -> l           --
+-- o - nextAnimation          -> na          --
+-- o - animationStartingFrame -> asf         --
 
 ---@diagnostic disable: redundant-parameter, undefined-field
 -----------------------------------------------
@@ -51,7 +52,7 @@ function AnimatedSprite:init(imagetable, states, animate)
 			---@type integer|string
 			firstFrameIndex = 1,
 			framesCount = #self.imagetable,
-			animationStartingFrame = 1,
+			asf = 1,
 			ts = 1,
 			frameStep = 1,
 			reverse = false,
@@ -109,11 +110,11 @@ function AnimatedSprite:playAnimation()
 	if (type(self.currentState) == 'nil') then
 		self.currentState = self.defaultState
 		state = self.states[self.currentState]
-		self._currentFrame = state.animationStartingFrame + state.firstFrameIndex - 1
+		self._currentFrame = state.asf + state.firstFrameIndex - 1
 	end
 
 	if (self._currentFrame == 0) then
-		self._currentFrame = state.animationStartingFrame + state.firstFrameIndex - 1
+		self._currentFrame = state.asf + state.firstFrameIndex - 1
 	end
 
 	self._enabled = true
@@ -192,7 +193,7 @@ local function addState(self, params)
 		state["l"] = params.l or false
 	end
 	state["reverse"] = params.reverse -- You can reverse animation sequence
-	state["animationStartingFrame"] = params.animationStartingFrame or (state.reverse and state.framesCount or 1) -- Frame to start the animation from
+	state["asf"] = params.asf or (state.reverse and state.framesCount or 1) -- Frame to start the animation from
 	state["ts"] = params.ts -- Speed of animation (2 = every second frame)
 	state["frameStep"] = params.frameStep -- Number of images to skip on next frame
 	state["yoyo"] = params.yoyo -- Ping-pong animation (from 1 to n to 1 to n)
@@ -377,7 +378,7 @@ local function processAnimation(self)
 	local frameStep = state.frameStep
 
 	if (self._currentFrame == 0) then -- true only after changing state
-		self._currentFrame = state.animationStartingFrame + state.firstFrameIndex - 1
+		self._currentFrame = state.asf + state.firstFrameIndex - 1
 		if (framesCount == 1) then
 			self._loopsFinished = self._loopsFinished + 1
 			state.onFrameChangedEvent(self)
