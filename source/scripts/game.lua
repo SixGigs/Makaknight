@@ -183,13 +183,9 @@ function Game:emptySpawnList()
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
-		if sprite:isa(Potion) then
-			sprite:setVisible(true)
-		elseif sprite:isa(Animal) then
+		if sprite:isa(Animal) or sprite:isa(Potion) then
 			if not sprite:isVisible() then
-				sprite.hp = sprite.maxHP
-				sprite:moveTo(sprite.spawn_x, sprite.spawn_y)
-				sprite:setVisible(true)
+				sprite:reset()
 			end
 		end
 	end
