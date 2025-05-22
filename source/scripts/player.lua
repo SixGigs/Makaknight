@@ -4,7 +4,6 @@ local gfx <const> = playdate.graphics
 
 -- Create hit box constants
 local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
-local dashing <const> = {['x'] = 34, ['y'] = 44, ['w'] = 10, ['h'] = 36}
 local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
 
 
@@ -1139,7 +1138,6 @@ function Player:changeToDashState()
 		end
 
 		self:deductMana(self.dashManaCost)
-		self:setHitBox(dashing)
 		self:changeState('dash')
 	end
 

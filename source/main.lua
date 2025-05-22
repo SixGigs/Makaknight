@@ -64,6 +64,7 @@ import 'scripts/entities/Prop'
 import 'scripts/entities/Wind'
 
 -- Pickup scripts
+import 'scripts/pickups/Pickup'
 import 'scripts/pickups/Coin'
 import 'scripts/pickups/Potion'
 
