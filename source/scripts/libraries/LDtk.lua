@@ -58,7 +58,7 @@ local _tilesets = {}
 local _imageTables = {}
 
 local _use_external_files = false
-local _use_lua_levels = false
+local _use_lua_levels = true
 
 local _ = {} -- for private functions
 
