@@ -438,6 +438,10 @@ function World:resetPlayer()
 		if sprite:isa(Text) then
 			sprite:remove()
 		end
+
+		if sprite:isa(Animal) or sprite:isa(Potion) then
+			sprite:reset()
+		end
 	end
 
 	-- Reset no spawn list to empty

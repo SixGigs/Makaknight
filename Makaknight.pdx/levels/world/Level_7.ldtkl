@@ -162,38 +162,6 @@
 					],
 					"__worldX": 3008,
 					"__worldY": -224
-				},
-				{
-					"__identifier": "Manapotion",
-					"__grid": [11,5],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "98938c80-1030-11f0-bc88-8f11cc52b6e8",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [176,80],
-					"fieldInstances": [],
-					"__worldX": 3040,
-					"__worldY": -160
-				},
-				{
-					"__identifier": "Manapotion",
-					"__grid": [10,5],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "991ce0c0-1030-11f0-bc88-1b01a1575647",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [160,80],
-					"fieldInstances": [],
-					"__worldX": 3024,
-					"__worldY": -160
 				}
 			]
 		},

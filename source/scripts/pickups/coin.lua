@@ -1,95 +1,49 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
-class('Coin').extends(AnimatedSprite)
-
--- An array of tags the coin hit box can overlap with
-local overlapTags <const> = {
-	[TAGS.Animal] = true,
-	[TAGS.Door] = true,
-	[TAGS.Fragile] = true,
-	[TAGS.Gui] = true,
-	[TAGS.Half] = true,
-	[TAGS.Hitbox] = true,
-	[TAGS.Pickup] = true,
-	[TAGS.Player] = true,
-	[TAGS.Wind] = true
-}
+class('Coin').extends(Pickup)
 
 -- An array of spinning coin states
 local spinStates <const> = {
+	[0] = true,
 	[1] = true,
 	[2] = true,
 	[3] = true,
-	[4] = true,
-	[5] = true
+	[4] = true
 }
 
 
 
---- This class is used to create a coin for the player to collect
---- @param  x  integer  The X coordinate to spawn the coin at
---- @param  y  integer  The Y coordinate to spawn the coin at
+--- Initialise the coin object using the data given
+--- @param  x  integer  The X coordinate to spawn the coin pickup
+--- @param  y  integer  The Y coordinate to spawn the coin pickup
 function Coin:init(x, y)
 	-- Choose a random animation & spawn jump height
-	local spin <const> = math.random(1, 5)
-	local jump <const> = math.random(180, 240)
+	local i <const> = 'images/pickups/coin-table-6-6'
+	local s <const> = math.random(0, 4)
+	local j <const> = math.random(180, 240)
 
 	-- Initialise the AnimatedSprite library
-	Coin.super.init(self, 'images/entities/animated/coin-table-6-6')
+	Coin.super.init(self, x, y, i)
 
 	-- Add coin animation states & start playing
-	self:addState(1, 1, 8,  {ts = 1})
-	self:addState(2, 9, 16, {ts = 1})
-	self:addState(3, 17, 24, {ts = 1})
-	self:addState(4, 25, 32, {ts = 1})
-	self:addState(5, 33, 40, {ts = 1})
+	self:addState(0, 1, 8,  {ts = 1})
+	self:addState(1, 9, 16, {ts = 1})
+	self:addState(2, 17, 24, {ts = 1})
+	self:addState(3, 25, 32, {ts = 1})
+	self:addState(4, 33, 40, {ts = 1})
 	self:addState('flat', 6, 6)
-	self:changeState(spin)
+	self:changeState(s)
 	self:playAnimation()
 
 	-- Generalised coin class properties
-	self.timer = false
-	self.ticker = 0
+	self.id = 123
 	self.speed = 60
-	self.touchingGround = false
-	self.touchingCeiling = false
-	self.touchingWall = false
 	self.xVelocity = math.random(-self.speed, self.speed)
-	self.yVelocity = -jump
+	self.yVelocity = -j
 	self.weight = 1
 
 	-- Playdate sprite details
 	self:setCollideRect(1, 1, 4, 4)
-	self:setCenter(0, 0)
-	self:moveTo(x, y)
-	self:setZIndex(Z_INDEXES.Pickup)
-	self:setTag(TAGS.Pickup)
-end
-
-
-
---- This method handles collision responses
-function Coin:collisionResponse(e)
-	local tag <const> = e:getTag()
-
-	if overlapTags[tag] then
-		if tag == TAGS.Fragile or tag == TAGS.Half then
-			return e:collision(self)
-		else
-			return gfx.sprite.kCollisionTypeOverlap
-		end
-	end
-
-	return gfx.sprite.kCollisionTypeSlide
-end
-
-
-
---- This function runs every game tick and handles coin behaviour
-function Coin:update()
-	self:updateAnimation()
-	self:handleState()
-	self:handleMovementAndCollisions()
 end
 
 
@@ -101,62 +55,6 @@ function Coin:handleState()
 		self:applyGravity()
 	else
 		self:handleFlatState()
-	end
-end
-
-
-
---- This method handles coin movement and collisions
-function Coin:handleMovementAndCollisions()
-	local xMovement <const> = self.x + (self.xVelocity * DELTA_TIME)
-	local yMovement <const> = self.y + (self.yVelocity * DELTA_TIME)
-	local _, _, collisions, length <const> = self:moveWithCollisions(xMovement, yMovement)
-
-	self.touchingGround = false
-	self.touchingCeiling = false
-	self.touchingWall = false
-
-	for i = 1, length do
-		local collision <const> = collisions[i]
-		local collisionType <const> = collision.type
-		local collisionObject <const> = collision.other
-		local collisionTag <const> = collisionObject:getTag()
-
-		-- Let's test the collision type
-		if collisionType == gfx.sprite.kCollisionTypeSlide then
-			if collision.normal.y == -1 then
-				self.touchingGround = true
-			elseif collision.normal.y == 1 then
-				self.touchingCeiling = true
-			end
-
-			if collision.normal.x ~= 0 then
-				self.touchingWall = true
-			end
-		end
-
-		-- Process the collision based on the collision tag
-		if collisionTag == TAGS.Wind then
-			collisionObject:handleCollision(self)
-		end
-	end
-
-	-- Make the coin direction change on xVelocity
-	if self.xVelocity < 0 then
-		self.globalFlip = 1
-	elseif self.xVelocity > 0 then
-		self.globalFlip = 0
-	end
-
-	-- Delete the coin if it bounces off screen
-	if self.x < -6 then
-		self:remove()
-	elseif self.x > 406 then
-		self:remove()
-	elseif self.y < -10 then
-		self:remove()
-	elseif self.y > 262 then
-		self:remove()
 	end
 end
 
@@ -177,7 +75,7 @@ function Coin:handleSpinState()
 				Sparkle(self.x, self.y)
 			end
 
-			self:changeState(math.random(1, 5))
+			self:changeState(math.random(0, 4))
 		else
 			self.xVelocity = 0
 			self.yVelocity = 0
@@ -224,16 +122,5 @@ function Coin:handleCollision(e)
 				self:remove()
 			end
 		end
-	end
-end
-
-
-
---- Applies gravity to the coin
-function Coin:applyGravity()
-	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
-
-	if self.touchingCeiling or self.touchingGround then
-		self.yVelocity = 0
 	end
 end

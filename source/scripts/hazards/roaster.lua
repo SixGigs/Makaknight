@@ -1,8 +1,6 @@
--- Creating the Playdate Graphics Module as a Constant
 local gfx <const> = playdate.graphics
-
--- Create the Roaster Class
 class("Roaster").extends(AnimatedSprite)
+
 
 
 --- Initialise the Roaster Entity
@@ -16,11 +14,11 @@ function Roaster:init(x, y, e)
 	local fillLoops <const> = e.fields.refill * 2
 	local fireTimer <const> = e.fields.fuel
 	local fireDamage <const> = e.fields.damage
-	
+
 	-- Initialise the Fire Box Class
 	Roaster.super.init(self, gfx.imagetable.new("images/hazards/animated/roaster-table-32-16"))
 
-	-- Fire Box Animation Settings
+	-- Roaster animation states
 	self:addState("ready", 1, 1)
 	self:addState("primed", 2, 2)
 	self:addState("ignite", 3, 4, {ts = 2, l = 1, na = "burn"})
@@ -28,10 +26,10 @@ function Roaster:init(x, y, e)
 	self:addState("refill", 22, 32, {ts = fillTicks, l = fillLoops, na = "ready"})
 	self:playAnimation()
 
-	-- Fire Box Attributes
+	-- Roaster properties
 	self.fuse = 0
 
-	-- Fire Box Properties
+	-- Playdate sprite properties
 	self:setCollideRect(0, 17, 16, 15)
 	self:setCenter(0, 0.5)
 	self:moveTo(x, y)
@@ -43,6 +41,7 @@ function Roaster:init(x, y, e)
 	self.states["ignite"].onAnimationEndEvent = function(self) Fire(self.x, self.y - 16, fireTimer, fireDamage) end -- Create a Fire Object When the Fire Box Ignites
 	self.states["refill"].onAnimationEndEvent = function(self) self:setCollideRect(0, 17, 16, 15) end -- Update the Fire Box Hit Box when Ready to Activate Again
 end
+
 
 
 --- The Update Method Updates the Roaster Every Tick
@@ -65,13 +64,17 @@ function Roaster:update()
 end
 
 
-function Roaster:handleCollision()
-	if self.currentState == "ready" then
-		self:prime()
-	elseif self.currentState == "primed" then
-		self:pressed()
+
+function Roaster:handleCollision(e)
+	if e.touchingGround then
+		if self.currentState == "ready" then
+			self:prime()
+		elseif self.currentState == "primed" then
+			self:pressed()
+		end
 	end
 end
+
 
 
 function Roaster:prime()
@@ -80,9 +83,11 @@ function Roaster:prime()
 end
 
 
+
 function Roaster:pressed()
 	self.fuse = 4
 end
+
 
 
 function Roaster:ignite()
