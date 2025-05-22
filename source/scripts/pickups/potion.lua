@@ -145,6 +145,10 @@ function Potion:handleMovementAndCollisions()
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
+		elseif collisionTag == TAGS.Roaster then
+			if self.touchingGround then
+				collisionObject:handleCollision(self)
+			end
 		end
 	end
 
