@@ -124,6 +124,7 @@ end
 -- Main Game Loop
 function pd.update()
 	DELTA_TIME = playdate.getElapsedTime()
+
 	playdate.resetElapsedTime()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
