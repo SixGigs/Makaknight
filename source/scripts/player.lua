@@ -350,7 +350,6 @@ end
 
 
 
-
 --- Update all game buffers
 function Player:updateBuffers()
 	-- Update each game buffer, math.max ensures it never goes below zero
@@ -617,7 +616,7 @@ function Player:reset()
 	self.mp = self.maxMP
 	self.dead = false
 	self.hurt = false
-
+	
 	self:setCollisionsEnabled(true)
 	self.world:resetPlayer()
 end
@@ -710,10 +709,12 @@ end
 
 --- This function handles when the player dies, what to do and when to respawn
 function Player:die()
+	-- Stop the player from moving & interacting
 	self.xVelocity = 0
 	self.yVelocity = 0
 	self.dead = true
 
+	-- Stop player collisions & set a timer to reset the player
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
 		Fade('out')
@@ -723,26 +724,33 @@ function Player:die()
 		end)
 	end)
 
-	-- Deduct coins
-	if GAME.playerCoins >= 4 then
-		local xCoin = self.x
-		local yCoin = 0
+	-- Create some local vars dropping coins
+	local xCoin = self.x
+	local yCoin = 0
+	local coins = math.ceil(GAME.playerCoins / 2)
 
-		if self.y > 240 then
-			yCoin = 236
-		else
-			yCoin = self.y
-		end
-
-		Coin(xCoin, yCoin)
-		Coin(xCoin, yCoin)
-		Coin(xCoin, yCoin)
-		Coin(xCoin, yCoin)
-
-		GAME.playerCoins = GAME.playerCoins - 4
-		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
+	-- If the player dies offscreen set coins to spawn at 236
+	if self.y > 240 then
+		yCoin = 236
+	else
+		yCoin = self.y
 	end
 
+	-- If the amount of coins dropped is greater than 4, set it to 4
+	if coins > 4 then
+		coins = 4
+	end
+
+	-- Spawn as many dropped coins as necessary
+	for i = 1, coins, 1 do
+		Coin(xCoin, yCoin)
+	end
+
+	-- Deduct the coins from the player & show new coin balance
+	GAME.playerCoins = math.floor(GAME.playerCoins / 2, 0.5)
+	Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
+
+	-- Set the player to the die state
 	self:changeState('die')
 end
 
