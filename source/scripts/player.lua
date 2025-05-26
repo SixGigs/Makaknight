@@ -497,7 +497,6 @@ end
 
 
 
-
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
 	local xMovement = self.x + (self.xVelocity * DELTA_TIME)
@@ -609,7 +608,6 @@ end
 
 
 
-
 function Player:reset()
 	self.hp = self.maxHP
 	self.sp = self.maxSP
@@ -620,7 +618,6 @@ function Player:reset()
 	self:setCollisionsEnabled(true)
 	self.world:resetPlayer()
 end
-
 
 
 
@@ -650,14 +647,12 @@ end
 
 
 
-
 --- Handle Colliding with the Bubble Object
 --- param  obj  object  The Bubble Object we'll be interacting with
 function Player:handleBubbleCollision(obj)
 	self.touchingGround = false
 	obj:pop(self)
 end
-
 
 
 
@@ -684,7 +679,6 @@ end
 
 
 
-
 function Player:handleVariableJump()
 	if pd.buttonJustReleased(pd.kButtonA) or self.jumpCounter > (self.jumpCounterMax * GAME.fps) then
 		if self.jumping then
@@ -703,7 +697,6 @@ function Player:handleVariableJump()
 		self.setStaminaBuffer = true
 	end
 end
-
 
 
 
