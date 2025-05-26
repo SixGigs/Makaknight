@@ -31,7 +31,8 @@ function Coin:init(x, y)
 	self:addState(2, 17, 24, {ts = 1})
 	self:addState(3, 25, 32, {ts = 1})
 	self:addState(4, 33, 40, {ts = 1})
-	self:addState('flat', 6, 6)
+	self:addState('flat', 6, 6, {ts = 30, l = 1, na = 'shine'})
+	self:addState('shine', 41, 48, {ts = 2, l = 1, na = 'flat'})
 	self:changeState(s)
 	self:playAnimation()
 
@@ -53,8 +54,6 @@ function Coin:handleState()
 	if spinStates[self.currentState] then
 		self:handleSpinState()
 		self:applyGravity()
-	else
-		self:handleFlatState()
 	end
 end
 
@@ -81,24 +80,6 @@ function Coin:handleSpinState()
 			self.yVelocity = 0
 			self:changeState('flat')
 		end
-	end
-end
-
-
-
---- This method handles the coin when it's flat to see if if sparkles
-function Coin:handleFlatState()
-	if not self.timer then
-		self.timer = true
-		self.ticker = math.random(GAME.fps, GAME.fps * 3)
-		return
-	end
-
-	self.ticker = self.ticker - (30 * DELTA_TIME)
-
-	if self.ticker <= 0 then
-		Sparkle(self.x, self.y)
-		self.timer = false
 	end
 end
 
