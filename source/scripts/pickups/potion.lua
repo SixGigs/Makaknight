@@ -10,24 +10,18 @@ class('Potion').extends(Pickup)
 --- @param  e  object   The table of entities related to the potion
 function Potion:init(x, y, e)
 	-- Load the relevant potion table & get its length
-	local i <const> = 'images/pickups/'..string.lower(e.name)..'-table-16-16'
-	local t <const> = gfx.imagetable.new(i)
-	local l <const> = t:getLength()
+	local p <const> = 'images/pickups/'
+	local i <const> = p .. string.lower(e.name) .. '-table-16-16'
+	local f <const> = e.name == 'Staminapotion' and 5 or 11
 
 	-- Initialise the potion using the pickup class
-	Potion.super.init(self, x, y, t)
-
-	-- Add the potion animation state & start playing
-	self:addState(0, 1, nil, {ts = 3, asf = math.random(1, l)})
-	self:playAnimation()
+	Potion.super.init(self, x, y, i, 2)
 
 	-- Potion properties
 	self.id = e.iid
 	self.name = e.name
 	self.xVelocity = 0
 	self.yVelocity = 0
-	self.spawnX = x
-	self.spawnY = y
 	self.weight = 20
 
 	-- If the potion ID is on the don't spawn list, hide the potion
@@ -36,18 +30,7 @@ function Potion:init(x, y, e)
 	end
 
 	-- Sprite properties
-	self:setCollideRect(4, 8, 8, 8)
-end
-
-
-
---- This sets the potion y velocity to 0 if invisible
-function Pickup:handleState()
-	if self.touchingGround then
-		self.yVelocity = 0
-	end
-
-	self:applyGravity()
+	self:setCollideRect(4, 2, 8, 14)
 end
 
 
@@ -70,12 +53,4 @@ function Potion:handleCollision(e)
 	Sparkle(self.x + 8, self.y + 8)
 	GAME.depletedEntities[self.id] = true
 	self:setVisible(false)
-end
-
-
-
---- This method is called to reset potions
-function Potion:reset()
-	self:moveTo(self.spawnX, self.spawnY)
-	self:setVisible(true)
 end

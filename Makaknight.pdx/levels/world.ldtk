@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4845,
+	"nextUid": 4892,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -4946,7 +4946,7 @@
 					"isOptional": false,
 					"rules": [
 						{
-							"uid": 4234,
+							"uid": 4845,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[450]],
@@ -4973,12 +4973,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 6594991,
+							"perlinSeed": 9290191,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4235,
+							"uid": 4846,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[378]],
@@ -5005,12 +5005,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8646649,
+							"perlinSeed": 184230,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4236,
+							"uid": 4847,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[331]],
@@ -5037,12 +5037,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 4249093,
+							"perlinSeed": 1535747,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4237,
+							"uid": 4848,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[332]],
@@ -5069,12 +5069,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1692271,
+							"perlinSeed": 8756245,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4238,
+							"uid": 4849,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[356]],
@@ -5101,12 +5101,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 2151611,
+							"perlinSeed": 9431211,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4239,
+							"uid": 4850,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[355]],
@@ -5133,12 +5133,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 2311212,
+							"perlinSeed": 4682250,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4240,
+							"uid": 4851,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[449]],
@@ -5165,12 +5165,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1105124,
+							"perlinSeed": 6077408,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4241,
+							"uid": 4852,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[448]],
@@ -5197,12 +5197,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7390022,
+							"perlinSeed": 5228067,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4242,
+							"uid": 4853,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[429]],
@@ -5229,12 +5229,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 4420136,
+							"perlinSeed": 6215109,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4243,
+							"uid": 4854,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[335]],
@@ -5261,12 +5261,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5879627,
+							"perlinSeed": 6988492,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4244,
+							"uid": 4855,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[403]],
@@ -5293,12 +5293,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 146928,
+							"perlinSeed": 4328496,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4245,
+							"uid": 4856,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[430]],
@@ -5325,12 +5325,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 6645096,
+							"perlinSeed": 1338314,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4246,
+							"uid": 4857,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[333]],
@@ -5357,12 +5357,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8211096,
+							"perlinSeed": 1295727,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4247,
+							"uid": 4858,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[404]],
@@ -5389,12 +5389,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 9711032,
+							"perlinSeed": 1679317,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4248,
+							"uid": 4859,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[357]],
@@ -5421,12 +5421,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1913038,
+							"perlinSeed": 3177580,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4249,
+							"uid": 4860,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[382]],
@@ -5453,12 +5453,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 3790408,
+							"perlinSeed": 9590177,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4250,
+							"uid": 4861,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[428]],
@@ -5485,12 +5485,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 121130,
+							"perlinSeed": 5636083,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4251,
+							"uid": 4862,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[381]],
@@ -5517,12 +5517,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1260461,
+							"perlinSeed": 6652145,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4252,
+							"uid": 4863,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[359]],
@@ -5549,12 +5549,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7372268,
+							"perlinSeed": 2101024,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4253,
+							"uid": 4864,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[427]],
@@ -5581,12 +5581,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 687605,
+							"perlinSeed": 8218702,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4254,
+							"uid": 4865,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[358]],
@@ -5613,12 +5613,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 2627542,
+							"perlinSeed": 2131293,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4255,
+							"uid": 4866,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[405]],
@@ -5645,12 +5645,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8594893,
+							"perlinSeed": 7612819,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4256,
+							"uid": 4867,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[334]],
@@ -5677,12 +5677,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 6259336,
+							"perlinSeed": 6942950,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4257,
+							"uid": 4868,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[406]],
@@ -5709,12 +5709,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8494204,
+							"perlinSeed": 7189100,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4258,
+							"uid": 4869,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[400]],
@@ -5741,12 +5741,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 4179378,
+							"perlinSeed": 9936487,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4259,
+							"uid": 4870,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[425]],
@@ -5773,12 +5773,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5475411,
+							"perlinSeed": 2511501,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4260,
+							"uid": 4871,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[424]],
@@ -5805,12 +5805,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 2863185,
+							"perlinSeed": 2570608,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4261,
+							"uid": 4872,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[401]],
@@ -5837,12 +5837,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 6700798,
+							"perlinSeed": 3726919,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4262,
+							"uid": 4873,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[376]],
@@ -5869,12 +5869,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7609451,
+							"perlinSeed": 4260710,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4263,
+							"uid": 4874,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[380]],
@@ -5901,12 +5901,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7359732,
+							"perlinSeed": 2795338,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4264,
+							"uid": 4875,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[377]],
@@ -5933,12 +5933,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 6820055,
+							"perlinSeed": 7998030,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4265,
+							"uid": 4876,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[330]],
@@ -5965,12 +5965,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5325553,
+							"perlinSeed": 5285357,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4266,
+							"uid": 4877,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[426]],
@@ -5997,15 +5997,15 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 4494440,
+							"perlinSeed": 9770378,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4267,
+							"uid": 4878,
 							"active": true,
 							"size": 3,
-							"tileRectsIds": [ [354], [473], [474] ],
+							"tileRectsIds": [[354]],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,
@@ -6029,12 +6029,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8748438,
+							"perlinSeed": 2786087,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4268,
+							"uid": 4879,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[324]],
@@ -6061,12 +6061,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 154536,
+							"perlinSeed": 5389897,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4269,
+							"uid": 4880,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[327]],
@@ -6093,12 +6093,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1695797,
+							"perlinSeed": 9224081,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4270,
+							"uid": 4881,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[399]],
@@ -6125,12 +6125,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 4891453,
+							"perlinSeed": 2434882,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4271,
+							"uid": 4882,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[396]],
@@ -6157,15 +6157,15 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 3671843,
+							"perlinSeed": 6330709,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4272,
+							"uid": 4883,
 							"active": true,
 							"size": 3,
-							"tileRectsIds": [ [325], [326] ],
+							"tileRectsIds": [ [325], [326], [420] ],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,
@@ -6189,12 +6189,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5097009,
+							"perlinSeed": 7341020,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4273,
+							"uid": 4884,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [351], [375] ],
@@ -6221,12 +6221,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 3380831,
+							"perlinSeed": 6026451,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4274,
+							"uid": 4885,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [397], [398], [421] ],
@@ -6253,12 +6253,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 193429,
+							"perlinSeed": 2501145,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4275,
+							"uid": 4886,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [ [348], [372] ],
@@ -6285,12 +6285,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 5262284,
+							"perlinSeed": 940929,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4276,
+							"uid": 4887,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[328]],
@@ -6317,12 +6317,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 831713,
+							"perlinSeed": 2650346,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4277,
+							"uid": 4888,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[329]],
@@ -6349,12 +6349,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 7697313,
+							"perlinSeed": 9556556,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4278,
+							"uid": 4889,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[353]],
@@ -6381,12 +6381,12 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 1373172,
+							"perlinSeed": 202260,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4279,
+							"uid": 4890,
 							"active": true,
 							"size": 3,
 							"tileRectsIds": [[352]],
@@ -6413,15 +6413,22 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 3455023,
+							"perlinSeed": 7164326,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						},
 						{
-							"uid": 4280,
+							"uid": 4891,
 							"active": true,
 							"size": 1,
-							"tileRectsIds": [ [349], [350], [373], [374] ],
+							"tileRectsIds": [
+								[25],
+								[337],
+								[349],
+								[350],
+								[373],
+								[374]
+							],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,
@@ -6445,7 +6452,7 @@
 							"outOfBoundsValue": 16,
 							"invalidated": false,
 							"perlinActive": false,
-							"perlinSeed": 8811222,
+							"perlinSeed": 8736132,
 							"perlinScale": 0.2,
 							"perlinOctaves": 2
 						}
@@ -19445,7 +19452,14 @@
 							"uid": 3748,
 							"active": true,
 							"size": 1,
-							"tileRectsIds": [ [25], [49], [26], [50] ],
+							"tileRectsIds": [
+								[25],
+								[26],
+								[49],
+								[50],
+								[337],
+								[349]
+							],
 							"alpha": 1,
 							"chance": 1,
 							"breakOnMatch": true,

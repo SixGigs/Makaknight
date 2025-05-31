@@ -6,7 +6,7 @@
 -- o - loop                   -> l           --
 -- o - nextAnimation          -> na          --
 -- o - animationStartingFrame -> asf         --
-
+-- o - reverse                -> r           --
 ---@diagnostic disable: redundant-parameter, undefined-field
 -----------------------------------------------
 --- Sprite class extension with support of  ---
@@ -18,8 +18,6 @@
 -- You can find examples and docs at https://github.com/Whitebrim/AnimatedSprite/wiki
 -- Comments use EmmyLua style
 
-import 'CoreLibs/object'
-import 'CoreLibs/sprites'
 local gfx <const> = playdate.graphics
 local function emptyFunc()end
 
@@ -55,7 +53,7 @@ function AnimatedSprite:init(imagetable, states, animate)
 			asf = 1,
 			ts = 1,
 			frameStep = 1,
-			reverse = false,
+			r = false,
 			---@type boolean|integer
 			l = true,
 			yoyo = false,
