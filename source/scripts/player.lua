@@ -812,9 +812,7 @@ function Player:handleGroundInput()
 
 	if self:playerPunched() then
 		if pd.buttonJustReleased(pd.kButtonB) then
-			if not pd.buttonIsPressed(pd.kButtonLeft) and not pd.buttonIsPressed(pd.kButtonRight) then
-				self:changeToPunchState('punch')
-			end
+			self:changeToPunchState('punch')
 		end
 	end
 
@@ -1156,7 +1154,7 @@ end
 --- Applies gravity to the player, used if the player is not touching a surface
 --- Resets Y velocity when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
+	self.yVelocity = self.yVelocity + ((GRAVITY + self.weight) * DELTA_TIME)
 
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false

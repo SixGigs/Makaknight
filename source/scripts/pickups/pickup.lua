@@ -10,9 +10,17 @@ local overlapTags <const> = {
 	[TAGS.Gui] = true,
 	[TAGS.Half] = true,
 	[TAGS.Hitbox] = true,
-	[TAGS.Pickup] = true,
 	[TAGS.Player] = true,
-	[TAGS.Wind] = true
+	[TAGS.Wind] = true,
+	[TAGS.Pickup] = true
+}
+
+-- A pickup MUST have 4 spin states
+local spinStates <const> = {
+	[0] = true,
+	[1] = true,
+	[2] = true,
+	[3] = true
 }
 
 
@@ -21,13 +29,28 @@ local overlapTags <const> = {
 --- @param  x  integer  The X coordinate of the pickup
 --- @param  y  integer  The Y coordinate of the pickup
 --- @param  i  string   The pickup image table path
-function Pickup:init(x, y, i)
+--- @param  s  integer  The pickup spin tick speed
+function Pickup:init(x, y, i, s)
 	-- Initialise the AnimatedSprite library
 	Pickup.super.init(self, i)
 
+	-- Set the pickup image states
+	self:addState(0, 1, 8, {ts = s})
+	self:addState(1, 9, 16, {ts = s})
+	self:addState(2, 17, 24, {ts = s})
+	self:addState(3, 25, 32, {ts = s})
+	self:addState('shine', 33, 40, {ts = 2, l = 1, na = 'flat'})
+	self:addState('flat', 41, nil, {ts = 2, l = 3, na = 'shine'}, true)
+
+	-- Spawn a sparkle when the pickup finishes shining
+	self.states['shine'].onAnimationEndEvent = function(self)
+		Sparkle(self.x + (self.width / 2), self.y + (self.height / 2))
+	end
+
 	-- Pickup class properties
-	self.sparkleTick = 0
-	self.sparkleTimer = false
+	self.speed = 60
+	self.spawnX = x
+	self.spawnY = y
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
@@ -49,8 +72,20 @@ function Pickup:update()
 
 	self:updateAnimation()
 	self:handleState()
-	self:handleSparkle()
 	self:handleMovementAndCollisions()
+end
+
+
+
+--- This method handles states for pickups
+function Pickup:handleState()
+	if spinStates[self.currentState] then
+		self:handleSpinState()
+		self:applyGravity()
+	else
+		self:handleFlatState()
+		self:applyGravity()
+	end
 end
 
 
@@ -68,6 +103,44 @@ function Pickup:collisionResponse(e)
 	end
 
 	return gfx.sprite.kCollisionTypeSlide
+end
+
+
+
+--- This method handles potions bouncing until it lands
+function Pickup:handleSpinState()
+	if self.touchingGround then
+		if self.yVelocity > 90 then
+			local low <const> = math.floor((self.yVelocity / 4) * 3, 0.5)
+			local high <const> = math.floor(self.yVelocity, 0.5)
+
+			self.yVelocity = -math.random(low, high)
+			self.xVelocity = math.random(-self.speed, self.speed)
+
+			Sparkle(self.x + (self.width / 2), self.y + (self.height / 2))
+
+			self:changeState(math.random(0, #spinStates))
+		else
+			self.xVelocity = 0
+			self.yVelocity = 0
+			self:changeState('flat')
+		end
+	end
+end
+
+
+
+--- This method handles potions bouncing until it lands
+function Pickup:handleFlatState()
+	if self.touchingGround then
+		self.yVelocity = 0
+	end
+
+	if self.yVelocity > 90 then
+		self:changeState(0)
+	elseif self.yVelocity < 0 then
+		self:changeState(math.random(0, #spinStates))
+	end
 end
 
 
@@ -132,30 +205,17 @@ end
 
 
 
---- This method creates sparkles for active pickups
-function Pickup:handleSparkle()
-	-- Initialise the timer if it doesn't exist
-	if not self.sparkleTimer then
-		self.sparkleTimer = true
-		self.sparkleTick = math.random(GAME.fps, GAME.fps * 3)
-		return
-	end
-
-	-- Countdown the timer
-	self.sparkleTick = self.sparkleTick - (30 * DELTA_TIME)
-
-	-- Trigger sparkle and reset timer if countdown ends
-	if self.sparkleTick <= 0 then
-		Sparkle(self.x, self.y)
-		self.sparkleTimer = false
-	end
+--- This method is called to reset a pickup
+function Pickup:reset()
+	self:moveTo(self.spawnX, self.spawnY)
+	self:setVisible(true)
 end
 
 
 
 --- Applies gravity to the pickup
 function Pickup:applyGravity()
-	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
+	self.yVelocity = self.yVelocity + ((GRAVITY + self.weight) * DELTA_TIME)
 
 	if self.touchingCeiling then
 		self.yVelocity = 0

@@ -105,7 +105,13 @@ SCREEN = {
 	['height'] = pd.display.getHeight()
 }
 
-Title()
+
+
+if DEBUG then
+	World()
+else
+	Title()
+end
 
 
 

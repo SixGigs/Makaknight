@@ -2,15 +2,6 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 class('Coin').extends(Pickup)
 
--- An array of spinning coin states
-local spinStates <const> = {
-	[0] = true,
-	[1] = true,
-	[2] = true,
-	[3] = true,
-	[4] = true
-}
-
 
 
 --- Initialise the coin object using the data given
@@ -19,68 +10,19 @@ local spinStates <const> = {
 function Coin:init(x, y)
 	-- Choose a random animation & spawn jump height
 	local i <const> = 'images/pickups/coin-table-6-6'
-	local s <const> = math.random(0, 4)
 	local j <const> = math.random(180, 240)
 
 	-- Initialise the AnimatedSprite library
-	Coin.super.init(self, x, y, i)
-
-	-- Add coin animation states & start playing
-	self:addState(0, 1, 8,  {ts = 1})
-	self:addState(1, 9, 16, {ts = 1})
-	self:addState(2, 17, 24, {ts = 1})
-	self:addState(3, 25, 32, {ts = 1})
-	self:addState(4, 33, 40, {ts = 1})
-	self:addState('flat', 6, 6, {ts = 30, l = 1, na = 'shine'})
-	self:addState('shine', 41, 48, {ts = 2, l = 1, na = 'flat'})
-	self:changeState(s)
-	self:playAnimation()
+	Coin.super.init(self, x, y, i, 1)
 
 	-- Generalised coin class properties
 	self.id = 123
-	self.speed = 60
 	self.xVelocity = math.random(-self.speed, self.speed)
 	self.yVelocity = -j
 	self.weight = 1
 
 	-- Playdate sprite details
 	self:setCollideRect(1, 1, 4, 4)
-end
-
-
-
---- This method handles coin behaviour for each state
-function Coin:handleState()
-	if spinStates[self.currentState] then
-		self:handleSpinState()
-		self:applyGravity()
-	end
-end
-
-
-
---- This method handles coin bouncing until the coin lands flat
-function Coin:handleSpinState()
-	if self.touchingGround then
-		if self.yVelocity > 90 then
-			local low <const> = math.floor(self.yVelocity / 2, 0.5)
-			local high <const> = math.floor((self.yVelocity / 4) * 3, 0.5)
-
-			self.yVelocity = -math.random(low, high)
-			self.xVelocity = math.random(-self.speed, self.speed)
-
-			local n <const> = math.random(0, 1)
-			if n == 1 then
-				Sparkle(self.x, self.y)
-			end
-
-			self:changeState(math.random(0, 4))
-		else
-			self.xVelocity = 0
-			self.yVelocity = 0
-			self:changeState('flat')
-		end
-	end
 end
 
 
