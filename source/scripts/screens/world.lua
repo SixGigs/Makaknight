@@ -231,6 +231,8 @@ function World:goToLevel(level)
 			Potion(entityX, entityY, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
+		elseif entityName == 'Coin' then
+			Coin(entityX + 5, entityY + 5, entity)
 		elseif entityName == 'Firefly' then
 			Firefly(entityX, entityY + 4, entity)
 		elseif entityName == 'Spikeball' then
@@ -414,11 +416,8 @@ end
 
 --- This Method Moves the Player to Their Spawn Room and Coordinates
 function World:resetPlayer()
-	if GAME.playerLevel ~= GAME.playerSpawnLevel then
-		self:goToLevel(GAME.playerSpawnLevel)
-		self.player:add()
-		GAME.worldX = 0
-	end
+	-- Reset no spawn list to empty
+	GAME:emptySpawnList()
 
 	-- Remove any transition, coin, or effect sprites
 	local allSprites = gfx.sprite.getAllSprites()
@@ -439,13 +438,16 @@ function World:resetPlayer()
 			sprite:remove()
 		end
 
-		if sprite:isa(Animal) or sprite:isa(Potion) then
+		if sprite:isa(Animal) or sprite:isa(Pickup) then
 			sprite:reset()
 		end
 	end
 
-	-- Reset no spawn list to empty
-	GAME:emptySpawnList()
+	if GAME.playerLevel ~= GAME.playerSpawnLevel then
+		self:goToLevel(GAME.playerSpawnLevel)
+		self.player:add()
+		GAME.worldX = 0
+	end
 
 	-- Move player to the spawn coordinates and set them to the spawn state
 	self.player:moveTo(GAME.playerSpawnX, GAME.playerSpawnY)

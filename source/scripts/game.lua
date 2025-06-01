@@ -183,7 +183,7 @@ function Game:emptySpawnList()
 
 	local allSprites = gfx.sprite.getAllSprites()
 	for _, sprite in ipairs(allSprites) do
-		if sprite:isa(Animal) or sprite:isa(Potion) then
+		if sprite:isa(Animal) or sprite:isa(Pickup) then
 			if not sprite:isVisible() then
 				sprite:reset()
 			end

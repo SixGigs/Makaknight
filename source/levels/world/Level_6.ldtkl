@@ -59,54 +59,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Floorspike",
-					"__grid": [5,10],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": { "tilesetUid": 3603, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "03b39860-9b00-11ef-98f6-c3d27586eb97",
-					"width": 16,
-					"height": 16,
-					"defUid": 3604,
-					"px": [80,160],
-					"fieldInstances": [],
-					"__worldX": 2544,
-					"__worldY": -80
-				},
-				{
-					"__identifier": "Floorspike",
-					"__grid": [6,10],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": { "tilesetUid": 3603, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "041ba900-9b00-11ef-98f6-f38c8b97242e",
-					"width": 16,
-					"height": 16,
-					"defUid": 3604,
-					"px": [96,160],
-					"fieldInstances": [],
-					"__worldX": 2560,
-					"__worldY": -80
-				},
-				{
-					"__identifier": "Floorspike",
-					"__grid": [7,10],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": { "tilesetUid": 3603, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "047c1880-9b00-11ef-98f6-c583ea298b5a",
-					"width": 16,
-					"height": 16,
-					"defUid": 3604,
-					"px": [112,160],
-					"fieldInstances": [],
-					"__worldX": 2576,
-					"__worldY": -80
-				},
-				{
 					"__identifier": "Flag",
 					"__grid": [12,7],
 					"__pivot": [0,0],
@@ -140,7 +92,7 @@
 				},
 				{
 					"__identifier": "Butterfly",
-					"__grid": [4,7],
+					"__grid": [5,7],
 					"__pivot": [0,0],
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -149,40 +101,15 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
-					"px": [64,112],
+					"px": [80,112],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
-					],
-					"__worldX": 2528,
-					"__worldY": -128
-				},
-				{
-					"__identifier": "Butterfly",
-					"__grid": [5,8],
-					"__pivot": [0,0],
-					"__tags": [ "Grass", "Animal" ],
-					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "7ced6b60-9b00-11ef-98f6-15b0c8d98a1a",
-					"width": 16,
-					"height": 16,
-					"defUid": 3213,
-					"px": [80,128],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
 					],
 					"__worldX": 2544,
-					"__worldY": -112
+					"__worldY": -128
 				},
 				{
 					"__identifier": "Butterfly",
@@ -191,7 +118,7 @@
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
 					"__smartColor": "#B55088",
-					"iid": "7d535920-9b00-11ef-98f6-8fb79b11143e",
+					"iid": "7ced6b60-9b00-11ef-98f6-15b0c8d98a1a",
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
@@ -200,16 +127,35 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
 					],
 					"__worldX": 2560,
 					"__worldY": -112
 				},
 				{
 					"__identifier": "Butterfly",
-					"__grid": [6,7],
+					"__grid": [7,8],
+					"__pivot": [0,0],
+					"__tags": [ "Grass", "Animal" ],
+					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
+					"__smartColor": "#B55088",
+					"iid": "7d535920-9b00-11ef-98f6-8fb79b11143e",
+					"width": 16,
+					"height": 16,
+					"defUid": 3213,
+					"px": [112,128],
+					"fieldInstances": [
+						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+					],
+					"__worldX": 2576,
+					"__worldY": -112
+				},
+				{
+					"__identifier": "Butterfly",
+					"__grid": [7,7],
 					"__pivot": [0,0],
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -218,21 +164,19 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
-					"px": [96,112],
+					"px": [112,112],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
 					],
-					"__worldX": 2560,
+					"__worldX": 2576,
 					"__worldY": -128
 				},
 				{
 					"__identifier": "Butterfly",
-					"__grid": [5,6],
+					"__grid": [6,6],
 					"__pivot": [0,0],
 					"__tags": [ "Grass", "Animal" ],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -241,16 +185,14 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
-					"px": [80,96],
+					"px": [96,96],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3377, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3378, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
 					],
-					"__worldX": 2544,
+					"__worldX": 2560,
 					"__worldY": -144
 				},
 				{
@@ -312,6 +254,66 @@
 					],
 					"__worldX": 2688,
 					"__worldY": -128
+				},
+				{
+					"__identifier": "Roaster",
+					"__grid": [5,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3657, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "07713860-3740-11f0-be31-e3010546a3df",
+					"width": 16,
+					"height": 16,
+					"defUid": 3658,
+					"px": [80,160],
+					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
+						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
+						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
+					],
+					"__worldX": 2544,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Roaster",
+					"__grid": [6,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3657, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "07a8ea30-3740-11f0-be31-b1fd08da82b7",
+					"width": 16,
+					"height": 16,
+					"defUid": 3658,
+					"px": [96,160],
+					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
+						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
+						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
+					],
+					"__worldX": 2560,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Roaster",
+					"__grid": [7,10],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 3657, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "07e3d050-3740-11f0-be31-3d7f207d8b22",
+					"width": 16,
+					"height": 16,
+					"defUid": 3658,
+					"px": [112,160],
+					"fieldInstances": [
+						{ "__identifier": "damage", "__type": "Int", "__value": 20, "__tile": null, "defUid": 3663, "realEditorValues": [] },
+						{ "__identifier": "fuel", "__type": "Int", "__value": 2, "__tile": null, "defUid": 3659, "realEditorValues": [] },
+						{ "__identifier": "refill", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3660, "realEditorValues": [] }
+					],
+					"__worldX": 2576,
+					"__worldY": -80
 				}
 			]
 		},

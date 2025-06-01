@@ -11,7 +11,9 @@ class("Reptile").extends(Animal)
 --- @param  y  integer  The Y Coordinate to Create the Reptile at
 --- @param  e  object   The Entity Data Being Passed into the Class
 function Reptile:init(w, x, y, e)
-	Reptile.super.init(self, x, y, e)
+	local i <const> = 'images/animals/'..string.lower(e.name)..'-table-16-8'
+
+	Reptile.super.init(self, x, y, i, e)
 
 	self:addState("idle", 1, 1)
 	self:addState("blep", 2, 4, {ts = 3})
