@@ -12,12 +12,18 @@ function Animal:init(x, y, i, e)
 	-- Create the Animal State Machine with the Animated Sprite Library
 	Animal.super.init(self, i)
 
+	-- Add the primary drop to the drops table if it exists
+	table.insert(e.fields.drops, e.fields.drop)
+
 	-- Animal properties
 	self.id = e.iid
 	self.hp = e.fields.hp
 	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
-	self.drops = e.fields.drops
+	self.allDrops = e.fields.drops
+	self.dropChance = e.fields.dropChance
+	self.dropEverything = e.fields.dropEverything
+	self.dropLimit = e.fields.dropLimit
 	self.spawnX = x
 	self.spawnY = y
 
@@ -60,6 +66,7 @@ function Animal:init(x, y, i, e)
 end
 
 
+
 --- This Method is Used to Return Collision Responses the Animal has with the World
 --- @param   e        table    The Entity the Animal has just Collided with
 --- @return  unknown  unknown  The Collision Response for the Entity
@@ -78,6 +85,7 @@ function Animal:collisionResponse(e)
 end
 
 
+
 --- The Animal Update Method Runs Every Game Tick
 function Animal:update()
 	if not self:isVisible() then
@@ -85,20 +93,48 @@ function Animal:update()
 	end
 
 	if self.hp <= 0 and self:isVisible() then
+		-- If the animal has drops...
+		if #self.allDrops > 0 then
+
+			-- Check if the animal drops anything...
+			local randNum <const> = math.random(1, 100)
+			if self.dropChance >= randNum then
+
+				-- Check if the animal drops everything...
+				if self.dropEverything then
+					for _, drop in ipairs(self.allDrops) do
+						self:handleDrops(drop)
+					end
+				else
+					-- If the animal has a set number of drops...
+					local drops = self.dropLimit
+					local dropped = {}
+
+					-- Loop until the drop limit is reached
+					while drops > 0 do
+						local n <const> = math.random(1, #self.allDrops)
+
+						-- Make sure every drop is unique
+						if not dropped[n] then
+							self:handleDrops(self.allDrops[n])
+							table.insert(dropped, n)
+							drops = drops - 1
+						end
+					end
+				end
+			end
+		end
+
+		-- Add the animal to the array of depleted entities and make it invisible
 		GAME.depletedEntities[self.id] = true
 		self:setVisible(false)
-
-		if self.drops == 'Coin' then
-			Coin(self.x, self.y)
-		elseif self.drops == 'Manapotion' then
-			Manapotion(self.x, self.y)
-		end
 	end
 
 	self:updateAnimation()
 	self:handleState()
 	self:handleMovementAndCollisions()
 end
+
 
 
 --- Handles All Animal Movement and Any Collisions it has
@@ -159,6 +195,20 @@ function Animal:handleMovementAndCollisions()
 		self:setVisible(false)
 	elseif self.y > 264 then
 		self:setVisible(false)
+	end
+end
+
+
+
+function Animal:handleDrops(drop)
+	if drop == 'Coin' then
+		Coin(self.x, self.y - 8)
+	elseif drop == 'Manapotion' then
+		Manapotion(self.x, self.y - 8)
+	elseif drop == 'Staminapotion' then
+		Staminapotion(self.x, self.y - 8)
+	elseif drop == 'Healthpotion' then
+		Healthpotion(self.x, self.y - 8)
 	end
 end
 
