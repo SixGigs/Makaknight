@@ -90,6 +90,8 @@ function Animal:update()
 
 		if self.drops == 'Coin' then
 			Coin(self.x, self.y)
+		elseif self.drops == 'Manapotion' then
+			Manapotion(self.x, self.y)
 		end
 	end
 

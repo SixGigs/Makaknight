@@ -67,6 +67,9 @@ import 'scripts/entities/Wind'
 import 'scripts/pickups/Pickup'
 import 'scripts/pickups/Coin'
 import 'scripts/pickups/Potion'
+import 'scripts/pickups/Healthpotion'
+import 'scripts/pickups/Staminapotion'
+import 'scripts/pickups/Manapotion'
 
 -- Hazard scripts
 import 'scripts/hazards/Fan'
@@ -97,7 +100,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Globals
-DEBUG = false
+DEBUG = true
 DELTA_TIME = 0
 GAME = Game()
 SCREEN = {

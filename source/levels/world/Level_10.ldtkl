@@ -138,7 +138,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 3744,
 					"__worldY": -112
@@ -159,7 +160,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 3760,
 					"__worldY": -112
@@ -180,7 +182,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 3968,
 					"__worldY": -128
@@ -201,7 +204,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 3984,
 					"__worldY": -112
@@ -222,7 +226,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 4016,
 					"__worldY": -128
@@ -310,102 +315,6 @@
 					],
 					"__worldX": 3888,
 					"__worldY": -128
-				},
-				{
-					"__identifier": "Fragile",
-					"__grid": [16,4],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "25de3160-3740-11f0-be31-0783015c8503",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [256,64],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
-					"__worldX": 3920,
-					"__worldY": -176
-				},
-				{
-					"__identifier": "Fragile",
-					"__grid": [18,4],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "262329a0-3740-11f0-be31-7572d6967eaa",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [288,64],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
-					"__worldX": 3952,
-					"__worldY": -176
-				},
-				{
-					"__identifier": "Fragile",
-					"__grid": [20,4],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 3648, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#D77643",
-					"iid": "266cdcd0-3740-11f0-be31-3db8906a261f",
-					"width": 16,
-					"height": 16,
-					"defUid": 3649,
-					"px": [320,64],
-					"fieldInstances": [{ "__identifier": "respawn", "__type": "Int", "__value": 4, "__tile": null, "defUid": 3693, "realEditorValues": [] }],
-					"__worldX": 3984,
-					"__worldY": -176
-				},
-				{
-					"__identifier": "Healthpotion",
-					"__grid": [16,3],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 4540, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "27f1cf20-3740-11f0-be31-df73d5fab0a0",
-					"width": 16,
-					"height": 16,
-					"defUid": 4521,
-					"px": [256,48],
-					"fieldInstances": [],
-					"__worldX": 3920,
-					"__worldY": -192
-				},
-				{
-					"__identifier": "Staminapotion",
-					"__grid": [18,2],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 4545, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "29140800-3740-11f0-be31-1d9f22aa0e31",
-					"width": 16,
-					"height": 16,
-					"defUid": 4546,
-					"px": [288,32],
-					"fieldInstances": [],
-					"__worldX": 3952,
-					"__worldY": -208
-				},
-				{
-					"__identifier": "Manapotion",
-					"__grid": [20,1],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": { "tilesetUid": 4548, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#B994FF",
-					"iid": "2a614880-3740-11f0-be31-b587dca162ba",
-					"width": 16,
-					"height": 16,
-					"defUid": 4549,
-					"px": [320,16],
-					"fieldInstances": [],
-					"__worldX": 3984,
-					"__worldY": -224
 				}
 			]
 		},
