@@ -5,6 +5,7 @@ class('Pickup').extends(AnimatedSprite)
 -- An array of tags potions can overlap
 local overlapTags <const> = {
 	[TAGS.Animal] = true,
+	[TAGS.Bubble] = true,
 	[TAGS.Door] = true,
 	[TAGS.Fragile] = true,
 	[TAGS.Gui] = true,
@@ -218,6 +219,8 @@ function Pickup:handleMovementAndCollisions()
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
 		elseif collisionTag == TAGS.Roaster then
+			collisionObject:handleCollision(self)
+		elseif collisionTag == TAGS.Bubble then
 			collisionObject:handleCollision(self)
 		end
 	end

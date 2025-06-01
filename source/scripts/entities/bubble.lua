@@ -29,7 +29,9 @@ end
 
 --- This method handles the Bubble being picked up by the entity
 --- @param entity table The entity is passed into this function to manage the pick-up
-function Bubble:pop(e)
+function Bubble:handleCollision(e)
+	e.touchingGround = false
+
 	if self.currentState == 'wobble' then
 		e.yVelocity = -330
 		self:changeState('pop')

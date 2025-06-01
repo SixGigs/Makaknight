@@ -533,7 +533,7 @@ function Player:handleMovementAndCollisions()
 				collisionObject:handleCollision(self)
 			end
 		elseif collisionTag == TAGS.Bubble then
-			self:handleBubbleCollision(collisionObject)
+			collisionObject: handleCollision(self)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
 		elseif collisionTag == TAGS.Door then
@@ -643,15 +643,6 @@ function Player:handleDamageCollision(obj, tag)
 			end
 		end
 	end
-end
-
-
-
---- Handle Colliding with the Bubble Object
---- param  obj  object  The Bubble Object we'll be interacting with
-function Player:handleBubbleCollision(obj)
-	self.touchingGround = false
-	obj:pop(self)
 end
 
 
