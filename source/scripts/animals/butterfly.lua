@@ -3,18 +3,22 @@ local gfx <const> = playdate.graphics
 class("Butterfly").extends(Animal)
 
 
+
 --- The Butterfly Class Creates a Flying Butterfly
 --- @param  x  integer  The X Coordinate to Create the Butterfly at
 --- @param  y  integer  The Y Coordinate to Create the Butterfly at
 --- @param  e  table    The Entity Data Being Passed into the Class
 function Butterfly:init(x, y, e)
-	Butterfly.super.init(self, x, y, e)
+	local i <const> = 'images/animals/butterfly-table-4-4'
+
+	Butterfly.super.init(self, x, y, i, e)
 
 	self:addState(0, 1, 4, {ts = 3})
 	self:playAnimation()
 
 	self:setCollideRect(1, 1, 2, 2)
 end
+
 
 
 --- Handle the possible ground events for the Animal

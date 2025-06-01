@@ -146,9 +146,7 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
+						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] }
 					],
 					"__worldX": 3312,
 					"__worldY": -208
@@ -169,12 +167,74 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] },
-						{ "__identifier": "tableWidth", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4527, "realEditorValues": [] },
-						{ "__identifier": "tableHeight", "__type": "Int", "__value": 10, "__tile": null, "defUid": 4528, "realEditorValues": [] }
+						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] }
 					],
 					"__worldX": 3456,
 					"__worldY": -208
+				},
+				{
+					"__identifier": "Coin",
+					"__grid": [5,6],
+					"__pivot": [0,1],
+					"__tags": [],
+					"__tile": { "tilesetUid": 4893, "x": 0, "y": 0, "w": 6, "h": 6 },
+					"__smartColor": "#FFB304",
+					"iid": "8b269b90-3740-11f0-be31-8f3e0c6cc7be",
+					"width": 16,
+					"height": 16,
+					"defUid": 4892,
+					"px": [80,112],
+					"fieldInstances": [],
+					"__worldX": 3344,
+					"__worldY": -128
+				},
+				{
+					"__identifier": "Coin",
+					"__grid": [13,9],
+					"__pivot": [0,1],
+					"__tags": [],
+					"__tile": { "tilesetUid": 4893, "x": 0, "y": 0, "w": 6, "h": 6 },
+					"__smartColor": "#FFB304",
+					"iid": "8bfe36e0-3740-11f0-be31-8374bc5b041b",
+					"width": 16,
+					"height": 16,
+					"defUid": 4892,
+					"px": [208,160],
+					"fieldInstances": [],
+					"__worldX": 3472,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Coin",
+					"__grid": [17,9],
+					"__pivot": [0,1],
+					"__tags": [],
+					"__tile": { "tilesetUid": 4893, "x": 0, "y": 0, "w": 6, "h": 6 },
+					"__smartColor": "#FFB304",
+					"iid": "8c703290-3740-11f0-be31-0f775825a4fe",
+					"width": 16,
+					"height": 16,
+					"defUid": 4892,
+					"px": [272,160],
+					"fieldInstances": [],
+					"__worldX": 3536,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Coin",
+					"__grid": [23,10],
+					"__pivot": [0,1],
+					"__tags": [],
+					"__tile": { "tilesetUid": 4893, "x": 0, "y": 0, "w": 6, "h": 6 },
+					"__smartColor": "#FFB304",
+					"iid": "8cd89150-3740-11f0-be31-bfdcd238d3e5",
+					"width": 16,
+					"height": 16,
+					"defUid": 4892,
+					"px": [368,176],
+					"fieldInstances": [],
+					"__worldX": 3632,
+					"__worldY": -64
 				}
 			]
 		},

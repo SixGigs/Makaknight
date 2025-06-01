@@ -8,26 +8,17 @@ class('Potion').extends(Pickup)
 --- @param  x  integer  The X coordinate to spawn the potion pickup
 --- @param  y  integer  The Y coordinate to spawn the potion pickup
 --- @param  e  object   The table of entities related to the potion
-function Potion:init(x, y, e)
+function Potion:init(x, y, ...)
 	-- Load the relevant potion table & get its length
-	local p <const> = 'images/pickups/'
-	local i <const> = p .. string.lower(e.name) .. '-table-16-16'
-	local f <const> = e.name == 'Staminapotion' and 5 or 11
+	local e <const> = ...
+	local i <const> = string.lower(e.name) .. '-table-16-16'
 
 	-- Initialise the potion using the pickup class
-	Potion.super.init(self, x, y, i, 2)
+	Potion.super.init(self, x, y, i, e)
 
 	-- Potion properties
-	self.id = e.iid
 	self.name = e.name
-	self.xVelocity = 0
-	self.yVelocity = 0
 	self.weight = 20
-
-	-- If the potion ID is on the don't spawn list, hide the potion
-	if GAME.depletedEntities[self.id] then
-		self:setVisible(false)
-	end
 
 	-- Sprite properties
 	self:setCollideRect(4, 2, 8, 14)
@@ -51,6 +42,11 @@ function Potion:handleCollision(e)
 	end
 
 	Sparkle(self.x + 8, self.y + 8)
-	GAME.depletedEntities[self.id] = true
-	self:setVisible(false)
+
+	if self.id then
+		GAME.depletedEntities[self.id] = true
+		self:setVisible(false)
+	else
+		self:remove()
+	end
 end

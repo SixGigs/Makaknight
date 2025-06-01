@@ -8,9 +8,9 @@ class('Animal').extends(AnimatedSprite)
 --- @param  x  integer  The X Coordinate to Spawn the Animal
 --- @param  y  integer  The Y Coordinate to Spawn the Animal
 --- @param  e  integer  The Entity Used to Create the Animal
-function Animal:init(x, y, e)
+function Animal:init(x, y, i, e)
 	-- Create the Animal State Machine with the Animated Sprite Library
-	Animal.super.init(self, gfx.imagetable.new('images/animals/'.. string.lower(e.name) .. '-table-' .. e.fields.tableWidth .. '-' .. e.fields.tableHeight))
+	Animal.super.init(self, i)
 
 	-- Animal properties
 	self.id = e.iid

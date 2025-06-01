@@ -10,9 +10,25 @@ local overlapTags <const> = {
 	[TAGS.Gui] = true,
 	[TAGS.Half] = true,
 	[TAGS.Hitbox] = true,
+	[TAGS.Hazard] = true,
 	[TAGS.Player] = true,
 	[TAGS.Wind] = true,
 	[TAGS.Pickup] = true
+}
+
+-- An array of pickups & their animation speeds
+local spinSpeeds <const> = {
+	['coin-table-6-6'] = 1,
+	['healthpotion-table-16-16'] = 2,
+	['staminapotion-table-16-16'] = 2,
+	['manapotion-table-16-16'] = 2
+}
+
+local flatSpeeds <const> = {
+	['coin-table-6-6'] = 15,
+	['healthpotion-table-16-16'] = 2,
+	['staminapotion-table-16-16'] = 2,
+	['manapotion-table-16-16'] = 2
 }
 
 -- A pickup MUST have 4 spin states
@@ -30,9 +46,16 @@ local spinStates <const> = {
 --- @param  y  integer  The Y coordinate of the pickup
 --- @param  i  string   The pickup image table path
 --- @param  s  integer  The pickup spin tick speed
-function Pickup:init(x, y, i, s)
+function Pickup:init(x, y, i, ...)
+	local p <const> = 'images/pickups/'
+	local e <const> = ...
+	local s <const> = spinSpeeds[i]
+	local f <const> = flatSpeeds[i]
+
+	print(s)
+
 	-- Initialise the AnimatedSprite library
-	Pickup.super.init(self, i)
+	Pickup.super.init(self, p .. i)
 
 	-- Set the pickup image states
 	self:addState(0, 1, 8, {ts = s})
@@ -40,7 +63,7 @@ function Pickup:init(x, y, i, s)
 	self:addState(2, 17, 24, {ts = s})
 	self:addState(3, 25, 32, {ts = s})
 	self:addState('shine', 33, 40, {ts = 2, l = 1, na = 'flat'})
-	self:addState('flat', 41, nil, {ts = 2, l = 3, na = 'shine'}, true)
+	self:addState('flat', 41, nil, {ts = f, l = 3, na = 'shine'}, true)
 
 	-- Spawn a sparkle when the pickup finishes shining
 	self.states['shine'].onAnimationEndEvent = function(self)
@@ -54,6 +77,23 @@ function Pickup:init(x, y, i, s)
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+
+	-- Additional variables if an entity is given
+	if e then	
+		self.id = e['iid']
+		self.xVelocity = 0
+		self.yVelocity = 0
+
+		-- If the pickup is on the don't spawn list, hide the coin
+		if GAME.depletedEntities[self.id] then
+			self:setVisible(false)
+		end
+	else
+		local j <const> = math.random(180, 240)
+
+		self.xVelocity = math.random(-self.speed, self.speed)
+		self.yVelocity = -j
+	end
 
 	-- Playdate sprite properties
 	self:setCenter(0, 0)
@@ -207,6 +247,9 @@ end
 
 --- This method is called to reset a pickup
 function Pickup:reset()
+	self.xVelocity = 0
+	self.yVelocity = 0
+
 	self:moveTo(self.spawnX, self.spawnY)
 	self:setVisible(true)
 end

@@ -97,7 +97,7 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Globals
-DEBUG = true
+DEBUG = false
 DELTA_TIME = 0
 GAME = Game()
 SCREEN = {
