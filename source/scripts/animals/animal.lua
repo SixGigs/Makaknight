@@ -137,7 +137,7 @@ function Animal:handleMovementAndCollisions()
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Bubble then
 			self.touchingGround = false
-			collisionObject:pop(self)
+			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Fragile then
 			collisionObject:handleCollision(self, collision)
 		end
