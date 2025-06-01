@@ -132,30 +132,9 @@
 				},
 				{
 					"__identifier": "Firefly",
-					"__grid": [3,2],
-					"__pivot": [0,0],
-					"__tags": [ "Grass", "Animal" ],
-					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "2f984670-3740-11f0-be31-5b9431b07611",
-					"width": 16,
-					"height": 16,
-					"defUid": 4524,
-					"px": [48,32],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] }
-					],
-					"__worldX": 3312,
-					"__worldY": -208
-				},
-				{
-					"__identifier": "Firefly",
 					"__grid": [12,2],
 					"__pivot": [0,0],
-					"__tags": [ "Grass", "Animal" ],
+					"__tags": ["Grass"],
 					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
 					"__smartColor": "#B55088",
 					"iid": "30c295a0-3740-11f0-be31-0d0448033419",
@@ -167,7 +146,11 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
-						{ "__identifier": "heals", "__type": "Int", "__value": 5, "__tile": null, "defUid": 4530, "realEditorValues": [] }
+						{ "__identifier": "dropEverything", "__type": "Bool", "__value": true, "__tile": null, "defUid": 4914, "realEditorValues": [] },
+						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4918, "realEditorValues": [] },
+						{ "__identifier": "dropChance", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4905, "realEditorValues": [] },
+						{ "__identifier": "drop", "__type": "LocalEnum.Drops", "__value": "Coin", "__tile": null, "defUid": 4903, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4904, "realEditorValues": [] }
 					],
 					"__worldX": 3456,
 					"__worldY": -208
@@ -235,6 +218,31 @@
 					"fieldInstances": [],
 					"__worldX": 3632,
 					"__worldY": -64
+				},
+				{
+					"__identifier": "Firefly",
+					"__grid": [3,2],
+					"__pivot": [0,0],
+					"__tags": ["Grass"],
+					"__tile": { "tilesetUid": 4529, "x": 0, "y": 0, "w": 8, "h": 8 },
+					"__smartColor": "#B55088",
+					"iid": "e63011f0-3740-11f0-8313-2fc01bdfe549",
+					"width": 16,
+					"height": 16,
+					"defUid": 4524,
+					"px": [48,32],
+					"fieldInstances": [
+						{ "__identifier": "hp", "__type": "Int", "__value": 2, "__tile": null, "defUid": 4534, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 4525, "realEditorValues": [] },
+						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4536, "realEditorValues": [] },
+						{ "__identifier": "dropEverything", "__type": "Bool", "__value": true, "__tile": null, "defUid": 4914, "realEditorValues": [] },
+						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4918, "realEditorValues": [] },
+						{ "__identifier": "dropChance", "__type": "Int", "__value": 50, "__tile": null, "defUid": 4905, "realEditorValues": [] },
+						{ "__identifier": "drop", "__type": "LocalEnum.Drops", "__value": "Coin", "__tile": null, "defUid": 4903, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4904, "realEditorValues": [] }
+					],
+					"__worldX": 3312,
+					"__worldY": -208
 				}
 			]
 		},
