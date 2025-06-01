@@ -106,7 +106,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2544,
 					"__worldY": -128
@@ -127,7 +128,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2560,
 					"__worldY": -112
@@ -148,7 +150,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2576,
 					"__worldY": -112
@@ -169,7 +172,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2576,
 					"__worldY": -128
@@ -190,7 +194,8 @@
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
 						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] }
+						{ "__identifier": "drops", "__type": "String", "__value": "Coin", "__tile": null, "defUid": 4655, "realEditorValues": [] },
+						{ "__identifier": "Drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2560,
 					"__worldY": -144

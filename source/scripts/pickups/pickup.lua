@@ -52,8 +52,6 @@ function Pickup:init(x, y, i, ...)
 	local s <const> = spinSpeeds[i]
 	local f <const> = flatSpeeds[i]
 
-	print(s)
-
 	-- Initialise the AnimatedSprite library
 	Pickup.super.init(self, p .. i)
 

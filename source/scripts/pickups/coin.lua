@@ -10,7 +10,6 @@ class('Coin').extends(Pickup)
 function Coin:init(x, y, ...)
 	-- Choose a random animation & spawn jump height
 	local i <const> = 'coin-table-6-6'
-	local j <const> = math.random(180, 240)
 	local e <const> = ...
 
 	-- Initialise the AnimatedSprite library

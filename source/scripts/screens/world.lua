@@ -227,8 +227,12 @@ function World:goToLevel(level)
 			Door(entityX, entityY, entity)
 		elseif self:has_value(entityTags, 'Reptile') then
 			Reptile(self, entityX, entityY + 8, entity)
-		elseif entityName == 'Healthpotion' or entityName == 'Staminapotion' or entityName == 'Manapotion' then
-			Potion(entityX, entityY, entity)
+		elseif entityName == 'Healthpotion' then
+			Healthpotion(entityX, entityY, entity)
+		elseif entityName == 'Staminapotion' then
+			Staminapotion(entityX, entityY, entity)
+		elseif entityName == 'Manapotion' then
+			Manapotion(entityX, entityY, entity)
 		elseif entityName == "Butterfly" then
 			Butterfly(entityX, entityY + 8, entity)
 		elseif entityName == 'Coin' then
