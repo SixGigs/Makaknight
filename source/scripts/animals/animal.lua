@@ -20,12 +20,11 @@ function Animal:init(x, y, i, e)
 	self.hp = e.fields.hp
 	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
-	self.allDrops = e.fields.drops
+	self.allDrops = self:shuffle(e.fields.drops)
 	self.dropChance = e.fields.dropChance
-	self.dropEverything = e.fields.dropEverything
 	self.dropLimit = e.fields.dropLimit
 	self.spawnX = x
-	self.spawnY = y
+	self.spawnY = y	
 
 	-- If the animal ID is on the don't spawn list, hide the animal
 	if GAME.depletedEntities[self.id] then
@@ -93,41 +92,9 @@ function Animal:update()
 	end
 
 	if self.hp <= 0 and self:isVisible() then
-		-- If the animal has drops...
-		if #self.allDrops > 0 then
-
-			-- Check if the animal drops anything...
-			local randNum <const> = math.random(1, 100)
-			if self.dropChance >= randNum then
-
-				-- Check if the animal drops everything...
-				if self.dropEverything then
-					for _, drop in ipairs(self.allDrops) do
-						self:handleDrops(drop)
-					end
-				else
-					-- If the animal has a set number of drops...
-					local drops = self.dropLimit
-					local dropped = {}
-
-					-- Loop until the drop limit is reached
-					while drops > 0 do
-						local n <const> = math.random(1, #self.allDrops)
-
-						-- Make sure every drop is unique
-						if not dropped[n] then
-							self:handleDrops(self.allDrops[n])
-							table.insert(dropped, n)
-							drops = drops - 1
-						end
-					end
-				end
-			end
-		end
-
-		-- Add the animal to the array of depleted entities and make it invisible
 		GAME.depletedEntities[self.id] = true
 		self:setVisible(false)
+		self:dropLoot()
 	end
 
 	self:updateAnimation()
@@ -200,6 +167,31 @@ end
 
 
 
+--- Shuffle a table
+function Animal:shuffle(t)
+	local n = #t
+	for i = n, 2, -1 do
+		local j = math.random(1, i)
+		t[i], t[j] = t[j], t[i]
+	end
+
+	return t
+end
+
+
+
+function Animal:dropLoot()
+	if #self.allDrops == 0 then return end
+	if self.dropChance < math.random(1, 100) then return end
+
+	local limit = self.dropLimit and math.min(self.dropLimit, #self.allDrops) or #self.allDrops
+	for i=1, limit do
+		self:handleDrops(self.allDrops[i])
+	end
+end
+
+
+
 function Animal:handleDrops(drop)
 	if drop == 'Coin' then
 		Coin(self.x, self.y - 8)
@@ -217,6 +209,7 @@ end
 --- This method is called to reset animals
 function Animal:reset()
 	self.hp = self.maxHP
+	self.allDrops = self:shuffle(self.allDrops)
 	self:moveTo(self.spawnX, self.spawnY)
 	self:setVisible(true)
 end
