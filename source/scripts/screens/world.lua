@@ -441,10 +441,6 @@ function World:resetPlayer()
 		if sprite:isa(Text) then
 			sprite:remove()
 		end
-
-		if sprite:isa(Animal) or sprite:isa(Pickup) then
-			sprite:reset()
-		end
 	end
 
 	if GAME.playerLevel ~= GAME.playerSpawnLevel then
