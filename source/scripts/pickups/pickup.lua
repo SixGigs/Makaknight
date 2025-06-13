@@ -71,11 +71,12 @@ function Pickup:init(x, y, i, ...)
 
 	-- Pickup class properties
 	self.speed = 60
-	self.spawnX = x
-	self.spawnY = y
+	self.invulnFrames = 5
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
+	self.spawnX = x
+	self.spawnY = y
 
 	-- Additional variables if an entity is given
 	if e then	
@@ -107,6 +108,11 @@ end
 function Pickup:update()
 	if not self:isVisible() then
 		return
+	end
+
+	-- Subtract invulnerability frames if the pickup is invulnerable
+	if self.invulnFrames > 0 then
+		self.invulnFrames = self.invulnFrames - (30 * DELTA_TIME)
 	end
 
 	self:updateAnimation()
@@ -241,6 +247,41 @@ function Pickup:handleMovementAndCollisions()
 		self:setVisible(false)
 	elseif self.y > 262 then
 		self:setVisible(false)
+	end
+end
+
+
+
+--- This method handles entities colliding with the pickup
+--- @param  e  table  The entity colliding with the pickup
+function Pickup:handleCollision(e)
+	if not self:isVisible() then return end
+
+	-- Get the tag of the colliding object
+	local collisionTag <const> = e:getTag()
+	if collisionTag == TAGS.Player then
+		if not e.dead and self.invulnFrames < 0 then
+			if self:isa(Healthpotion) then
+				e.hp = e.maxHP
+			elseif self:isa(Staminapotion) then
+				e.sp = e.maxSP
+			elseif self:isa(Manapotion) then
+				e.mp = e.maxMP
+			else
+				GAME.playerCoins = GAME.playerCoins + 1
+				local text <const> = '$ ' .. tostring(GAME.playerCoins)
+				Text(text, 'right', 0)
+			end
+
+			Sparkle(self.x + (self.width / 2), self.y + (self.height / 2))
+
+			if self.id then
+				GAME.depletedEntities[self.id] = true
+				self:setVisible(false)
+			else
+				self:remove()
+			end
+		end
 	end
 end
 
