@@ -536,6 +536,8 @@ function Player:handleMovementAndCollisions()
 			collisionObject: handleCollision(self)
 		elseif collisionTag == TAGS.Flag then
 			self:handleFlagCollision(collisionObject)
+		elseif collisionTag == TAGS.Gui then
+			collisionObject:handleCollision()
 		elseif collisionTag == TAGS.Door then
 			collisionObject:handleCollision(self)
 		elseif collisionTag == TAGS.Crown then
