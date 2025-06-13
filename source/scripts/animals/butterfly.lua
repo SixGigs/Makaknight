@@ -13,28 +13,22 @@ function Butterfly:init(x, y, e)
 
 	Butterfly.super.init(self, x, y, i, e)
 
-	self:addState(0, 1, 4, {ts = 3})
+	self:addState(0, 1, 4, {ts = 2})
 	self:playAnimation()
 
-	self:setCollideRect(1, 1, 2, 2)
-end
+	-- Set the butterflies initial direction
+	local xSpeed <const> = math.random(-self.speed, self.speed)
+	local ySpeed <const> = math.random(-self.speed, self.speed)
+	self.xVelocity = xSpeed
+	self.yVelocity = ySpeed
 
-
-
---- Handle the possible ground events for the Animal
-function Butterfly:handleState()
-	if self.timer then
-		return
-	end
-
-	-- Set a Timer to Make the Directional Change Random
-	self.timer = true
-	pd.timer.performAfterDelay(math.random(50, 150), function()
+	-- Whenever the butterfly finishes an animation, change direction
+	self.states[0].onLoopFinishedEvent = function(self)
 		local xSpeed <const> = math.random(-self.speed, self.speed)
 		local ySpeed <const> = math.random(-self.speed, self.speed)
-
 		self.xVelocity = xSpeed
 		self.yVelocity = ySpeed
-		self.timer = false
-	end)
+	end
+
+	self:setCollideRect(1, 1, 2, 2)
 end
