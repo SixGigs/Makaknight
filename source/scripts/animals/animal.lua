@@ -15,24 +15,22 @@ function Animal:init(x, y, i, e)
 	-- Add the primary drop to the drops table if it exists
 	table.insert(e.fields.drops, e.fields.drop)
 
-	-- Animal properties
+	-- Animal properties - Calculate drops in advance
 	self.id = e.iid
 	self.hp = e.fields.hp
 	self.maxHP = e.fields.hp
 	self.weight = e.fields.weight
-	self.allDrops = self:shuffle(e.fields.drops)
 	self.dropChance = e.fields.dropChance
+	self.willDrop = self.dropChance > math.random(1, 100)
+	self.allDrops = self.willDrop and self:shuffle(e.fields.drops) or e.fields.drops
 	self.dropLimit = e.fields.dropLimit
 	self.spawnX = x
-	self.spawnY = y	
+	self.spawnY = y
 
 	-- If the animal ID is on the don't spawn list, hide the animal
 	if GAME.depletedEntities[self.id] then
 		self:setVisible(false)
 	end
-
-	-- Dynamic properties
-	if e.fields.heals then self.heals = e.fields.heals end
 
 	-- Physics Properties
 	self.xVelocity = 0
@@ -57,7 +55,7 @@ function Animal:init(x, y, i, e)
 		[TAGS.Half] = true
 	}
 
-	-- Animal Properties
+	-- Set Playdate Sprite Properties
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setZIndex(Z_INDEXES.Animal)
@@ -181,8 +179,8 @@ end
 
 
 function Animal:dropLoot()
+	if not self.willDrop then return end
 	if #self.allDrops == 0 then return end
-	if self.dropChance < math.random(1, 100) then return end
 
 	local limit = self.dropLimit and math.min(self.dropLimit, #self.allDrops) or #self.allDrops
 	for i=1, limit do
@@ -209,7 +207,13 @@ end
 --- This method is called to reset animals
 function Animal:reset()
 	self.hp = self.maxHP
-	self.allDrops = self:shuffle(self.allDrops)
+	self.willDrop = self.dropChance > math.random(1, 100)
+
+	-- Only use resources to shuffle drops if it will drop
+	if self.willDrop then
+		self.allDrops = self:shuffle(self.allDrops)
+	end
+
 	self:moveTo(self.spawnX, self.spawnY)
 	self:setVisible(true)
 end
@@ -225,14 +229,5 @@ function Animal:handleCollision(obj)
 	self.hp = self.hp - obj.damage
 	if self.hp < 0 then
 		self.hp = 0
-	end
-
-	if self.hp == 0 then
-		if self.heals then
-			obj.hp = obj.hp + self.heals
-			if obj.hp > obj.maxHP then
-				obj.hp = obj.maxHP
-			end
-		end
 	end
 end

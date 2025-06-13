@@ -28597,7 +28597,7 @@
 			"__bgColor": "#696A79",
 			"bgColor": null,
 			"useAutoIdentifier": true,
-			"bgRelPath": "cave-background-400-240.png",
+			"bgRelPath": "black-background-400-240.png",
 			"bgPos": "Repeat",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
