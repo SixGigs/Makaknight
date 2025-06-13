@@ -165,31 +165,7 @@
 				},
 				{
 					"__identifier": "Butterfly",
-					"__grid": [10,7],
-					"__pivot": [0,0],
-					"__tags": ["Grass"],
-					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
-					"__smartColor": "#B55088",
-					"iid": "72afce90-9b00-11ef-98f6-9558605c8562",
-					"width": 16,
-					"height": 16,
-					"defUid": 3213,
-					"px": [160,112],
-					"fieldInstances": [
-						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
-						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
-						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
-						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
-						{ "__identifier": "drop", "__type": "LocalEnum.Drops", "__value": "Coin", "__tile": null, "defUid": 4901, "realEditorValues": [] },
-						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
-					],
-					"__worldX": 2224,
-					"__worldY": -128
-				},
-				{
-					"__identifier": "Butterfly",
-					"__grid": [11,7],
+					"__grid": [11,8],
 					"__pivot": [0,0],
 					"__tags": ["Grass"],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
@@ -198,10 +174,10 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
-					"px": [176,112],
+					"px": [176,128],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -209,23 +185,23 @@
 						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2240,
-					"__worldY": -128
+					"__worldY": -112
 				},
 				{
 					"__identifier": "Butterfly",
-					"__grid": [12,8],
+					"__grid": [12,9],
 					"__pivot": [0,0],
 					"__tags": ["Grass"],
 					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
 					"__smartColor": "#B55088",
-					"iid": "75ba0150-9b00-11ef-98f6-d397ff98c18c",
+					"iid": "9e12fe90-3740-11f0-90ad-35ce0b3e1fec",
 					"width": 16,
 					"height": 16,
 					"defUid": 3213,
-					"px": [192,128],
+					"px": [192,144],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -233,6 +209,30 @@
 						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
 					],
 					"__worldX": 2256,
+					"__worldY": -96
+				},
+				{
+					"__identifier": "Butterfly",
+					"__grid": [10,8],
+					"__pivot": [0,0],
+					"__tags": ["Grass"],
+					"__tile": { "tilesetUid": 3214, "x": 0, "y": 0, "w": 8, "h": 8 },
+					"__smartColor": "#B55088",
+					"iid": "9eed8010-3740-11f0-90ad-c7688e6bb8ae",
+					"width": 16,
+					"height": 16,
+					"defUid": 3213,
+					"px": [160,128],
+					"fieldInstances": [
+						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
+						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
+						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
+						{ "__identifier": "drop", "__type": "LocalEnum.Drops", "__value": "Coin", "__tile": null, "defUid": 4901, "realEditorValues": [] },
+						{ "__identifier": "drops", "__type": "Array<LocalEnum.Drops>", "__value": [], "__tile": null, "defUid": 4900, "realEditorValues": [] }
+					],
+					"__worldX": 2224,
 					"__worldY": -112
 				}
 			]

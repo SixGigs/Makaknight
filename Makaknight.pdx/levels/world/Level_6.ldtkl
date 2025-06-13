@@ -141,7 +141,7 @@
 					"px": [80,112],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -165,7 +165,7 @@
 					"px": [96,128],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -189,7 +189,7 @@
 					"px": [112,128],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -213,7 +213,7 @@
 					"px": [112,112],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },
@@ -237,7 +237,7 @@
 					"px": [96,96],
 					"fieldInstances": [
 						{ "__identifier": "hp", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4533, "realEditorValues": [] },
-						{ "__identifier": "speed", "__type": "Int", "__value": 30, "__tile": null, "defUid": 3215, "realEditorValues": [] },
+						{ "__identifier": "speed", "__type": "Int", "__value": 15, "__tile": null, "defUid": 3215, "realEditorValues": [] },
 						{ "__identifier": "weight", "__type": "Int", "__value": 1, "__tile": null, "defUid": 4535, "realEditorValues": [] },
 						{ "__identifier": "dropLimit", "__type": "Int", "__value": null, "__tile": null, "defUid": 4917, "realEditorValues": [] },
 						{ "__identifier": "dropChance", "__type": "Int", "__value": 25, "__tile": null, "defUid": 4902, "realEditorValues": [] },

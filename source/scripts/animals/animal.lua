@@ -102,6 +102,12 @@ end
 
 
 
+--- The animal class has an empty handle state method by default
+function Animal:handleState()
+end
+
+
+
 --- Handles All Animal Movement and Any Collisions it has
 function Animal:handleMovementAndCollisions()
 	-- Get a list of collisions
