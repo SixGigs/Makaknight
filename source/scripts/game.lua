@@ -116,9 +116,9 @@ end
 function Game:load()
 	local gd <const> = pd.datastore.read()
 
-	self.playerSpawnLevel = (gd and (gd.spawn and gd.spawn or "1b2e8290-3b70-11ee-b8ee-9181be436c18") or "1b2e8290-3b70-11ee-b8ee-9181be436c18")
-	self.playerSpawnX = (gd and (gd.spawnX and gd.spawnX or 12 * 16 + 8) or 12 * 16 + 8)
-	self.playerSpawnY = (gd and (gd.spawnY and gd.spawnY or 8 * 16) or 9 * 16)
+	self.playerSpawnLevel = (gd and (gd.spawn and gd.spawn or nil) or nil)
+	self.playerSpawnX = (gd and (gd.spawnX and gd.spawnX or nil) or nil)
+	self.playerSpawnY = (gd and (gd.spawnY and gd.spawnY or nil) or nil)
 	self.playerLevel = (gd and (gd.level and gd.level or self.playerSpawnLevel) or self.playerSpawnLevel)
 	self.playerXVelocity = (gd and (gd.xVelocity and gd.xVelocity or 0) or 0)
 	self.playerYVelocity = (gd and (gd.yVelocity and gd.yVelocity or 0) or 0)
