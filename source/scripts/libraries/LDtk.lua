@@ -58,7 +58,7 @@ local _tilesets = {}
 local _imageTables = {}
 
 local _use_external_files = false
-local _use_lua_levels = true
+local _use_lua_levels = false
 
 local _ = {} -- for private functions
 
@@ -175,7 +175,6 @@ function LDtk.load( ldtk_file, use_lua_levels )
 			tileset.tileIDs_flipped[ enum_def.enumValueId ] = tileIDs_flipped
 			tileset.tileIDs_flipped_empty[ enum_def.enumValueId ] = tileIDs_flipped_empty
 		end
-
 	end
 
 	-- we list the level names (the complete list needs to be ready before calling LDtk.load_level())
@@ -194,6 +193,26 @@ function LDtk.load( ldtk_file, use_lua_levels )
 		end
 	end
 end
+
+
+
+function LDtk.get_player_spawn()
+	for _, level_name in pairs(_level_names) do
+		LDtk.load_level(level_name)
+		local allEntities = LDtk.get_entities(level_name)
+		for _, entity in ipairs(allEntities) do
+			if entity.name == 'Player' then
+				return {
+					level = level_name,
+					forceSpawn = entity.fields.forceSpawn, x = entity.position.x,
+					y = entity.position.y
+				}
+			end
+		end
+	end
+end
+
+
 
 -- Call this function to save the LDtk level in lua files to improve loading performance
 -- The files will be saved in the aave folder of the game (PlaydateSDK/Disk/Data)
