@@ -263,7 +263,7 @@ function Player:init(world)
 	-- Double Jump properties
 	self.doubleJumpManaCost = 5
 	self.doubleJumpAvailable = true
-	self.doubleJumpVelocity = -300
+	self.doubleJumpVelocity = -345
 
 	-- Dash properties
 	self.dashManaCost = 10
@@ -430,7 +430,7 @@ function Player:handleState()
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
-			if self.yVelocity > 360 then
+			if self.yVelocity > 270 then
 				if pd.buttonIsPressed(pd.kButtonDown) then
 					self:changeToDuckState()
 				else

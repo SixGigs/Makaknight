@@ -13,7 +13,7 @@ function Butterfly:init(x, y, e)
 
 	Butterfly.super.init(self, x, y, i, e)
 
-	self:addState(0, 1, 4, {ts = 2})
+	self:addState(0, 1, nil, {ts = 2})
 	self:playAnimation()
 
 	-- Set the butterflies initial direction
