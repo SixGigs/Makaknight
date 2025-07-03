@@ -13,28 +13,22 @@ function Firefly:init(x, y, e)
 
 	Firefly.super.init(self, x, y, i, e)
 
-	self:addState(0, 7, 8, {ts = 1})
+	self:addState(0, 7, nil, {ts = 2})
 	self:playAnimation()
+	
+	-- Set the fireflies initial direction
+	local xSpeed <const> = math.random(-self.speed, self.speed)
+	local ySpeed <const> = math.random(-self.speed, self.speed)
+	self.xVelocity = xSpeed
+	self.yVelocity = ySpeed
 
-	self:setCollideRect(1, 2, 8, 8)
-end
-
-
-
---- Handle the possible ground events for the Animal
-function Firefly:handleState()
-	if self.timer then
-		return
-	end
-
-	-- Set a Timer to Make the Directional Change Random
-	self.timer = true
-	pd.timer.performAfterDelay(math.random(150, 300), function()
+	-- Whenever the firefly finishes an animation, change direction
+	self.states[0].onLoopFinishedEvent = function(self)
 		local xSpeed <const> = math.random(-self.speed, self.speed)
 		local ySpeed <const> = math.random(-self.speed, self.speed)
-
 		self.xVelocity = xSpeed
 		self.yVelocity = ySpeed
-		self.timer = false
-	end)
+	end
+
+	self:setCollideRect(1, 2, 8, 8)
 end

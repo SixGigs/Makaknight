@@ -34,6 +34,9 @@ function World:init()
 		GAME.playerSpawnLevel = GAME.playerLevel
 		GAME.playerSpawnX = GAME.playerX
 		GAME.playerSpawnY = GAME.playerY
+		GAME.playerHP = GAME.playerMaxHP
+		GAME.playerSP = GAME.playerMaxSP
+		GAME.playerMP = GAME.playerMaxMP
 		GAME.checkpoint = nil
 	end
 
