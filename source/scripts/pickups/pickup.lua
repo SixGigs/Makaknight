@@ -255,33 +255,31 @@ end
 --- This method handles entities colliding with the pickup
 --- @param  e  table  The entity colliding with the pickup
 function Pickup:handleCollision(e)
-	if not self:isVisible() then return end
+	if not self:isVisible() or e:getTag() ~= TAGS.Player or e.dead or self.invulnFrames >= 0 then
+		return
+	end
 
-	-- Get the tag of the colliding object
-	local collisionTag <const> = e:getTag()
-	if collisionTag == TAGS.Player then
-		if not e.dead and self.invulnFrames < 0 then
-			if self:isa(Healthpotion) then
-				e.hp = e.maxHP
-			elseif self:isa(Staminapotion) then
-				e.sp = e.maxSP
-			elseif self:isa(Manapotion) then
-				e.mp = e.maxMP
-			else
-				GAME.playerCoins = GAME.playerCoins + 1
-				local text <const> = '$ ' .. tostring(GAME.playerCoins)
-				Text(text, 'right', 0)
-			end
+	-- Apply pickup effect
+	if self:isa(Healthpotion) then
+		e.hp = e.maxHP
+	elseif self:isa(Staminapotion) then
+		e.sp = e.maxSP
+	elseif self:isa(Manapotion) then
+		e.mp = e.maxMP
+	else
+		GAME.playerCoins += 1
+		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
+	end
 
-			Sparkle(self.x + (self.width / 2), self.y + (self.height / 2))
+	-- Visual effect
+	Sparkle(self.x + (self.width / 2), self.y + (self.height / 2))
 
-			if self.id then
-				GAME.depletedEntities[self.id] = true
-				self:setVisible(false)
-			else
-				self:remove()
-			end
-		end
+	-- Remove or mark as depleted
+	if self.id then
+		GAME.depletedEntities[self.id] = true
+		self:setVisible(false)
+	else
+		self:remove()
 	end
 end
 
