@@ -16,27 +16,25 @@ function World:init()
 	-- Load game save data
 	GAME:load()
 
-	local level = GAME.playerLevel
-
 	-- Go to the Level Specified in the Save File and Create the Player
 	self.oldLevelName = ''
 	self.oldWorldY = 0
 
 	-- See if there is a player spawn
-	if DEBUG or not GAME.playerLevel then
-		local playerSpawn = ldtk.get_player_spawn()
+	if FIXED_SPAWN or not GAME.playerLevel then
+		local spawn <const> = ldtk.get_player_spawn()
 
-		if playerSpawn.forceSpawn then
-			GAME.playerLevel = playerSpawn.level
-			GAME.playerX = playerSpawn.x + 8
-			GAME.playerY = playerSpawn.y + 8
-			GAME.playerSpawnLevel = GAME.playerLevel
-			GAME.playerSpawnX = GAME.playerX
-			GAME.playerSpawnY = GAME.playerY
-			GAME.checkpoint = nil
-		else
+		if not spawn then
 			print('NO PLAYER SPAWN OBJECT PLACED!!!')
 		end
+
+		GAME.playerLevel = spawn.level
+		GAME.playerX = spawn.x + 8
+		GAME.playerY = spawn.y + 8
+		GAME.playerSpawnLevel = GAME.playerLevel
+		GAME.playerSpawnX = GAME.playerX
+		GAME.playerSpawnY = GAME.playerY
+		GAME.checkpoint = nil
 	end
 
 	self:goToLevel(GAME.playerLevel)

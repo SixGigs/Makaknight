@@ -101,14 +101,13 @@ local gfx <const> = playdate.graphics
 
 -- Globals
 DEBUG = true
-DELTA_TIME = 0
 GAME = Game()
+FIXED_SPAWN = true
+DELTA_TIME = 0
 SCREEN = {
 	['width'] = pd.display.getWidth(),
 	['height'] = pd.display.getHeight()
 }
-
-
 
 if DEBUG then
 	World()

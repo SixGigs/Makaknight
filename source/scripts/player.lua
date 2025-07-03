@@ -313,10 +313,9 @@ function Player:init(world)
 
 
 
-
-	self:changeState(GAME.playerState)
 	-- Do -1 here to stop the player slipping through half tiles
 	self:moveTo(GAME.playerX, GAME.playerY -1)
+	self:changeState(GAME.playerState)
 	self:setZIndex(Z_INDEXES.Player)
 	self:setTag(TAGS.Player)
 	self:setHitBox(standing)

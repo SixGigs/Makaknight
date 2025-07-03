@@ -196,24 +196,6 @@ end
 
 
 
-function LDtk.get_player_spawn()
-	for _, level_name in pairs(_level_names) do
-		LDtk.load_level(level_name)
-		local allEntities = LDtk.get_entities(level_name)
-		for _, entity in ipairs(allEntities) do
-			if entity.name == 'Player' then
-				return {
-					level = level_name,
-					forceSpawn = entity.fields.forceSpawn, x = entity.position.x,
-					y = entity.position.y
-				}
-			end
-		end
-	end
-end
-
-
-
 -- Call this function to save the LDtk level in lua files to improve loading performance
 -- The files will be saved in the aave folder of the game (PlaydateSDK/Disk/Data)
 function LDtk.export_to_lua_files()
@@ -247,6 +229,36 @@ function LDtk.export_to_lua_files()
 		LDtk.load_level( level_name )
 		_.export_lua_table( folder.._.get_filename(level_file)..".lua", _levels[ level_name ])
 		LDtk.release_level( level_name )
+	end
+end
+
+-- load and return only the first player spawn entity in memory
+-- only necessary to call if the ldtk file is saved in multiple files
+function LDtk.get_player_spawn()
+	for _, level_name in pairs(_level_names) do
+		local level_data
+		if type(level_name)=="string" then
+			level_data = json.decodeFile( _level_files[ level_name ] )
+		else
+			level_data = level_name
+		end
+
+		local layer_count = #level_data.layerInstances
+		for layer_index, layer_data in ipairs(level_data.layerInstances) do
+			local entities_data = layer_data.entityInstances
+			if #entities_data>0 then
+				for entity_index, entity_data in ipairs(entities_data) do
+					if entity_data.__identifier == 'Player' then				
+						return {
+							name = entity_data.__identifier,
+							level = level_name,
+							x = entity_data.px[1],
+							y = entity_data.px[2]
+						}
+					end
+				end
+			end
+		end
 	end
 end
 
