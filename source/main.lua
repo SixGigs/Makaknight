@@ -100,9 +100,9 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Globals
-DEBUG = true
+DEBUG = false
 GAME = Game()
-FIXED_SPAWN = true
+FIXED_SPAWN = false
 DELTA_TIME = 0
 SCREEN = {
 	['width'] = pd.display.getWidth(),
