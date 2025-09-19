@@ -138,22 +138,6 @@
 					],
 					"__worldX": 224,
 					"__worldY": -112
-				},
-				{
-					"__identifier": "Player",
-					"__grid": [12,8],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#2EFF00",
-					"iid": "381a4400-8560-11f0-8e6d-1986435cfdda",
-					"width": 16,
-					"height": 48,
-					"defUid": 4922,
-					"px": [192,128],
-					"fieldInstances": [],
-					"__worldX": 192,
-					"__worldY": -112
 				}
 			]
 		},
