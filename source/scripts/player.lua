@@ -15,7 +15,7 @@ class('Player').extends(AnimatedSprite)
 --- The player is initialised with this method
 --- @param  x      integer  The X coordinate to spawn the player
 --- @param  y      integer  The Y coordinate to spawn the player
---- @param  world  table    The game manager is passed in to manage player on object interactions
+--- @param  world  table    The world is passed in to manage object interactions
 function Player:init(world)
 	-- Load player image, add equipment & armour
 	local image = gfx.image.new('images/player/player')
@@ -60,9 +60,6 @@ function Player:init(world)
 	-- The following are temporary sprites that will be animated later
 	self:addState("duckPunch", 78, 81, {ts = 1})
 	self:playAnimation()
-
-
-
 
 	-- If the yVelocity increases or decreases in these states then enter jumping or falling
 	self.states['idle'].onFrameChangedEvent  = function(self) self:handleYVelocity() end
@@ -248,6 +245,7 @@ function Player:init(world)
 	-- Jump properties
 	self.jumping = false
 	self.jumpSpeed = 112
+	self.airSpeed = 10
 	self.jumpCounter = 0
 	self.jumpCounterMax = 0.1
 	self.jumpVelocity = -220
@@ -315,9 +313,9 @@ function Player:init(world)
 	-- Physics properties
 	self.xVelocity = GAME.playerXVelocity
 	self.yVelocity = GAME.playerYVelocity
-	self.minimumAirSpeed = 15
+	self.minimumAirSpeed = 5
 	self.walkSpeed = 90
-	self.drag = 120
+	self.drag = 60
 
 
 
@@ -334,8 +332,9 @@ end
 
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
-	-- This keeps the player animations playing
 	self:updateAnimation()
+
+	if self.dead then return end
 
 	-- Update globals so the game saves correct data when closed
 	GAME.playerHP = self.hp
@@ -348,8 +347,7 @@ function Player:update()
 	GAME.playerYVelocity = self.yVelocity
 	GAME.playerState = self.currentState
 
-	-- If not dead update player buffers, handle player states, and movement with collisions
-	if self.dead then return end	
+	-- Update player buffers, states, and movement
 	self:updateBuffers()
 	self:handleState()
 	self:handleMovementAndCollisions()
@@ -845,10 +843,18 @@ end
 
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	if pd.buttonIsPressed(pd.kButtonLeft) and self.xVelocity < 1 then
-		self.xVelocity = -self.jumpSpeed
-	elseif pd.buttonIsPressed(pd.kButtonRight) and self.xVelocity > -1 then
-		self.xVelocity = self.jumpSpeed
+	if pd.buttonIsPressed(pd.kButtonLeft) then
+		self.xVelocity = self.xVelocity - self.airSpeed
+
+		if self.xVelocity < -self.jumpSpeed then
+			self.xVelocity = -self.jumpSpeed
+		end
+	elseif pd.buttonIsPressed(pd.kButtonRight) then
+		self.xVelocity = self.xVelocity + self.airSpeed
+
+		if self.xVelocity > self.jumpSpeed then
+			self.xVelocity = self.jumpSpeed
+		end
 	end
 
 	if pd.buttonIsPressed(pd.kButtonUp) then
@@ -882,14 +888,6 @@ function Player:handleAirInput()
 
 	if pd.buttonJustPressed(pd.kButtonA) then
 		if self.currentState == 'wallSlide' then
-			if pd.buttonIsPressed(pd.kButtonLeft) then
-				self.xVelocity = self.maxSpeed
-			else
-				if pd.buttonIsPressed(pd.kButtonRight) then
-					self.xVelocity = -self.maxSpeed
-				end
-			end
-
 			self:changeToJumpState()
 		end
 	end
@@ -989,20 +987,30 @@ function Player:changeToJumpState()
 		self:deductStamina(self.jumpStaminaCost)
 	end
 
+	if pd.buttonIsPressed(pd.kButtonLeft) then
+		if self.currentState == "wallSlide" then
+			self.xVelocity = self.jumpSpeed
+		else
+			self.xVelocity = -self.jumpSpeed
+		end
+	else
+		if pd.buttonIsPressed(pd.kButtonRight) then
+			if self.currentState == "wallSlide" then
+				self.xVelocity = -self.jumpSpeed
+			else
+				self.xVelocity = self.jumpSpeed
+			end
+		end
+	end
+
 	self.setStaminaBuffer = true
 end
-
-
-
 
 --- Changes the player sprite to the mid jump sprite
 function Player:changeToMidJumpState()
 	self:setHitBox(standing)
 	self:changeState('midJump')
 end
-
-
-
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
@@ -1017,9 +1025,6 @@ function Player:changeToDoubleJumpState()
 	self.setManaBuffer = true
 end
 
-
-
-
 --- Changes the player to the duck state
 function Player:changeToDuckState()
 	self.xVelocity = 0
@@ -1029,9 +1034,6 @@ function Player:changeToDuckState()
 	self:changeState('duck')
 end
 
-
-
-
 --- Changes the player sprite to the crouch state when down is pressed
 function Player:changeToDuckingState()
 	self.xVelocity = 0
@@ -1040,9 +1042,6 @@ function Player:changeToDuckingState()
 	self:setHitBox(crouching)
 	self:changeState('duckDown')
 end
-
-
-
 
 --- Change the player into a roll state
 --- @param  direction  string  The direction to roll in
@@ -1070,19 +1069,12 @@ function Player:changeToRollState(direction)
 	self.setStaminaBuffer = true
 end
 
-
-
-
 --- Changes the player to the contact state
 function Player:changeToContactState()
 	self.yVelocity = 0
 	self.xVelocity = 0
-
 	self:changeState('contact')
 end
-
-
-
 
 --- Changes the player to a punch state
 function Player:changeToPunchState(state)
@@ -1113,9 +1105,6 @@ function Player:changeToPunchState(state)
 	self.setStaminaBuffer = true
 end
 
-
-
-
 --- Changes the player to the dive state
 function Player:changeToDiveState()
 	if self.mp > self.diveManaCost then
@@ -1133,9 +1122,6 @@ function Player:changeToDiveState()
 
 	self.setManaBuffer = true
 end
-
-
-
 
 --- This method make the player dash in the direction they face
 function Player:changeToDashState()
@@ -1162,20 +1148,16 @@ function Player:changeToDashState()
 	self.setManaBuffer = true
 end
 
-
-
+--- This method sets the player to the spawn state
 function Player:changeToSpawnState()
 	self:setHitBox(standing)
 	self:changeState('spawn')
 end
 
-
-
-
 --- Applies gravity to the player, used if the player is not touching a surface
---- Resets Y velocity when colliding with a ceiling or the ground
+--- Makes Y velocity 0 when colliding with a ceiling or the ground
 function Player:applyGravity()
-	self.yVelocity = self.yVelocity + ((GRAVITY + self.weight) * DELTA_TIME)
+	self.yVelocity = self.yVelocity + (GRAVITY * DELTA_TIME)
 
 	if self.touchingGround or self.touchingCeiling then
 		self.jumping = false
@@ -1184,10 +1166,7 @@ function Player:applyGravity()
 	end
 end
 
-
-
-
---- Applies air drag to the player if they're not holding the direction they are moving in while airborne
+--- Applies drag to the player if they're not holding the direction they are moving in while airborne
 --- @param  amount  integer  The amount to decrease movement by while in the air if receiving no directional input
 function Player:applyDrag(amount)
 	if self.xVelocity > 0 then
@@ -1200,9 +1179,6 @@ function Player:applyDrag(amount)
 		self.xVelocity = 0
 	end
 end
-
-
-
 
 --- This method is used to calculate when to regenerate stamina and how quickly
 function Player:regenerateStamina()
@@ -1218,9 +1194,6 @@ function Player:regenerateStamina()
 		self.sp = self.maxSP
 	end
 end
-
-
-
 
 --- This method is used to calculate when to regenerate mana
 function Player:regenerateMana()
@@ -1280,10 +1253,10 @@ function Player:addArmour(sheet)
 
 	-- ADD ARMOUR/CUSTOMISING CODE HERE
 
-	local helmet = gfx.image.new('images/player/roman-helmet')
-	gfx.pushContext(sheet)
-	helmet:draw(0, 0)
-	gfx.popContext()
+	-- local helmet = gfx.image.new('images/player/roman-helmet')
+	-- gfx.pushContext(sheet)
+	-- helmet:draw(0, 0)
+	-- gfx.popContext()
 
 	-- Calculate number of frames
 	local sheetWidth, sheetHeight <const> = sheet:getSize()

@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4930,
+	"nextUid": 4928,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -28967,6 +28967,32 @@
 			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "57058f60-c210-11ef-9d97-415bd365b5a9", "dir": "sw" }, { "levelIid": "28097360-e920-11ef-8d6f-b1fe00bc695e", "dir": "w" }, { "levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0", "dir": "s" } ]
+		},
+		{
+			"identifier": "Level_13",
+			"iid": "cf327350-8560-11f0-8e6d-27a123fab968",
+			"uid": 4927,
+			"worldX": -1600,
+			"worldY": -240,
+			"worldDepth": 0,
+			"pxWid": 400,
+			"pxHei": 240,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": "black-background-400-240.png",
+			"bgPos": "Cover",
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
+			"externalRelPath": "world/Level_13.ldtkl",
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": null, "__tile": null, "defUid": 4551, "realEditorValues": [] }
+			],
+			"layerInstances": null,
+			"__neighbours": []
 		}
 	],
 	"worlds": [],
