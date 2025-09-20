@@ -245,7 +245,7 @@ function Player:init(world)
 	-- Jump properties
 	self.jumping = false
 	self.jumpSpeed = 112
-	self.airSpeed = 10
+	self.airSpeed = 330
 	self.jumpCounter = 0
 	self.jumpCounterMax = 0.1
 	self.jumpVelocity = -220
@@ -844,13 +844,13 @@ end
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
 	if pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = self.xVelocity - self.airSpeed
+		self.xVelocity = self.xVelocity - (self.airSpeed * DELTA_TIME)
 
 		if self.xVelocity < -self.jumpSpeed then
 			self.xVelocity = -self.jumpSpeed
 		end
 	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.xVelocity + self.airSpeed
+		self.xVelocity = self.xVelocity + (self.airSpeed * DELTA_TIME)
 
 		if self.xVelocity > self.jumpSpeed then
 			self.xVelocity = self.jumpSpeed
@@ -989,14 +989,14 @@ function Player:changeToJumpState()
 
 	if pd.buttonIsPressed(pd.kButtonLeft) then
 		if self.currentState == "wallSlide" then
-			self.xVelocity = self.jumpSpeed
+			self.xVelocity = self.maxSpeed
 		else
 			self.xVelocity = -self.jumpSpeed
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonRight) then
 			if self.currentState == "wallSlide" then
-				self.xVelocity = -self.jumpSpeed
+				self.xVelocity = -self.maxSpeed
 			else
 				self.xVelocity = self.jumpSpeed
 			end
