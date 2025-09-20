@@ -11,7 +11,7 @@
 	"iid": "1b2e0d60-3b70-11ee-b8ee-83f7d66d6977",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 4927,
+	"nextUid": 4931,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -28676,7 +28676,7 @@
 				}] }
 			],
 			"layerInstances": null,
-			"__neighbours": [ { "levelIid": "e07b6d20-4ce0-11ef-adb2-3b3522d4536f", "dir": "w" }, { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "e" } ]
+			"__neighbours": [ { "levelIid": "e07b6d20-4ce0-11ef-adb2-3b3522d4536f", "dir": "w" }, { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "e" }, { "levelIid": "986331b0-8560-11f0-a4ac-051dd3e2520c", "dir": "ne" } ]
 		},
 		{
 			"identifier": "Level_3",
@@ -28705,7 +28705,7 @@
 				}] }
 			],
 			"layerInstances": null,
-			"__neighbours": [ { "levelIid": "24f7b270-9b00-11ef-b44b-bba1b7be9655", "dir": "w" }, { "levelIid": "eec43550-9b00-11ef-a6a6-e75f8a0d8dde", "dir": "e" } ]
+			"__neighbours": [ { "levelIid": "24f7b270-9b00-11ef-b44b-bba1b7be9655", "dir": "w" }, { "levelIid": "eec43550-9b00-11ef-a6a6-e75f8a0d8dde", "dir": "e" }, { "levelIid": "986331b0-8560-11f0-a4ac-051dd3e2520c", "dir": "n" } ]
 		},
 		{
 			"identifier": "Level_4",
@@ -28734,7 +28734,7 @@
 				}] }
 			],
 			"layerInstances": null,
-			"__neighbours": [ { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "w" }, { "levelIid": "9285b800-9b00-11ef-a6a6-0b6f01063ace", "dir": "e" } ]
+			"__neighbours": [ { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "w" }, { "levelIid": "9285b800-9b00-11ef-a6a6-0b6f01063ace", "dir": "e" }, { "levelIid": "986331b0-8560-11f0-a4ac-051dd3e2520c", "dir": "nw" } ]
 		},
 		{
 			"identifier": "Level_5",
@@ -28967,6 +28967,32 @@
 			],
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "57058f60-c210-11ef-9d97-415bd365b5a9", "dir": "sw" }, { "levelIid": "28097360-e920-11ef-8d6f-b1fe00bc695e", "dir": "w" }, { "levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0", "dir": "s" } ]
+		},
+		{
+			"identifier": "Level_13",
+			"iid": "986331b0-8560-11f0-a4ac-051dd3e2520c",
+			"uid": 4930,
+			"worldX": 1264,
+			"worldY": -480,
+			"worldDepth": 0,
+			"pxWid": 400,
+			"pxHei": 240,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": "grass-background-400-240.png",
+			"bgPos": "Cover",
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,0,400,240] },
+			"externalRelPath": "world/Level_13.ldtkl",
+			"fieldInstances": [
+				{ "__identifier": "gravity", "__type": "Int", "__value": 900, "__tile": null, "defUid": 4539, "realEditorValues": [] },
+				{ "__identifier": "name", "__type": "String", "__value": null, "__tile": null, "defUid": 4551, "realEditorValues": [] }
+			],
+			"layerInstances": null,
+			"__neighbours": [ { "levelIid": "24f7b270-9b00-11ef-b44b-bba1b7be9655", "dir": "sw" }, { "levelIid": "e43c68a0-9b00-11ef-b44b-593177a43d82", "dir": "s" }, { "levelIid": "eec43550-9b00-11ef-a6a6-e75f8a0d8dde", "dir": "se" } ]
 		}
 	],
 	"worlds": [],
