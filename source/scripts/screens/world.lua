@@ -35,7 +35,6 @@ function World:init()
 		GAME.playerSpawnX = GAME.playerX
 		GAME.playerSpawnY = GAME.playerY
 		GAME.playerHP = GAME.playerMaxHP
-		GAME.playerSP = GAME.playerMaxSP
 		GAME.playerMP = GAME.playerMaxMP
 		GAME.checkpoint = nil
 	end
@@ -288,8 +287,7 @@ function World:goToLevel(level)
 
 	-- Load the status bars
 	self.health = Bar('health', 2, 2)
-	self.stamina = Bar('stamina', 2, 18)
-	self.mana = Bar('mana', 2, 34)
+	self.mana = Bar('mana', 2, 18)
 
 	-- Reset time elapsed to stop player accelerating when changing rooms
 	pd.resetElapsedTime()

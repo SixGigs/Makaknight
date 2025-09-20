@@ -30,9 +30,6 @@ function Bar:init(name, x, y)
 	if name == 'health' then
 		self:changeState(tostring(math.floor(GAME.playerHP)))
 		self.lastStateValue = math.floor(GAME.playerHP)
-	elseif name == 'stamina' then
-		self:changeState(tostring(math.floor(GAME.playerSP)))
-		self.lastStateValue = math.floor(GAME.playerSP)
 	else
 		self:changeState(tostring(math.floor(GAME.playerMP)))
 		self.lastStateValue = math.floor(GAME.playerMP)
@@ -59,9 +56,6 @@ function Bar:update()
 		if self.name == 'health' then
 			local val = GAME.playerHP
 			visible = val < self.lastStateValue or val > self.lastStateValue + 5
-		elseif self.name == 'stamina' then
-			local val = GAME.playerSP
-			visible = val < (GAME.playerMaxSP / 2) or val > self.lastStateValue + 5
 		else
 			local val = GAME.playerMP
 			visible = (val < self.lastStateValue and val < (GAME.playerMaxMP / 2)) or val > self.lastStateValue + 5
@@ -75,8 +69,6 @@ function Bar:update()
 
 		if self.name == 'health' then
 			newValue = math.floor(GAME.playerHP)
-		elseif self.name == 'stamina' then
-			newValue = math.floor(GAME.playerSP)
 		else
 			newValue = math.floor(GAME.playerMP)
 		end
