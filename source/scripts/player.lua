@@ -176,9 +176,7 @@ function Player:init(world)
 
 	-- General player class properties
 	self.hp = GAME.playerHP
-	self.mp = GAME.playerMP
 	self.maxHP = GAME.playerMaxHP
-	self.maxMP = GAME.playerMaxMP
 	self.globalFlip = GAME.playerFacing
 	self.touchingGround = false
 	self.touchingCeiling = false
@@ -234,7 +232,6 @@ function Player:init(world)
 	self.rollRecharge = 600
 
 	-- Dive properties
-	self.diveManaCost = 10
 	self.diveSpeed = 900
 	self.diveHorizontal = 160
 
@@ -262,12 +259,10 @@ function Player:init(world)
 	}
 
 	-- Double Jump properties
-	self.doubleJumpManaCost = 5
 	self.doubleJumpAvailable = true
 	self.doubleJumpVelocity = -345
 
 	-- Dash properties
-	self.dashManaCost = 10
 	self.dashAvailable = true
 	self.dashMinimumSpeed = 120
 	self.dashSpeed = 450
@@ -288,11 +283,6 @@ function Player:init(world)
 	self.rightBuffer = 0
 	self.upBuffer = 0
 	self.bBuffer = 0
-
-	-- Mana buffer properties
-	self.setManaBuffer = false
-	self.manaBufferAmount = 60
-	self.manaBuffer = 0
 
 	-- Run buffer properties
 	self.runBufferAmount = 4
@@ -327,7 +317,6 @@ function Player:update()
 
 	-- Update globals so the game saves correct data when closed
 	GAME.playerHP = self.hp
-	GAME.playerMP = self.mp
 	GAME.playerFacing = self.globalFlip
 	GAME.playerX = self.x
 	GAME.playerY = self.y
@@ -352,7 +341,7 @@ function Player:updateBuffers()
 	self.leftBuffer = math.max(self.leftBuffer - (30 * DELTA_TIME), 0)
 	self.rightBuffer = math.max(self.rightBuffer - (30 * DELTA_TIME), 0)
 	self.upBuffer = math.max(self.upBuffer - (30 * DELTA_TIME), 0)
-	self.manaBuffer = math.max(self.manaBuffer - (30 * DELTA_TIME), 0)
+
 	self.runLeftBuffer = math.max(self.runLeftBuffer - (30 * DELTA_TIME), 0)
 	self.runRightBuffer = math.max(self.runRightBuffer - (30 * DELTA_TIME), 0)
 
@@ -385,12 +374,6 @@ function Player:updateBuffers()
 			self.runRightBuffer = self.runBufferAmount
 		end
 	end
-
-	-- Set the mana buffer if requested
-	if self.setManaBuffer then
-		self.manaBuffer = self.manaBufferAmount
-		self.setManaBuffer = false
-	end
 end
 
 
@@ -403,15 +386,12 @@ function Player:playerPressedRight() return self.rightBuffer > 0 end
 function Player:playerPressedUp() return self.upBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerPressedB() return self.bBuffer > 0 end
-function Player:manaBlocked() return self.manaBuffer > 0 end
 
 
 
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	self:regenerateMana()
-
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
@@ -596,7 +576,6 @@ end
 
 function Player:reset()
 	self.hp = self.maxHP
-	self.mp = self.maxMP
 	self.dead = false
 	self.hurt = false
 	
@@ -649,7 +628,6 @@ function Player:handleFlagCollision(flag)
 
 	-- Top up player properties
 	self.hp = self.maxHP
-	self.mp = self.maxMP
 end
 
 
@@ -965,15 +943,11 @@ end
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
-	if self.mp > self.doubleJumpManaCost then
-		self.jumpBuffer = 0
-		self.doubleJumpAvailable = false
-		self.yVelocity = self.doubleJumpVelocity
-		self:changeState('dbJump')
-		self:deductMana(self.doubleJumpManaCost)		
-	end
+	self.jumpBuffer = 0
+	self.doubleJumpAvailable = false
+	self.yVelocity = self.doubleJumpVelocity
 
-	self.setManaBuffer = true
+	self:changeState('dbJump')
 end
 
 --- Changes the player to the duck state
@@ -1048,45 +1022,35 @@ end
 
 --- Changes the player to the dive state
 function Player:changeToDiveState()
-	if self.mp > self.diveManaCost then
-		self.yVelocity = self.diveSpeed
+	self.yVelocity = self.diveSpeed
 
-		if self.globalFlip == 0 then
-			self.xVelocity = self.diveHorizontal
-		else
-			self.xVelocity = -self.diveHorizontal
-		end
-
-		self:deductMana(self.dashManaCost)
-		self:changeState('dive')
+	if self.globalFlip == 0 then
+		self.xVelocity = self.diveHorizontal
+	else
+		self.xVelocity = -self.diveHorizontal
 	end
 
-	self.setManaBuffer = true
+	self:changeState('dive')
 end
 
 --- This method make the player dash in the direction they face
 function Player:changeToDashState()
-	if self.mp > self.dashManaCost then
-		self.dashAvailable = false
-		self.yVelocity = -self.walkSpeed
-	
-		if pd.buttonIsPressed(pd.kButtonLeft) then
-			self.xVelocity = -self.dashSpeed
-		elseif pd.buttonIsPressed(pd.kButtonRight) then
-			self.xVelocity = self.dashSpeed
-		else
-			if self.globalFlip == 1 then
-				self.xVelocity = -self.dashSpeed
-			else
-				self.xVelocity = self.dashSpeed
-			end
-		end
+	self.dashAvailable = false
+	self.yVelocity = -self.walkSpeed
 
-		self:deductMana(self.dashManaCost)
-		self:changeState('dash')
+	if pd.buttonIsPressed(pd.kButtonLeft) then
+		self.xVelocity = -self.dashSpeed
+	elseif pd.buttonIsPressed(pd.kButtonRight) then
+		self.xVelocity = self.dashSpeed
+	else
+		if self.globalFlip == 1 then
+			self.xVelocity = -self.dashSpeed
+		else
+			self.xVelocity = self.dashSpeed
+		end
 	end
 
-	self.setManaBuffer = true
+	self:changeState('dash')
 end
 
 --- This method sets the player to the spawn state
@@ -1120,26 +1084,6 @@ function Player:applyDrag(amount)
 		self.xVelocity = 0
 	end
 end
-
---- This method is used to calculate when to regenerate mana
-function Player:regenerateMana()
-	if self.mp < self.maxMP and not self:manaBlocked() then
-		self.mp = self.mp + 1 * DELTA_TIME
-	end
-
-	if self.mp > self.maxMP then
-		self.mp = self.maxMP
-	end
-end
-
-
-
-
-
-function Player:deductMana(amount)
-	self.mp = self.mp - amount
-end
-
 
 
 
