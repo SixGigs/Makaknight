@@ -176,10 +176,8 @@ function Player:init(world)
 
 	-- General player class properties
 	self.hp = GAME.playerHP
-	self.sp = GAME.playerSP
 	self.mp = GAME.playerMP
 	self.maxHP = GAME.playerMaxHP
-	self.maxSP = GAME.playerMaxSP
 	self.maxMP = GAME.playerMaxMP
 	self.globalFlip = GAME.playerFacing
 	self.touchingGround = false
@@ -229,13 +227,11 @@ function Player:init(world)
 
 	-- Run properties
 	self.maxSpeed = 195
-	self.runStaminaCost = 7.5
 
 	-- Roll properties
 	self.rollAvailable = true
 	self.rollSpeed = 165
 	self.rollRecharge = 600
-	self.rollStaminaCost = 20
 
 	-- Dive properties
 	self.diveManaCost = 10
@@ -250,7 +246,6 @@ function Player:init(world)
 	self.jumpCounterMax = 0.1
 	self.jumpVelocity = -220
 	self.jumpBufferAmount = 3
-	self.jumpStaminaCost = 1
 	self.jumpBuffer = 0
 	self.jumpStates = {
 		["jump"] = true,
@@ -281,7 +276,6 @@ function Player:init(world)
 
 	-- Punch properties
 	self.punchAvailable = true
-	self.punchStaminaCost = 5
 	self.punchFrameDuration = 30
 	self.punchBufferAmount = 4
 	self.punchRecharge = 195
@@ -294,11 +288,6 @@ function Player:init(world)
 	self.rightBuffer = 0
 	self.upBuffer = 0
 	self.bBuffer = 0
-
-	-- Status buffer properties
-	self.setStaminaBuffer = false
-	self.staminaBufferAmount = 60
-	self.staminaBuffer = 0
 
 	-- Mana buffer properties
 	self.setManaBuffer = false
@@ -338,7 +327,6 @@ function Player:update()
 
 	-- Update globals so the game saves correct data when closed
 	GAME.playerHP = self.hp
-	GAME.playerSP = self.sp
 	GAME.playerMP = self.mp
 	GAME.playerFacing = self.globalFlip
 	GAME.playerX = self.x
@@ -364,7 +352,6 @@ function Player:updateBuffers()
 	self.leftBuffer = math.max(self.leftBuffer - (30 * DELTA_TIME), 0)
 	self.rightBuffer = math.max(self.rightBuffer - (30 * DELTA_TIME), 0)
 	self.upBuffer = math.max(self.upBuffer - (30 * DELTA_TIME), 0)
-	self.staminaBuffer = math.max(self.staminaBuffer - (30 * DELTA_TIME), 0)
 	self.manaBuffer = math.max(self.manaBuffer - (30 * DELTA_TIME), 0)
 	self.runLeftBuffer = math.max(self.runLeftBuffer - (30 * DELTA_TIME), 0)
 	self.runRightBuffer = math.max(self.runRightBuffer - (30 * DELTA_TIME), 0)
@@ -399,12 +386,6 @@ function Player:updateBuffers()
 		end
 	end
 
-	-- Set the stamina buffer if requested
-	if self.setStaminaBuffer then
-		self.staminaBuffer = self.staminaBufferAmount
-		self.setStaminaBuffer = false
-	end
-
 	-- Set the mana buffer if requested
 	if self.setManaBuffer then
 		self.manaBuffer = self.manaBufferAmount
@@ -422,7 +403,6 @@ function Player:playerPressedRight() return self.rightBuffer > 0 end
 function Player:playerPressedUp() return self.upBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerPressedB() return self.bBuffer > 0 end
-function Player:staminaBlocked() return self.staminaBuffer > 0 end
 function Player:manaBlocked() return self.manaBuffer > 0 end
 
 
@@ -430,7 +410,6 @@ function Player:manaBlocked() return self.manaBuffer > 0 end
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
-	self:regenerateStamina()
 	self:regenerateMana()
 
 	-- If the player is in the air we use this statement to handle that
@@ -617,7 +596,6 @@ end
 
 function Player:reset()
 	self.hp = self.maxHP
-	self.sp = self.maxSP
 	self.mp = self.maxMP
 	self.dead = false
 	self.hurt = false
@@ -671,7 +649,6 @@ function Player:handleFlagCollision(flag)
 
 	-- Top up player properties
 	self.hp = self.maxHP
-	self.sp = self.maxSP
 	self.mp = self.maxMP
 end
 
@@ -686,13 +663,8 @@ function Player:handleVariableJump()
 	end
 
 	if self.jumping then 
-		if self.sp > self.jumpStaminaCost then
-			self.yVelocity = self.jumpVelocity
-			self.jumpCounter = self.jumpCounter + 1
-			self:deductStamina(self.jumpStaminaCost)
-		end
-
-		self.setStaminaBuffer = true
+		self.yVelocity = self.jumpVelocity
+		self.jumpCounter = self.jumpCounter + 1
 	end
 end
 
@@ -754,41 +726,25 @@ function Player:handleGroundInput()
 		self:changeToJumpState()
 	elseif pd.buttonIsPressed(pd.kButtonB) then
 		if pd.buttonIsPressed(pd.kButtonLeft) then
-			if self.sp > self.runStaminaCost then
-				if self.runRightBuffer > 0 then
-					self:changeState('runTurn')
-				else
-					self:changeToRunState('left')
-					self:deductStamina(self.runStaminaCost * DELTA_TIME)
-				end
+			if self.runRightBuffer > 0 then
+				self:changeState('runTurn')
 			else
-				self:changeToWalkState('left')
+				self:changeToRunState('left')
 			end
-
-			self.setStaminaBuffer = true
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
-			if self.sp > self.runStaminaCost then
-				if self.runLeftBuffer > 0 then
-					self:changeState('runTurn')
-				else
-					self:changeToRunState('right')
-					self:deductStamina(self.runStaminaCost * DELTA_TIME)
-				end
+			if self.runLeftBuffer > 0 then
+				self:changeState('runTurn')
 			else
-				self:changeToWalkState('right')
+				self:changeToRunState('right')
 			end
-
-			self.setStaminaBuffer = true
 		else
 			self:changeToReadyState()
 		end
 	else
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:changeToWalkState('left')
-			self.setStaminaBuffer = true
 		elseif pd.buttonIsPressed(pd.kButtonRight) then
 			self:changeToWalkState('right')
-			self.setStaminaBuffer = true
 		else
 			if self.currentState ~= 'idle' then
 				self:changeToIdleState()
@@ -980,12 +936,9 @@ end
 
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
-	if self.sp > self.jumpStaminaCost then
-		self.jumping = true
-		self.jumpBuffer = 0
-		self.yVelocity = self.jumpVelocity
-		self:deductStamina(self.jumpStaminaCost)
-	end
+	self.jumping = true
+	self.jumpBuffer = 0
+	self.yVelocity = self.jumpVelocity
 
 	if pd.buttonIsPressed(pd.kButtonLeft) then
 		if self.currentState == "wallSlide" then
@@ -1002,8 +955,6 @@ function Player:changeToJumpState()
 			end
 		end
 	end
-
-	self.setStaminaBuffer = true
 end
 
 --- Changes the player sprite to the mid jump sprite
@@ -1046,27 +997,22 @@ end
 --- Change the player into a roll state
 --- @param  direction  string  The direction to roll in
 function Player:changeToRollState(direction)
-	if self.sp > self.rollStaminaCost then
-		self.rollAvailable = false
-		self:setHitBox(crouching)
+	self.rollAvailable = false
+	self:setHitBox(crouching)
 
-		if direction == 'left' then
-			self.xVelocity = -self.rollSpeed
-		elseif direction == 'right' then
-			self.xVelocity = self.rollSpeed
-		end
-
-		pd.timer.performAfterDelay(490, function()
-			pd.timer.performAfterDelay(self.rollRecharge, function()
-				self.rollAvailable = true
-			end)
-		end)
-
-		self:deductStamina(self.rollStaminaCost)
-		self:changeState('roll')
+	if direction == 'left' then
+		self.xVelocity = -self.rollSpeed
+	elseif direction == 'right' then
+		self.xVelocity = self.rollSpeed
 	end
 
-	self.setStaminaBuffer = true
+	pd.timer.performAfterDelay(490, function()
+		pd.timer.performAfterDelay(self.rollRecharge, function()
+			self.rollAvailable = true
+		end)
+	end)
+
+	self:changeState('roll')
 end
 
 --- Changes the player to the contact state
@@ -1078,31 +1024,26 @@ end
 
 --- Changes the player to a punch state
 function Player:changeToPunchState(state)
-	if self.sp > self.punchStaminaCost then
-		self.xVelocity = 0
-		self.yVelocity = 0
+	self.xVelocity = 0
+	self.yVelocity = 0
 
-		if self.punchAvailable then
-			local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
-			local hitboxY = self.y + 9
-			if state == 'punch' then
-				hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 24
-				hitboxY = self.y + 16
-			end
-
-			Hitbox(hitboxX, hitboxY, 12, 7, self.punchDamage, self.punchFrameDuration)
-
-			self.punchAvailable = false
-			pd.timer.performAfterDelay(self.punchRecharge, function()
-				self.punchAvailable = true
-			end)
-
-			self:deductStamina(self.punchStaminaCost)
-			self:changeState(state)
+	if self.punchAvailable then
+		local hitboxX = self.globalFlip == 0 and self.x + 9 or self.x - 17
+		local hitboxY = self.y + 9
+		if state == 'punch' then
+			hitboxX = self.globalFlip == 0 and self.x + 12 or self.x - 24
+			hitboxY = self.y + 16
 		end
-	end
 
-	self.setStaminaBuffer = true
+		Hitbox(hitboxX, hitboxY, 12, 7, self.punchDamage, self.punchFrameDuration)
+
+		self.punchAvailable = false
+		pd.timer.performAfterDelay(self.punchRecharge, function()
+			self.punchAvailable = true
+		end)
+
+		self:changeState(state)
+	end
 end
 
 --- Changes the player to the dive state
@@ -1180,21 +1121,6 @@ function Player:applyDrag(amount)
 	end
 end
 
---- This method is used to calculate when to regenerate stamina and how quickly
-function Player:regenerateStamina()
-	if self.sp < self.maxSP and not self:staminaBlocked() then
-		if self.currentState == 'duck' then
-			self.sp = self.sp + 30 * DELTA_TIME
-		end
-
-		self.sp = self.sp + 30 * DELTA_TIME
-	end
-
-	if self.sp > self.maxSP then
-		self.sp = self.maxSP
-	end
-end
-
 --- This method is used to calculate when to regenerate mana
 function Player:regenerateMana()
 	if self.mp < self.maxMP and not self:manaBlocked() then
@@ -1206,14 +1132,6 @@ function Player:regenerateMana()
 	end
 end
 
-
-
-
---- This method is used to deduct stamina from the player, and request a stamina buffer set
---- @param  amount  integer  The amount of stamina to deduct from the player
-function Player:deductStamina(amount)
-	self.sp = self.sp - amount
-end
 
 
 
