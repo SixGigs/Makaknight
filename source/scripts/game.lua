@@ -59,7 +59,6 @@ function Game:startTransition(transition)
 
 		if self.won then
 			self.playerHP = self.playerMaxHP
-			self.playerMP = self.playerMaxMP
 			self.playerLevel = self.playerSpawnLevel
 			self.playerX = self.playerSpawnX
 			self.playerY = self.playerSpawnY
@@ -124,9 +123,6 @@ function Game:load()
 	self.playerState = (gd and (gd.state and gd.state or 'idle') or 'idle')
 	self.playerFacing = (gd and (gd.face and gd.face or 0) or 0)
 	self.playerHP = (gd and (gd.hp and gd.hp or 100) or 100)
-	self.playerMP = (gd and (gd.mp and gd.mp or 100) or 100)
-	self.playerMaxHP = (gd and (gd.maxHP and gd.maxHP or 100) or 100)
-	self.playerMaxMP = (gd and (gd.maxMP and gd.maxMP or 100) or 100)
 	self.playerCoins = (gd and (gd.coins and gd.coins or 0) or 0)
 	self.depletedEntities = (gd and (gd.depletedEntities and gd.depletedEntities or {}) or {})
 	self.extinctEntities = (gd and (gd.extinctEntities and gd.extinctEntities or {}) or {})
@@ -158,9 +154,7 @@ function Game:save()
 		face = self.playerFacing,
 		fps = self.fps,
 		hp = self.playerHP,
-		mp = self.playerMP,
 		maxHP = self.playerMaxHP,
-		maxMP = self.playerMaxMP,
 		coins = self.playerCoins,
 		depletedEntities = self.depletedEntities,
 		extinctEntities = self.extinctEntities,

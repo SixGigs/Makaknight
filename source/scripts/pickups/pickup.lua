@@ -262,8 +262,6 @@ function Pickup:handleCollision(e)
 	-- Apply pickup effect
 	if self:isa(Healthpotion) then
 		e.hp = e.maxHP
-	elseif self:isa(Manapotion) then
-		e.mp = e.maxMP
 	else
 		GAME.playerCoins += 1
 		Text('$ ' .. tostring(GAME.playerCoins), 'right', 0)
