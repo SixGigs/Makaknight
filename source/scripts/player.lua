@@ -395,7 +395,7 @@ function Player:handleState()
 	-- If the player is in the air we use this statement to handle that
 	if self.jumpStates[self.currentState] then
 		if self.touchingGround then
-			if self.yVelocity > 270 then
+			if self.yVelocity > 330 then
 				if pd.buttonIsPressed(pd.kButtonDown) then
 					self:changeToDuckState()
 				else

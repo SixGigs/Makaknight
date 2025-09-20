@@ -362,22 +362,6 @@
 					],
 					"__worldX": 3968,
 					"__worldY": -128
-				},
-				{
-					"__identifier": "Floorspike",
-					"__grid": [14,4],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": { "tilesetUid": 3603, "x": 0, "y": 0, "w": 16, "h": 16 },
-					"__smartColor": "#FF0000",
-					"iid": "4cc40480-8560-11f0-8e6d-bd4868c011d7",
-					"width": 16,
-					"height": 16,
-					"defUid": 3604,
-					"px": [224,64],
-					"fieldInstances": [],
-					"__worldX": 3888,
-					"__worldY": -176
 				}
 			]
 		},
