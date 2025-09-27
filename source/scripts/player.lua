@@ -909,11 +909,10 @@ function Player:changeToHurtState()
 	end
 end
 
-
-
-
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
+	if self.jumping then return end
+
 	self.jumping = true
 	self.jumpBuffer = 0
 	self.yVelocity = self.jumpVelocity
@@ -1085,16 +1084,11 @@ function Player:applyDrag(amount)
 	end
 end
 
-
-
 --- This method is used to set the player hit box dimensions and uses a table to do it
 --- @param  hitBox  table  A table containing an X, Y, Width, and Height for the collision rect
 function Player:setHitBox(hitBox)
 	self:setCollideRect(hitBox['x'], hitBox['y'], hitBox['w'], hitBox['h'])
 end
-
-
-
 
 --- This method handles falling and jumping sprite changes in several onFrameChangeEvents
 function Player:handleYVelocity()
@@ -1105,9 +1099,7 @@ function Player:handleYVelocity()
 	end
 end
 
-
-
-
+--- Add armour plating over the current character sprite sheet
 function Player:addArmour(sheet)
 	-- Sprite sheet frame width & height
 	local width <const> = 80
@@ -1150,9 +1142,6 @@ function Player:addArmour(sheet)
 
 	return imagetable
 end
-
-
-
 
 --- This method is used to handle the collisions the player has with the world
 --- @param   e        table    This variable contains what the player has collided with
