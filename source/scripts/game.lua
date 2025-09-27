@@ -18,6 +18,10 @@ function Game:init()
 		end)
 	end
 
+	menu:addMenuItem('Credits', function()
+		self:switchScene(Credits, 'fade')
+	end)
+
 	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
 		if status ~= nil then
 			self.fps = (status and 50 or 30)

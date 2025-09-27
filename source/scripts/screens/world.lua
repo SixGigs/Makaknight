@@ -82,7 +82,7 @@ function World:enterRoom(direction)
 	-- Create a local X and Y, and use them to spawn the player
 	local x, y
 	if direction == 'north' then
-		x, y = self.player.x, 240 - 40
+		x, y = self.player.x, 240 - 48
 	elseif direction == 'south' then
 		x, y = self.player.x, 24
 	elseif direction == 'east' then
