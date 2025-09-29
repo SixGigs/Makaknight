@@ -51,7 +51,7 @@ end
 -- Starts and handles the transition
 function Game:startTransition(transition)
 	if transition == "fade" then
-		Fade('out')
+		Fade('white', 'out')
 	else
 		Wipe('out')
 	end
@@ -71,7 +71,7 @@ function Game:startTransition(transition)
 		end
 
 		if transition == 'fade' then
-			Fade('in')
+			Fade('white', 'in')
 		else
 			Wipe('in')
 		end

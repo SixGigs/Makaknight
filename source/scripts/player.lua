@@ -658,7 +658,7 @@ function Player:die()
 	-- Stop player collisions & set a timer to reset the player
 	self:setCollisionsEnabled(false)
 	pd.timer.performAfterDelay(2000, function()
-		Fade('out')
+		Fade('black', 'out')
 
 		pd.timer.performAfterDelay(500, function()
 			self:reset()
