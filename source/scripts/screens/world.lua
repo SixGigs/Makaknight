@@ -126,7 +126,7 @@ end
 --- @param  y      integer  Contains the Y coordinate to spawn the player after moving to the new level
 function World:enterDoor(door)
 	if door.level ~= GAME.playerLevel then
-		Fade('out')
+		Fade('black', 'out')
 
 		pd.timer.performAfterDelay(500, function()
 			local oldLevel <const> = GAME.playerLevel
@@ -134,7 +134,7 @@ function World:enterDoor(door)
 			self:goToLevel(door.level)
 			self.player:add()
 
-			Fade('in')
+			Fade('black', 'in')
 		end)
 	end
 
@@ -470,7 +470,7 @@ function World:resetPlayer()
 	self.player:moveTo(GAME.playerSpawnX, GAME.playerSpawnY)
 	self.player:changeToSpawnState()
 
-	Fade('in')
+	Fade('black', 'in')
 end
 
 

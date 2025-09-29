@@ -2,13 +2,22 @@ local gfx <const> = playdate.graphics
 class('Fade').extends(AnimatedSprite)
 
 
-function Fade:init(direction)
-	Fade.super.init(self, gfx.imagetable.new('images/transitions/fade-table-400-240'))
+function Fade:init(colour, direction)
+	if colour == "black" then
+		Fade.super.init(self, gfx.imagetable.new('images/transitions/fade-table-400-240'))
 
-	self:addState('out', 1, 14, {ts = 1, na = 'blank'})
-	self:addState('blank', 15, 15)
-	self:addState('in', 15, 29, {ts = 1, l = 1})
-	self:playAnimation()
+		self:addState('out', 1, 14, {ts = 1, na = 'blank'})
+		self:addState('blank', 15, 15)
+		self:addState('in', 15, 29, {ts = 1, l = 1})
+		self:playAnimation()
+	else
+		Fade.super.init(self, gfx.imagetable.new('images/transitions/whitefade-table-400-240'))
+
+		self:addState('out', 1, 7, {ts = 1, na = 'blank'})
+		self:addState('blank', 8, 8)
+		self:addState('in', 9, 15, {ts = 1, l = 1})
+		self:playAnimation()
+	end
 
 	self.states['in'].onAnimationEndEvent = function(self) self:remove() end
 
