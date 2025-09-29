@@ -11,23 +11,6 @@ function Game:init()
 	self.transitionTime = 1000
 	self.transitioning = false
 	self.won = false
-
-	if DEBUG then
-		menu:addMenuItem('Reset', function()
-			self:reset()
-		end)
-	end
-
-	menu:addMenuItem('Credits', function()
-		self:switchScene(Credits, 'fade')
-	end)
-
-	menu:addCheckmarkMenuItem('50 FPS', (self.fps == 50 and true or false), function(status)
-		if status ~= nil then
-			self.fps = (status and 50 or 30)
-			pd.display.setRefreshRate(self.fps)
-		end
-	end)
 end
 
 
@@ -40,6 +23,9 @@ function Game:switchScene(nextScene, transition, ...)
 	if self.transitioning then
 		return
 	end
+
+	-- Remove all menu items when changing scenes
+	menu:removeAllMenuItems()
 
 	self.newScene = nextScene
 	self.sceneArgs = ...

@@ -1,5 +1,6 @@
 local pd <const> = playdate
 local gfx <const> = playdate.graphics
+local menu <const> = pd.getSystemMenu()
 local ldtk <const> = LDtk
 class('World').extends(gfx.sprite)
 
@@ -15,6 +16,24 @@ ldtk.load('levels/world.ldtk', false)
 function World:init()
 	-- Load game save data
 	GAME:load()
+
+	-- Add the relevant world menu options
+	if DEBUG then
+		menu:addMenuItem('Reset', function()
+			GAME:reset()
+		end)
+	end
+
+	menu:addMenuItem('Credits', function()
+		GAME:switchScene(Credits, 'fade')
+	end)
+
+	menu:addCheckmarkMenuItem('50 FPS', (GAME.fps == 50 and true or false), function(status)
+		if status ~= nil then
+			GAME.fps = (status and 50 or 30)
+			pd.display.setRefreshRate(GAME.fps)
+		end
+	end)
 
 	-- Go to the Level Specified in the Save File and Create the Player
 	self.oldLevelName = ''
@@ -73,16 +92,17 @@ function World:enterRoom(direction)
 		-- Load the new level, remove the old level, and add the player
 		self:goToLevel(level)
 		self.player:add()
-		
+
 		-- Reset the Game World Coordinate Properties
 		if direction == 'east' then
 			GAME.worldX = 0
 		end
-		
+
 		-- Create a local X and Y, and use them to spawn the player
 		local x, y
 		if direction == 'north' then
-			x, y = self.player.x, 240 - 48
+			x, y = self.player.x, 240 - 52
+			self.player.yVelocity = self.player.jumpVelocity
 		elseif direction == 'south' then
 			x, y = self.player.x, 24
 		elseif direction == 'east' then
@@ -90,10 +110,10 @@ function World:enterRoom(direction)
 		elseif direction == 'west' then
 			x, y = 392, self.player.y
 		end
-		
+
 		-- Move the player to the new X and Y
 		self.player:moveTo(x, y)
-		
+
 		if self.width > SCREEN['width'] then
 			if direction == 'west' then
 				GAME.worldX = self.width - SCREEN['width']
@@ -101,7 +121,7 @@ function World:enterRoom(direction)
 				self:adjustLevel(GAME.worldX, 0)
 			end
 		end
-		
+
 		if self.height > SCREEN['height'] then
 			if direction == 'east' or direction == 'west' then
 				local worldDiff <const> = self.oldWorldY - self.worldY
