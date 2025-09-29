@@ -48,74 +48,77 @@ end
 --- This method is responsible for loading rooms in the level. This includes the first room and any rooms the player enters
 --- @param  direction  string  Contains a Direction From the Current Level to Load the Next Level Piece
 function World:enterRoom(direction)
-	-- If there is no neighbouring level die unless its north in which case just don't move
+	-- Get the ID of the level the player is moving into
 	local level <const> = ldtk.get_neighbours(GAME.playerLevel, direction)[1]
+
+	-- If there is no level, handle what to do with the player and return
 	if not level then
-		if direction == 'north' then
-			return
-		elseif direction == 'east' then
+		if direction == 'east' then
 			self.player:moveTo(0, self.player.y - 2)
-			return
 		elseif direction == 'west' then
 			self.player:moveTo(400, self.player.y - 2)
-			return
-		else
+		elseif direction == 'south' then
 			self.player:die()
-			return
 		end
+
+		return
 	end
 
-	-- Use the LDtk library to find the neighbouring level in the direction given, and go to it
-	local oldLevel <const> = GAME.playerLevel
-	local level <const> = ldtk.get_neighbours(oldLevel, direction)[1]
-	ldtk.release_level(oldLevel)
+	-- Unload the level the player was just in to save memory
+	ldtk.release_level(GAME.playerLevel)
+	Fade("black", "out")
+	self.player:remove()
 
-	-- Load the new level, remove the old level, and add the player
-	self:goToLevel(level)
-	self.player:add()
-
-	-- Reset the Game World Coordinate Properties
-	if direction == 'east' then
-		GAME.worldX = 0
-	end
-
-	-- Create a local X and Y, and use them to spawn the player
-	local x, y
-	if direction == 'north' then
-		x, y = self.player.x, 240 - 48
-	elseif direction == 'south' then
-		x, y = self.player.x, 24
-	elseif direction == 'east' then
-		x, y = 8, self.player.y
-	elseif direction == 'west' then
-		x, y = 392, self.player.y
-	end
-
-	-- Move the player to the new X and Y
-	self.player:moveTo(x, y)
-
-	if self.width > SCREEN['width'] then
-		if direction == 'west' then
-			GAME.worldX = self.width - SCREEN['width']
-			self.player:moveBy(GAME.worldX, 0)
-			self:adjustLevel(GAME.worldX, 0)
+	pd.timer.performAfterDelay(500, function()
+		-- Load the new level, remove the old level, and add the player
+		self:goToLevel(level)
+		self.player:add()
+		
+		-- Reset the Game World Coordinate Properties
+		if direction == 'east' then
+			GAME.worldX = 0
 		end
-	end
-
-	if self.height > SCREEN['height'] then
-		if direction == 'east' or direction == 'west' then
-			local worldDiff <const> = self.oldWorldY - self.worldY
-			GAME.worldY = worldDiff
-			self.player:moveBy(0, GAME.worldY)
-			self:adjustLevel(0, GAME.worldY)
-		elseif direction == 'north' then
-			GAME.worldY = self.height - SCREEN['height']
-			self.player:moveBy(0, GAME.worldY)
-			self:adjustLevel(0, GAME.worldY)
+		
+		-- Create a local X and Y, and use them to spawn the player
+		local x, y
+		if direction == 'north' then
+			x, y = self.player.x, 240 - 48
+		elseif direction == 'south' then
+			x, y = self.player.x, 24
+		elseif direction == 'east' then
+			x, y = 8, self.player.y
+		elseif direction == 'west' then
+			x, y = 392, self.player.y
 		end
-	else
-		GAME.worldY = 0
-	end
+		
+		-- Move the player to the new X and Y
+		self.player:moveTo(x, y)
+		
+		if self.width > SCREEN['width'] then
+			if direction == 'west' then
+				GAME.worldX = self.width - SCREEN['width']
+				self.player:moveBy(GAME.worldX, 0)
+				self:adjustLevel(GAME.worldX, 0)
+			end
+		end
+		
+		if self.height > SCREEN['height'] then
+			if direction == 'east' or direction == 'west' then
+				local worldDiff <const> = self.oldWorldY - self.worldY
+				GAME.worldY = worldDiff
+				self.player:moveBy(0, GAME.worldY)
+				self:adjustLevel(0, GAME.worldY)
+			elseif direction == 'north' then
+				GAME.worldY = self.height - SCREEN['height']
+				self.player:moveBy(0, GAME.worldY)
+				self:adjustLevel(0, GAME.worldY)
+			end
+		else
+			GAME.worldY = 0
+		end
+
+		Fade("black", "in")
+	end)
 end
 
 
