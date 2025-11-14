@@ -114,22 +114,22 @@ function World:enterRoom(direction)
 		-- Move the player to the new X and Y
 		self.player:moveTo(x, y)
 
-		if self.width > SCREEN['width'] then
+		if self.width > SCREEN.width then
 			if direction == 'west' then
-				GAME.worldX = self.width - SCREEN['width']
+				GAME.worldX = self.width - SCREEN.width
 				self.player:moveBy(GAME.worldX, 0)
 				self:adjustLevel(GAME.worldX, 0)
 			end
 		end
 
-		if self.height > SCREEN['height'] then
+		if self.height > SCREEN.height then
 			if direction == 'east' or direction == 'west' then
 				local worldDiff <const> = self.oldWorldY - self.worldY
 				GAME.worldY = worldDiff
 				self.player:moveBy(0, GAME.worldY)
 				self:adjustLevel(0, GAME.worldY)
 			elseif direction == 'north' then
-				GAME.worldY = self.height - SCREEN['height']
+				GAME.worldY = self.height - SCREEN.height
 				self.player:moveBy(0, GAME.worldY)
 				self:adjustLevel(0, GAME.worldY)
 			end
@@ -172,16 +172,16 @@ function World:enterDoor(door)
 			end
 		end
 
-		if self.width > SCREEN['width'] then
+		if self.width > SCREEN.width then
 			if direction == 'west' then
-				GAME.worldX = self.width - SCREEN['width']
+				GAME.worldX = self.width - SCREEN.width
 				self.player:moveBy(GAME.worldX, 0)
 				self:adjustLevel(GAME.worldX, 0)
 			end
 		end
 
-		if self.height > SCREEN['height'] then
-			GAME.worldY = self.player.y - SCREEN['height'] / 2
+		if self.height > SCREEN.height then
+			GAME.worldY = self.player.y - SCREEN.height / 2
 			self:adjustLevel(0, GAME.worldY)
 		else
 			GAME.worldY = 0
