@@ -172,8 +172,6 @@ function Player:init(world)
 		self.xVelocity = 0
 	end
 
-
-
 	-- General player class properties
 	self.hp = GAME.playerHP
 	self.maxHP = GAME.playerMaxHP
@@ -184,7 +182,6 @@ function Player:init(world)
 	self.weight = 72
 	self.holster = ''
 	self.hand = ''
-	self.hurt = false
 	self.dead = false
 
 	-- Array of playdate tags the player hit box can overlap with
@@ -224,7 +221,7 @@ function Player:init(world)
 	}
 
 	-- Run properties
-	self.maxSpeed = 195
+	self.runSpeed = 195
 
 	-- Roll properties
 	self.rollAvailable = true
@@ -296,8 +293,6 @@ function Player:init(world)
 	self.walkSpeed = 90
 	self.drag = 60
 
-
-
 	-- Do -1 here to stop the player slipping through half tiles
 	self:moveTo(GAME.playerX, GAME.playerY -1)
 	self:changeState(GAME.playerState)
@@ -306,8 +301,22 @@ function Player:init(world)
 	self:setHitBox(standing)
 end
 
+--- This method is used to handle the collisions the player has with the world
+--- @param   e        table    This variable contains what the player has collided with
+--- @return  unknown  unknown  The function returns the collision response to use
+function Player:collisionResponse(e)
+	local tag <const> = e:getTag()
 
+	if self.overlapTags[tag] then
+		if tag == TAGS.Fragile or tag == TAGS.Half then
+			return e:collision(self)
+		else
+			return gfx.sprite.kCollisionTypeOverlap
+		end
+	end
 
+	return gfx.sprite.kCollisionTypeSlide
+end
 
 --- The player update function runs every game tick and manages all input/responses
 function Player:update()
@@ -329,8 +338,6 @@ function Player:update()
 	self:handleState()
 	self:handleMovementAndCollisions()
 end
-
-
 
 --- Update all game buffers
 function Player:updateBuffers()
@@ -376,9 +383,6 @@ function Player:updateBuffers()
 	end
 end
 
-
-
-
 --- These methods return true if the buffer is greater than zero
 function Player:playerPunched() return self.punchBuffer > 0 end
 function Player:playerPressedLeft() return self.leftBuffer > 0 end
@@ -386,9 +390,6 @@ function Player:playerPressedRight() return self.rightBuffer > 0 end
 function Player:playerPressedUp() return self.upBuffer > 0 end
 function Player:playerJumped() return self.jumpBuffer > 0 end
 function Player:playerPressedB() return self.bBuffer > 0 end
-
-
-
 
 --- The state handler changes the functions running on the player based on state
 function Player:handleState()
@@ -459,18 +460,17 @@ function Player:handleState()
 	end
 end
 
-
-
 --- This function handles all player movement input and any collisions that might occur
 function Player:handleMovementAndCollisions()
-	local xMovement = self.x + (self.xVelocity * DELTA_TIME)
-	local yMovement = self.y + (self.yVelocity * DELTA_TIME)
-	local _, _, collisions, length = self:moveWithCollisions(xMovement, yMovement)
+	local xMove <const> = self.x + (self.xVelocity * DELTA_TIME)
+	local yMove <const> = self.y + (self.yVelocity * DELTA_TIME)
+	local _, _, collisions, length <const> = self:moveWithCollisions(xMove, yMove)
+	local screenHeight <const> = pd.display.getHeight()
+	local died = false
 
 	self.touchingGround = false
 	self.touchingCeiling = false
 	self.touchingWall = false
-	local died = false
 
 	for i = 1, length do
 		local collision <const> = collisions[i]
@@ -522,7 +522,7 @@ function Player:handleMovementAndCollisions()
 	end
 
 	-- If the world is wider than 400 pixels and the player is 250 or more pixels across the screen update the world
-	if self.x + self.xVelocity > self.x and self.x >= 250 and GAME.worldX + SCREEN['width'] < self.world.width - 1 then
+	if self.x + self.xVelocity > self.x and self.x >= 250 and GAME.worldX + pd.display.getWidth() < self.world.width - 1 then
 		self.world:update()
 	end
 
@@ -533,15 +533,14 @@ function Player:handleMovementAndCollisions()
 
 	-- If the world is taller than 240 pixels and the player is in the centre of the screen update the world
 	if self.world.height > 240 then
-		if self.y + self.yVelocity < self.y and self.y <= (SCREEN['height'] / 2) - (standing['h'] / 2) and GAME.worldY > 0 then 
+		if self.y + self.yVelocity < self.y and self.y <= (screenHeight / 2) - (standing['h'] / 2) and GAME.worldY > 0 then 
 			self.world:update()
 		end
 
-		if (self.y + self.yVelocity) > self.y and self.y >= SCREEN['height'] / 2 + (standing['h'] / 4) and GAME.worldY + SCREEN['height'] < self.world.height then
+		if (self.y + self.yVelocity) > self.y and self.y >= screenHeight / 2 + (standing['h'] / 4) and GAME.worldY + screenHeight < self.world.height then
 			self.world:update()
 		end
-	end
-
+	end   
 	-- Change to face the direction we are moving in
 	if self.xVelocity < 0 then
 		self.globalFlip = 1
@@ -573,17 +572,13 @@ function Player:handleMovementAndCollisions()
 end
 
 
-
 function Player:reset()
 	self.hp = self.maxHP
 	self.dead = false
-	self.hurt = false
 	
 	self:setCollisionsEnabled(true)
 	self.world:resetPlayer()
 end
-
-
 
 --- This method handles collisions with objects that can deal damage
 --- @param  obj  object   This object contains all collision object data
@@ -593,7 +588,7 @@ function Player:handleDamageCollision(obj, tag)
 	local damage = 0
 
 	-- If the player is not already in a hurt state, lets see if they can be hurt again
-	if not self.hurt then
+	if not self.currentState == 'hurt' then
 		damage = obj.damage
 
 		-- If the damage number is not zero, deduct it from the player health
@@ -608,8 +603,6 @@ function Player:handleDamageCollision(obj, tag)
 		end
 	end
 end
-
-
 
 --- Trigger checkpoint
 --- param flag table The checkpoint triggered
@@ -631,7 +624,6 @@ function Player:handleFlagCollision(flag)
 end
 
 
-
 function Player:handleVariableJump()
 	if pd.buttonJustReleased(pd.kButtonA) or self.jumpCounter > (self.jumpCounterMax * GAME.fps) then
 		if self.jumping then
@@ -645,8 +637,6 @@ function Player:handleVariableJump()
 		self.jumpCounter = self.jumpCounter + 1
 	end
 end
-
-
 
 --- This function handles when the player dies, what to do and when to respawn
 function Player:die()
@@ -694,9 +684,6 @@ function Player:die()
 	-- Set the player to the die state
 	self:changeState('die')
 end
-
-
-
 
 --- Handle input while the player is on the ground. Like going left, right, dashing, and jumping
 function Player:handleGroundInput()
@@ -755,9 +742,6 @@ function Player:handleGroundInput()
 	self:handleVariableJump()
 end
 
-
-
-
 --- Handle input while the player is crouched
 function Player:handleDuckInput()
 	if not pd.buttonIsPressed(pd.kButtonDown) then
@@ -772,65 +756,53 @@ function Player:handleDuckInput()
 	-- end
 end
 
-
-
-
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	if pd.buttonIsPressed(pd.kButtonLeft) then
-		self.xVelocity = self.xVelocity - (self.airSpeed * DELTA_TIME)
+	local up     = pd.buttonIsPressed(pd.kButtonUp)
+	local down   = pd.buttonIsPressed(pd.kButtonDown)
+	local left   = pd.buttonIsPressed(pd.kButtonLeft)
+	local right  = pd.buttonIsPressed(pd.kButtonRight)
+	local pressB = pd.buttonJustPressed(pd.kButtonB)
+	local pressA = pd.buttonJustPressed(pd.kButtonA)
 
-		if self.xVelocity < -self.jumpSpeed then
-			self.xVelocity = -self.jumpSpeed
-		end
-	elseif pd.buttonIsPressed(pd.kButtonRight) then
-		self.xVelocity = self.xVelocity + (self.airSpeed * DELTA_TIME)
-
-		if self.xVelocity > self.jumpSpeed then
-			self.xVelocity = self.jumpSpeed
-		end
+	-- Jump / dive / double jump
+	if up and self:playerPressedB() then
+		self:changeToDoubleJumpState()
+	elseif down and self:playerPressedB() then
+		self:changeToDiveState()
 	end
 
-	if pd.buttonIsPressed(pd.kButtonUp) then
-		if pd.buttonIsPressed(pd.kButtonB) and not pd.buttonIsPressed(pd.kButtonDown) then
-			if self.doubleJumpAvailable then
-				self:changeToDoubleJumpState()
-			end
-		end
-	end
-
-	if pd.buttonIsPressed(pd.kButtonLeft) or pd.buttonIsPressed(pd.kButtonRight) then
+	-- Horizontal movement
+	if left or right then
+		local dir = (right and 1 or -1)
+		self.xVelocity = self.xVelocity + dir * self.airSpeed * DELTA_TIME
+	
+		-- Clamp horizontal velocity
+		if self.xVelocity >  self.jumpSpeed then self.xVelocity =  self.jumpSpeed end
+		if self.xVelocity < -self.jumpSpeed then self.xVelocity = -self.jumpSpeed end
+	
+		-- Dash
 		if self:playerPressedB() then
-			if self.dashAvailable then
-				self:changeToDashState()
-			end
+			self:changeToDashState()
 		end
 	end
 
-	if pd.buttonIsPressed(pd.kButtonDown) then
-		if pd.buttonJustPressed(pd.kButtonB) then
-			self:changeToDiveState()
+	-- Wall interactions
+	if self.touchingWall and (left or right) then
+		-- Wall slide
+		if self.yVelocity >= 90 and self.yVelocity <= 450 then
+			self.yVelocity = self.yVelocity / 4
+			self:changeState("wallSlide")
 		end
-	end
-
-	if self.touchingWall then
-		if self.yVelocity >= 30 and self.yVelocity <= 240 then
-			self.yVelocity = self.yVelocity / 2
-			self:changeState('wallSlide')
-		end
-	end
-
-	if pd.buttonJustPressed(pd.kButtonA) then
-		if self.currentState == 'wallSlide' then
+	
+		-- Wall jump
+		if pressA then
 			self:changeToJumpState()
 		end
 	end
 
 	self:handleVariableJump()
 end
-
-
-
 
 --- If the player is not moving on the X axis change to an idle state
 function Player:changeToIdleState()
@@ -843,9 +815,6 @@ function Player:changeToIdleState()
 	end
 end
 
-
-
-
 --- Change the player to a ready state
 function Player:changeToReadyState()
 	if self.currentState ~= 'ready' then
@@ -857,11 +826,8 @@ function Player:changeToReadyState()
 	end
 end
 
-
-
-
---- If the player is moving in any direction set their X movement velocity to their max speed and change sprite
---- @param direction string Contains the direction the player is moving in as a string
+--- Change the player into a walking state
+--- @param  direction  string  The direction the player is walking in
 function Player:changeToWalkState(direction)
 	if direction == 'left' then
 		self.xVelocity = -self.walkSpeed
@@ -874,24 +840,19 @@ function Player:changeToWalkState(direction)
 	end
 end
 
-
-
-
 --- Change the player into a running state
+--- @param  direction  string  The direction the player is running in
 function Player:changeToRunState(direction)
 	if direction == 'left' then
-		self.xVelocity = -self.maxSpeed
+		self.xVelocity = -self.runSpeed
 	elseif direction == 'right' then
-		self.xVelocity = self.maxSpeed
+		self.xVelocity = self.runSpeed
 	end
 
 	if self.currentState ~= 'run' then
 		self:changeState('run')
 	end
 end
-
-
-
 
 --- Change the player into the hurt state
 function Player:changeToHurtState()
@@ -901,12 +862,10 @@ function Player:changeToHurtState()
 		self.xVelocity = -self.walkSpeed
 	end
 
-	self.yVelocity = -self.maxSpeed
-	self.hurt = true
+	self.yVelocity = -self.runSpeed
+	self.touchingGround = false
 
-	if self.currentState ~= 'hurt' then
-		self:changeState('hurt')
-	end
+	self:changeState('hurt')
 end
 
 --- Changes the player sprite & Y velocity to the jump velocity
@@ -917,17 +876,17 @@ function Player:changeToJumpState()
 	self.jumpBuffer = 0
 	self.yVelocity = self.jumpVelocity
 
-	if pd.buttonIsPressed(pd.kButtonLeft) then
-		if self.currentState == "wallSlide" then
-			self.xVelocity = self.maxSpeed
+	if self.currentState == "wallSlide" then
+		if self.globalFlip == 0 then
+			self.xVelocity = -self.runSpeed
 		else
-			self.xVelocity = -self.jumpSpeed
+			self.xVelocity = self.runSpeed
 		end
 	else
-		if pd.buttonIsPressed(pd.kButtonRight) then
-			if self.currentState == "wallSlide" then
-				self.xVelocity = -self.maxSpeed
-			else
+		if pd.buttonIsPressed(pd.kButtonLeft) then
+			self.xVelocity = -self.jumpSpeed
+		else
+			if pd.buttonIsPressed(pd.kButtonRight) then
 				self.xVelocity = self.jumpSpeed
 			end
 		end
@@ -942,6 +901,8 @@ end
 
 --- Allow the player to double jump
 function Player:changeToDoubleJumpState()
+	if not self.doubleJumpAvailable then return end
+
 	self.jumpBuffer = 0
 	self.doubleJumpAvailable = false
 	self.yVelocity = self.doubleJumpVelocity
@@ -1034,6 +995,8 @@ end
 
 --- This method make the player dash in the direction they face
 function Player:changeToDashState()
+	if not self.dashAvailable then return end
+
 	self.dashAvailable = false
 	self.yVelocity = -self.walkSpeed
 
@@ -1094,8 +1057,10 @@ end
 function Player:handleYVelocity()
 	if self.yVelocity < 0 then
 		self:changeState('jump')
-	elseif self.yVelocity > 90 then
-		self:changeState('fall')
+	else
+		if self.yVelocity > 45 then
+			self:changeState('fall')
+		end
 	end
 end
 
@@ -1141,21 +1106,4 @@ function Player:addArmour(sheet)
 	})
 
 	return imagetable
-end
-
---- This method is used to handle the collisions the player has with the world
---- @param   e        table    This variable contains what the player has collided with
---- @return  unknown  unknown  The function returns the collision response to use
-function Player:collisionResponse(e)
-	local tag <const> = e:getTag()
-
-	if self.overlapTags[tag] then
-		if tag == TAGS.Fragile or tag == TAGS.Half then
-			return e:collision(self)
-		else
-			return gfx.sprite.kCollisionTypeOverlap
-		end
-	end
-
-	return gfx.sprite.kCollisionTypeSlide
 end

@@ -182,6 +182,38 @@
 					"fieldInstances": [],
 					"__worldX": 3472,
 					"__worldY": -80
+				},
+				{
+					"__identifier": "Stalagmite",
+					"__grid": [21,10],
+					"__pivot": [0,0],
+					"__tags": ["Spike"],
+					"__tile": { "tilesetUid": 3598, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "feddba00-8560-11f0-9476-0937163adc3a",
+					"width": 16,
+					"height": 16,
+					"defUid": 3597,
+					"px": [336,160],
+					"fieldInstances": [],
+					"__worldX": 3600,
+					"__worldY": -80
+				},
+				{
+					"__identifier": "Stalagmite",
+					"__grid": [22,10],
+					"__pivot": [0,0],
+					"__tags": ["Spike"],
+					"__tile": { "tilesetUid": 3598, "x": 0, "y": 0, "w": 16, "h": 16 },
+					"__smartColor": "#FF0000",
+					"iid": "ff4a1060-8560-11f0-9476-ad71037dd916",
+					"width": 16,
+					"height": 16,
+					"defUid": 3597,
+					"px": [352,160],
+					"fieldInstances": [],
+					"__worldX": 3616,
+					"__worldY": -80
 				}
 			]
 		},
