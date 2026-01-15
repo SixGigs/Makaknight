@@ -253,6 +253,12 @@ function World:goToLevel(level)
 			if emptyTiles then
 				self:addHalfWallSprites(tilemap, emptyTiles)
 			end
+			
+			-- Draw spikes
+			local emptyTiles <const> = ldtk.get_empty_tileIDs(level, 'Spike', layer_name)
+			if emptyTiles then
+				self:addSpikeSprites(tilemap, emptyTiles)
+			end
 		end
 	end
 
@@ -343,6 +349,20 @@ function World:addFullWallSprites(tilemap, emptyTiles)
 		end
 
 		gfx.sprite.addEmptyCollisionSprite(tile.x, tile.y, tile.w, tile.h)
+	end
+end
+
+
+
+function World:addSpikeSprites(tilemap, emptyTiles)
+	local spikes = gfx.tilemap.getCollisionRects(tilemap, emptyTiles)
+	for _, tile in pairs(spikes) do
+		tile.x = tile.x * 16
+		tile.y = tile.y * 16
+		tile.w = tile.w * 16
+		tile.h = tile.h * 16
+		
+		Spike(tile.x, tile.y, tile.w, tile.h)
 	end
 end
 

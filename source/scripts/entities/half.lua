@@ -20,7 +20,7 @@ end
 --- This method is used to return collision types to colliding entities
 --- @param  e  object  The entity that is colliding with the half tile
 function Half:collision(e)
-	-- Adds minus 0.1 for some leniency for collisions (stops player slipping through half tiles when moving the camera up & down)
+	-- Adds minus 0.025 for some leniency for collisions (stops player slipping through half tiles when moving the camera up & down)
 	if e.y + (e.height / 2) - 0.025 > self.y or e.currentState == 'duck' and pd.buttonIsPressed(pd.kButtonA) or e.yVelocity >= 750 then
 		return gfx.sprite.kCollisionTypeOverlap
 	else
