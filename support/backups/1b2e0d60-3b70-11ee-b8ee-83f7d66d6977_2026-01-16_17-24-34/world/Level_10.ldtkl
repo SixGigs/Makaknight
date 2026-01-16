@@ -362,6 +362,54 @@
 					],
 					"__worldX": 3968,
 					"__worldY": -128
+				},
+				{
+					"__identifier": "Door4",
+					"__grid": [14,2],
+					"__pivot": [0,0],
+					"__tags": [ "Grass", "Door" ],
+					"__tile": { "tilesetUid": 3632, "x": 0, "y": 0, "w": 32, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "08b8e550-d380-11f0-bd1e-7385b684ea0d",
+					"width": 32,
+					"height": 48,
+					"defUid": 3633,
+					"px": [224,32],
+					"fieldInstances": [{ "__identifier": "links", "__type": "EntityRef", "__value": {
+						"entityIid": "0a8085f0-d380-11f0-bd1e-472b8896b102",
+						"layerIid": "3aab47f1-e920-11ef-8d6f-0deebff000d7",
+						"levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0",
+						"worldIid": "1b2e3470-3b70-11ee-b8ee-9757ae8d1300"
+					}, "__tile": null, "defUid": 4612, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["0a8085f0-d380-11f0-bd1e-472b8896b102"]
+					}] }],
+					"__worldX": 3888,
+					"__worldY": -208
+				},
+				{
+					"__identifier": "Door4",
+					"__grid": [9,2],
+					"__pivot": [0,0],
+					"__tags": [ "Grass", "Door" ],
+					"__tile": { "tilesetUid": 3632, "x": 0, "y": 0, "w": 32, "h": 48 },
+					"__smartColor": "#BE4A2F",
+					"iid": "0a8085f0-d380-11f0-bd1e-472b8896b102",
+					"width": 32,
+					"height": 48,
+					"defUid": 3633,
+					"px": [144,32],
+					"fieldInstances": [{ "__identifier": "links", "__type": "EntityRef", "__value": {
+						"entityIid": "08b8e550-d380-11f0-bd1e-7385b684ea0d",
+						"layerIid": "3aab47f1-e920-11ef-8d6f-0deebff000d7",
+						"levelIid": "3aab47f0-e920-11ef-8d6f-cbc144b273f0",
+						"worldIid": "1b2e3470-3b70-11ee-b8ee-9757ae8d1300"
+					}, "__tile": null, "defUid": 4612, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["08b8e550-d380-11f0-bd1e-7385b684ea0d"]
+					}] }],
+					"__worldX": 3808,
+					"__worldY": -208
 				}
 			]
 		},
