@@ -5,6 +5,7 @@
   },
   "extensionTemplate" : "simulator",
   "extensionValues" : {
-    "playdate.main-path" : "source"
+    "playdate.main-path" : "source",
+    "playdate.output-path" : "..\/..\/PlaydateSDK\/Disk\/Games"
   }
 }

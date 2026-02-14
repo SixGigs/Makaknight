@@ -2,13 +2,13 @@
 -- Working title; MakaKnight          --
 ----------------------------------------
 -- Programming standards:             --
--- > Strings use 'single quotes'      --
+-- > Strings use "single quotes"      --
 -- > Variable names use camelCase     --
 -- > Class names use CapitalCase      --
 -- > Method names use snake_case      --
+-- > Functions names use snake_case   --
 -- > Global variables use ALL_CAPS    --
 ----------------------------------------
-
 
 
 -- Global collision tag & z-index arrays
@@ -27,6 +27,7 @@ Z_INDEXES = {
 	Wind = 500, Roaster = 100, Background = -10, Transition = 1500,
 	Text = 1250, Foreground = 105, Effect = 500
 }
+
 
 -- Playdate Core Libraries
 import 'CoreLibs/object'
@@ -94,6 +95,7 @@ import 'scripts/transitions/Wipe'
 -- User interface scripts
 import 'scripts/ui/Bar'
 import 'scripts/ui/Text'
+
 
 -- Constants
 local pd <const> = playdate
