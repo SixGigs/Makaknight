@@ -3,8 +3,8 @@ local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 -- Create hit box constants
-local standing <const> = {['x'] = 38, ['y'] = 44, ['w'] = 4, ['h'] = 36}
-local crouching <const> = {['x'] = 38, ['y'] = 61, ['w'] = 4, ['h'] = 19}
+local standing <const> = {['x'] = 37, ['y'] = 44, ['w'] = 6, ['h'] = 36}
+local crouching <const> = {['x'] = 37, ['y'] = 61, ['w'] = 6, ['h'] = 19}
 
 
 
@@ -25,11 +25,11 @@ function Player:init(world)
 	self.world = world -- Save the World Class as a property
 
 	---[ AnimatedSprite library - States, loops, and animations ] ----------------------------------------
-	self:addState('idle',     1,   16,    {ts = 2})
-	self:addState('walk',     17,  28,   {ts = 1.3})
-	self:addState('duckDown', 29,  29,   {ts = 1, l = 1, na = 'duck'})
+	self:addState('idle',     1,   16,  {ts = 2})
+	self:addState('walk',     17,  28,  {ts = 1.3})
+	self:addState('duckDown', 29,  29,  {ts = 1, l = 1, na = 'duck'})
 	self:addState('duck',     30,  30)
-	self:addState('duckUp',   31,  31,   {ts = 1, l = 1, na = 'idle'})
+	self:addState('duckUp',   31,  31,  {ts = 1, l = 1, na = 'idle'})
 	self:addState('jump',     32,  32)
 	self:addState('jump1',    33,  33)
 	self:addState('jump2',    34,  34)
@@ -40,15 +40,15 @@ function Player:init(world)
 	self:addState('fall1',    38,  38)
 	self:addState('fall2',    39,  39)
 	self:addState('fall3',    40,  40)
-	self:addState('contact',  41,  42,   {ts = 2, l = 1, na = 'idle'})
-	self:addState('roll',     43,  58,   {ts = 1, l = 1, na = 'midJump'})
-	self:addState('dbJump',   59,  74,   {ts = 1, l = 1})
-	self:addState('hurt',     75,  76,   {ts = 1, l = 12, na = 'fall'})
-	self:addState('run',      77,  88,   {ts = 1})
+	self:addState('contact',  41,  42,  {ts = 2, l = 1, na = 'idle'})
+	self:addState('roll',     43,  58,  {ts = 1, l = 1, na = 'midJump'})
+	self:addState('dbJump',   59,  74,  {ts = 1, l = 1})
+	self:addState('hurt',     75,  76,  {ts = 1, l = 12, na = 'fall'})
+	self:addState('run',      77,  88,  {ts = 1})
 	self:addState('dive',     89,  89)
-	self:addState('die',      90,  94,   {ts = 3, l = 1, na = 'dead'})
+	self:addState('die',      90,  94,  {ts = 3, l = 1, na = 'dead'})
 	self:addState('dead',     95,  95)
-	self:addState('spawn',    96,  101,  {ts = 3, l = 1, na = 'idle'})
+	self:addState('spawn',    96,  101, {ts = 3, l = 1, na = 'idle'})
 	self:addState('exit',     99,  101, {ts = 3, l = 1, na = 'idle'})
 	self:addState('ready',    102, 111, {ts = 3})
 	self:addState('punch',    112, 114, {ts = 1, l = 1})
@@ -790,13 +790,13 @@ function Player:handleAirInput()
 	-- Wall interactions
 	if self.touchingWall and (left or right) then
 		-- Wall slide
-		if self.yVelocity >= 90 and self.yVelocity <= 450 then
+		if self.yVelocity <= 450 and self.yVelocity >= 45 then
 			self.yVelocity = self.yVelocity / 4
 			self:changeState("wallSlide")
 		end
 	
 		-- Wall jump
-		if pressA then
+		if pressA and self.currentState == "wallSlide" then
 			self:changeToJumpState()
 		end
 	end
@@ -870,7 +870,9 @@ end
 
 --- Changes the player sprite & Y velocity to the jump velocity
 function Player:changeToJumpState()
-	if self.jumping then return end
+	if self.jumping and self.currentState ~= "wallSlide" then
+		return
+	end
 
 	self.jumping = true
 	self.jumpBuffer = 0
