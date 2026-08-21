@@ -25,36 +25,36 @@ function Player:init(world)
 	self.world = world -- Save the World Class as a property
 
 	---[ AnimatedSprite library - States, loops, and animations ] ----------------------------------------
-	self:addState('idle',     1,   16,  {ts = 2})
-	self:addState('walk',     17,  28,  {ts = 1.3})
-	self:addState('duckDown', 29,  29,  {ts = 1, l = 1, na = 'duck'})
-	self:addState('duck',     30,  30)
-	self:addState('duckUp',   31,  31,  {ts = 1, l = 1, na = 'idle'})
-	self:addState('jump',     32,  32)
-	self:addState('jump1',    33,  33)
-	self:addState('jump2',    34,  34)
-	self:addState('jump3',    35,  35)
-	self:addState('midJump',  36,  36)
-	self:addState('dash',     36,  36)   -- REMAKE LATER
-	self:addState('fall',     37,  37)
-	self:addState('fall1',    38,  38)
-	self:addState('fall2',    39,  39)
-	self:addState('fall3',    40,  40)
-	self:addState('contact',  41,  42,  {ts = 2, l = 1, na = 'idle'})
-	self:addState('roll',     43,  58,  {ts = 1, l = 1, na = 'midJump'})
-	self:addState('dbJump',   59,  74,  {ts = 1, l = 1})
-	self:addState('hurt',     75,  76,  {ts = 1, l = 12, na = 'fall'})
-	self:addState('run',      77,  88,  {ts = 1})
-	self:addState('dive',     89,  89)
-	self:addState('die',      90,  94,  {ts = 3, l = 1, na = 'dead'})
-	self:addState('dead',     95,  95)
-	self:addState('spawn',    96,  101, {ts = 3, l = 1, na = 'idle'})
-	self:addState('exit',     99,  101, {ts = 3, l = 1, na = 'idle'})
-	self:addState('ready',    102, 111, {ts = 3})
-	self:addState('punch',    112, 114, {ts = 1, l = 1})
-	self:addState('entering', 115, 116, {ts = 3, l = 1, na = 'enter'})
-	self:addState('enter',    117, 117)
-	self:addState('runTurn',  118, 118, {ts = 5, l = 1, na = 'idle'})
+	self:addState('idle',      1,   16,  {ts = 2})
+	self:addState('walk',      17,  28,  {ts = 1.3})
+	self:addState('duckDown',  29,  29,  {ts = 1, l = 1, na = 'duck'})
+	self:addState('duck',      30,  30)
+	self:addState('duckUp',    31,  31,  {ts = 1, l = 1, na = 'idle'})
+	self:addState('jump',      32,  32)
+	self:addState('jump1',     33,  33)
+	self:addState('jump2',     34,  34)
+	self:addState('jump3',     35,  35)
+	self:addState('midJump',   36,  36)
+	self:addState('dash',      36,  36)
+	self:addState('fall',      37,  37)
+	self:addState('fall1',     38,  38)
+	self:addState('fall2',     39,  39)
+	self:addState('fall3',     40,  40)
+	self:addState('contact',   41,  42,  {ts = 2, l = 1, na = 'idle'})
+	self:addState('roll',      43,  58,  {ts = 1, l = 1, na = 'midJump'})
+	self:addState('dbJump',    59,  74,  {ts = 1, l = 1})
+	self:addState('hurt',      75,  76,  {ts = 1, l = 12, na = 'fall'})
+	self:addState('run',       77,  88,  {ts = 1})
+	self:addState('dive',      89,  89)
+	self:addState('die',       90,  94,  {ts = 3, l = 1, na = 'dead'})
+	self:addState('dead',      95,  95)
+	self:addState('spawn',     96,  101, {ts = 3, l = 1, na = 'idle'})
+	self:addState('exit',      99,  101, {ts = 3, l = 1, na = 'idle'})
+	self:addState('ready',     102, 111, {ts = 3})
+	self:addState('punch',     112, 114, {ts = 1, l = 1})
+	self:addState('entering',  115, 116, {ts = 3, l = 1, na = 'enter'})
+	self:addState('enter',     117, 117)
+	self:addState('runTurn',   118, 118, {ts = 5, l = 1, na = 'idle'})
 	self:addState('wallSlide', 119, 119)
 
 	-- The following are temporary sprites that will be animated later
@@ -758,23 +758,23 @@ end
 
 --- Handle input while the player is in the air. Like going left, right, double jumping, and dashing
 function Player:handleAirInput()
-	local up     = pd.buttonIsPressed(pd.kButtonUp)
-	local down   = pd.buttonIsPressed(pd.kButtonDown)
-	local left   = pd.buttonIsPressed(pd.kButtonLeft)
-	local right  = pd.buttonIsPressed(pd.kButtonRight)
+	local upHeld  = pd.buttonIsPressed(pd.kButtonUp)
+	local downHeld = pd.buttonIsPressed(pd.kButtonDown)
+	local leftHeld = pd.buttonIsPressed(pd.kButtonLeft)
+	local rightHeld = pd.buttonIsPressed(pd.kButtonRight)
 	local pressB = pd.buttonJustPressed(pd.kButtonB)
 	local pressA = pd.buttonJustPressed(pd.kButtonA)
 
 	-- Jump / dive / double jump
-	if up and self:playerPressedB() then
+	if upHeld and self:playerPressedB() then
 		self:changeToDoubleJumpState()
-	elseif down and self:playerPressedB() then
+	elseif downHeld and self:playerPressedB() then
 		self:changeToDiveState()
 	end
 
 	-- Horizontal movement
-	if left or right then
-		local dir = (right and 1 or -1)
+	if leftHeld or rightHeld then
+		local dir = (rightHeld and 1 or -1)
 		self.xVelocity = self.xVelocity + dir * self.airSpeed * DELTA_TIME
 	
 		-- Clamp horizontal velocity
@@ -788,7 +788,7 @@ function Player:handleAirInput()
 	end
 
 	-- Wall interactions
-	if self.touchingWall and (left or right) then
+	if self.touchingWall and (leftHeld or rightHeld) then
 		-- Wall slide
 		if self.yVelocity <= 450 and self.yVelocity >= 45 then
 			self.yVelocity = self.yVelocity / 4
@@ -998,6 +998,7 @@ end
 --- This method make the player dash in the direction they face
 function Player:changeToDashState()
 	if not self.dashAvailable then return end
+	if self.currentState == "wallSlide" then return end
 
 	self.dashAvailable = false
 	self.yVelocity = -self.walkSpeed
